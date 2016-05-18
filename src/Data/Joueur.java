@@ -53,7 +53,7 @@ public class Joueur {
 	}
 
 	public void setPositionCourante(Carreau nouvellePosition) {
-		throw new UnsupportedOperationException();
+		positionCourante = nouvellePosition;
 	}
 
 	public boolean peutAcheter(int prixC) {
