@@ -1,7 +1,11 @@
-package Diagramme_du_domaine;
+package Data;
 
 public class Gare extends Carreau {
 	private Joueur proprietaire;
+
+        public void setProprietaire(Joueur proprietaire) {
+            this.proprietaire = proprietaire;
+        }
 
 	public void action(Joueur j) {
 		throw new UnsupportedOperationException();

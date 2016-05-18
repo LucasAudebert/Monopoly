@@ -1,4 +1,4 @@
-package Diagramme_du_domaine;
+package Data;
 
 public class ProprieteAConstruire {
 }

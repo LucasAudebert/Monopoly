@@ -1,4 +1,4 @@
-package Data.Diagramme_du_domaine;
+package Data;
 
 public class AutreCarreau {
 }
