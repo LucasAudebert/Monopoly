@@ -41,7 +41,7 @@ public class Joueur {
 	}
 
 	public int getNbGares() {
-		throw new UnsupportedOperationException();
+		return gares.size();
 	}
 
 	public String getNomProprietaire() {
