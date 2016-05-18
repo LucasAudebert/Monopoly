@@ -57,6 +57,10 @@ public class Joueur {
 	}
 
 	public boolean peutAcheter(int prixC) {
-		throw new UnsupportedOperationException();
+		if(cash >= prixC){
+                    return true;
+                }else{
+                    return false;
+                }
 	}
 }
