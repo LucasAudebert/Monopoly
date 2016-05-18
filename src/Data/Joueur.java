@@ -37,7 +37,7 @@ public class Joueur {
 	}
 
 	public void recevoirLoyer(int l) {
-		throw new UnsupportedOperationException();
+		cash += l;
 	}
 
 	public int getNbGares() {
