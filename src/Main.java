@@ -17,10 +17,18 @@ public class Main {
     private Controleur controleur; 
     
     public static void main(String[] args){
-        
+        //Initialisation
         //controleur = new Controleur();
         //controleur.CreerPlateau();
         
+        
+        //Boucle de Jeu
+        
+        while(true){
+            
+        }
+        
+        //Fin
     }
     
 }
