@@ -12,7 +12,11 @@ public class Controleur {
         
         Monopoly monopoly;
         
-	public void CreerPlateau(String dataFilename){
+        public Controleur(){
+            monopoly = new Monopoly();
+        }
+        
+	public void creerPlateau(String dataFilename){
 		try{
 			ArrayList<String[]> data = readDataFile(dataFilename, ",");
 			
@@ -112,12 +116,18 @@ public class Controleur {
             }
         }
         
-        public void lancerDesAvancer(Joueur joueur){
+        private void lancerDesAvancer(Joueur joueur){
             int[] des = new int[2];
             des[0] = (int) (Math.random() % 6) + 1;
             des[1] = (int) (Math.random() % 6) + 1;
             joueur.setDes(des);
             joueur.setPositionCourante(monopoly.getNouvellePosition(des[0]+des[1], joueur.getPositionCourante()));
+        }
+        
+        private void jouerCoup(Joueur joueur){
+            lancerDesAvancer(joueur);
+            Resultat resultat = joueur.getPositionCourante().action(joueur);
+            
         }
 }
 

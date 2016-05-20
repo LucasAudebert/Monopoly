@@ -7,8 +7,8 @@ public class Monopoly {
 	private ArrayList<Joueur> joueurs;
         private ArrayList<Carreau> carreaux; // HashMap ??!!!
 
-        public Monopoly(ArrayList joueurs){
-            this.joueurs = joueurs;
+        public Monopoly(){
+            this.joueurs = new ArrayList<Joueur>();
             this.carreaux = new ArrayList<Carreau>();
         }
         

@@ -18,15 +18,11 @@ public class Main {
     
     public static void main(String[] args){
         //Initialisation
-        //controleur = new Controleur();
-        //controleur.CreerPlateau();
-        
-        
+        Controleur controleur = new Controleur();
+        controleur.creerPlateau("data");
+        controleur.inscrireJoueurs();
         //Boucle de Jeu
         
-        while(true){
-            
-        }
         
         //Fin
     }
