@@ -21,19 +21,19 @@ public class Controleur {
 				String caseType = data.get(i)[0];
 				if(caseType.compareTo("P") == 0){
 					//System.out.println("Propriété :\t" + data.get(i)[2] + "\t@ case " + data.get(i)[1]);
-                                        monopoly.addCarreau(new ProprieteAConstruire(Integer.parseInt(data.get(i)[4]), Integer.parseInt(data.get(i)[1]), data.get(i)[2]));
+                                        monopoly.addCarreau(new ProprieteAConstruire(Integer.parseInt(data.get(i)[4]), Integer.parseInt(data.get(i)[1]), data.get(i)[2], EnumerationsMonopoly.typeCarreau[2]));
 				}
 				else if(caseType.compareTo("G") == 0){
 					//System.out.println("Gare :\t" + data.get(i)[2] + "\t@ case " + data.get(i)[1]);
-                                        monopoly.addCarreau(new Gare(Integer.parseInt(data.get(i)[4]), Integer.parseInt(data.get(i)[1]), data.get(i)[2]));
+                                        monopoly.addCarreau(new Gare(Integer.parseInt(data.get(i)[4]), Integer.parseInt(data.get(i)[1]), data.get(i)[2], EnumerationsMonopoly.typeCarreau[0]));
 				}
 				else if(caseType.compareTo("C") == 0){
 					//System.out.println("Compagnie :\t" + data.get(i)[2] + "\t@ case " + data.get(i)[1]);
-                                        monopoly.addCarreau(new Compagnie(Integer.parseInt(data.get(i)[4]), Integer.parseInt(data.get(i)[1]), data.get(i)[2]));
+                                        monopoly.addCarreau(new Compagnie(Integer.parseInt(data.get(i)[4]), Integer.parseInt(data.get(i)[1]), data.get(i)[2], EnumerationsMonopoly.typeCarreau[1]));
 				}
 				else if(caseType.compareTo("AU") == 0){
 					//System.out.println("Case Autre :\t" + data.get(i)[2] + "\t@ case " + data.get(i)[1]);
-                                        monopoly.addCarreau(new AutreCarreau(Integer.parseInt(data.get(i)[1]), data.get(i)[2]));
+                                        monopoly.addCarreau(new AutreCarreau(Integer.parseInt(data.get(i)[1]), data.get(i)[2], EnumerationsMonopoly.typeCarreau[3]));
 				}
 				else
 					System.err.println("[buildGamePleateau()] : Invalid Data type");
@@ -97,11 +97,18 @@ public class Controleur {
         
         public void inscrireJoueurs(){                                        // 2 <= nbJoueur <= 6
             Scanner sc = new Scanner(System.in);
-            int nbJoueurs = 1;
+            int nbJoueurs = 0;
             while(nbJoueurs <= 6){
                 System.out.print("Saisir nom du joueur " + nbJoueurs + " : ");
-                String nomJoueur = sc.nextLine();
-                monopoly.addJoueur(new Joueur(nomJoueur, monopoly.getCarreau(0)));
+                String reponse = sc.nextLine();
+                monopoly.addJoueur(new Joueur(reponse, monopoly.getCarreau(0)));
+                nbJoueurs++;
+                if (nbJoueurs >= 2){
+                    System.out.println("Ajouter un autre joueur? (y/n) : ");
+                    reponse = sc.nextLine();
+                    if(reponse.contains("n"))
+                        nbJoueurs = 10;
+                }
             }
         }
         
