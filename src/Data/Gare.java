@@ -2,8 +2,8 @@ package Data;
 
 public class Gare extends Propriete {
 
-    public Gare(int prix, int numero, String nomCarreau) {
-        super(prix, numero, nomCarreau);
+    public Gare(int prix, int numero, String nomCarreau, String type) {
+        super(prix, numero, nomCarreau, type);
     }
 
     @Override
@@ -14,12 +14,10 @@ public class Gare extends Propriete {
     @Override
     public Resultat action(Joueur joueur) {
         Resultat res = new Resultat();
-        res.setJoueur(joueur);
-        res.setCarreau(this);
         if(this.getProprietaire() == null){
-            res.setActionJoueur("acheter");
+            res.update(this, joueur, "acheter");
         }else{
-            res.setActionJoueur("payerLoyer");
+            res.update(this, joueur, "payerLoyer");
         }
         return res;
     }

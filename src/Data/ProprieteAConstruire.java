@@ -2,8 +2,8 @@ package Data;
 
 public class ProprieteAConstruire extends Propriete{
 
-    public ProprieteAConstruire(int prix, int numero, String nomCarreau) {
-        super(prix, numero, nomCarreau);
+    public ProprieteAConstruire(int prix, int numero, String nomCarreau, String type) {
+        super(prix, numero, nomCarreau, type);
     }
 
     @Override

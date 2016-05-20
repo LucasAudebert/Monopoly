@@ -2,37 +2,30 @@ package Data;
 
 public class Resultat {
 	
-        private Carreau carreau;
-        private Joueur joueur;
-        private String actionJoueur;
-        
-        public Resultat(){
-            
-        }
-        
-        public Carreau getCarreau() {
-            return carreau;
-        }
+    private Carreau carreau;
+    private Joueur joueur;
+    private String actionJoueur;
 
-        public void setCarreau(Carreau carreau) {
-            this.carreau = carreau;
-        }
+    public Resultat(){
 
-        public Joueur getJoueur() {
-            return joueur;
-        }
+    }
 
-        public void setJoueur(Joueur joueur) {
-            this.joueur = joueur;
-        }
+    public Carreau getCarreau() {
+        return carreau;
+    }
 
-        public String getActionJoueur() {
-            return actionJoueur;
-        }
+    public Joueur getJoueur() {
+        return joueur;
+    }
 
-        public void setActionJoueur(String actionJoueur) {
-            this.actionJoueur = actionJoueur;
-        }
-        
-        
+    public String getActionJoueur() {
+        return actionJoueur;
+    }
+
+    public void update(Carreau carreau, Joueur joueur, String actionJoueur){
+        this.carreau = carreau;
+        this.joueur = joueur;
+        this.actionJoueur = actionJoueur;
+    }
+
 }

@@ -2,8 +2,8 @@ package Data;
 
 public class AutreCarreau extends Carreau{
 
-    public AutreCarreau(int numero, String nomCarreau) {
-        super(numero, nomCarreau);
+    public AutreCarreau(int numero, String nomCarreau, String type) {
+        super(numero, nomCarreau, type);
     }
 
     @Override
