@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Monopoly {
     
 	private ArrayList<Joueur> joueurs;
-        private ArrayList<Carreau> carreaux;
+        private ArrayList<Carreau> carreaux; // HashMap ??!!!
 
         public Monopoly(ArrayList joueurs){
             this.joueurs = joueurs;
@@ -24,9 +24,13 @@ public class Monopoly {
             carreaux.add(carreau);
         }
 
-        public ArrayList<Joueur> getJoueurs() {
-            return joueurs;
-        }
+        /*public Joueur getJoueur(String nomJoueur) { // HashMap ?
+            
+        }*/
+        
+        public void addJoueur(Joueur joueur){
+            joueurs.add(joueur);
+        }        
 
         public void setJoueurs(ArrayList<Joueur> joueurs) {
             this.joueurs = joueurs;

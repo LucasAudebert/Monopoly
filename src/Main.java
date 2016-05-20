@@ -19,7 +19,7 @@ public class Main {
     public static void main(String[] args){
         
         //controleur = new Controleur();
-        controleur.CreerPlateau();
+        //controleur.CreerPlateau();
         
     }
     

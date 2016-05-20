@@ -95,7 +95,7 @@ public class Controleur {
 		return data;
 	}
         
-        public void inscrireJoueurs(){
+        public void inscrireJoueurs(){                                        // 2 <= nbJoueur <= 6
             Scanner sc = new Scanner(System.in);
             int nbJoueurs = 1;
             while(nbJoueurs <= 6){
