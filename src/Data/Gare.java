@@ -13,7 +13,15 @@ public class Gare extends Propriete {
 
     @Override
     public Resultat action(Joueur joueur) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Resultat res = new Resultat();
+        res.setJoueur(joueur);
+        res.setCarreau(this);
+        if(this.getProprietaire() == null){
+            res.setActionJoueur("acheter");
+        }else{
+            res.setActionJoueur("payerLoyer");
+        }
+        return res;
     }
 	
 }
