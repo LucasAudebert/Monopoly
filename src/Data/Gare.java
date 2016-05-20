@@ -1,33 +1,19 @@
 package Data;
 
-public class Gare extends Carreau {
-	private Joueur proprietaire;
+public class Gare extends Propriete {
 
-        public void setProprietaire(Joueur proprietaire) {
-            this.proprietaire = proprietaire;
-        }
+    public Gare(int prix, int numero, String nomCarreau) {
+        super(prix, numero, nomCarreau);
+    }
 
-	public void action(Joueur j) {
-		throw new UnsupportedOperationException();
-	}
+    @Override
+    public int calculLoyer() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
-	private int calculLoyer() {
-		throw new UnsupportedOperationException();
-	}
-
-	private Joueur getProprietaire() {
-		return this.proprietaire;
-	}
-
-	private void achatPossible(Joueur j) {
-		throw new UnsupportedOperationException();
-	}
-
-	public int getPrix() {
-		throw new UnsupportedOperationException();
-	}
-
-	public String getNom() {
-		throw new UnsupportedOperationException();
-	}
+    @Override
+    public Resultat action(Joueur joueur) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+	
 }
