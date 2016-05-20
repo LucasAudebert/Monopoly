@@ -7,7 +7,7 @@ public class Groupe {
         private HashSet<Carreau> carreaux;
 
     public Groupe(){
-        
+        carreaux = new HashSet<Carreau>();
     }
         
     public CouleurPropriete getCouleur() {
