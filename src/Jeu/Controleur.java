@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Controleur {
         
@@ -93,5 +94,15 @@ public class Controleur {
 		
 		return data;
 	}
+        
+        public void inscrireJoueurs(){
+            Scanner sc = new Scanner(System.in);
+            int nbJoueurs = 1;
+            while(nbJoueurs <= 6){
+                System.out.print("Saisir nom du joueur " + nbJoueurs + " : ");
+                String nomJoueur = sc.nextLine();
+                monopoly.addJoueur(new Joueur(nomJoueur, monopoly.getCarreau(0)));
+            }
+        }
 }
 

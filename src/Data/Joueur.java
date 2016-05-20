@@ -5,9 +5,19 @@ import java.util.ArrayList;
 public class Joueur {
 	private String nomJoueur;
 	private int cash = 1500;
-	public ArrayList<Gare> gares = new ArrayList<Gare>();
+        private ArrayList<Compagnie> compagnies;
+	private ArrayList<Gare> gares;
+        private ArrayList<ProprieteAConstruire> proprieteAConstruires;
 	private Carreau positionCourante;
 
+        public Joueur(String nomJoueur, Carreau carreauDepart){
+            this.nomJoueur = nomJoueur;
+            this.positionCourante = carreauDepart;
+            compagnies = new ArrayList();
+            gares = new ArrayList();
+            proprieteAConstruires = new ArrayList();
+        }
+        
         public String getNomJoueur() {
             return nomJoueur;
         }

@@ -9,11 +9,15 @@ public class Monopoly {
 
         public Monopoly(ArrayList joueurs){
             this.joueurs = joueurs;
-            this.carreaux = new ArrayList();
+            this.carreaux = new ArrayList<Carreau>();
         }
         
         public ArrayList getCarreaux() {
             return carreaux;
+        }
+        
+        public Carreau getCarreau(int index){
+            return carreaux.get(index);
         }
         
         public void addCarreau(Carreau carreau){
