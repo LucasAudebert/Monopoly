@@ -3,15 +3,21 @@ package Data;
 import java.util.ArrayList;
 
 public class Monopoly {
-	private Carreau carreaux;
-	private ArrayList<Joueur> joueurs = new ArrayList<Joueur>();
+    
+	private ArrayList<Joueur> joueurs;
+        private ArrayList<Carreau> carreaux;
 
-        public Carreau getCarreaux() {
+        public Monopoly(ArrayList joueurs){
+            this.joueurs = joueurs;
+            this.carreaux = new ArrayList();
+        }
+        
+        public ArrayList getCarreaux() {
             return carreaux;
         }
-
-        public void setCarreaux(Carreau carreaux) {
-            this.carreaux = carreaux;
+        
+        public void addCarreau(Carreau carreau){
+            carreaux.add(carreau);
         }
 
         public ArrayList<Joueur> getJoueurs() {
