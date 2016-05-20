@@ -104,5 +104,13 @@ public class Controleur {
                 monopoly.addJoueur(new Joueur(nomJoueur, monopoly.getCarreau(0)));
             }
         }
+        
+        public void lancerDesAvancer(Joueur joueur){
+            int[] des = new int[2];
+            des[0] = (int) (Math.random() % 6) + 1;
+            des[1] = (int) (Math.random() % 6) + 1;
+            joueur.setDes(des);
+            joueur.setPositionCourante(monopoly.getNouvellePosition(des[0]+des[1], joueur.getPositionCourante()));
+        }
 }
 

@@ -9,6 +9,7 @@ public class Joueur {
 	private ArrayList<Gare> gares;
         private ArrayList<ProprieteAConstruire> proprieteAConstruires;
 	private Carreau positionCourante;
+        private int[] des;
 
         public Joueur(String nomJoueur, Carreau carreauDepart){
             this.nomJoueur = nomJoueur;
@@ -54,6 +55,10 @@ public class Joueur {
 		return gares.size();
 	}
 
+        public int getNbCompagnies(){
+                return compagnies.size();
+        }
+        
 	public String getNomProprietaire() {
 		throw new UnsupportedOperationException();
 	}
@@ -62,6 +67,14 @@ public class Joueur {
 		return this.positionCourante;
 	}
 
+        public void setDes(int[] des){
+            this.des = des;
+        }
+        
+        public int getValeurDes(){
+            return des[0]+des[1];
+        }
+        
 	public void setPositionCourante(Carreau nouvellePosition) {
 		positionCourante = nouvellePosition;
 	}

@@ -36,7 +36,11 @@ public class Monopoly {
             this.joueurs = joueurs;
         }
 
-	public Carreau getNouvellePosition(Object des, Object anciennePosition) {
-		throw new UnsupportedOperationException();
+	public Carreau getNouvellePosition(int des, Carreau anciennePosition) {
+	    if(anciennePosition.getNumero() + des > carreaux.size()){
+                return getCarreau(anciennePosition.getNumero() + des - (carreaux.size() + 1));
+            }else{
+                return getCarreau(anciennePosition.getNumero() + des - 1);
+            }
 	}
 }

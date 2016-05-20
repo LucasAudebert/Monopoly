@@ -8,7 +8,11 @@ public class Compagnie extends Propriete {
 
     @Override
     public int calculLoyer() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(getProprietaire().getNbCompagnies() == 1){
+            return 4 * getProprietaire().getValeurDes();  
+        }else{
+            return 10 * getProprietaire().getValeurDes();
+        }   
     }
 
     @Override
