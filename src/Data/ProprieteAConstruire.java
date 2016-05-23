@@ -2,13 +2,21 @@ package Data;
 
 public class ProprieteAConstruire extends Propriete{
 
-    public ProprieteAConstruire(int prix, int numero, String nomCarreau, String type) {
-        super(prix, numero, nomCarreau, type);
+    private Groupe groupe; 
+    
+    public ProprieteAConstruire(int prix, int numero, String nomCarreau, String type, Groupe groupe, int loyer) {
+        super(prix, numero, nomCarreau, type, loyer);
+        this.groupe = groupe;
     }
 
     @Override
     public int calculLoyer() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         if(groupe.memeProprietaire()){
+             
+         }else{
+             
+         }
+         return 0;
     }
 
     @Override

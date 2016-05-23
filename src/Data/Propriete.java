@@ -12,11 +12,13 @@ package Data;
 public abstract class Propriete extends Carreau {
     
     private int prix;
+    private int loyer;
     private Joueur proprietaire;
     
-    public Propriete(int prix, int numero, String nomCarreau, String type){
+    public Propriete(int prix, int numero, String nomCarreau, String type, int loyer){
         super(numero, nomCarreau, type);
         this.prix = prix;
+        this.loyer = loyer;
     }
     
     public abstract int calculLoyer();
@@ -28,7 +30,11 @@ public abstract class Propriete extends Carreau {
     public Joueur getProprietaire(){
         return proprietaire;
     }
-    
+
+    public int getLoyer() {
+        return loyer;
+    }
+        
     public Resultat action(Joueur joueur) {
         ResultatAchat res = new ResultatAchat();
         if(this.getProprietaire() == null){

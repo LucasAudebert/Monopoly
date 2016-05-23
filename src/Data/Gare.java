@@ -2,12 +2,12 @@ package Data;
 
 public class Gare extends Propriete {
 
-    public Gare(int prix, int numero, String nomCarreau, String type) {
-        super(prix, numero, nomCarreau, type);
+    public Gare(int prix, int numero, String nomCarreau, String type, int loyer) {
+        super(prix, numero, nomCarreau, type, loyer);
     }
 
     @Override
     public int calculLoyer() {
-        return super.getProprietaire().getNbGares() * 25;
+        return super.getProprietaire().getNbGares() * getLoyer();
     }	
 }

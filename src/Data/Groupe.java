@@ -1,13 +1,13 @@
 package Data;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 
 public class Groupe {
 	private CouleurPropriete couleur;
-        private HashSet<ProprieteAConstruire> proprietes;
+        private ArrayList<ProprieteAConstruire> proprietes;
 
     public Groupe(CouleurPropriete couleur){
-        proprietes = new HashSet<ProprieteAConstruire>();
+        proprietes = new ArrayList<ProprieteAConstruire>();
         this.couleur = couleur;
     }
         
@@ -19,11 +19,25 @@ public class Groupe {
         proprietes.add(propriete);
     }
     
-    public HashSet<ProprieteAConstruire> getProprietes(){
+    public ArrayList<ProprieteAConstruire> getProprietes(){
         return proprietes;
     }
     
     public void setCouleur(CouleurPropriete couleur) {
         this.couleur = couleur;
+    }
+    
+    public boolean memeProprietaire(){
+        boolean resultat = true;
+       
+        int i =0;
+        Joueur jProprio = proprietes.get(i).getProprietaire() ;
+        i++;
+        while(resultat && i < proprietes.size()){
+            resultat = proprietes.get(i).getProprietaire() == jProprio;
+            jProprio = proprietes.get(i).getProprietaire() ;
+            i++;
+        }
+        return resultat;
     }
 }

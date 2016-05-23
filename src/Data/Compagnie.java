@@ -2,8 +2,8 @@ package Data;
 
 public class Compagnie extends Propriete {
 
-    public Compagnie(int prix, int numero, String nomCarreau, String type) {
-        super(prix, numero, nomCarreau, type);
+    public Compagnie(int prix, int numero, String nomCarreau, String type, int loyer) {
+        super(prix, numero, nomCarreau, type, loyer);
     }
 
     @Override

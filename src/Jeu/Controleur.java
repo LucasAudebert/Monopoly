@@ -29,21 +29,22 @@ public class Controleur {
 				String caseType = data.get(i)[0];
 				if(caseType.compareTo("P") == 0){
 					//System.out.println("Propriété :\t" + data.get(i)[2] + "\t@ case " + data.get(i)[1]);
-                                        ProprieteAConstruire proprieteTemp = new ProprieteAConstruire(Integer.parseInt(data.get(i)[4]), Integer.parseInt(data.get(i)[1]), data.get(i)[2], EnumerationsMonopoly.typeCarreau[2]);
-                                        monopoly.addCarreau(proprieteTemp);
                                         if(monopoly.getGroupe(CouleurPropriete.valueOf(data.get(i)[3])) == null){
                                             monopoly.addGroupe(new Groupe(CouleurPropriete.valueOf(data.get(i)[3])));
                                         }
+                                        ProprieteAConstruire proprieteTemp = new ProprieteAConstruire(Integer.parseInt(data.get(i)[4]), Integer.parseInt(data.get(i)[1]), data.get(i)[2], EnumerationsMonopoly.typeCarreau[2], monopoly.getGroupe(CouleurPropriete.valueOf(data.get(i)[3])), Integer.parseInt(data.get(i)[5]));
+                                        monopoly.addCarreau(proprieteTemp);
+                                        
                                         monopoly.getGroupe(CouleurPropriete.valueOf(data.get(i)[3])).addPropriete(proprieteTemp);
                                         
 				}
 				else if(caseType.compareTo("G") == 0){
 					//System.out.println("Gare :\t" + data.get(i)[2] + "\t@ case " + data.get(i)[1]);
-                                        monopoly.addCarreau(new Gare(25, Integer.parseInt(data.get(i)[1]), data.get(i)[2], EnumerationsMonopoly.typeCarreau[0]));
+                                        monopoly.addCarreau(new Gare(Integer.parseInt(data.get(i)[3]), Integer.parseInt(data.get(i)[1]), data.get(i)[2], EnumerationsMonopoly.typeCarreau[0], 25));
 				}
 				else if(caseType.compareTo("C") == 0){
 					//System.out.println("Compagnie :\t" + data.get(i)[2] + "\t@ case " + data.get(i)[1]);
-                                        monopoly.addCarreau(new Compagnie(125, Integer.parseInt(data.get(i)[1]), data.get(i)[2], EnumerationsMonopoly.typeCarreau[1]));
+                                        monopoly.addCarreau(new Compagnie(Integer.parseInt(data.get(i)[3]), Integer.parseInt(data.get(i)[1]), data.get(i)[2], EnumerationsMonopoly.typeCarreau[1], 0));
 				}
 				else if(caseType.compareTo("AU") == 0){
 					//System.out.println("Case Autre :\t" + data.get(i)[2] + "\t@ case " + data.get(i)[1]);
