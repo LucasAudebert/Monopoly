@@ -12,11 +12,11 @@ public class ProprieteAConstruire extends Propriete{
     @Override
     public int calculLoyer() {
          if(groupe.memeProprietaire()){
-             
+           return getLoyer()*2;
          }else{
-             
+           return  getLoyer();
          }
-         return 0;
+         
     }
 
     @Override
