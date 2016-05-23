@@ -9,9 +9,9 @@ public class Compagnie extends Propriete {
     @Override
     public int calculLoyer() {
         if(getProprietaire().getNbCompagnies() == 1){
-            return 4 * getProprietaire().getValeurDes();  
+            return 4 * getProprietaire().getDerniereValeurDes();  
         }else{
-            return 10 * getProprietaire().getValeurDes();
+            return 10 * getProprietaire().getDerniereValeurDes();
         }   
     }
 

@@ -1,14 +1,15 @@
 package Data;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class Monopoly {
     
-	private ArrayList<Joueur> joueurs;
+	private HashSet<Joueur> joueurs;
         private ArrayList<Carreau> carreaux; // HashMap ??!!!
 
         public Monopoly(){
-            this.joueurs = new ArrayList<Joueur>();
+            this.joueurs = new HashSet<Joueur>();
             this.carreaux = new ArrayList<Carreau>();
         }
         
@@ -24,17 +25,19 @@ public class Monopoly {
             carreaux.add(carreau);
         }
 
-        /*public Joueur getJoueur(String nomJoueur) { // HashMap ?
-            
-        }*/
+        public HashSet<Joueur> getJoueurs() {
+            return joueurs;
+        }
         
         public void addJoueur(Joueur joueur){
             joueurs.add(joueur);
         }        
 
-        public void setJoueurs(ArrayList<Joueur> joueurs) {
+        public void setJoueurs(HashSet<Joueur> joueurs) {
             this.joueurs = joueurs;
         }
+        
+        
 
 	public Carreau getNouvellePosition(int des, Carreau anciennePosition) {
 	    if(anciennePosition.getNumero() + des > carreaux.size()){

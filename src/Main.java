@@ -19,7 +19,7 @@ public class Main {
     public static void main(String[] args){
         //Initialisation
         Controleur controleur = new Controleur();
-        controleur.creerPlateau("data");
+        controleur.creerPlateau("data.txt");
         controleur.inscrireJoueurs();
         //Boucle de Jeu
         

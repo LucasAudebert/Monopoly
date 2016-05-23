@@ -9,7 +9,7 @@ public class Joueur {
 	private ArrayList<Gare> gares;
         private ArrayList<ProprieteAConstruire> proprieteAConstruires;
 	private Carreau positionCourante;
-        private int[] des;
+        private int[] derniereValeurDes;
 
         public Joueur(String nomJoueur, Carreau carreauDepart){
             this.nomJoueur = nomJoueur;
@@ -67,12 +67,12 @@ public class Joueur {
 		return this.positionCourante;
 	}
 
-        public void setDes(int[] des){
-            this.des = des;
+        public void setDerniereValeurDes(int[] des){
+            this.derniereValeurDes = des;
         }
         
-        public int getValeurDes(){
-            return des[0]+des[1];
+        public int getDerniereValeurDes(){
+            return derniereValeurDes[0]+derniereValeurDes[1];
         }
         
 	public void setPositionCourante(Carreau nouvellePosition) {

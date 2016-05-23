@@ -1,6 +1,7 @@
 package Jeu;
 
 import Data.*;
+import Ui.Ihm;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -10,10 +11,12 @@ import java.util.Scanner;
 
 public class Controleur {
         
-        Monopoly monopoly;
+        private Monopoly monopoly;
+        private Ihm ihm;
         
         public Controleur(){
             monopoly = new Monopoly();
+            ihm = new Ihm();
         }
         
 	public void creerPlateau(String dataFilename){
@@ -29,11 +32,11 @@ public class Controleur {
 				}
 				else if(caseType.compareTo("G") == 0){
 					//System.out.println("Gare :\t" + data.get(i)[2] + "\t@ case " + data.get(i)[1]);
-                                        monopoly.addCarreau(new Gare(Integer.parseInt(data.get(i)[4]), Integer.parseInt(data.get(i)[1]), data.get(i)[2], EnumerationsMonopoly.typeCarreau[0]));
+                                        monopoly.addCarreau(new Gare(25, Integer.parseInt(data.get(i)[1]), data.get(i)[2], EnumerationsMonopoly.typeCarreau[0]));
 				}
 				else if(caseType.compareTo("C") == 0){
 					//System.out.println("Compagnie :\t" + data.get(i)[2] + "\t@ case " + data.get(i)[1]);
-                                        monopoly.addCarreau(new Compagnie(Integer.parseInt(data.get(i)[4]), Integer.parseInt(data.get(i)[1]), data.get(i)[2], EnumerationsMonopoly.typeCarreau[1]));
+                                        monopoly.addCarreau(new Compagnie(125, Integer.parseInt(data.get(i)[1]), data.get(i)[2], EnumerationsMonopoly.typeCarreau[1]));
 				}
 				else if(caseType.compareTo("AU") == 0){
 					//System.out.println("Case Autre :\t" + data.get(i)[2] + "\t@ case " + data.get(i)[1]);
@@ -99,20 +102,10 @@ public class Controleur {
 		return data;
 	}
         
-        public void inscrireJoueurs(){                                        // 2 <= nbJoueur <= 6
-            Scanner sc = new Scanner(System.in);
-            int nbJoueurs = 0;
-            while(nbJoueurs <= 6){
-                System.out.print("Saisir nom du joueur " + nbJoueurs + " : ");
-                String reponse = sc.nextLine();
-                monopoly.addJoueur(new Joueur(reponse, monopoly.getCarreau(0)));
-                nbJoueurs++;
-                if (nbJoueurs >= 2){
-                    System.out.println("Ajouter un autre joueur? (y/n) : ");
-                    reponse = sc.nextLine();
-                    if(reponse.contains("n"))
-                        nbJoueurs = 10;
-                }
+        public void inscrireJoueurs(){                              
+            String[] nomJoueurs = ihm.saisirNouveauJoueur();
+            for(int i = 0; i < nomJoueurs.length; i++){
+                monopoly.addJoueur(new Joueur(nomJoueurs[i], monopoly.getCarreau(0)));
             }
         }
         
@@ -120,7 +113,7 @@ public class Controleur {
             int[] des = new int[2];
             des[0] = (int) (Math.random() % 6) + 1;
             des[1] = (int) (Math.random() % 6) + 1;
-            joueur.setDes(des);
+            joueur.setDerniereValeurDes(des);
             joueur.setPositionCourante(monopoly.getNouvellePosition(des[0]+des[1], joueur.getPositionCourante()));
         }
         
@@ -129,5 +122,12 @@ public class Controleur {
             Resultat resultat = joueur.getPositionCourante().action(joueur);
             
         }
+        
+        public void boucleDeJeu(){
+            for(Joueur jTemp : monopoly.getJoueurs()){
+                jouerCoup(jTemp);
+            }
+        }
 }
+
 
