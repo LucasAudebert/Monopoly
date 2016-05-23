@@ -1,16 +1,20 @@
 package Data;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map.Entry;
 
 public class Monopoly {
     
 	private HashSet<Joueur> joueurs;
         private ArrayList<Carreau> carreaux; // HashMap ??!!!
+        private HashMap<CouleurPropriete,Groupe> groupes;
 
         public Monopoly(){
             this.joueurs = new HashSet<Joueur>();
             this.carreaux = new ArrayList<Carreau>();
+            this.groupes = new HashMap<CouleurPropriete,Groupe>();
         }
         
         public ArrayList getCarreaux() {
@@ -37,8 +41,14 @@ public class Monopoly {
             this.joueurs = joueurs;
         }
         
-        
+        public Groupe getGroupe(CouleurPropriete couleur){
+            return groupes.get(couleur);
+        }
 
+        public void addGroupe(Groupe groupe){
+            groupes.put(groupe.getCouleur(), groupe);
+        }
+        
 	public Carreau getNouvellePosition(int des, Carreau anciennePosition) {
 	    if(anciennePosition.getNumero() + des > carreaux.size()){
                 return getCarreau(anciennePosition.getNumero() + des - (carreaux.size() + 1));

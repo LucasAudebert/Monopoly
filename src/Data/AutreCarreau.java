@@ -8,6 +8,6 @@ public class AutreCarreau extends Carreau{
 
     @Override
     public Resultat action(Joueur joueur) {
-        
+        return null;
     }
 }
