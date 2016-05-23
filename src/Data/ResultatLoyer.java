@@ -7,15 +7,12 @@ package Data;
 
 /**
  *
- * @author audeberl
+ * @author blachert
  */
-public class ProjetMonopoly {
+public class ResultatLoyer {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
+    public ResultatLoyer() {
+        
     }
     
 }

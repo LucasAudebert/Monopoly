@@ -14,15 +14,4 @@ public class Compagnie extends Propriete {
             return 10 * getProprietaire().getDerniereValeurDes();
         }   
     }
-
-    @Override
-    public Resultat action(Joueur joueur) {
-        Resultat res = new Resultat();
-        if(this.getProprietaire() == null){
-            res.update(this, joueur, "acheter");
-        }else{
-            res.update(this, joueur, "payerLoyer");
-        }
-        return res;
-    }
 }

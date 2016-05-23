@@ -22,7 +22,7 @@ public class Main {
         controleur.creerPlateau("data.txt");
         controleur.inscrireJoueurs();
         //Boucle de Jeu
-        
+        controleur.boucleDeJeu();
         
         //Fin
     }

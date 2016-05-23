@@ -9,17 +9,5 @@ public class Gare extends Propriete {
     @Override
     public int calculLoyer() {
         return super.getProprietaire().getNbGares() * 25;
-    }
-
-    @Override
-    public Resultat action(Joueur joueur) {
-        Resultat res = new Resultat();
-        if(this.getProprietaire() == null){
-            res.update(this, joueur, "acheter");
-        }else{
-            res.update(this, joueur, "payerLoyer");
-        }
-        return res;
-    }
-	
+    }	
 }

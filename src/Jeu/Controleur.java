@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Scanner;
 
 public class Controleur {
@@ -103,9 +104,9 @@ public class Controleur {
 	}
         
         public void inscrireJoueurs(){                              
-            String[] nomJoueurs = ihm.saisirNouveauJoueur();
-            for(int i = 0; i < nomJoueurs.length; i++){
-                monopoly.addJoueur(new Joueur(nomJoueurs[i], monopoly.getCarreau(0)));
+            HashSet<String> nomJoueurs = ihm.saisirNouveauJoueur();
+            for(String nomTemp : nomJoueurs){
+                monopoly.addJoueur(new Joueur(nomTemp, monopoly.getCarreau(0)));
             }
         }
         
@@ -124,8 +125,10 @@ public class Controleur {
         }
         
         public void boucleDeJeu(){
-            for(Joueur jTemp : monopoly.getJoueurs()){
-                jouerCoup(jTemp);
+            while(true){
+                for(Joueur jTemp : monopoly.getJoueurs()){
+                    jouerCoup(jTemp);
+                }
             }
         }
 }

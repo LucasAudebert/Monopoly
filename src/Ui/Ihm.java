@@ -5,6 +5,7 @@
  */
 package Ui;
 
+import java.util.HashSet;
 import java.util.Scanner;
 
 /**
@@ -18,20 +19,26 @@ public class Ihm {
         sc = new Scanner(System.in);
     }
     
-    public String[] saisirNouveauJoueur(){
+    public HashSet<String> saisirNouveauJoueur(){
         int reponse = 0;
+        HashSet listeJoueurs = new HashSet<String>();
         do{
             System.out.print("Combien de joueurs ? (entre 2 et 6) : "); 
-            reponse = sc.nextInt();
+            reponse = Integer.parseInt(sc.nextLine());
         }while(reponse < 2 || reponse > 6);
-        String[] listeJoueur = new String[reponse];
         
-        for(int i = 1; i <= 6; i++){
+        for(int i = 1; i <= reponse; i++){
             System.out.print("Saisir nom du joueur " + i + ": ");
-            listeJoueur[i - 1] = sc.nextLine();
+            String nom = sc.nextLine();
+            if(listeJoueurs.contains(nom)){
+                System.out.println("nom deja saisi");
+                i--;
+            }else{
+                listeJoueurs.add(nom);
+            }
         }  
         
-        return listeJoueur;
+        return listeJoueurs;
     }
     
     public void afficher(String s){

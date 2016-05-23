@@ -1,31 +1,25 @@
 package Data;
 
-public class Resultat {
+public abstract class Resultat {
 	
-    private Carreau carreau;
+    private Propriete propriete;
     private Joueur joueur;
-    private String actionJoueur;
 
     public Resultat(){
 
-    }
-
-    public Carreau getCarreau() {
-        return carreau;
     }
 
     public Joueur getJoueur() {
         return joueur;
     }
 
-    public String getActionJoueur() {
-        return actionJoueur;
+    public Propriete getPropriete() {
+        return propriete;
     }
-
-    public void update(Carreau carreau, Joueur joueur, String actionJoueur){
-        this.carreau = carreau;
+   
+    public void update(Propriete propriete, Joueur joueur){
         this.joueur = joueur;
-        this.actionJoueur = actionJoueur;
+        this.propriete = propriete;
     }
 
 }

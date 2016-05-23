@@ -21,8 +21,22 @@ public abstract class Propriete extends Carreau {
     
     public abstract int calculLoyer();
     
+    public boolean achatPossible(Joueur joueur){
+        return joueur.getCash() > prix;
+    }
+    
     public Joueur getProprietaire(){
         return proprietaire;
     }
     
+    public Resultat action(Joueur joueur) {
+        ResultatAchat res = new ResultatAchat();
+        if(this.getProprietaire() == null){
+            
+        }else if (this.getProprietaire() != joueur){
+            res.update(this, joueur);
+            // doit payer le loyer
+        }
+        return res;
+    }
 }
