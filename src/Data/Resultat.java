@@ -1,13 +1,18 @@
 package Data;
 
+
 public class Resultat {
 	
     private Propriete propriete;
     private Joueur joueur;
+    private String typeResultat;
+    
+
     private EnumerationsMonopoly.typeResultat type;
 
-    public Resultat(){
 
+    public Resultat(){
+        
     }
 
     public Joueur getJoueur() {
