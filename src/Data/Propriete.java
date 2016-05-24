@@ -34,13 +34,14 @@ public abstract class Propriete extends Carreau {
     public int getLoyer() {
         return loyer;
     }
-        
+   
+    @Override
     public Resultat action(Joueur joueur) {
-        ResultatAchat res = new ResultatAchat();
+        
         if(this.getProprietaire() == null){
             
         }else if (this.getProprietaire() != joueur){
-            res.update(this, joueur);
+            
             // doit payer le loyer
         }
         return res;
