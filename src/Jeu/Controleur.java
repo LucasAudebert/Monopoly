@@ -128,17 +128,14 @@ public class Controleur {
         private void jouerCoup(Joueur joueur){
             lancerDesAvancer(joueur);
             Resultat resultat = joueur.getPositionCourante().action(joueur);  
-            if(resultat.getTypeResultat()== EnumerationsMonopoly.typeResultat.autreCarreau){
-                System.out.println("test1");
-            }
-            /*switch(resultat.getTypeResultat()){
+            switch(resultat.getTypeResultat()){
                 case achat :
                     System.out.println("achat");
                     break;
                 case loyer :
                     System.out.println("loyer");
-                    joueur.payerLoyer(resultat.getPropriete().calculLoyer());
-                    resultat.getPropriete().getProprietaire().recevoirLoyer( resultat.getPropriete().calculLoyer() ); //joli commentaire              
+                    joueur.payerLoyer(resultat.getLoyer());
+                    resultat.getPropriete().getProprietaire().recevoirLoyer( resultat.getLoyer() ); //joli commentaire              
                     break;
                 case autreCarreau :
                     System.out.println("Autre Carreau");
@@ -148,7 +145,7 @@ public class Controleur {
                     break;    
                 default :
                     
-            }*/
+            }
         }
         
         public void boucleDeJeu(){

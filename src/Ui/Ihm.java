@@ -41,7 +41,5 @@ public class Ihm {
         return listeJoueurs;
     }
     
-    public void afficher(String s){
-        System.out.println(s);
-    }
+    
 }

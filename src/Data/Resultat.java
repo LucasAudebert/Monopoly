@@ -37,17 +37,8 @@ public class Resultat {
         this.typeResultat = type;
         this.loyer = loyer;
     }   
-    
-    public void setPropriete(Propriete propriete) {
-        this.propriete = propriete;
-    }
 
-    public void setJoueur(Joueur joueur) {
-        this.joueur = joueur;
+    public int getLoyer() {
+        return loyer;
     }
-
-    public void setType(EnumerationsMonopoly.typeResultat typeResultat) {
-        this.typeResultat = typeResultat;
-    }
-
 }
