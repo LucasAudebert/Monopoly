@@ -54,7 +54,7 @@ public abstract class Propriete extends Carreau {
             System.out.println("null");
             res = achatPossible(joueur);
         }else if (this.getProprietaire() != joueur){
-            res.update(this, joueur, typeResultat.loyer);
+            res.update(this, joueur, typeResultat.loyer, calculLoyer());
             System.out.println("loyer");
         }else{
             res.update(this, joueur, typeResultat.neRienFaire);
