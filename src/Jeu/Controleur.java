@@ -132,8 +132,8 @@ public class Controleur {
                 case achat :
                     break;
                 case loyer :
-                    joueur.payerLoyer(resultat.getPropriete().calculLoyer());
-                    resultat.getPropriete().getProprietaire().recevoirLoyer( resultat.getPropriete().calculLoyer() ); //joli commentaire
+                    joueur.payerLoyer(resultat.getCarreau().calculLoyer());
+                    resultat.getCarreau().getProprietaire().recevoirLoyer( resultat.getCarreau().calculLoyer() ); //joli commentaire
                     break;
                 case neRienFaire : 
                     break;    

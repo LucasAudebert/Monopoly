@@ -10,5 +10,6 @@ public class AutreCarreau extends Carreau{
     public Resultat action(Joueur joueur) {
         Resultat res = new Resultat();
         res.update(this, joueur, EnumerationsMonopoly.typeResultat.neRienFaire);
+        return res;
     }
 }
