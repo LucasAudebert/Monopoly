@@ -6,9 +6,11 @@ public class Resultat {
     private Propriete propriete;
     private Joueur joueur;
     private EnumerationsMonopoly.typeResultat typeResultat;
+    private int loyer;
 
 
-    public Resultat(){        
+    public Resultat(){
+        
     }
 
     public Joueur getJoueur() {
@@ -18,17 +20,25 @@ public class Resultat {
     public Propriete getPropriete() {
         return propriete;
     }
-   
-    public void update(Propriete propriete, Joueur joueur, EnumerationsMonopoly.typeResultat type){
-        this.joueur = joueur;
-        this.propriete = propriete;
-    }
-
+ 
     public EnumerationsMonopoly.typeResultat getTypeResultat() {
         return typeResultat;
     }
+    
+    public void update(Propriete propriete, Joueur joueur, EnumerationsMonopoly.typeResultat type){
+        this.joueur = joueur;
+        this.propriete = propriete;
+        this.typeResultat = type;
+    }
 
-    public void setCarreau(Propriete propriete) {
+     public void update(Propriete propriete, Joueur joueur, EnumerationsMonopoly.typeResultat type, int loyer){
+        this.joueur = joueur;
+        this.propriete = propriete;
+        this.typeResultat = type;
+        this.loyer = loyer;
+    }   
+    
+    public void setPropriete(Propriete propriete) {
         this.propriete = propriete;
     }
 
