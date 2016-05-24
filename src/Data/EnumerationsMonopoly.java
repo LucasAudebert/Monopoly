@@ -13,7 +13,9 @@ public class EnumerationsMonopoly {
     
     public static final String[] couleurPropriete = {"bleuFonce", "orange", "mauve", "violet", "bleuCiel", "jaune", "vert", "rouge"};
     
-    public static final String[] actionPossible = {"aucune", ""};
+    public enum typeResultat {
+        neRienFaire, achat, loyer
+    }
     
     public static final String[] typeCarreau = {"gare", "compagnie", "proprieteAConstruire", "autre"};
     

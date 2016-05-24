@@ -1,9 +1,10 @@
 package Data;
 
-public abstract class Resultat {
+public class Resultat {
 	
     private Propriete propriete;
     private Joueur joueur;
+    private EnumerationsMonopoly.typeResultat type;
 
     public Resultat(){
 
@@ -17,9 +18,21 @@ public abstract class Resultat {
         return propriete;
     }
    
-    public void update(Propriete propriete, Joueur joueur){
+    public void update(Propriete propriete, Joueur joueur, EnumerationsMonopoly.typeResultat type){
         this.joueur = joueur;
         this.propriete = propriete;
+    }
+
+    public void setPropriete(Propriete propriete) {
+        this.propriete = propriete;
+    }
+
+    public void setJoueur(Joueur joueur) {
+        this.joueur = joueur;
+    }
+
+    public void setType(EnumerationsMonopoly.typeResultat type) {
+        this.type = type;
     }
 
 }

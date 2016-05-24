@@ -5,6 +5,8 @@
  */
 package Data;
 
+import Data.EnumerationsMonopoly.typeResultat;
+
 /**
  *
  * @author blachert
@@ -23,8 +25,18 @@ public abstract class Propriete extends Carreau {
     
     public abstract int calculLoyer();
     
-    public boolean achatPossible(Joueur joueur){
-        return joueur.getCash() > prix;
+    public Resultat achatPossible(Joueur joueur){
+        Resultat res = new Resultat();
+        if (joueur.peutPayer(prix)){
+            res.update(this, joueur, typeResultat.achat);
+        }else{
+            res.update(this, joueur, typeResultat.neRienFaire);
+        }
+        return res;
+    }
+    
+    public Resultat doitPayerLoyer(){
+        return null;
     }
     
     public Joueur getProprietaire(){
@@ -37,12 +49,13 @@ public abstract class Propriete extends Carreau {
    
     @Override
     public Resultat action(Joueur joueur) {
-        
+        Resultat res = new Resultat();
         if(this.getProprietaire() == null){
-            
+            res = achatPossible(joueur);
         }else if (this.getProprietaire() != joueur){
-            
-            // doit payer le loyer
+            res.update(this, joueur, typeResultat.loyer);
+        }else{
+            res.update(this, joueur, typeResultat.neRienFaire);
         }
         return res;
     }

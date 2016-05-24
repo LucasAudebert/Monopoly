@@ -44,7 +44,7 @@ public class Joueur {
         }
 
 	public void payerLoyer(int l) {
-		throw new UnsupportedOperationException();
+                cash -= l;
 	}
 
 	public void recevoirLoyer(int l) {
@@ -57,12 +57,8 @@ public class Joueur {
 
         public int getNbCompagnies(){
                 return compagnies.size();
-        }
-        
-	public String getNomProprietaire() {
-		throw new UnsupportedOperationException();
-	}
-
+        }     
+	
 	public Carreau getPositionCourante() {
 		return this.positionCourante;
 	}
@@ -78,8 +74,8 @@ public class Joueur {
 	public void setPositionCourante(Carreau nouvellePosition) {
 		positionCourante = nouvellePosition;
 	}
-
-	public boolean peutAcheter(int prixC) {
+        
+        public boolean peutPayer(int prixC) {
 		if(cash >= prixC){
                     return true;
                 }else{
