@@ -82,4 +82,8 @@ public class Joueur {
                     return false;
                 }
 	}
+        
+        public boolean desDouble(){
+            return derniereValeurDes[0] == derniereValeurDes[1];
+        }
 }

@@ -121,7 +121,11 @@ public class Controleur {
             int[] des = new int[2];
             des[0] = (int) (Math.random() * 6) + 1;
             des[1] = (int) (Math.random() * 6) + 1;
-            System.out.println(des[0] + " " + des[1]);
+            if(des[0] == des[1]){
+                ihm.afficher("Vous obtenez un double " + des[1]);
+            }else{
+                ihm.afficher("Vous obtenez un " + des[0] + " et un " + des[1]);
+            }
             joueur.setDerniereValeurDes(des);
             joueur.setPositionCourante(monopoly.getNouvellePosition(des[0]+des[1], joueur.getPositionCourante()));
         }
@@ -131,37 +135,39 @@ public class Controleur {
             Resultat resultat = joueur.getPositionCourante().action(joueur);  
             switch(resultat.getTypeResultat()){
                 case achat :
-                    System.out.println("achat");
-                        if(ihm.demandeAchat(resultat)){
-                            joueur.payerLoyer(resultat.getPropriete().getPrix());
-                            resultat.getPropriete().setProprietaire(joueur);
-                        }
-                    break;
+                    if(ihm.demandeAchat(resultat)){
+                        joueur.payerLoyer(resultat.getPropriete().getPrix());
+                        resultat.getPropriete().setProprietaire(joueur);
+                    }
+                break;
                 case loyer :
-                    System.out.println("loyer");
+                    ihm.afficher("Vous êtes tombé(e) sur la propriété " + resultat.getPropriete().getNom() + " appartenant à " + resultat.getPropriete().getProprietaire().getNomJoueur());
+                    ihm.afficher("Vous payez " + resultat.getLoyer());
                     joueur.payerLoyer(resultat.getLoyer());
                     resultat.getPropriete().getProprietaire().recevoirLoyer( resultat.getLoyer() ); //joli commentaire              
-                    break;
+                break;
                 case autreCarreau :
-                    System.out.println("Autre Carreau");
-                    break;
+                    ihm.afficher("Vous êtes tombé(e) sur un carreau quelqueconque");
+                break;
                 case neRienFaire : 
                     System.out.println("rien faire");
-                    break;    
-                default :
-                    
+                break;   
+            }
+            if(joueur.desDouble()){
+                ihm.afficherFinDeCoup(joueur);
+                ihm.attendreBouton(joueur.getNomJoueur() + " appuyez sur Entrer pour rejouer.");
+                jouerCoup(joueur);
             }
         }
         
         public void boucleDeJeu(){
             while(true){
                 for(Joueur jTemp : monopoly.getJoueurs()){
+                    ihm.attendreBouton(jTemp.getNomJoueur() + " appuyez sur Entrer pour jouer.");
                     jouerCoup(jTemp);
                     ihm.afficherFinDeCoup(jTemp);
-                    ihm.attendreBouton();
                 }
                 ihm.afficherFinDeTour(monopoly.getJoueurs());
-                ihm.attendreBouton();
             }
         }
 }

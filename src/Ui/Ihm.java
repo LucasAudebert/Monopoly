@@ -30,7 +30,7 @@ public class Ihm {
         }while(reponse < 2 || reponse > 6);
         
         for(int i = 1; i <= reponse; i++){
-            System.out.print("Saisir nom du joueur " + i + ": ");
+            System.out.print("Saisir nom du joueur " + i + " : ");
             String nom = sc.nextLine();
             if(listeJoueurs.contains(nom)){
                 System.out.println("nom deja saisi");
@@ -50,21 +50,27 @@ public class Ihm {
     }
     
     public void afficherFinDeCoup(Joueur joueur){
-        System.out.println("Nom : " + joueur.getNomJoueur() + " : ");
+        System.out.println("----------------------------------");
+        System.out.println("Nom : " + joueur.getNomJoueur());
         System.out.println("Cash : " + joueur.getCash());
         System.out.println("Position : " + joueur.getPositionCourante().getNom());
-        System.out.println("Numero de Case :" + joueur.getPositionCourante().getNumero());
+        System.out.println("Numero de Case : " + joueur.getPositionCourante().getNumero());
+        System.out.println("----------------------------------");
     }
     
     public void afficherFinDeTour(HashSet<Joueur> joueurs){
-        System.out.println("Fin de tour :");
+        System.out.println("--- Fin de tour : ----------------");
         for(Joueur jTemp : joueurs){
             afficherFinDeCoup(jTemp);
         }
     }
     
-    public void attendreBouton(){
-        System.out.println("Appuyer sur Entrer");
+    public void afficher(String chaine){
+        System.out.println(chaine);
+    }
+    
+    public void attendreBouton(String chaine){
+        System.out.println(chaine);
         sc.nextLine();
     }
 }
