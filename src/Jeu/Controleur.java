@@ -127,8 +127,19 @@ public class Controleur {
         
         private void jouerCoup(Joueur joueur){
             lancerDesAvancer(joueur);
-            Resultat resultat = joueur.getPositionCourante().action(joueur);
-            
+            Resultat resultat = joueur.getPositionCourante().action(joueur);          
+            switch(resultat.getType()){
+                case achat :
+                    break;
+                case loyer :
+                    joueur.payerLoyer(resultat.getPropriete().calculLoyer());
+                    resultat.getPropriete().getProprietaire().recevoirLoyer( resultat.getPropriete().calculLoyer() ); //joli commentaire
+                    break;
+                case neRienFaire : 
+                    break;    
+                default :
+                    
+            }
         }
         
         public void boucleDeJeu(){

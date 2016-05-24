@@ -5,9 +5,6 @@ public class Resultat {
 	
     private Propriete propriete;
     private Joueur joueur;
-    private String typeResultat;
-    
-
     private EnumerationsMonopoly.typeResultat type;
 
 
@@ -26,6 +23,10 @@ public class Resultat {
     public void update(Propriete propriete, Joueur joueur, EnumerationsMonopoly.typeResultat type){
         this.joueur = joueur;
         this.propriete = propriete;
+    }
+
+    public EnumerationsMonopoly.typeResultat getType() {
+        return type;
     }
 
     public void setPropriete(Propriete propriete) {

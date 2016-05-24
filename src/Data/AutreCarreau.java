@@ -8,6 +8,7 @@ public class AutreCarreau extends Carreau{
 
     @Override
     public Resultat action(Joueur joueur) {
-        return null;
+        Resultat res = new Resultat();
+        res.update(this, joueur, EnumerationsMonopoly.typeResultat.neRienFaire);
     }
 }
