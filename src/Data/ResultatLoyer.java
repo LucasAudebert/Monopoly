@@ -9,7 +9,10 @@ package Data;
  *
  * @author blachert
  */
-public class ResultatLoyer {
+public class ResultatLoyer extends Resultat {
+    
+    private boolean perdu;
+    private int loyer;
 
     public ResultatLoyer() {
         

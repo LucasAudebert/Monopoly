@@ -10,11 +10,11 @@ package Data;
  * @author blachert
  */
 public class ResultatAchat extends Resultat{
+    
+    private boolean peutAcheter;    
 
     public ResultatAchat() {
     
     }
-    
-    
     
 }

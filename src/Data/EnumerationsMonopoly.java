@@ -11,10 +11,10 @@ package Data;
  */
 public class EnumerationsMonopoly {
     
-    public static final String[] couleurPropriete = {"bleuFonce", "orange", "mauve", "violet", "bleuCiel", "jaune", "vert", "rouge"};
+    public static final String[] COULEUR_PROPRIETE = {"bleuFonce", "orange", "mauve", "violet", "bleuCiel", "jaune", "vert", "rouge"};
     
-    public static final String[] actionPossible = {"aucune", ""};
+    public static final String[] TYPE_RESULTAT = {"achat", "loyer", "neRienFaire"};
     
-    public static final String[] typeCarreau = {"gare", "compagnie", "proprieteAConstruire", "autre"};
+    public static final String[] TYPE_CARREAU = {"gare", "compagnie", "proprieteAConstruire", "autre"};
     
 }
