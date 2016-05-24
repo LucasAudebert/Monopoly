@@ -119,8 +119,9 @@ public class Controleur {
         
         private void lancerDesAvancer(Joueur joueur){
             int[] des = new int[2];
-            des[0] = (int) (Math.random() % 6) + 1;
-            des[1] = (int) (Math.random() % 6) + 1;
+            des[0] = (int) (Math.random() * 6) + 1;
+            des[1] = (int) (Math.random() * 6) + 1;
+            System.out.println(des[0] + " " + des[1]);
             joueur.setDerniereValeurDes(des);
             joueur.setPositionCourante(monopoly.getNouvellePosition(des[0]+des[1], joueur.getPositionCourante()));
         }
@@ -131,6 +132,10 @@ public class Controleur {
             switch(resultat.getTypeResultat()){
                 case achat :
                     System.out.println("achat");
+                        if(ihm.demandeAchat(resultat)){
+                            joueur.payerLoyer(resultat.getPropriete().getPrix());
+                            resultat.getPropriete().setProprietaire(joueur);
+                        }
                     break;
                 case loyer :
                     System.out.println("loyer");
@@ -152,7 +157,11 @@ public class Controleur {
             while(true){
                 for(Joueur jTemp : monopoly.getJoueurs()){
                     jouerCoup(jTemp);
+                    ihm.afficherFinDeCoup(jTemp);
+                    ihm.attendreBouton();
                 }
+                ihm.afficherFinDeTour(monopoly.getJoueurs());
+                ihm.attendreBouton();
             }
         }
 }

@@ -5,6 +5,8 @@
  */
 package Ui;
 
+import Data.Joueur;
+import Data.Resultat;
 import java.util.HashSet;
 import java.util.Scanner;
 
@@ -41,5 +43,28 @@ public class Ihm {
         return listeJoueurs;
     }
     
+    public boolean demandeAchat(Resultat res){
+        System.out.print("Voulez vous acheter " + res.getPropriete().getNom() + " pour " + res.getPropriete().getPrix() + " ? (y/n) : ");
+        String rep = sc.nextLine();
+        return !rep.contains("n");
+    }
     
+    public void afficherFinDeCoup(Joueur joueur){
+        System.out.println("Nom : " + joueur.getNomJoueur() + " : ");
+        System.out.println("Cash : " + joueur.getCash());
+        System.out.println("Position : " + joueur.getPositionCourante().getNom());
+        System.out.println("Numero de Case :" + joueur.getPositionCourante().getNumero());
+    }
+    
+    public void afficherFinDeTour(HashSet<Joueur> joueurs){
+        System.out.println("Fin de tour :");
+        for(Joueur jTemp : joueurs){
+            afficherFinDeCoup(jTemp);
+        }
+    }
+    
+    public void attendreBouton(){
+        System.out.println("Appuyer sur Entrer");
+        sc.nextLine();
+    }
 }

@@ -17,4 +17,8 @@ public abstract class Carreau {
             return numero;
         }
         
+        public String getNom(){
+            return nomCarreau;
+        }
+        
 }

@@ -43,8 +43,16 @@ public abstract class Propriete extends Carreau {
         return proprietaire;
     }
 
+    public void setProprietaire(Joueur joueur){
+        this.proprietaire = joueur;
+    }
+    
     public int getLoyer() {
         return loyer;
+    }
+    
+    public int getPrix(){
+        return prix;
     }
    
     @Override
