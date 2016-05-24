@@ -32,7 +32,7 @@ public class Controleur {
                                         if(monopoly.getGroupe(CouleurPropriete.valueOf(data.get(i)[3])) == null){
                                             monopoly.addGroupe(new Groupe(CouleurPropriete.valueOf(data.get(i)[3])));
                                         }
-                                        ProprieteAConstruire proprieteTemp = new ProprieteAConstruire(Integer.parseInt(data.get(i)[4]), Integer.parseInt(data.get(i)[1]), data.get(i)[2], EnumerationsMonopoly.typeCarreau[2], monopoly.getGroupe(CouleurPropriete.valueOf(data.get(i)[3])), Integer.parseInt(data.get(i)[5]));
+                                        ProprieteAConstruire proprieteTemp = new ProprieteAConstruire(Integer.parseInt(data.get(i)[4]), Integer.parseInt(data.get(i)[1]), data.get(i)[2], EnumerationsMonopoly.TYPE_CARREAU[2], monopoly.getGroupe(CouleurPropriete.valueOf(data.get(i)[3])), Integer.parseInt(data.get(i)[5]));
                                         monopoly.addCarreau(proprieteTemp);
                                         
                                         monopoly.getGroupe(CouleurPropriete.valueOf(data.get(i)[3])).addPropriete(proprieteTemp);
@@ -40,15 +40,15 @@ public class Controleur {
 				}
 				else if(caseType.compareTo("G") == 0){
 					//System.out.println("Gare :\t" + data.get(i)[2] + "\t@ case " + data.get(i)[1]);
-                                        monopoly.addCarreau(new Gare(Integer.parseInt(data.get(i)[3]), Integer.parseInt(data.get(i)[1]), data.get(i)[2], EnumerationsMonopoly.typeCarreau[0], 25));
+                                        monopoly.addCarreau(new Gare(Integer.parseInt(data.get(i)[3]), Integer.parseInt(data.get(i)[1]), data.get(i)[2], EnumerationsMonopoly.TYPE_CARREAU[0], 25));
 				}
 				else if(caseType.compareTo("C") == 0){
 					//System.out.println("Compagnie :\t" + data.get(i)[2] + "\t@ case " + data.get(i)[1]);
-                                        monopoly.addCarreau(new Compagnie(Integer.parseInt(data.get(i)[3]), Integer.parseInt(data.get(i)[1]), data.get(i)[2], EnumerationsMonopoly.typeCarreau[1], 0));
+                                        monopoly.addCarreau(new Compagnie(Integer.parseInt(data.get(i)[3]), Integer.parseInt(data.get(i)[1]), data.get(i)[2], EnumerationsMonopoly.TYPE_CARREAU[1], 0));
 				}
 				else if(caseType.compareTo("AU") == 0){
 					//System.out.println("Case Autre :\t" + data.get(i)[2] + "\t@ case " + data.get(i)[1]);
-                                        monopoly.addCarreau(new AutreCarreau(Integer.parseInt(data.get(i)[1]), data.get(i)[2], EnumerationsMonopoly.typeCarreau[3]));
+                                        monopoly.addCarreau(new AutreCarreau(Integer.parseInt(data.get(i)[1]), data.get(i)[2], EnumerationsMonopoly.TYPE_CARREAU[3]));
 				}
 				else
 					System.err.println("[buildGamePleateau()] : Invalid Data type");
