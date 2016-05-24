@@ -15,7 +15,7 @@ public class EnumerationsMonopoly {
     
 
     public enum typeResultat {
-        neRienFaire, achat, loyer
+        neRienFaire, achat, loyer, autreCarreau
     }
     
     public static final String[] TYPE_CARREAU = {"gare", "compagnie", "proprieteAConstruire", "autre"};

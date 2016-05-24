@@ -3,9 +3,9 @@ package Data;
 
 public class Resultat {
 	
-    private Carreau carreau;
+    private Propriete propriete;
     private Joueur joueur;
-    private EnumerationsMonopoly.typeResultat type;
+    private EnumerationsMonopoly.typeResultat typeResultat;
 
 
     public Resultat(){        
@@ -15,29 +15,29 @@ public class Resultat {
         return joueur;
     }
 
-    public Carreau getCarreau() {
-        return carreau;
+    public Propriete getPropriete() {
+        return propriete;
     }
    
-    public void update(Carreau carreau, Joueur joueur, EnumerationsMonopoly.typeResultat type){
+    public void update(Propriete propriete, Joueur joueur, EnumerationsMonopoly.typeResultat type){
         this.joueur = joueur;
-        this.carreau = carreau;
+        this.propriete = propriete;
     }
 
-    public EnumerationsMonopoly.typeResultat getType() {
-        return type;
+    public EnumerationsMonopoly.typeResultat getTypeResultat() {
+        return typeResultat;
     }
 
-    public void setCarreau(Carreau carreau) {
-        this.carreau = carreau;
+    public void setCarreau(Propriete propriete) {
+        this.propriete = propriete;
     }
 
     public void setJoueur(Joueur joueur) {
         this.joueur = joueur;
     }
 
-    public void setType(EnumerationsMonopoly.typeResultat type) {
-        this.type = type;
+    public void setType(EnumerationsMonopoly.typeResultat typeResultat) {
+        this.typeResultat = typeResultat;
     }
 
 }
