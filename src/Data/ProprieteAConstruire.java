@@ -4,7 +4,7 @@ public class ProprieteAConstruire extends Propriete{
 
     private Groupe groupe; 
     
-    public ProprieteAConstruire(int prix, int numero, String nomCarreau, String type, Groupe groupe, int loyer) {
+    public ProprieteAConstruire(int prix, int numero, String nomCarreau, EnumerationsMonopoly.TYPE_CARREAU type, Groupe groupe, int loyer) {
         super(prix, numero, nomCarreau, type, loyer);
         this.groupe = groupe;
     }

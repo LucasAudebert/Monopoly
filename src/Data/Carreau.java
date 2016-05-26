@@ -3,9 +3,9 @@ package Data;
 public abstract class Carreau {
 	private int numero;
 	private String nomCarreau;
-        private String type;
+        private EnumerationsMonopoly.TYPE_CARREAU type;
         
-        public Carreau(int numero, String nomCarreau, String type){
+        public Carreau(int numero, String nomCarreau, EnumerationsMonopoly.TYPE_CARREAU type){
             this.numero = numero;
             this.nomCarreau = nomCarreau;
             this.type = type;
@@ -19,6 +19,10 @@ public abstract class Carreau {
         
         public String getNom(){
             return nomCarreau;
+        }
+        
+        public EnumerationsMonopoly.TYPE_CARREAU getType(){
+            return type;
         }
         
 }

@@ -2,7 +2,7 @@ package Data;
 
 public class Compagnie extends Propriete {
 
-    public Compagnie(int prix, int numero, String nomCarreau, String type, int loyer) {
+    public Compagnie(int prix, int numero, String nomCarreau, EnumerationsMonopoly.TYPE_CARREAU type, int loyer) {
         super(prix, numero, nomCarreau, type, loyer);
     }
 

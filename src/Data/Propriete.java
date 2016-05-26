@@ -5,7 +5,7 @@
  */
 package Data;
 
-import Data.EnumerationsMonopoly.typeResultat;
+import Data.EnumerationsMonopoly.TYPE_RESULTAT;
 
 /**
  *
@@ -17,7 +17,7 @@ public abstract class Propriete extends Carreau {
     private int loyer;
     private Joueur proprietaire;
     
-    public Propriete(int prix, int numero, String nomCarreau, String type, int loyer){
+    public Propriete(int prix, int numero, String nomCarreau, EnumerationsMonopoly.TYPE_CARREAU type, int loyer){
         super(numero, nomCarreau, type);
         this.prix = prix;
         this.loyer = loyer;
@@ -28,9 +28,9 @@ public abstract class Propriete extends Carreau {
     public Resultat achatPossible(Joueur joueur){
         Resultat res = new Resultat();
         if (joueur.peutPayer(prix)){
-            res.update(this, joueur, typeResultat.achat);
+            res.update(this, joueur, TYPE_RESULTAT.achat);
         }else{
-            res.update(this, joueur, typeResultat.neRienFaire);
+            res.update(this, joueur, TYPE_RESULTAT.neRienFaire);
         }
         return res;
     }
@@ -61,9 +61,9 @@ public abstract class Propriete extends Carreau {
         if(this.getProprietaire() == null){
             res = achatPossible(joueur);
         }else if (this.getProprietaire() != joueur){
-            res.update(this, joueur, typeResultat.loyer, calculLoyer());
+            res.update(this, joueur, TYPE_RESULTAT.loyer, calculLoyer());
         }else{
-            res.update(this, joueur, typeResultat.neRienFaire);
+            res.update(this, joueur, TYPE_RESULTAT.neRienFaire);
         }
         return res;
     }

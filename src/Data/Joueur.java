@@ -35,14 +35,30 @@ public class Joueur {
             this.cash = cash;
         }
 
+        public ArrayList<Compagnie> getCompagnies() {
+            return compagnies;
+        }
+
+        public void addCompagnie(Compagnie compagnie){
+            compagnies.add(compagnie);
+        }
+        
         public ArrayList<Gare> getGares() {
             return gares;
         }
 
-        public void setGares(ArrayList<Gare> gares) {
-            this.gares = gares;
+        public void addGare(Gare gare){
+            gares.add(gare);
         }
 
+        public ArrayList<ProprieteAConstruire> getProprieteAConstruires() {
+            return proprieteAConstruires;
+        }
+
+        public void addProprieteAConstruire(ProprieteAConstruire pac){
+            proprieteAConstruires.add(pac);
+        }
+        
 	public void payerLoyer(int l) {
                 cash -= l;
 	}

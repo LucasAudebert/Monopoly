@@ -5,7 +5,7 @@ public class Resultat {
 	
     private Propriete propriete;
     private Joueur joueur;
-    private EnumerationsMonopoly.typeResultat typeResultat;
+    private EnumerationsMonopoly.TYPE_RESULTAT typeResultat;
     private int loyer;
 
 
@@ -21,17 +21,17 @@ public class Resultat {
         return propriete;
     }
  
-    public EnumerationsMonopoly.typeResultat getTypeResultat() {
+    public EnumerationsMonopoly.TYPE_RESULTAT getTypeResultat() {
         return typeResultat;
     }
     
-    public void update(Propriete propriete, Joueur joueur, EnumerationsMonopoly.typeResultat type){
+    public void update(Propriete propriete, Joueur joueur, EnumerationsMonopoly.TYPE_RESULTAT type){
         this.joueur = joueur;
         this.propriete = propriete;
         this.typeResultat = type;
     }
 
-     public void update(Propriete propriete, Joueur joueur, EnumerationsMonopoly.typeResultat type, int loyer){
+     public void update(Propriete propriete, Joueur joueur, EnumerationsMonopoly.TYPE_RESULTAT type, int loyer){
         this.joueur = joueur;
         this.propriete = propriete;
         this.typeResultat = type;

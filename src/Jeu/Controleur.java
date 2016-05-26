@@ -28,27 +28,23 @@ public class Controleur {
 			for(int i=0; i<data.size(); ++i){
 				String caseType = data.get(i)[0];
 				if(caseType.compareTo("P") == 0){
-					//System.out.println("Propriété :\t" + data.get(i)[2] + "\t@ case " + data.get(i)[1]);
                                         if(monopoly.getGroupe(CouleurPropriete.valueOf(data.get(i)[3])) == null){
                                             monopoly.addGroupe(new Groupe(CouleurPropriete.valueOf(data.get(i)[3])));
                                         }
-                                        ProprieteAConstruire proprieteTemp = new ProprieteAConstruire(Integer.parseInt(data.get(i)[4]), Integer.parseInt(data.get(i)[1]), data.get(i)[2], EnumerationsMonopoly.TYPE_CARREAU[2], monopoly.getGroupe(CouleurPropriete.valueOf(data.get(i)[3])), Integer.parseInt(data.get(i)[5]));
+                                        ProprieteAConstruire proprieteTemp = new ProprieteAConstruire(Integer.parseInt(data.get(i)[4]), Integer.parseInt(data.get(i)[1]), data.get(i)[2], EnumerationsMonopoly.TYPE_CARREAU.proprieteAConstruire, monopoly.getGroupe(CouleurPropriete.valueOf(data.get(i)[3])), Integer.parseInt(data.get(i)[5]));
                                         monopoly.addCarreau(proprieteTemp);
                                         
                                         monopoly.getGroupe(CouleurPropriete.valueOf(data.get(i)[3])).addPropriete(proprieteTemp);
                                         
 				}
 				else if(caseType.compareTo("G") == 0){
-					//System.out.println("Gare :\t" + data.get(i)[2] + "\t@ case " + data.get(i)[1]);
-                                        monopoly.addCarreau(new Gare(Integer.parseInt(data.get(i)[3]), Integer.parseInt(data.get(i)[1]), data.get(i)[2], EnumerationsMonopoly.TYPE_CARREAU[0], 25));
+                                        monopoly.addCarreau(new Gare(Integer.parseInt(data.get(i)[3]), Integer.parseInt(data.get(i)[1]), data.get(i)[2], EnumerationsMonopoly.TYPE_CARREAU.gare, 25));
 				}
 				else if(caseType.compareTo("C") == 0){
-					//System.out.println("Compagnie :\t" + data.get(i)[2] + "\t@ case " + data.get(i)[1]);
-                                        monopoly.addCarreau(new Compagnie(Integer.parseInt(data.get(i)[3]), Integer.parseInt(data.get(i)[1]), data.get(i)[2], EnumerationsMonopoly.TYPE_CARREAU[1], 0));
+                                        monopoly.addCarreau(new Compagnie(Integer.parseInt(data.get(i)[3]), Integer.parseInt(data.get(i)[1]), data.get(i)[2], EnumerationsMonopoly.TYPE_CARREAU.compagnie, 0));
 				}
 				else if(caseType.compareTo("AU") == 0){
-					//System.out.println("Case Autre :\t" + data.get(i)[2] + "\t@ case " + data.get(i)[1]);
-                                        monopoly.addCarreau(new AutreCarreau(Integer.parseInt(data.get(i)[1]), data.get(i)[2], EnumerationsMonopoly.TYPE_CARREAU[3]));
+                                        monopoly.addCarreau(new AutreCarreau(Integer.parseInt(data.get(i)[1]), data.get(i)[2], EnumerationsMonopoly.TYPE_CARREAU.autre));
 				}
 				else
 					System.err.println("[buildGamePleateau()] : Invalid Data type");
@@ -111,7 +107,7 @@ public class Controleur {
 	}
         
         public void inscrireJoueurs(){                              
-            HashSet<String> nomJoueurs = ihm.saisirNouveauJoueur();
+            ArrayList<String> nomJoueurs = ihm.saisirNouveauJoueur();
             for(String nomTemp : nomJoueurs){
                 monopoly.addJoueur(new Joueur(nomTemp, monopoly.getCarreau(0)));
             }
@@ -138,6 +134,17 @@ public class Controleur {
                     if(ihm.demandeAchat(resultat)){
                         joueur.payerLoyer(resultat.getPropriete().getPrix());
                         resultat.getPropriete().setProprietaire(joueur);
+                        switch(resultat.getPropriete().getType()){
+                            case gare :
+                                joueur.addGare((Gare) resultat.getPropriete());
+                            break;
+                            case compagnie :
+                                joueur.addCompagnie((Compagnie) resultat.getPropriete());
+                            break;
+                            case proprieteAConstruire :
+                                joueur.addProprieteAConstruire((ProprieteAConstruire) resultat.getPropriete());
+                            break;
+                        }
                     }
                 break;
                 case loyer :
@@ -167,6 +174,7 @@ public class Controleur {
                     jouerCoup(jTemp);
                     ihm.afficherFinDeCoup(jTemp);
                 }
+                ihm.attendreBouton("");
                 ihm.afficherFinDeTour(monopoly.getJoueurs());
             }
         }

@@ -7,6 +7,7 @@ package Ui;
 
 import Data.Joueur;
 import Data.Resultat;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Scanner;
 
@@ -21,9 +22,9 @@ public class Ihm {
         sc = new Scanner(System.in);
     }
     
-    public HashSet<String> saisirNouveauJoueur(){
+    public ArrayList<String> saisirNouveauJoueur(){
         int reponse = 0;
-        HashSet listeJoueurs = new HashSet<String>();
+        ArrayList listeJoueurs = new ArrayList<String>();
         do{
             System.out.print("Combien de joueurs ? (entre 2 et 6) : "); 
             reponse = Integer.parseInt(sc.nextLine());
@@ -58,7 +59,7 @@ public class Ihm {
         System.out.println("----------------------------------");
     }
     
-    public void afficherFinDeTour(HashSet<Joueur> joueurs){
+    public void afficherFinDeTour(ArrayList<Joueur> joueurs){
         System.out.println("--- Fin de tour : ----------------");
         for(Joueur jTemp : joueurs){
             afficherFinDeCoup(jTemp);

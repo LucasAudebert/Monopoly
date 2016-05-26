@@ -7,12 +7,12 @@ import java.util.Map.Entry;
 
 public class Monopoly {
     
-	private HashSet<Joueur> joueurs;
+	private ArrayList<Joueur> joueurs;
         private ArrayList<Carreau> carreaux; // HashMap ??!!!
         private HashMap<CouleurPropriete,Groupe> groupes;
 
         public Monopoly(){
-            this.joueurs = new HashSet<Joueur>();
+            this.joueurs = new ArrayList<Joueur>();
             this.carreaux = new ArrayList<Carreau>();
             this.groupes = new HashMap<CouleurPropriete,Groupe>();
         }
@@ -29,7 +29,7 @@ public class Monopoly {
             carreaux.add(carreau);
         }
 
-        public HashSet<Joueur> getJoueurs() {
+        public ArrayList<Joueur> getJoueurs() {
             return joueurs;
         }
         
@@ -37,7 +37,7 @@ public class Monopoly {
             joueurs.add(joueur);
         }        
 
-        public void setJoueurs(HashSet<Joueur> joueurs) {
+        public void setJoueurs(ArrayList<Joueur> joueurs) {
             this.joueurs = joueurs;
         }
         
