@@ -7,8 +7,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Scanner;
 
 public class Controleur {
         
@@ -28,13 +26,13 @@ public class Controleur {
 			for(int i=0; i<data.size(); ++i){
 				String caseType = data.get(i)[0];
 				if(caseType.compareTo("P") == 0){
-                                        if(monopoly.getGroupe(CouleurPropriete.valueOf(data.get(i)[3])) == null){
-                                            monopoly.addGroupe(new Groupe(CouleurPropriete.valueOf(data.get(i)[3])));
+                                        if(monopoly.getGroupe(EnumerationsMonopoly.COULEUR_PROPRIETE.valueOf(data.get(i)[3])) == null){
+                                            monopoly.addGroupe(new Groupe(EnumerationsMonopoly.COULEUR_PROPRIETE.valueOf(data.get(i)[3])));
                                         }
-                                        ProprieteAConstruire proprieteTemp = new ProprieteAConstruire(Integer.parseInt(data.get(i)[4]), Integer.parseInt(data.get(i)[1]), data.get(i)[2], EnumerationsMonopoly.TYPE_CARREAU.proprieteAConstruire, monopoly.getGroupe(CouleurPropriete.valueOf(data.get(i)[3])), Integer.parseInt(data.get(i)[5]));
+                                        ProprieteAConstruire proprieteTemp = new ProprieteAConstruire(Integer.parseInt(data.get(i)[4]), Integer.parseInt(data.get(i)[1]), data.get(i)[2], EnumerationsMonopoly.TYPE_CARREAU.proprieteAConstruire, monopoly.getGroupe(EnumerationsMonopoly.COULEUR_PROPRIETE.valueOf(data.get(i)[3])), Integer.parseInt(data.get(i)[5]));
                                         monopoly.addCarreau(proprieteTemp);
                                         
-                                        monopoly.getGroupe(CouleurPropriete.valueOf(data.get(i)[3])).addPropriete(proprieteTemp);
+                                        monopoly.getGroupe(EnumerationsMonopoly.COULEUR_PROPRIETE.valueOf(data.get(i)[3])).addPropriete(proprieteTemp);
                                         
 				}
 				else if(caseType.compareTo("G") == 0){
@@ -128,7 +126,7 @@ public class Controleur {
         
         private void jouerCoup(Joueur joueur){
             lancerDesAvancer(joueur);
-            Resultat resultat = joueur.getPositionCourante().action(joueur);  
+            Resultat resultat = joueur.getPositionCourante().action(joueur); 
             switch(resultat.getTypeResultat()){
                 case achat :
                     if(ihm.demandeAchat(resultat)){
@@ -154,28 +152,32 @@ public class Controleur {
                     resultat.getPropriete().getProprietaire().recevoirLoyer( resultat.getLoyer() ); //joli commentaire              
                 break;
                 case autreCarreau :
-                    ihm.afficher("Vous êtes tombé(e) sur un carreau quelqueconque");
+                    ihm.afficher("Vous êtes tombé(e) sur un carreau quelconque");
                 break;
                 case neRienFaire : 
                     System.out.println("rien faire");
                 break;   
             }
             if(joueur.desDouble()){
-                ihm.afficherFinDeCoup(joueur);
+                ihm.afficherInfosJoueur(joueur);
                 ihm.attendreBouton(joueur.getNomJoueur() + " appuyez sur Entrer pour rejouer.");
                 jouerCoup(joueur);
             }
         }
         
         public void boucleDeJeu(){
-            while(true){
+            int nbTours = 1;
+            while(!monopoly.isFinDePartie()){
+                ihm.afficher("----------- Tour " + nbTours + "-----------");
                 for(Joueur jTemp : monopoly.getJoueurs()){
                     ihm.attendreBouton(jTemp.getNomJoueur() + " appuyez sur Entrer pour jouer.");
                     jouerCoup(jTemp);
-                    ihm.afficherFinDeCoup(jTemp);
+                    ihm.afficherInfosJoueur(jTemp);
                 }
-                ihm.attendreBouton("");
+                ihm.attendreBouton("Appuyer sur Entrer pour voir le récapitulatif du tour");
                 ihm.afficherFinDeTour(monopoly.getJoueurs());
+                
+                nbTours++;
             }
         }
 }

@@ -3,15 +3,15 @@ package Data;
 import java.util.ArrayList;
 
 public class Groupe {
-	private CouleurPropriete couleur;
+	private EnumerationsMonopoly.COULEUR_PROPRIETE couleur;
         private ArrayList<ProprieteAConstruire> proprietes;
 
-    public Groupe(CouleurPropriete couleur){
+    public Groupe(EnumerationsMonopoly.COULEUR_PROPRIETE couleur){
         proprietes = new ArrayList<ProprieteAConstruire>();
         this.couleur = couleur;
     }
         
-    public CouleurPropriete getCouleur() {
+    public EnumerationsMonopoly.COULEUR_PROPRIETE getCouleur() {
         return couleur;
     }
 
@@ -23,7 +23,7 @@ public class Groupe {
         return proprietes;
     }
     
-    public void setCouleur(CouleurPropriete couleur) {
+    public void setCouleur(EnumerationsMonopoly.COULEUR_PROPRIETE couleur) {
         this.couleur = couleur;
     }
     

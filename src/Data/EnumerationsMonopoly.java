@@ -11,13 +11,16 @@ package Data;
  */
 public class EnumerationsMonopoly {
     
-    public static final String[] COULEUR_PROPRIETE = {"bleuFonce", "orange", "mauve", "violet", "bleuCiel", "jaune", "vert", "rouge"};
-    
+    public enum COULEUR_PROPRIETE {
+        bleuFonce, orange, mauve, violet, bleuCiel, jaune, vert, rouge
+    }
 
     public enum TYPE_RESULTAT {
         neRienFaire, achat, loyer, autreCarreau
     }
     
-    public enum TYPE_CARREAU {gare, compagnie, proprieteAConstruire, autre};
+    public enum TYPE_CARREAU {
+        gare, compagnie, proprieteAConstruire, autre
+    }
     
 }

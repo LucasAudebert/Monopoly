@@ -50,7 +50,7 @@ public class Ihm {
         return !rep.contains("n");
     }
     
-    public void afficherFinDeCoup(Joueur joueur){
+    public void afficherInfosJoueur(Joueur joueur){
         System.out.println("----------------------------------");
         System.out.println("Nom : " + joueur.getNomJoueur());
         System.out.println("Cash : " + joueur.getCash());
@@ -60,9 +60,9 @@ public class Ihm {
     }
     
     public void afficherFinDeTour(ArrayList<Joueur> joueurs){
-        System.out.println("--- Fin de tour : ----------------");
+        System.out.println("---------- Fin de tour : ---------");
         for(Joueur jTemp : joueurs){
-            afficherFinDeCoup(jTemp);
+            afficherInfosJoueur(jTemp);
         }
     }
     

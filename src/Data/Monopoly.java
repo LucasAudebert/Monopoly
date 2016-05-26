@@ -9,12 +9,12 @@ public class Monopoly {
     
 	private ArrayList<Joueur> joueurs;
         private ArrayList<Carreau> carreaux; // HashMap ??!!!
-        private HashMap<CouleurPropriete,Groupe> groupes;
+        private HashMap<EnumerationsMonopoly.COULEUR_PROPRIETE, Groupe> groupes;
 
         public Monopoly(){
             this.joueurs = new ArrayList<Joueur>();
             this.carreaux = new ArrayList<Carreau>();
-            this.groupes = new HashMap<CouleurPropriete,Groupe>();
+            this.groupes = new HashMap<EnumerationsMonopoly.COULEUR_PROPRIETE, Groupe>();
         }
         
         public ArrayList getCarreaux() {
@@ -41,7 +41,7 @@ public class Monopoly {
             this.joueurs = joueurs;
         }
         
-        public Groupe getGroupe(CouleurPropriete couleur){
+        public Groupe getGroupe(EnumerationsMonopoly.COULEUR_PROPRIETE couleur){
             return groupes.get(couleur);
         }
 
@@ -56,4 +56,8 @@ public class Monopoly {
                 return getCarreau(anciennePosition.getNumero() + des - 1);
             }
 	}
+        
+        public boolean isFinDePartie(){
+            return joueurs.size() == 1;
+        }
 }
