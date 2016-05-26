@@ -1,22 +1,22 @@
 package Data;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 
 public class Joueur {
 	private String nomJoueur;
 	private int cash = 1500;
-        private ArrayList<Compagnie> compagnies;
-	private ArrayList<Gare> gares;
-        private ArrayList<ProprieteAConstruire> proprietes;
+        private HashSet<Compagnie> compagnies;
+	private HashSet<Gare> gares;
+        private HashSet<ProprieteAConstruire> proprietesAConstruire;
 	private Carreau positionCourante;
         private int[] derniereValeurDes;
 
         public Joueur(String nomJoueur, Carreau carreauDepart){
             this.nomJoueur = nomJoueur;
             this.positionCourante = carreauDepart;
-            compagnies = new ArrayList();
-            gares = new ArrayList();
-            proprietes = new ArrayList();
+            compagnies = new HashSet();
+            gares = new HashSet();
+            proprietesAConstruire = new HashSet();
         }
         
         public String getNomJoueur() {
@@ -35,7 +35,7 @@ public class Joueur {
             this.cash = cash;
         }
 
-        public ArrayList<Compagnie> getCompagnies() {
+        public HashSet<Compagnie> getCompagnies() {
             return compagnies;
         }
 
@@ -43,20 +43,27 @@ public class Joueur {
             compagnies.add(compagnie);
         }
         
-        public ArrayList<Gare> getGares() {
+        public HashSet<Gare> getGares() {
             return gares;
         }
 
+        public HashSet<Propriete> getProprietes(){
+            HashSet proprietes = new HashSet(proprietesAConstruire);
+            proprietes.addAll(gares);
+            proprietes.addAll(compagnies);
+            return proprietes;
+        }
+        
         public void addGare(Gare gare){
             gares.add(gare);
         }
 
-        public ArrayList<ProprieteAConstruire> getProprieteAConstruires() {
-            return proprietes;
+        public HashSet<ProprieteAConstruire> getProprieteAConstruires() {
+            return proprietesAConstruire;
         }
 
         public void addProprieteAConstruire(ProprieteAConstruire pac){
-            proprietes.add(pac);
+            proprietesAConstruire.add(pac);
         }
         
 	public void payerLoyer(int l) {
@@ -92,14 +99,14 @@ public class Joueur {
 	}
         
         public boolean peutPayer(int prixC) {
-		if(cash >= prixC){
-                    return true;
-                }else{
-                    return false;
-                }
+		return cash > prixC;
 	}
         
         public boolean desDouble(){
             return derniereValeurDes[0] == derniereValeurDes[1];
+        }
+        
+        public boolean estElimine(){
+            return cash <= 0;
         }
 }

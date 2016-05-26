@@ -6,11 +6,13 @@ import java.util.HashMap;
 public class Monopoly {
     
 	private ArrayList<Joueur> joueurs;
+        private ArrayList<Joueur> joueursElimines;
         private ArrayList<Carreau> carreaux; // HashMap ??!!!
         private HashMap<EnumerationsMonopoly.COULEUR_PROPRIETE, Groupe> groupes;
 
         public Monopoly(){
             this.joueurs = new ArrayList<Joueur>();
+            this.joueursElimines = new ArrayList<Joueur>();
             this.carreaux = new ArrayList<Carreau>();
             this.groupes = new HashMap<EnumerationsMonopoly.COULEUR_PROPRIETE, Groupe>();
         }
@@ -54,6 +56,14 @@ public class Monopoly {
                 return getCarreau(anciennePosition.getNumero() + des - 1);
             }
 	}
+        
+        public void eliminerJoueur(Joueur joueur){
+            joueurs.remove(joueur);
+            joueursElimines.remove(joueur);
+            for(Propriete pTemp : joueur.getProprietes()){
+                pTemp.setProprietaire(null);
+            }
+        }
         
         public boolean isFinDePartie(){
             return joueurs.size() == 1;

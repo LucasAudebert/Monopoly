@@ -126,22 +126,26 @@ public class Controleur {
         
         private void jouerCoup(Joueur joueur){
             lancerDesAvancer(joueur);
-            Resultat resultat = joueur.getPositionCourante().action(joueur); 
-            ihm.afficher("Vous êtes tombé(e) sur " + resultat.getPropriete().getNom());
+            Resultat resultat = joueur.getPositionCourante().action(joueur);
             switch(resultat.getTypeResultat()){
                 case achat :
+                    ihm.afficher("Vous étes tombé(e) sur la propriété libre " + resultat.getPropriete().getNom());
                     if(ihm.demandeAchat(resultat)){
                         resultat.getPropriete().achat(joueur);
                     }
                 break;
                 case loyer :
-                    ihm.afficher("Vous êtes tombé(e) sur la propriété appartenant à " + resultat.getPropriete().getProprietaire().getNomJoueur());
+                    ihm.afficher("Vous êtes tombé(e) sur la propriété " + resultat.getPropriete().getNom() + " appartenant à " + resultat.getPropriete().getProprietaire().getNomJoueur());
                     ihm.afficher("Vous payez " + resultat.getLoyer());
                     joueur.payerLoyer(resultat.getLoyer());
-                    resultat.getPropriete().getProprietaire().recevoirLoyer( resultat.getLoyer() ); //joli commentaire              
+                    resultat.getPropriete().getProprietaire().recevoirLoyer( resultat.getLoyer() ); //joli commentaire
+                    if(joueur.estElimine()){
+                        monopoly.eliminerJoueur(joueur);
+                        ihm.afficher(joueur.getNomJoueur() + " est ruiné(e)");
+                    }
                 break;
                 case autreCarreau :
-                    ihm.afficher("Rien ne se passe");
+                    ihm.afficher("Vous étes tombé(e) sur un carreau quelconque");
                 break;
                 case neRienFaire : 
                     System.out.println("Rien faire");
