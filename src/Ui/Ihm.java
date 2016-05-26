@@ -45,6 +45,7 @@ public class Ihm {
     }
     
     public boolean demandeAchat(Resultat res){
+        System.out.println("Votre cash : " + res.getJoueur().getCash());
         System.out.print("Voulez vous acheter " + res.getPropriete().getNom() + " pour " + res.getPropriete().getPrix() + " ? (y/n) : ");
         String rep = sc.nextLine();
         return !rep.contains("n");

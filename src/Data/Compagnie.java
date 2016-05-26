@@ -19,5 +19,6 @@ public class Compagnie extends Propriete {
     public void achat(Joueur joueur) {
         this.setProprietaire(joueur);
         joueur.addCompagnie(this);
+        joueur.payerLoyer(getPrix());
     }
 }

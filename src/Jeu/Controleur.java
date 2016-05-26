@@ -141,10 +141,10 @@ public class Controleur {
                     resultat.getPropriete().getProprietaire().recevoirLoyer( resultat.getLoyer() ); //joli commentaire              
                 break;
                 case autreCarreau :
-                    ihm.afficher("Vous êtes tombé(e) sur un carreau quelconque");
+                    ihm.afficher("Rien ne se passe");
                 break;
                 case neRienFaire : 
-                    System.out.println("rien faire");
+                    System.out.println("Rien faire");
                 break;   
             }
             if(joueur.desDouble()){
@@ -157,7 +157,7 @@ public class Controleur {
         public void boucleDeJeu(){
             int nbTours = 1;
             while(!monopoly.isFinDePartie()){
-                ihm.afficher("----------- Tour " + nbTours + "-----------");
+                ihm.afficher("------------- Tour " + nbTours + " -------------");
                 for(Joueur jTemp : monopoly.getJoueurs()){
                     ihm.attendreBouton(jTemp.getNomJoueur() + " appuyez sur Entrer pour jouer.");
                     jouerCoup(jTemp);

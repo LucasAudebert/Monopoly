@@ -28,7 +28,7 @@ public class ProprieteAConstruire extends Propriete{
     public void achat(Joueur joueur) {
         this.setProprietaire(joueur);
         joueur.addProprieteAConstruire(this);
-        joueur.payerLoyer(calculLoyer());
+        joueur.payerLoyer(this.getPrix());
     }
     
 }

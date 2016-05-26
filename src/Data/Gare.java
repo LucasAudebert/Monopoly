@@ -22,5 +22,6 @@ public class Gare extends Propriete {
     public void achat(Joueur joueur) {
         this.setProprietaire(joueur);
         joueur.addGare(this);
+        joueur.payerLoyer(getPrix());
     }
 }

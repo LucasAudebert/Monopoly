@@ -7,7 +7,7 @@ public class Joueur {
 	private int cash = 1500;
         private ArrayList<Compagnie> compagnies;
 	private ArrayList<Gare> gares;
-        private ArrayList<ProprieteAConstruire> proprieteAConstruires;
+        private ArrayList<ProprieteAConstruire> proprietes;
 	private Carreau positionCourante;
         private int[] derniereValeurDes;
 
@@ -16,7 +16,7 @@ public class Joueur {
             this.positionCourante = carreauDepart;
             compagnies = new ArrayList();
             gares = new ArrayList();
-            proprieteAConstruires = new ArrayList();
+            proprietes = new ArrayList();
         }
         
         public String getNomJoueur() {
@@ -52,11 +52,11 @@ public class Joueur {
         }
 
         public ArrayList<ProprieteAConstruire> getProprieteAConstruires() {
-            return proprieteAConstruires;
+            return proprietes;
         }
 
         public void addProprieteAConstruire(ProprieteAConstruire pac){
-            proprieteAConstruires.add(pac);
+            proprietes.add(pac);
         }
         
 	public void payerLoyer(int l) {
