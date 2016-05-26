@@ -29,20 +29,20 @@ public class Controleur {
                                         if(monopoly.getGroupe(EnumerationsMonopoly.COULEUR_PROPRIETE.valueOf(data.get(i)[3])) == null){
                                             monopoly.addGroupe(new Groupe(EnumerationsMonopoly.COULEUR_PROPRIETE.valueOf(data.get(i)[3])));
                                         }
-                                        ProprieteAConstruire proprieteTemp = new ProprieteAConstruire(Integer.parseInt(data.get(i)[4]), Integer.parseInt(data.get(i)[1]), data.get(i)[2], EnumerationsMonopoly.TYPE_CARREAU.proprieteAConstruire, monopoly.getGroupe(EnumerationsMonopoly.COULEUR_PROPRIETE.valueOf(data.get(i)[3])), Integer.parseInt(data.get(i)[5]));
+                                        ProprieteAConstruire proprieteTemp = new ProprieteAConstruire(Integer.parseInt(data.get(i)[4]), Integer.parseInt(data.get(i)[1]), data.get(i)[2], monopoly.getGroupe(EnumerationsMonopoly.COULEUR_PROPRIETE.valueOf(data.get(i)[3])), Integer.parseInt(data.get(i)[5]));
                                         monopoly.addCarreau(proprieteTemp);
                                         
                                         monopoly.getGroupe(EnumerationsMonopoly.COULEUR_PROPRIETE.valueOf(data.get(i)[3])).addPropriete(proprieteTemp);
                                         
 				}
 				else if(caseType.compareTo("G") == 0){
-                                        monopoly.addCarreau(new Gare(Integer.parseInt(data.get(i)[3]), Integer.parseInt(data.get(i)[1]), data.get(i)[2], EnumerationsMonopoly.TYPE_CARREAU.gare, 25));
+                                        monopoly.addCarreau(new Gare(Integer.parseInt(data.get(i)[3]), Integer.parseInt(data.get(i)[1]), data.get(i)[2], 25));
 				}
 				else if(caseType.compareTo("C") == 0){
-                                        monopoly.addCarreau(new Compagnie(Integer.parseInt(data.get(i)[3]), Integer.parseInt(data.get(i)[1]), data.get(i)[2], EnumerationsMonopoly.TYPE_CARREAU.compagnie, 0));
+                                        monopoly.addCarreau(new Compagnie(Integer.parseInt(data.get(i)[3]), Integer.parseInt(data.get(i)[1]), data.get(i)[2]));
 				}
 				else if(caseType.compareTo("AU") == 0){
-                                        monopoly.addCarreau(new AutreCarreau(Integer.parseInt(data.get(i)[1]), data.get(i)[2], EnumerationsMonopoly.TYPE_CARREAU.autre));
+                                        monopoly.addCarreau(new AutreCarreau(Integer.parseInt(data.get(i)[1]), data.get(i)[2]));
 				}
 				else
 					System.err.println("[buildGamePleateau()] : Invalid Data type");
@@ -130,19 +130,7 @@ public class Controleur {
             switch(resultat.getTypeResultat()){
                 case achat :
                     if(ihm.demandeAchat(resultat)){
-                        joueur.payerLoyer(resultat.getPropriete().getPrix());
-                        resultat.getPropriete().setProprietaire(joueur);
-                        switch(resultat.getPropriete().getType()){
-                            case gare :
-                                joueur.addGare((Gare) resultat.getPropriete());
-                            break;
-                            case compagnie :
-                                joueur.addCompagnie((Compagnie) resultat.getPropriete());
-                            break;
-                            case proprieteAConstruire :
-                                joueur.addProprieteAConstruire((ProprieteAConstruire) resultat.getPropriete());
-                            break;
-                        }
+                        
                     }
                 break;
                 case loyer :

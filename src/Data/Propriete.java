@@ -14,13 +14,11 @@ import Data.EnumerationsMonopoly.TYPE_RESULTAT;
 public abstract class Propriete extends Carreau {
     
     private int prix;
-    private int loyer;
     private Joueur proprietaire;
     
-    public Propriete(int prix, int numero, String nomCarreau, EnumerationsMonopoly.TYPE_CARREAU type, int loyer){
-        super(numero, nomCarreau, type);
+    public Propriete(int prix, int numero, String nomCarreau){
+        super(numero, nomCarreau);
         this.prix = prix;
-        this.loyer = loyer;
     }
     
     public abstract int calculLoyer();
@@ -46,11 +44,7 @@ public abstract class Propriete extends Carreau {
     public void setProprietaire(Joueur joueur){
         this.proprietaire = joueur;
     }
-    
-    public int getLoyer() {
-        return loyer;
-    }
-    
+        
     public int getPrix(){
         return prix;
     }

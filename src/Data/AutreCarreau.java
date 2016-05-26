@@ -2,8 +2,8 @@ package Data;
 
 public class AutreCarreau extends Carreau{
 
-    public AutreCarreau(int numero, String nomCarreau, EnumerationsMonopoly.TYPE_CARREAU type) {
-        super(numero, nomCarreau, type);
+    public AutreCarreau(int numero, String nomCarreau) {
+        super(numero, nomCarreau);
     }
 
     @Override

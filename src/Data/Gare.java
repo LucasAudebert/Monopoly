@@ -2,10 +2,17 @@ package Data;
 
 public class Gare extends Propriete {
 
-    public Gare(int prix, int numero, String nomCarreau, EnumerationsMonopoly.TYPE_CARREAU type, int loyer) {
-        super(prix, numero, nomCarreau, type, loyer);
+    private int loyer ;
+    
+    public Gare(int prix, int numero, String nomCarreau, int loyer) {
+        super(prix, numero, nomCarreau);
+        this.loyer = loyer;
     }
 
+    public int getLoyer() {
+        return loyer;
+    }
+    
     @Override
     public int calculLoyer() {
         return super.getProprietaire().getNbGares() * getLoyer();

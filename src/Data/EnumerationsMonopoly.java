@@ -18,9 +18,4 @@ public class EnumerationsMonopoly {
     public enum TYPE_RESULTAT {
         neRienFaire, achat, loyer, autreCarreau
     }
-    
-    public enum TYPE_CARREAU {
-        gare, compagnie, proprieteAConstruire, autre
-    }
-    
 }
