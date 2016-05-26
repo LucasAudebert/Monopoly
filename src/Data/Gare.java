@@ -17,4 +17,10 @@ public class Gare extends Propriete {
     public int calculLoyer() {
         return super.getProprietaire().getNbGares() * getLoyer();
     }	
+
+    @Override
+    public void achat(Joueur joueur) {
+        this.setProprietaire(joueur);
+        joueur.addGare(this);
+    }
 }

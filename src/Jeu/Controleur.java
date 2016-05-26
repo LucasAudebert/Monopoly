@@ -127,14 +127,15 @@ public class Controleur {
         private void jouerCoup(Joueur joueur){
             lancerDesAvancer(joueur);
             Resultat resultat = joueur.getPositionCourante().action(joueur); 
+            ihm.afficher("Vous êtes tombé(e) sur " + resultat.getPropriete().getNom());
             switch(resultat.getTypeResultat()){
                 case achat :
                     if(ihm.demandeAchat(resultat)){
-                        
+                        resultat.getPropriete().achat(joueur);
                     }
                 break;
                 case loyer :
-                    ihm.afficher("Vous êtes tombé(e) sur la propriété " + resultat.getPropriete().getNom() + " appartenant à " + resultat.getPropriete().getProprietaire().getNomJoueur());
+                    ihm.afficher("Vous êtes tombé(e) sur la propriété appartenant à " + resultat.getPropriete().getProprietaire().getNomJoueur());
                     ihm.afficher("Vous payez " + resultat.getLoyer());
                     joueur.payerLoyer(resultat.getLoyer());
                     resultat.getPropriete().getProprietaire().recevoirLoyer( resultat.getLoyer() ); //joli commentaire              

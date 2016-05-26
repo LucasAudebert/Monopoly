@@ -23,6 +23,8 @@ public abstract class Propriete extends Carreau {
     
     public abstract int calculLoyer();
     
+    public abstract void achat(Joueur joueur);
+    
     public Resultat achatPossible(Joueur joueur){
         Resultat res = new Resultat();
         if (joueur.peutPayer(prix)){
@@ -31,10 +33,6 @@ public abstract class Propriete extends Carreau {
             res.update(this, joueur, TYPE_RESULTAT.neRienFaire);
         }
         return res;
-    }
-    
-    public Resultat doitPayerLoyer(){
-        return null;
     }
     
     public Joueur getProprietaire(){

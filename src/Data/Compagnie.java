@@ -14,4 +14,10 @@ public class Compagnie extends Propriete {
             return 10 * getProprietaire().getDerniereValeurDes();
         }   
     }
+
+    @Override
+    public void achat(Joueur joueur) {
+        this.setProprietaire(joueur);
+        joueur.addCompagnie(this);
+    }
 }
