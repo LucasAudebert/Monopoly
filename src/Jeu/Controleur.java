@@ -160,17 +160,29 @@ public class Controleur {
         
         public void boucleDeJeu(){
             int nbTours = 1;
-            while(!monopoly.isFinDePartie()){
+            boolean finPartieJoueur = false;
+            while(!monopoly.isFinDePartie() && !finPartieJoueur ){
                 ihm.afficher("------------- Tour " + nbTours + " -------------");
                 for(Joueur jTemp : monopoly.getJoueurs()){
+                    finPartieJoueur = ihm.menueTourJoueur(jTemp);
+                    if(finPartieJoueur){
+                        break;
+                    }
                     ihm.attendreBouton(jTemp.getNomJoueur() + " appuyez sur Entrer pour jouer.");
                     jouerCoup(jTemp);
                     ihm.afficherInfosJoueur(jTemp);
                 }
-                ihm.attendreBouton("Appuyer sur Entrer pour voir le récapitulatif du tour");
-                ihm.afficherFinDeTour(monopoly.getJoueurs());
-                
+                if(!finPartieJoueur){
+                    ihm.attendreBouton("Appuyer sur Entrer pour voir le récapitulatif du tour");
+                    ihm.afficherFinDeTour(monopoly.getJoueurs());
+                }
                 nbTours++;
+            }
+            if(finPartieJoueur){
+                ihm.afficher("----------- Fin de parie -----------");
+                ihm.afficherFinDePartie(monopoly.getJoueurs());
+            }else if(monopoly.isFinDePartie()){
+                ihm.afficherGagnant(monopoly.getJoueurs());
             }
         }
 }
