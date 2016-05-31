@@ -153,7 +153,7 @@ public class Controleur {
             }
             if(joueur.desDouble()){
                 ihm.afficherInfosJoueur(joueur);
-                ihm.attendreBouton(joueur.getNomJoueur() + " appuyez sur Entrer pour rejouer.");
+                ihm.attendreBouton("\033[32m" + joueur.getNomJoueur() + " appuyez sur Entrer pour rejouer.");
                 jouerCoup(joueur);
             }
         }

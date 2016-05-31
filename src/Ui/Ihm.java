@@ -27,10 +27,20 @@ public class Ihm {
     
     public ArrayList<String> saisirNouveauJoueur(){
         int reponse = 0;
+        boolean erreur = true;
         ArrayList listeJoueurs = new ArrayList<String>();
         do{
             System.out.print("Combien de joueurs ? (entre 2 et 6) : "); 
-            reponse = Integer.parseInt(sc.nextLine());
+            while(erreur){
+                try{
+                    erreur = false;
+                    reponse = Integer.parseInt(sc.nextLine());
+                }catch(java.lang.NumberFormatException e){
+                    System.out.print("Veuillez saisir un entier : ");
+                    erreur = true;
+                }
+            }
+            erreur = true;
         }while(reponse < 2 || reponse > 6);
         
         for(int i = 1; i <= reponse; i++){
@@ -49,37 +59,47 @@ public class Ihm {
     
     public boolean demandeAchat(Resultat res){
         System.out.println("Votre cash : " + res.getJoueur().getCash());
-        System.out.print("Voulez vous acheter " + res.getPropriete().getNom() + " pour " + res.getPropriete().getPrix() + " ? (y/n) : ");
+        System.out.print("\033[32m Voulez vous acheter " + res.getPropriete().getNom() + " pour " + res.getPropriete().getPrix() + " ? (y/n) : ");
         String rep = sc.nextLine();
         return !rep.contains("n");
     }
     public boolean menueTourJoueur(Joueur joueur){
-        int reponse =0;
+        int reponse = 0;
+        boolean erreur = true;
         System.out.println("C'est au tour de "+ joueur.getNomJoueur()+" de jouer !");
         
         do{ 
             System.out.println("Que voulez-vous faire : ");
             System.out.println(" 1 - Jouer");
             System.out.println(" 2 - Afficher vos informations");
-            System.out.println(" 3 - Fin de partie");            
-            reponse = Integer.parseInt(sc.nextLine());
+            System.out.println(" 3 - Fin de partie");    
+            while(erreur){
+                try{
+                    erreur = false;
+                    reponse = Integer.parseInt(sc.nextLine());
+                }catch(java.lang.NumberFormatException e){
+                    erreur = true;
+                    System.out.print("\033[32m Veuillez saisir un entier : ");    
+                }
+            }
+            erreur = true;
         }while(reponse < 1 || reponse > 3);
         
         switch(reponse){
             case  1 : 
                  return false;                
             case 2 :
-                System.out.println("Info du joueur : ");
+                System.out.println("\033[34m Info du joueur : \033[34m");
                 afficherInfosJoueur(joueur);
-                System.out.println("Compagnies : ");
+                System.out.println("\033[34m Compagnies : \033[34m");
                 for(Compagnie cTemp : joueur.getCompagnies()){
                     System.out.println(cTemp.getNom());
                 }
-                System.out.println("Gares : ");
+                System.out.println("\033[34m Gares : \033[34m");
                 for(Gare gTemp : joueur.getGares()){
                     System.out.println(gTemp.getNom());
                 }
-                System.out.println("Proprietes à construire : ");
+                System.out.println("\033[34m Proprietes à construire : \033[34m");
                 for(ProprieteAConstruire pTemp : joueur.getProprieteAConstruires() ){
                     System.out.println(pTemp.getNom());
                 }
@@ -93,16 +113,16 @@ public class Ihm {
     }
     
     public void afficherInfosJoueur(Joueur joueur){
-        System.out.println("----------------------------------");
-        System.out.println("Nom : " + joueur.getNomJoueur());
-        System.out.println("Cash : " + joueur.getCash());
-        System.out.println("Position : " + joueur.getPositionCourante().getNom());
-        System.out.println("Numero de Case : " + joueur.getPositionCourante().getNumero());
-        System.out.println("----------------------------------");
+        System.out.println("\033[34m----------------------------------");
+        System.out.println("\033[34m Nom : " + joueur.getNomJoueur());
+        System.out.println("\033[34m Cash : " + joueur.getCash());
+        System.out.println("\033[34m Position : " + joueur.getPositionCourante().getNom());
+        System.out.println("\033[34m Numero de Case : " + joueur.getPositionCourante().getNumero());
+        System.out.println("\033[34m ----------------------------------\033[34m");
     }
         
     public void afficherFinDeTour(ArrayList<Joueur> joueurs){
-        System.out.println("---------- Fin de tour : ---------");
+        System.out.println("\033[34m ---------- Fin de tour : ---------");
         for(Joueur jTemp : joueurs){
             afficherInfosJoueur(jTemp);
         }
