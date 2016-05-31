@@ -59,9 +59,9 @@ public class Ihm {
         
         do{ 
             System.out.println("Que voulez-vous faire : ");
-            System.out.println(" 1 - JOUER ");
-            System.out.println(" 2 - AFFICHER VOS INFORMATIONS ");
-            System.out.println(" 3 - FIN DE PARTIE ");            
+            System.out.println(" 1 - Jouer");
+            System.out.println(" 2 - Afficher vos informations");
+            System.out.println(" 3 - Fin de partie");            
             reponse = Integer.parseInt(sc.nextLine());
         }while(reponse < 1 || reponse > 3);
         
