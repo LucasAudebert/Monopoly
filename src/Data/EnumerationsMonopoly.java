@@ -11,11 +11,75 @@ package Data;
  */
 public class EnumerationsMonopoly {
     
+    /**
+     *
+     */
     public enum COULEUR_PROPRIETE {
-        bleuFonce, orange, mauve, violet, bleuCiel, jaune, vert, rouge
+
+        /**
+         *
+         */
+        bleuFonce,
+
+        /**
+         *
+         */
+        orange,
+
+        /**
+         *
+         */
+        mauve,
+
+        /**
+         *
+         */
+        violet,
+
+        /**
+         *
+         */
+        bleuCiel,
+
+        /**
+         *
+         */
+        jaune,
+
+        /**
+         *
+         */
+        vert,
+
+        /**
+         *
+         */
+        rouge
     }
 
+    /**
+     *
+     */
     public enum TYPE_RESULTAT {
-        neRienFaire, achat, loyer, autreCarreau
+
+        /**
+         *
+         */
+        neRienFaire,
+
+        /**
+         *
+         */
+        achat,
+
+        /**
+         *
+         */
+        loyer,
+
+        /**
+         *
+         */
+        autreCarreau
     }
 }

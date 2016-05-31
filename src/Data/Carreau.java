@@ -1,21 +1,43 @@
 package Data;
 
+/**
+ *
+ * @author Maxence
+ */
 public abstract class Carreau {
 	private int numero;
 	private String nomCarreau;
         
-        public Carreau(int numero, String nomCarreau){
+    /**
+     *
+     * @param numero
+     * @param nomCarreau
+     */
+    public Carreau(int numero, String nomCarreau){
             this.numero = numero;
             this.nomCarreau = nomCarreau;
         }
         
-        public abstract Resultat action(Joueur joueur);
+    /**
+     *
+     * @param joueur
+     * @return
+     */
+    public abstract Resultat action(Joueur joueur);
         
-        public int getNumero(){
+    /**
+     *
+     * @return
+     */
+    public int getNumero(){
             return numero;
         }
         
-        public String getNom(){
+    /**
+     *
+     * @return
+     */
+    public String getNom(){
             return nomCarreau;
         }
         

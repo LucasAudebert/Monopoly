@@ -1,11 +1,25 @@
 package Data;
 
+/**
+ *
+ * @author Maxence
+ */
 public class Compagnie extends Propriete {
 
+    /**
+     *
+     * @param prix
+     * @param numero
+     * @param nomCarreau
+     */
     public Compagnie(int prix, int numero, String nomCarreau) {
         super(prix, numero, nomCarreau);
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int calculLoyer() {
         if(getProprietaire().getNbCompagnies() == 1){
@@ -15,6 +29,10 @@ public class Compagnie extends Propriete {
         }   
     }
 
+    /**
+     *
+     * @param joueur
+     */
     @Override
     public void achat(Joueur joueur) {
         this.setProprietaire(joueur);
