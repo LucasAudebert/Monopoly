@@ -14,6 +14,10 @@ public class EnumerationsMonopoly {
     public enum COULEUR_PROPRIETE {
         bleuFonce, orange, mauve, violet, bleuCiel, jaune, vert, rouge
     }
+    
+    public static int[] COULEUR_CODE = {
+        1
+    };
 
     public enum TYPE_RESULTAT {
         neRienFaire, achat, loyer, autreCarreau
