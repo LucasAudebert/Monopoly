@@ -55,7 +55,7 @@ public class Ihm {
     }
     public boolean menueTourJoueur(Joueur joueur){
         int reponse =0;
-        System.out.println("C'est au tout de "+ joueur.getNomJoueur()+" de jouer !");
+        System.out.println("C'est au tour de "+ joueur.getNomJoueur()+" de jouer !");
         
         do{ 
             System.out.println("Que voulez-vous faire : ");
