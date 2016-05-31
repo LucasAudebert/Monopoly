@@ -110,7 +110,7 @@ public class Monopoly {
      */
     public void eliminerJoueur(Joueur joueur){
             joueurs.remove(joueur);
-            joueursElimines.remove(joueur);
+            joueursElimines.add(joueur);
             for(Propriete pTemp : joueur.getProprietes()){
                 pTemp.setProprietaire(null);
             }
