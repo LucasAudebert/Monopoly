@@ -118,7 +118,7 @@ public class Controleur {
                     System.out.println("Rien faire");
                 break;   
             }
-            if(joueur.desDouble()){
+            if(joueur.desDouble() && !monopoly.isFinDePartie()){
                 ihm.afficherInfosJoueur(joueur);
                 ihm.attendreBouton("\033[32m" + joueur.getNomJoueur() + " appuyez sur Entrer pour rejouer.\033[32m");
                 jouerCoup(joueur);
