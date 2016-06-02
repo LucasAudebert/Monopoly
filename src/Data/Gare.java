@@ -30,7 +30,7 @@ public class Gare extends Propriete {
     
     /**
      *
-     * @return
+     * @return le prix du loyer en fonction du nombre de garde que possède le proprietaire
      */
     @Override
     public int calculLoyer() {
@@ -40,6 +40,9 @@ public class Gare extends Propriete {
     /**
      *
      * @param joueur
+     * set le Joueur joueur comme proprietaire de la Gare
+     * ajouter la proprieté aux Gare du joueur
+     * fait payer le joueur le prix de la Gare 
      */
     @Override
     public void achat(Joueur joueur) {
