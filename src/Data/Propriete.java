@@ -42,7 +42,7 @@ public abstract class Propriete extends Carreau {
     /**
      *
      * @param joueur
-     * @return
+     * @return Resultat 
      */
     public Resultat achatPossible(Joueur joueur){
         Resultat res = new Resultat();
