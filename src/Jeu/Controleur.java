@@ -127,8 +127,8 @@ public class Controleur {
         
         public void boucleDeJeu(){
             int nbTours = 1;
-            boolean finPartieJoueur = monopoly.isFinDePartie();
-            while(!finPartieJoueur ){
+            boolean finPartieJoueur = false;
+            while(!finPartieJoueur && !monopoly.isFinDePartie()){
                 ihm.afficher("\033[34m------------- Tour " + nbTours + " -------------\033[34m");
                 for(Joueur jTemp : monopoly.getJoueurs()){
                      if(!monopoly.getJoueursElimines().contains(jTemp)){
@@ -138,11 +138,15 @@ public class Controleur {
                         break;
                     }
                     jouerCoup(jTemp);
+                    if(monopoly.isFinDePartie()){
+                        break;
+                    }
                     ihm.afficherInfosJoueur(jTemp);
-                }
+               
                 if(!finPartieJoueur){
                     ihm.attendreBouton("Appuyer sur Entrer pour voir le récapitulatif du tour");
                     ihm.afficherFinDeTour(monopoly.getJoueurs());
+                }
                 }
             }
                 nbTours++;

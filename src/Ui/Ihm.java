@@ -148,12 +148,11 @@ public class Ihm {
         }
     }
     public void afficherGagnant(ArrayList<Joueur> joueurs){
-        System.out.print("BRAVO ");
         for(Joueur jTemp : joueurs){
-            System.out.println(jTemp.getNomJoueur());
+            if(!jTemp.estElimine()){
+                System.out.print("BRAVO "+ jTemp.getNomJoueur() + " VOUS ETES LE GRAND GAGNANT !!!!!!!!!!! ");                
+            }
         }
-        System.out.print(" VOUS ETES LE GRAND GAGNANT !!!!!!!!!!! ");
-        
     }
     public void afficher(String chaine){
         System.out.println(chaine);

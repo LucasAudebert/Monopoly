@@ -112,13 +112,11 @@ public class Monopoly {
      *
      * @param joueur
      */
-    public void eliminerJoueur(Joueur joueur){
-     // joueurs.remove(joueur);
+    public void eliminerJoueur(Joueur joueur){    
         joueursElimines.add(joueur);
         for(Propriete pTemp : joueur.getProprietes()){
             pTemp.setProprietaire(null);
-        }
-        joueurs.trimToSize();
+        }      
     }
         
     /**
@@ -126,7 +124,14 @@ public class Monopoly {
      * @return
      */
     public boolean isFinDePartie(){
-        return joueurs.size() == 1;
+        int cpt = 0;
+        for(Joueur jTemp :joueurs){
+            if(jTemp.estElimine()){
+               cpt++; 
+            }
+        }
+        
+        return (cpt == joueurs.size()-1);
     }
     
     
