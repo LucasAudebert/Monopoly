@@ -30,7 +30,7 @@ public class Joueur {
         
     /**
      *
-     * @return
+     * @return le nom du joueur 
      */
     public String getNomJoueur() {
             return nomJoueur;
@@ -46,7 +46,7 @@ public class Joueur {
 
     /**
      *
-     * @return
+     * @return le cash du joueur 
      */
     public int getCash() {
             return cash;
@@ -62,7 +62,7 @@ public class Joueur {
 
     /**
      *
-     * @return
+     * @return un HashSet des compagnies du joueur
      */
     public HashSet<Compagnie> getCompagnies() {
             return compagnies;
@@ -78,7 +78,7 @@ public class Joueur {
         
     /**
      *
-     * @return
+     * @return un HashSet des gares du joueur
      */
     public HashSet<Gare> getGares() {
             return gares;
@@ -86,7 +86,7 @@ public class Joueur {
 
     /**
      *
-     * @return
+     * @return un HashSet des proprietés du joueur
      */
     public HashSet<Propriete> getProprietes(){
             HashSet proprietes = new HashSet(proprietesAConstruire);
@@ -105,7 +105,7 @@ public class Joueur {
 
     /**
      *
-     * @return
+     * @return un HashSet des proprietés à construire du joueur
      */
     public HashSet<ProprieteAConstruire> getProprieteAConstruires() {
             return proprietesAConstruire;
@@ -121,7 +121,8 @@ public class Joueur {
         
     /**
      *
-     * @param l
+     * @param l 
+     * Soustrait l au  cash du joueur
      */
     public void payerLoyer(int l) {
                 cash -= l;
@@ -130,6 +131,7 @@ public class Joueur {
     /**
      *
      * @param l
+     * ajoute l au cash du joueur
      */
     public void recevoirLoyer(int l) {
 		cash += l;
@@ -137,7 +139,7 @@ public class Joueur {
 
     /**
      *
-     * @return
+     * @return le nbr de gare appartenant au joueur
      */
     public int getNbGares() {
 		return gares.size();
@@ -145,7 +147,7 @@ public class Joueur {
 
     /**
      *
-     * @return
+     * @return le nbr de compagnies appartenant au joueur
      */
     public int getNbCompagnies(){
                 return compagnies.size();
@@ -153,7 +155,7 @@ public class Joueur {
 	
     /**
      *
-     * @return
+     * @return le carreau sur lequelle se trouve le joueur
      */
     public Carreau getPositionCourante() {
 		return this.positionCourante;
@@ -162,6 +164,7 @@ public class Joueur {
     /**
      *
      * @param des
+     * set la dernière valeure des dés du réalisé par le joueur
      */
     public void setDerniereValeurDes(int[] des){
             this.derniereValeurDes = des;
@@ -169,7 +172,7 @@ public class Joueur {
         
     /**
      *
-     * @return
+     * @return la dernière valeure des dés du réalisé par le joueur
      */
     public int getDerniereValeurDes(){
             return derniereValeurDes[0]+derniereValeurDes[1];
@@ -177,7 +180,8 @@ public class Joueur {
         
     /**
      *
-     * @param nouvellePosition
+     * @param nouvellePosition 
+     * set le carreau sur lequelle se trouve le joueur
      */
     public void setPositionCourante(Carreau nouvellePosition) {
 		positionCourante = nouvellePosition;
@@ -186,7 +190,7 @@ public class Joueur {
     /**
      *
      * @param prixC
-     * @return
+     * @return vrai si le joueur peut payer le prixC sinon faux
      */
     public boolean peutPayer(int prixC) {
 		return cash > prixC;
@@ -194,7 +198,7 @@ public class Joueur {
         
     /**
      *
-     * @return
+     * @return vrai sir le joueur a réalisé un double
      */
     public boolean desDouble(){
             return derniereValeurDes[0] == derniereValeurDes[1];
@@ -202,7 +206,7 @@ public class Joueur {
         
     /**
      *
-     * @return
+     * @return vraie si le joueur est éliminé (n'a plus d'argent)
      */
     public boolean estElimine(){
             return cash <= 0;
