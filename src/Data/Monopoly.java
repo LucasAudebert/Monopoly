@@ -109,18 +109,16 @@ public class Monopoly {
      * @param joueur
      */
     public void eliminerJoueur(Joueur joueur){
-            joueurs.remove(joueur);
-            joueursElimines.add(joueur);
             for(Propriete pTemp : joueur.getProprietes()){
                 pTemp.setProprietaire(null);
             }
-        }
+    }
         
     /**
      *
      * @return
      */
     public boolean isFinDePartie(){
-            return joueurs.size() == 1;
-        }
+        return joueurs.size() == 1;
+    }
 }

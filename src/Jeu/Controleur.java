@@ -91,7 +91,7 @@ public class Controleur {
             joueur.setPositionCourante(monopoly.getNouvellePosition(des[0]+des[1], joueur.getPositionCourante()));
         }
         
-        private void jouerCoup(Joueur joueur){
+        private void jouerCoup(Joueur joueur){           
             lancerDesAvancer(joueur);
             Resultat resultat = joueur.getPositionCourante().action(joueur);
             switch(resultat.getTypeResultat()){
@@ -99,10 +99,6 @@ public class Controleur {
                     ihm.afficher("Vous étes tombé(e) sur la propriété libre " + resultat.getPropriete().getNom());
                     if(ihm.demandeAchat(resultat)){
                         resultat.getPropriete().achat(joueur);
-                    }
-                    if(joueur.estElimine()){
-                        monopoly.eliminerJoueur(joueur);
-                        ihm.afficher(joueur.getNomJoueur() + " est ruiné(e)");
                     }
                 break;
                 case loyer :
@@ -149,11 +145,11 @@ public class Controleur {
                 
                 nbTours++;
             }
+            ihm.afficher("\033[31m----------- Fin de partie -----------\033[31m");
             if(monopoly.isFinDePartie()){
-                ihm.afficher("\033[31m----------- Fin de partie -----------\033[31m");
+                
                 ihm.afficherGagnant(monopoly.getJoueurs());
             }else if(finPartieJoueur){
-                ihm.afficher("\033[31m----------- Fin de partie -----------\033[31m");
                 ihm.afficherFinDePartie(monopoly.getJoueurs());
             }
         }

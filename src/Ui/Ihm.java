@@ -58,10 +58,20 @@ public class Ihm {
     }
     
     public boolean demandeAchat(Resultat res){
+        String rep;
+        boolean loop = true;
         System.out.println("Votre cash : " + res.getJoueur().getCash());
-        System.out.print("\033[32mVoulez vous acheter " + res.getPropriete().getNom() + " pour " + res.getPropriete().getPrix() + " ? (y/n) : \033[32m");
-        String rep = sc.nextLine();
-        return !rep.contains("n");
+        do{
+            System.out.print("\033[32mVoulez vous acheter " + res.getPropriete().getNom() + " pour " + res.getPropriete().getPrix() + " ? (y/n) : \033[32m");
+            rep = sc.nextLine();
+            if(rep.equalsIgnoreCase("n") || rep.equalsIgnoreCase("y")){
+                loop = false;
+            }else{
+                System.out.println("\033[31mMauvaise saisie. \033[31m"); 
+            }
+        }while(loop);
+        return rep.equalsIgnoreCase("y");
+        
     }
     public boolean menuTourJoueur(Joueur joueur){
         int reponse = 0;
