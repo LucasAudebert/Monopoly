@@ -8,7 +8,7 @@ import java.util.HashSet;
  */
 public class Joueur {
 	private String nomJoueur;
-	private int cash = 1500;
+	private int cash = 250;
         private HashSet<Compagnie> compagnies;
 	private HashSet<Gare> gares;
         private HashSet<ProprieteAConstruire> proprietesAConstruire;

@@ -128,4 +128,15 @@ public class Monopoly {
     public boolean isFinDePartie(){
         return joueurs.size() == 1;
     }
+    
+    
+    //JEU DE TEST
+    public void donnéProprietés(Joueur joueur){
+        for(Groupe gp : groupes.values()){
+            for(ProprieteAConstruire pc : gp.getProprietes()){
+                pc.setProprietaire(joueur);
+                joueur.addProprieteAConstruire(pc);
+            }
+        }
+    }
 }
