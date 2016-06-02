@@ -162,13 +162,12 @@ public class Controleur {
             int nbTours = 1;
             boolean finPartieJoueur = false;
             while(!monopoly.isFinDePartie() && !finPartieJoueur ){
-                ihm.afficher("------------- Tour " + nbTours + " -------------");
+                ihm.afficher("\033[31m------------- Tour " + nbTours + " -------------");
                 for(Joueur jTemp : monopoly.getJoueurs()){
-                    finPartieJoueur = ihm.menueTourJoueur(jTemp);
+                    finPartieJoueur = ihm.menuTourJoueur(jTemp);
                     if(finPartieJoueur){
                         break;
                     }
-                    ihm.attendreBouton(jTemp.getNomJoueur() + " appuyez sur Entrer pour jouer.");
                     jouerCoup(jTemp);
                     ihm.afficherInfosJoueur(jTemp);
                 }
@@ -179,7 +178,7 @@ public class Controleur {
                 nbTours++;
             }
             if(finPartieJoueur){
-                ihm.afficher("----------- Fin de parie -----------");
+                ihm.afficher("\033[31m----------- Fin de partie -----------");
                 ihm.afficherFinDePartie(monopoly.getJoueurs());
             }else if(monopoly.isFinDePartie()){
                 ihm.afficherGagnant(monopoly.getJoueurs());
