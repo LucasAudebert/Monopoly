@@ -14,7 +14,7 @@ import Jeu.*;
  */
 public class Main {
    
-    private Controleur controleur; 
+    //private Controleur controleur; 
     
     public static void main(String[] args){
         //Initialisation

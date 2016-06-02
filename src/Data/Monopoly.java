@@ -65,6 +65,10 @@ public class Monopoly {
             joueurs.add(joueur);
         }        
 
+    public ArrayList<Joueur> getJoueursElimines() {
+        return joueursElimines;
+    }
+
     /**
      *
      * @param joueurs
@@ -109,7 +113,7 @@ public class Monopoly {
      * @param joueur
      */
     public void eliminerJoueur(Joueur joueur){
-        joueurs.remove(joueur);
+     // joueurs.remove(joueur);
         joueursElimines.add(joueur);
         for(Propriete pTemp : joueur.getProprietes()){
             pTemp.setProprietaire(null);

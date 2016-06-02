@@ -131,6 +131,8 @@ public class Controleur {
             while(!finPartieJoueur ){
                 ihm.afficher("\033[34m------------- Tour " + nbTours + " -------------\033[34m");
                 for(Joueur jTemp : monopoly.getJoueurs()){
+                     if(!monopoly.getJoueursElimines().contains(jTemp)){
+                   
                     finPartieJoueur = ihm.menuTourJoueur(jTemp);
                     if(finPartieJoueur){
                         break;
@@ -142,7 +144,7 @@ public class Controleur {
                     ihm.attendreBouton("Appuyer sur Entrer pour voir le récapitulatif du tour");
                     ihm.afficherFinDeTour(monopoly.getJoueurs());
                 }
-                
+            }
                 nbTours++;
             }
             ihm.afficher("\033[31m----------- Fin de partie -----------\033[31m");
