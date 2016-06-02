@@ -30,13 +30,13 @@ public class Ihm {
         boolean erreur = true;
         ArrayList listeJoueurs = new ArrayList<String>();
         do{
-            System.out.print("\033[32mCombien de joueurs ? (entre 2 et 6) : "); 
+            System.out.print("\033[32mCombien de joueurs ? (entre 2 et 6) : \033[32m"); 
             while(erreur){
                 try{
                     erreur = false;
                     reponse = Integer.parseInt(sc.nextLine());
                 }catch(java.lang.NumberFormatException e){
-                    System.out.print("\033[32mVeuillez saisir un entier : ");
+                    System.out.print("\033[32mVeuillez saisir un entier : \033[32m");
                     erreur = true;
                 }
             }
@@ -44,7 +44,7 @@ public class Ihm {
         }while(reponse < 2 || reponse > 6);
         
         for(int i = 1; i <= reponse; i++){
-            System.out.print("\033[32mSaisir nom du joueur " + i + " : ");
+            System.out.print("\033[32mSaisir nom du joueur " + i + " : \033[32m");
             String nom = sc.nextLine();
             if(listeJoueurs.contains(nom)){
                 System.out.println("nom deja saisi");
@@ -59,7 +59,7 @@ public class Ihm {
     
     public boolean demandeAchat(Resultat res){
         System.out.println("Votre cash : " + res.getJoueur().getCash());
-        System.out.print("\033[32mVoulez vous acheter " + res.getPropriete().getNom() + " pour " + res.getPropriete().getPrix() + " ? (y/n) : ");
+        System.out.print("\033[32mVoulez vous acheter " + res.getPropriete().getNom() + " pour " + res.getPropriete().getPrix() + " ? (y/n) : \033[32m");
         String rep = sc.nextLine();
         return !rep.contains("n");
     }
@@ -76,11 +76,11 @@ public class Ihm {
             while(erreur){
                 try{
                     erreur = false;
-                    System.out.print("\033[32mVeuillez saisir votre choix : ");
+                    System.out.print("\033[32mVeuillez saisir votre choix : \033[32m");
                     reponse = Integer.parseInt(sc.nextLine());
                 }catch(java.lang.NumberFormatException e){
                     erreur = true;
-                    System.out.print("\033[32mMauvaise saisie, veuillez saisir un entier : ");    
+                    System.out.print("\033[31mMauvaise saisie. \033[31m");    
                 }
             }
             erreur = true;
@@ -104,10 +104,12 @@ public class Ihm {
                 for(ProprieteAConstruire pTemp : joueur.getProprieteAConstruires() ){
                     System.out.println("    " + pTemp.getNom());
                 }
-                attendreBouton("\033[32m" + joueur.getNomJoueur() + " appuyez sur Entrer pour jouer.\033[32m");
+                attendreBouton("\033[32mAppuyez sur Entrer pour retourner au menu.\033[32m");
+                menuTourJoueur(joueur);
                 return false;                
             case 3 :
-                return true;              
+                return true;
+           
         }      
         return false;
                
@@ -136,9 +138,11 @@ public class Ihm {
         }
     }
     public void afficherGagnant(ArrayList<Joueur> joueurs){
+        System.out.print("BRAVO ");
         for(Joueur jTemp : joueurs){
             System.out.println(jTemp.getNomJoueur());
         }
+        System.out.print(" VOUS ETES LE GRAND GAGNANT !!!!!!!!!!! ");
         
     }
     public void afficher(String chaine){

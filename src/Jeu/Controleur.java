@@ -57,39 +57,6 @@ public class Controleur {
 		}		
 	}
 	
-	/*private void buildGamePlateau(String dataFilename)
-	{
-		try{
-			ArrayList<String[]> data = readDataFile(dataFilename, ",");
-			
-			//TODO: create cases instead of displaying
-			for(int i=0; i<data.size(); ++i){
-				String caseType = data.get(i)[0];
-				if(caseType.compareTo("P") == 0){
-					System.out.println("Propriété :\t" + data.get(i)[2] + "\t@ case " + data.get(i)[1]);
-				}
-				else if(caseType.compareTo("G") == 0){
-					System.out.println("Gare :\t" + data.get(i)[2] + "\t@ case " + data.get(i)[1]);
-				}
-				else if(caseType.compareTo("C") == 0){
-					System.out.println("Compagnie :\t" + data.get(i)[2] + "\t@ case " + data.get(i)[1]);
-				}
-				else if(caseType.compareTo("AU") == 0){
-					System.out.println("Case Autre :\t" + data.get(i)[2] + "\t@ case " + data.get(i)[1]);
-				}
-				else
-					System.err.println("[buildGamePleateau()] : Invalid Data type");
-			}
-			
-		} 
-		catch(FileNotFoundException e){
-			System.err.println("[buildGamePlateau()] : File is not found!");
-		}
-		catch(IOException e){
-			System.err.println("[buildGamePlateau()] : Error while reading file!");
-		}
-	}*/
-	
 	private ArrayList<String[]> readDataFile(String filename, String token) throws FileNotFoundException, IOException
 	{
 		ArrayList<String[]> data = new ArrayList<String[]>();
@@ -133,12 +100,16 @@ public class Controleur {
                     if(ihm.demandeAchat(resultat)){
                         resultat.getPropriete().achat(joueur);
                     }
+                    if(joueur.estElimine()){
+                        monopoly.eliminerJoueur(joueur);
+                        ihm.afficher(joueur.getNomJoueur() + " est ruiné(e)");
+                    }
                 break;
                 case loyer :
                     ihm.afficher("Vous êtes tombé(e) sur la propriété " + resultat.getPropriete().getNom() + " appartenant à " + resultat.getPropriete().getProprietaire().getNomJoueur());
                     ihm.afficher("Vous payez " + resultat.getLoyer());
                     joueur.payerLoyer(resultat.getLoyer());
-                    resultat.getPropriete().getProprietaire().recevoirLoyer( resultat.getLoyer() ); //joli commentaire
+                    resultat.getPropriete().getProprietaire().recevoirLoyer( resultat.getLoyer() ); 
                     if(joueur.estElimine()){
                         monopoly.eliminerJoueur(joueur);
                         ihm.afficher(joueur.getNomJoueur() + " est ruiné(e)");
@@ -153,16 +124,16 @@ public class Controleur {
             }
             if(joueur.desDouble()){
                 ihm.afficherInfosJoueur(joueur);
-                ihm.attendreBouton("\033[32m" + joueur.getNomJoueur() + " appuyez sur Entrer pour rejouer.");
+                ihm.attendreBouton("\033[32m" + joueur.getNomJoueur() + " appuyez sur Entrer pour rejouer.\033[32m");
                 jouerCoup(joueur);
             }
         }
         
         public void boucleDeJeu(){
             int nbTours = 1;
-            boolean finPartieJoueur = false;
-            while(!monopoly.isFinDePartie() && !finPartieJoueur ){
-                ihm.afficher("\033[31m------------- Tour " + nbTours + " -------------");
+            boolean finPartieJoueur = monopoly.isFinDePartie();
+            while(!finPartieJoueur ){
+                ihm.afficher("\033[34m------------- Tour " + nbTours + " -------------\033[34m");
                 for(Joueur jTemp : monopoly.getJoueurs()){
                     finPartieJoueur = ihm.menuTourJoueur(jTemp);
                     if(finPartieJoueur){
@@ -175,15 +146,18 @@ public class Controleur {
                     ihm.attendreBouton("Appuyer sur Entrer pour voir le récapitulatif du tour");
                     ihm.afficherFinDeTour(monopoly.getJoueurs());
                 }
+                
                 nbTours++;
             }
-            if(finPartieJoueur){
-                ihm.afficher("\033[31m----------- Fin de partie -----------");
-                ihm.afficherFinDePartie(monopoly.getJoueurs());
-            }else if(monopoly.isFinDePartie()){
+            if(monopoly.isFinDePartie()){
+                ihm.afficher("\033[31m----------- Fin de partie -----------\033[31m");
                 ihm.afficherGagnant(monopoly.getJoueurs());
+            }else if(finPartieJoueur){
+                ihm.afficher("\033[31m----------- Fin de partie -----------\033[31m");
+                ihm.afficherFinDePartie(monopoly.getJoueurs());
             }
         }
+        
 }
 
 
