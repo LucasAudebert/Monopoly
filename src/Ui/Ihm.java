@@ -120,7 +120,8 @@ public class Ihm {
             case 3 :
                 return true;
            
-        }      
+        }
+      
         return false;
                
     }
