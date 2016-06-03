@@ -29,7 +29,11 @@ public abstract class Propriete extends Carreau {
     
     public abstract int calculLoyer(Joueur joueur);
     
-    public abstract void achat(Joueur joueur);
+    public void achat(Joueur joueur){
+        this.setProprietaire(joueur);
+        joueur.payerLoyer(this.getPrix());
+
+    }
     
     /**
      *

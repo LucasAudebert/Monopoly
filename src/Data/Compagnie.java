@@ -31,8 +31,7 @@ public class Compagnie extends Propriete {
      */
     @Override
     public void achat(Joueur joueur) {
-        this.setProprietaire(joueur);
+        super.achat(joueur);
         joueur.addCompagnie(this);
-        joueur.payerLoyer(getPrix());
     }
 }

@@ -50,9 +50,8 @@ public class ProprieteAConstruire extends Propriete{
      */
     @Override
     public void achat(Joueur joueur) {
-        this.setProprietaire(joueur);
+        super.achat(joueur);
         joueur.addProprieteAConstruire(this);
-        joueur.payerLoyer(this.getPrix());
     }
     
 }
