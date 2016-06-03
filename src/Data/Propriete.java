@@ -27,16 +27,8 @@ public abstract class Propriete extends Carreau {
         this.prix = prix;
     }
     
-    /**
-     *
-     * @return
-     */
     public abstract int calculLoyer();
     
-    /**
-     *
-     * @param joueur
-     */
     public abstract void achat(Joueur joueur);
     
     /**
@@ -54,26 +46,14 @@ public abstract class Propriete extends Carreau {
         return res;
     }
     
-    /**
-     *
-     * @return
-     */
     public Joueur getProprietaire(){
         return proprietaire;
     }
 
-    /**
-     *
-     * @param joueur
-     */
     public void setProprietaire(Joueur joueur){
         this.proprietaire = joueur;
     }
         
-    /**
-     *
-     * @return
-     */
     public int getPrix(){
         return prix;
     }
@@ -85,12 +65,12 @@ public abstract class Propriete extends Carreau {
      */
     @Override
     public Resultat action(Joueur joueur) {
-        Resultat res = new Resultat();
+        Resultat res = new Resultat();//Creation du resultat renvoyé au controleur
         if(this.getProprietaire() == null){
             res = achatPossible(joueur);
         }else if (this.getProprietaire() != joueur){
             res.update(this, joueur, TYPE_RESULTAT.loyer, calculLoyer());
-        }else{
+        }else{// Si le joueur est proprietaire de la propriete ou que la case ne peut pas être achetée
             res.update(this, joueur, TYPE_RESULTAT.neRienFaire);
         }
         return res;

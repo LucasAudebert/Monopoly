@@ -20,17 +20,13 @@ public class Gare extends Propriete {
         this.loyer = loyer;
     }
 
-    /**
-     *
-     * @return
-     */
     public int getLoyer() {
         return loyer;
     }
     
     /**
      *
-     * @return le prix du loyer en fonction du nombre de garde que possède le proprietaire
+     * @return le prix du loyer en fonction du nombre de gares que possède le proprietaire
      */
     @Override
     public int calculLoyer() {
@@ -41,7 +37,7 @@ public class Gare extends Propriete {
      *
      * @param joueur
      * set le Joueur joueur comme proprietaire de la Gare
-     * ajouter la proprieté aux Gare du joueur
+     * ajouter la proprieté aux Gares du joueur
      * fait payer le joueur le prix de la Gare 
      */
     @Override

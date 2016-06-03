@@ -16,10 +16,6 @@ public class Compagnie extends Propriete {
         super(prix, numero, nomCarreau);
     }
 
-    /**
-     *
-     * @return
-     */
     @Override
     public int calculLoyer() {
         if(getProprietaire().getNbCompagnies() == 1){

@@ -25,18 +25,10 @@ public abstract class Carreau {
      */
     public abstract Resultat action(Joueur joueur);
         
-    /**
-     *
-     * @return
-     */
     public int getNumero(){
             return numero;
         }
         
-    /**
-     *
-     * @return
-     */
     public String getNom(){
             return nomCarreau;
         }

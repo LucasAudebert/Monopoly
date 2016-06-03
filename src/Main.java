@@ -13,8 +13,6 @@ import Jeu.*;
  * Projet Monopoly S2 IUT2 Grenoble
  */
 public class Main {
-   
-    //private Controleur controleur; 
     
     public static void main(String[] args){
         //Initialisation

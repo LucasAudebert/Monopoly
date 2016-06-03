@@ -11,33 +11,22 @@ public class Resultat {
     private EnumerationsMonopoly.TYPE_RESULTAT typeResultat;
     private int loyer;
 
-    /**
-     *
-     */
+  
     public Resultat(){
         
     }
 
-    /**
-     *
-     * @return
-     */
+   
     public Joueur getJoueur() {
         return joueur;
     }
 
-    /**
-     *
-     * @return
-     */
+   
     public Propriete getPropriete() {
         return propriete;
     }
  
-    /**
-     *
-     * @return
-     */
+    
     public EnumerationsMonopoly.TYPE_RESULTAT getTypeResultat() {
         return typeResultat;
     }
@@ -68,10 +57,6 @@ public class Resultat {
         this.loyer = loyer;
     }   
 
-    /**
-     *
-     * @return
-     */
     public int getLoyer() {
         return loyer;
     }

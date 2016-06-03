@@ -14,9 +14,7 @@ public class Monopoly {
         private ArrayList<Carreau> carreaux; // HashMap ??!!!
         private HashMap<EnumerationsMonopoly.COULEUR_PROPRIETE, Groupe> groupes;
 
-    /**
-     *
-     */
+    
     public Monopoly(){
             this.joueurs = new ArrayList<Joueur>();
             this.joueursElimines = new ArrayList<Joueur>();
@@ -24,43 +22,23 @@ public class Monopoly {
             this.groupes = new HashMap<EnumerationsMonopoly.COULEUR_PROPRIETE, Groupe>();
         }
         
-    /**
-     *
-     * @return
-     */
+   
     public ArrayList getCarreaux() {
             return carreaux;
         }
         
-    /**
-     *
-     * @param index
-     * @return
-     */
     public Carreau getCarreau(int index){
             return carreaux.get(index);
         }
         
-    /**
-     *
-     * @param carreau
-     */
     public void addCarreau(Carreau carreau){
             carreaux.add(carreau);
         }
 
-    /**
-     *
-     * @return
-     */
     public ArrayList<Joueur> getJoueurs() {
             return joueurs;
         }
         
-    /**
-     *
-     * @param joueur
-     */
     public void addJoueur(Joueur joueur){
             joueurs.add(joueur);
         }        
@@ -69,27 +47,14 @@ public class Monopoly {
         return joueursElimines;
     }
 
-    /**
-     *
-     * @param joueurs
-     */
     public void setJoueurs(ArrayList<Joueur> joueurs) {
             this.joueurs = joueurs;
         }
         
-    /**
-     *
-     * @param couleur
-     * @return
-     */
     public Groupe getGroupe(EnumerationsMonopoly.COULEUR_PROPRIETE couleur){
             return groupes.get(couleur);
         }
 
-    /**
-     *
-     * @param groupe
-     */
     public void addGroupe(Groupe groupe){
             groupes.put(groupe.getCouleur(), groupe);
         }
@@ -102,11 +67,10 @@ public class Monopoly {
      * @return le nouveau carreau selon la valeur des dés et un carreau
      */
     public Carreau getNouvellePosition(int des, Carreau anciennePosition) {
-            // Si la valeur des dés + l'ancienne position est superieur à la valeur des dés
-	    if(anciennePosition.getNumero() + des > carreaux.size()){
-                return getCarreau(anciennePosition.getNumero() + des - (carreaux.size() + 1));// calcul la nouvelle position si la valeur des dés + l'ancienne position est superieur au nbr de carreaux 
+	    if(anciennePosition.getNumero() + des > carreaux.size()){// Si la valeur des dés + l'ancienne position est superieure à la valeur des dés
+                return getCarreau(anciennePosition.getNumero() + des - (carreaux.size() + 1));// calcul la nouvelle position si la valeur des dés + l'ancienne position est supérieure au nbr de carreaux 
             }else{
-                return getCarreau(anciennePosition.getNumero() + des - 1);// calcul la nouvelle position si la valeur des dés + l'ancienne position est inferieur au nbr de carreaux 
+                return getCarreau(anciennePosition.getNumero() + des - 1);// calcul la nouvelle position si la valeur des dés + l'ancienne position est inferieure au nbr de carreaux 
             }
 	}
         
@@ -125,7 +89,7 @@ public class Monopoly {
         
     /**
      *
-     * @return vrai si le nbr de joueur eliminé est eguale au nombre de joueur -1 (si il reste juste un joueur pas eliminé) faux sinon
+     * @return vrai si le nbr de joueurs eliminés est egual au nombre de joueurs -1 (si il reste juste un joueur pas eliminé) faux sinon
      */
     public boolean isFinDePartie(){
         int cpt = 0;
@@ -140,7 +104,7 @@ public class Monopoly {
     
     
     //JEU DE TEST
-    public void donnéProprietés(Joueur joueur){
+    public void donneesProprietes(Joueur joueur){
         for(Groupe gp : groupes.values()){
             for(ProprieteAConstruire pc : gp.getProprietes()){
                 pc.setProprietaire(joueur);

@@ -28,66 +28,34 @@ public class Joueur {
             proprietesAConstruire = new HashSet();
         }
         
-    /**
-     *
-     * @return le nom du joueur 
-     */
     public String getNomJoueur() {
             return nomJoueur;
         }
 
-    /**
-     *
-     * @param nomJoueur
-     */
     public void setNomJoueur(String nomJoueur) {
             this.nomJoueur = nomJoueur;
         }
 
-    /**
-     *
-     * @return le cash du joueur 
-     */
     public int getCash() {
             return cash;
         }
 
-    /**
-     *
-     * @param cash
-     */
     public void setCash(int cash) {
             this.cash = cash;
         }
 
-    /**
-     *
-     * @return un HashSet des compagnies du joueur
-     */
     public HashSet<Compagnie> getCompagnies() {
             return compagnies;
         }
 
-    /**
-     *
-     * @param compagnie
-     */
     public void addCompagnie(Compagnie compagnie){
             compagnies.add(compagnie);
         }
         
-    /**
-     *
-     * @return un HashSet des gares du joueur
-     */
     public HashSet<Gare> getGares() {
             return gares;
         }
 
-    /**
-     *
-     * @return un HashSet des proprietés du joueur
-     */
     public HashSet<Propriete> getProprietes(){
             HashSet proprietes = new HashSet(proprietesAConstruire);
             proprietes.addAll(gares);
@@ -95,26 +63,14 @@ public class Joueur {
             return proprietes;
         }
         
-    /**
-     *
-     * @param gare
-     */
     public void addGare(Gare gare){
             gares.add(gare);
         }
 
-    /**
-     *
-     * @return un HashSet des proprietés à construire du joueur
-     */
     public HashSet<ProprieteAConstruire> getProprieteAConstruires() {
             return proprietesAConstruire;
         }
 
-    /**
-     *
-     * @param pac
-     */
     public void addProprieteAConstruire(ProprieteAConstruire pac){
             proprietesAConstruire.add(pac);
         }
@@ -153,36 +109,18 @@ public class Joueur {
                 return compagnies.size();
         }     
 	
-    /**
-     *
-     * @return le carreau sur lequelle se trouve le joueur
-     */
     public Carreau getPositionCourante() {
 		return this.positionCourante;
 	}
 
-    /**
-     *
-     * @param des
-     * set la dernière valeure des dés du réalisé par le joueur
-     */
     public void setDerniereValeurDes(int[] des){
             this.derniereValeurDes = des;
         }
         
-    /**
-     *
-     * @return la dernière valeure des dés du réalisé par le joueur
-     */
     public int getDerniereValeurDes(){
             return derniereValeurDes[0]+derniereValeurDes[1];
         }
         
-    /**
-     *
-     * @param nouvellePosition 
-     * set le carreau sur lequelle se trouve le joueur
-     */
     public void setPositionCourante(Carreau nouvellePosition) {
 		positionCourante = nouvellePosition;
 	}
@@ -190,7 +128,7 @@ public class Joueur {
     /**
      *
      * @param prixC
-     * @return vrai si le joueur peut payer le prixC sinon faux
+     * @return vrai si le joueur peut payer le prixC (prix du carreau) sinon faux
      */
     public boolean peutPayer(int prixC) {
 		return cash > prixC;
@@ -198,7 +136,7 @@ public class Joueur {
         
     /**
      *
-     * @return vrai sir le joueur a réalisé un double
+     * @return vrai si le joueur a réalisé un double
      */
     public boolean desDouble(){
             return derniereValeurDes[0] == derniereValeurDes[1];
@@ -206,7 +144,7 @@ public class Joueur {
         
     /**
      *
-     * @return vraie si le joueur est éliminé (n'a plus d'argent)
+     * @return vrai si le joueur est éliminé (n'a plus d'argent)
      */
     public boolean estElimine(){
             return cash <= 0;
