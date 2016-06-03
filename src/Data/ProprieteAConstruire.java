@@ -36,7 +36,7 @@ public class ProprieteAConstruire extends Propriete{
      * @return
      */
     @Override
-    public int calculLoyer() {
+    public int calculLoyer(Joueur joueur) {
          if(groupe.memeProprietaire()){
            return getLoyer()*2;
          }else{

@@ -162,4 +162,9 @@ public class Ihm {
         System.out.println(chaine);
         sc.nextLine();
     }
+    
+    public int lancerDes(){
+        System.out.print("Entrer valeur dé : ");
+        return Integer.parseInt(sc.nextLine());
+    }
 }

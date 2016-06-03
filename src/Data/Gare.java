@@ -29,7 +29,7 @@ public class Gare extends Propriete {
      * @return le prix du loyer en fonction du nombre de gares que possède le proprietaire
      */
     @Override
-    public int calculLoyer() {
+    public int calculLoyer(Joueur joueur) {
         return super.getProprietaire().getNbGares() * getLoyer();
     }	
 

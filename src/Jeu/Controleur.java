@@ -83,8 +83,8 @@ public class Controleur {
         
         private void lancerDesAvancer(Joueur joueur){
             int[] des = new int[2];
-            des[0] = (int) (Math.random() * 6) + 1;
-            des[1] = (int) (Math.random() * 6) + 1;
+            des[0] = ihm.lancerDes();//(int) (Math.random() * 6) + 1;
+            des[1] = ihm.lancerDes();//(int) (Math.random() * 6) + 1;
             if(des[0] == des[1]){
                 ihm.afficher("Vous obtenez un double " + des[1]);
             }else{
@@ -118,7 +118,7 @@ public class Controleur {
                     ihm.afficher("Vous étes tombé(e) sur un carreau quelconque");
                 break;
                 case neRienFaire : //si le joueur ne peut rien faire 
-                    System.out.println("Rien faire");
+                    ihm.afficher("Rien faire");
                 break;   
             }
             if(joueur.desDouble() && !monopoly.isFinDePartie()){ //si le joueur fait un double est que ce n'est pas une fin de partie 

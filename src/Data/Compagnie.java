@@ -17,11 +17,11 @@ public class Compagnie extends Propriete {
     }
 
     @Override
-    public int calculLoyer() {
+    public int calculLoyer(Joueur joueur) {
         if(getProprietaire().getNbCompagnies() == 1){
-            return 4 * getProprietaire().getDerniereValeurDes();  
+            return 4 * joueur.getDerniereValeurDes();  
         }else{
-            return 10 * getProprietaire().getDerniereValeurDes();
+            return 10 * joueur.getDerniereValeurDes();
         }   
     }
 

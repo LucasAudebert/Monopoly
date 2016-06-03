@@ -27,7 +27,7 @@ public abstract class Propriete extends Carreau {
         this.prix = prix;
     }
     
-    public abstract int calculLoyer();
+    public abstract int calculLoyer(Joueur joueur);
     
     public abstract void achat(Joueur joueur);
     
@@ -69,7 +69,7 @@ public abstract class Propriete extends Carreau {
         if(this.getProprietaire() == null){
             res = achatPossible(joueur);
         }else if (this.getProprietaire() != joueur){
-            res.update(this, joueur, TYPE_RESULTAT.loyer, calculLoyer());
+            res.update(this, joueur, TYPE_RESULTAT.loyer, calculLoyer(joueur));
         }else{// Si le joueur est proprietaire de la propriete ou que la case ne peut pas être achetée
             res.update(this, joueur, TYPE_RESULTAT.neRienFaire);
         }
