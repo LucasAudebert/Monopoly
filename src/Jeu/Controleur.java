@@ -71,7 +71,10 @@ public class Controleur {
 		return data;
 	}
         
-        public void inscrireJoueurs(){                              
+    /**
+     *
+     */
+    public void inscrireJoueurs(){                              
             ArrayList<String> nomJoueurs = ihm.saisirNouveauJoueur();
             for(String nomTemp : nomJoueurs){
                 monopoly.addJoueur(new Joueur(nomTemp, monopoly.getCarreau(0)));
@@ -125,7 +128,10 @@ public class Controleur {
             }
         }
         
-        public void boucleDeJeu(){
+    /**
+     *
+     */
+    public void boucleDeJeu(){
             int nbTours = 1;
             boolean finPartieJoueur = false;
             while(!finPartieJoueur && !monopoly.isFinDePartie()){
