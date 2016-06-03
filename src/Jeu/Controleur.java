@@ -71,15 +71,15 @@ public class Controleur {
 		return data;
 	}
         
-    /**
-     *
-     */
-    public void inscrireJoueurs(){                              
-            ArrayList<String> nomJoueurs = ihm.saisirNouveauJoueur();
-            for(String nomTemp : nomJoueurs){
-                monopoly.addJoueur(new Joueur(nomTemp, monopoly.getCarreau(0)));
+        /**
+         *
+         */
+        public void inscrireJoueurs(){                              
+                ArrayList<String> nomJoueurs = ihm.saisirNouveauJoueur();
+                for(String nomTemp : nomJoueurs){
+                    monopoly.addJoueur(new Joueur(nomTemp, monopoly.getCarreau(0)));
+                }
             }
-        }
         
         private void lancerDesAvancer(Joueur joueur){
             int[] des = new int[2];
@@ -95,36 +95,36 @@ public class Controleur {
         }
         
         private void jouerCoup(Joueur joueur){           
-            lancerDesAvancer(joueur);
+            lancerDesAvancer(joueur); 
             Resultat resultat = joueur.getPositionCourante().action(joueur);
             switch(resultat.getTypeResultat()){
-                case achat :
+                case achat ://si le joueur peut acheter 
                     ihm.afficher("Vous étes tombé(e) sur la propriété libre " + resultat.getPropriete().getNom());
-                    if(ihm.demandeAchat(resultat)){
-                        resultat.getPropriete().achat(joueur);
+                    if(ihm.demandeAchat(resultat)){ //si le joueur veut acheter  
+                        resultat.getPropriete().achat(joueur); // on set le joueur comme proprietaire de la proprieté 
                     }
                 break;
-                case loyer :
+                case loyer :// si le joueur doit payer le loyer 
                     ihm.afficher("Vous êtes tombé(e) sur la propriété " + resultat.getPropriete().getNom() + " appartenant à " + resultat.getPropriete().getProprietaire().getNomJoueur());
-                    ihm.afficher("Vous payez " + resultat.getLoyer());
-                    joueur.payerLoyer(resultat.getLoyer());
-                    resultat.getPropriete().getProprietaire().recevoirLoyer( resultat.getLoyer() ); 
-                    if(joueur.estElimine()){
-                        monopoly.eliminerJoueur(joueur);
-                        ihm.afficher(joueur.getNomJoueur() + " est ruiné(e)");
+                    ihm.afficher("Vous payez " + resultat.getLoyer()); // on affiche le loyer 
+                    joueur.payerLoyer(resultat.getLoyer());//on fait payer le loyer au joueur 
+                    resultat.getPropriete().getProprietaire().recevoirLoyer( resultat.getLoyer() );  //on donne le loyer au proprietaire de la proprietés
+                    if(joueur.estElimine()){//si le  joueur est eliminer 
+                        monopoly.eliminerJoueur(joueur); // on elimine le joueur
+                        ihm.afficher(joueur.getNomJoueur() + " est ruiné(e)"); // on affiche que le joueur est éliminé
                     }
                 break;
-                case autreCarreau :
+                case autreCarreau ://si le joueur tombe sur un carreau quelconque
                     ihm.afficher("Vous étes tombé(e) sur un carreau quelconque");
                 break;
-                case neRienFaire : 
+                case neRienFaire : //si le joueur ne peut rien faire 
                     System.out.println("Rien faire");
                 break;   
             }
-            if(joueur.desDouble() && !monopoly.isFinDePartie()){
-                ihm.afficherInfosJoueur(joueur);
+            if(joueur.desDouble() && !monopoly.isFinDePartie()){ //si le joueur fait un double est que ce n'est pas une fin de partie 
+                ihm.afficherInfosJoueur(joueur); // on affiche les infos du joueur
                 ihm.attendreBouton("\033[32m" + joueur.getNomJoueur() + " appuyez sur Entrer pour rejouer.\033[32m");
-                jouerCoup(joueur);
+                jouerCoup(joueur); // on fait rejouer le joueur 
             }
         }
         
@@ -133,36 +133,36 @@ public class Controleur {
      */
     public void boucleDeJeu(){
             int nbTours = 1;
-            boolean finPartieJoueur = false;
-            while(!finPartieJoueur && !monopoly.isFinDePartie()){
+            boolean finPartieJoueur = false; //boolean de fin de partie decider par les joueur
+            while(!finPartieJoueur && !monopoly.isFinDePartie()){ // tant que finPartieJoueur false ET pas de vainqeur faire 
                 ihm.afficher("\033[34m------------- Tour " + nbTours + " -------------\033[34m");
-                for(Joueur jTemp : monopoly.getJoueurs()){
-                     if(!monopoly.getJoueursElimines().contains(jTemp)){
+                for(Joueur jTemp : monopoly.getJoueurs()){// boucle sur tout les joueurs du monopoly
+                     if(!monopoly.getJoueursElimines().contains(jTemp)){// verifie que jTemp n'est pas éliminé
                    
-                    finPartieJoueur = ihm.menuTourJoueur(jTemp);
-                    if(finPartieJoueur){
+                    finPartieJoueur = ihm.menuTourJoueur(jTemp); 
+                    if(finPartieJoueur){//si fin de partie décider par les joueurs arrêter de jouer 
                         break;
                     }
                     jouerCoup(jTemp);
-                    if(monopoly.isFinDePartie()){
+                    if(monopoly.isFinDePartie()){ // si fin de partie car vainqueur arrêter de joueur
                         break;
                     }
-                    ihm.afficherInfosJoueur(jTemp);
+                    ihm.afficherInfosJoueur(jTemp); //affiche l'etat du joueur qui vient de jouer
                
-                if(!finPartieJoueur){
+                if(!finPartieJoueur){ 
                     ihm.attendreBouton("Appuyer sur Entrer pour voir le récapitulatif du tour");
-                    ihm.afficherFinDeTour(monopoly.getJoueurs());
+                    ihm.afficherFinDeTour(monopoly.getJoueurs()); // affiche l'etat de chaque joueur à la fin du tour
                 }
                 }
             }
-                nbTours++;
+                nbTours++; // increment de 1  le nbr tour à chauqe fin de tour 
             }
             ihm.afficher("\033[31m----------- Fin de partie -----------\033[31m");
-            if(monopoly.isFinDePartie()){
-                
-                ihm.afficherGagnant(monopoly.getJoueurs());
-            }else if(finPartieJoueur){
-                ihm.afficherFinDePartie(monopoly.getJoueurs());
+            
+            if(monopoly.isFinDePartie()){  //Si fin de partie car il y a un gagnant               
+                ihm.afficherGagnant(monopoly.getJoueurs()); // affiche le gagnant 
+            }else if(finPartieJoueur){//si fin de partie décider par les joueur
+                ihm.afficherFinDePartie(monopoly.getJoueurs());// afficher l'etat des joueur à ce moment 
             }
         }
         
