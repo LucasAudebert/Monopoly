@@ -98,19 +98,23 @@ public class Monopoly {
      *
      * @param des
      * @param anciennePosition
-     * @return
+     * 
+     * @return le nouveau carreau selon la valeur des dés et un carreau
      */
     public Carreau getNouvellePosition(int des, Carreau anciennePosition) {
+            // Si la valeur des dés + l'ancienne position est superieur à la valeur des dés
 	    if(anciennePosition.getNumero() + des > carreaux.size()){
-                return getCarreau(anciennePosition.getNumero() + des - (carreaux.size() + 1));
+                return getCarreau(anciennePosition.getNumero() + des - (carreaux.size() + 1));// calcul la nouvelle position si la valeur des dés + l'ancienne position est superieur au nbr de carreaux 
             }else{
-                return getCarreau(anciennePosition.getNumero() + des - 1);
+                return getCarreau(anciennePosition.getNumero() + des - 1);// calcul la nouvelle position si la valeur des dés + l'ancienne position est inferieur au nbr de carreaux 
             }
 	}
         
     /**
      *
-     * @param joueur
+     * @param joueur 
+     * ajoute le joueur à la liste de joueur éliminé 
+     * boucle sur les proprietés qu'il possède pour mettre le proprietaire à null
      */
     public void eliminerJoueur(Joueur joueur){    
         joueursElimines.add(joueur);
@@ -121,7 +125,7 @@ public class Monopoly {
         
     /**
      *
-     * @return
+     * @return vrai si le nbr de joueur eliminé est eguale au nombre de joueur -1 (si il reste juste un joueur pas eliminé) faux sinon
      */
     public boolean isFinDePartie(){
         int cpt = 0;
