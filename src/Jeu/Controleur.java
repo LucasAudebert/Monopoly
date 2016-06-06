@@ -52,7 +52,7 @@ public class Controleur {
                                         monopoly.addCarreau(new AutreCarreau(Integer.parseInt(data.get(i)[1]), data.get(i)[2]));
 				}
                                 else if(caseType.compareTo("CP") == 0){
-                                        monopoly.addCarreau(new Pioche(Integer.parseInt(data.get(i)[1]), data.get(i)[2]));
+                                        monopoly.addCarreau(new CarreauPiocherCarte(Integer.parseInt(data.get(i)[1]), data.get(i)[2]));
                                 }
                                 else if(caseType.compareTo("PR") == 0){
                                         monopoly.addCarreau(new AllerEnPrison(Integer.parseInt(data.get(i)[1]), data.get(i)[2]));
@@ -109,14 +109,13 @@ public class Controleur {
             if(des[0] == des[1]){
                 ihm.afficher("Vous obtenez un double " + des[1]);
                joueur.incrementCompteurDee();
-                
-                
             }else{
                 ihm.afficher("Vous obtenez un " + des[0] + " et un " + des[1]);
-                joueur.setCompteurDouble(0);
+                joueur.reinitCompteurDouble();
             }
             joueur.setDerniereValeurDes(des);
-            joueur.setPositionCourante(monopoly.getNouvellePosition(des[0]+des[1], joueur.getPositionCourante()));
+            if(!monopoly.estEnPrison(joueur) && !joueur.desDouble())
+                joueur.setPositionCourante(monopoly.getNouvellePosition(des[0]+des[1], joueur.getPositionCourante()));
             if(joueur.getDerniereValeurDes() >= joueur.getPositionCourante().getNumero()){
                 joueur.gagnerCash(200);
                 ihm.afficher("Vous êtes passé par la case départ (+200)");
@@ -124,51 +123,71 @@ public class Controleur {
         }
         
         private void allerPrison(Joueur joueur){
-            joueur.setPositionCourante(monopoly.getPrison());
-            //peut être set le joueur dans la prison OU boolean dans joueur
+            joueur.setPositionCourante(monopoly.getCarreauPrison());
+            monopoly.addPrisonnier(joueur);
         }
         
         private void jouerCoup(Joueur joueur){           
-            lancerDesAvancer(joueur); 
-            ResultatPropriete resultat = joueur.getPositionCourante().action(joueur);
-            if(joueur.getCompteurDouble() !=3){
-                switch(resultat.getTypeResultat()){
-                case achat ://si le joueur peut acheter 
-                    ihm.afficher("Vous étes tombé(e) sur la propriété libre " + resultat.getPropriete().getNom());
-                    if(ihm.demandeAchat(resultat)){ //si le joueur veut acheter  
-                        resultat.getPropriete().achat(joueur); // on set le joueur comme proprietaire de la proprieté 
-                    }
-                break;
-                case loyer :// si le joueur doit payer le loyer 
-                    ihm.afficher("Vous êtes tombé(e) sur la propriété " + resultat.getPropriete().getNom() + " appartenant à " + resultat.getPropriete().getProprietaire().getNomJoueur());
-                    ihm.afficher("Vous payez " + resultat.getLoyer()); // on affiche le loyer 
-                    joueur.payerLoyer(resultat.getLoyer());//on fait payer le loyer au joueur 
-                    resultat.getPropriete().getProprietaire().recevoirLoyer( resultat.getLoyer() );  //on donne le loyer au proprietaire de la proprietés
-                    if(joueur.estElimine()){//si le  joueur est eliminer 
-                        monopoly.eliminerJoueur(joueur); // on elimine le joueur
-                        ihm.afficher(joueur.getNomJoueur() + " est ruiné(e)"); // on affiche que le joueur est éliminé
-                    }
-                break;
-                case autreCarreau ://si le joueur tombe sur un carreau quelconque
-                    ihm.afficher("Vous étes tombé(e) sur un carreau quelconque");
-                break;
-                case neRienFaire : //si le joueur ne peut rien faire 
-                    ihm.afficher("Rien faire");
-                break;   
+            lancerDesAvancer(joueur);
+            if (monopoly.estEnPrison(joueur) && joueur.desDouble()){
+                monopoly.removePrisonnier(joueur);
+                joueur.reinitCompteurEssaiPrison();
             }
-            if(joueur.desDouble() && !monopoly.isFinDePartie()){ //si le joueur fait un double est que ce n'est pas une fin de partie 
-                ihm.afficherInfosJoueur(joueur); // on affiche les infos du joueur
-                ihm.attendreBouton("\033[32m" + joueur.getNomJoueur() + " appuyez sur Entrer pour rejouer.\033[32m");
-                jouerCoup(joueur); // on fait rejouer le joueur 
-            }
+            if(monopoly.estEnPrison(joueur) && joueur.getCompteurEssaiPrison() < 3 ){
+                joueur.incrementCompteurEssaiPrison();
             }else{
+                if(joueur.getCompteurEssaiPrison() >= 3){
+                    ihm.afficher("Payer caution 50");
+                    joueur.payer(50);
+                    monopoly.removePrisonnier(joueur);
+                    joueur.reinitCompteurEssaiPrison();
+                }
+                Resultat resultat = joueur.getPositionCourante().action(joueur);
+                if(joueur.getCompteurDouble() != 3){
+                    switch(resultat.getTypeResultat()){
+                    case achat ://si le joueur peut acheter 
+                        ihm.afficher("Vous étes tombé(e) sur la propriété libre " + resultat.getPropriete().getNom());
+                        if(ihm.demandeAchat(resultat)){ //si le joueur veut acheter  
+                            resultat.getPropriete().achat(joueur); // on set le joueur comme proprietaire de la proprieté 
+                        }
+                    break;
+                    case loyer :// si le joueur doit payer le loyer 
+                        ihm.afficher("Vous êtes tombé(e) sur la propriété " + resultat.getPropriete().getNom() + " appartenant à " + resultat.getPropriete().getProprietaire().getNomJoueur());
+                        ihm.afficher("Vous payez " + resultat.getLoyer()); // on affiche le loyer 
+                        joueur.payer(resultat.getLoyer());//on fait payer le loyer au joueur 
+                        resultat.getPropriete().getProprietaire().recevoirLoyer( resultat.getLoyer() );  //on donne le loyer au proprietaire de la proprietés
+                        if(joueur.estElimine()){//si le  joueur est eliminer 
+                            monopoly.eliminerJoueur(joueur); // on elimine le joueur
+                            ihm.afficher(joueur.getNomJoueur() + " est ruiné(e)"); // on affiche que le joueur est éliminé
+                        }
+                    break;
+                    case piocherUneCarte ://si le joueur tombe sur un carreau quelconque
+                        ihm.afficher("Vous étes tombé(e) sur un carreau quelconque");
+                    break;
+                    case allerEnPrison ://si le joueur tombe sur un carreau quelconque
+                        allerPrison(joueur);
+                        ihm.afficher("Prison");
+                    break;
+                    case taxe ://si le joueur tombe sur un carreau quelconque
+                        ihm.afficher("Vous étes tombé(e) sur un carreau taxe");
+                    break;            
+                    case neRienFaire : //si le joueur ne peut rien faire 
+                        ihm.afficher("Rien faire");
+                    break;   
+                    }
+                    
+                    if(joueur.desDouble() && !monopoly.isFinDePartie()){ //si le joueur fait un double est que ce n'est pas une fin de partie 
+                        ihm.afficherInfosJoueur(joueur); // on affiche les infos du joueur
+                        ihm.attendreBouton("\033[32m" + joueur.getNomJoueur() + " appuyez sur Entrer pour rejouer.\033[32m");
+                        System.out.println(joueur.getCompteurDouble());
+                        jouerCoup(joueur); // on fait rejouer le joueur 
+                    }
+                    
+                }else{
                     ihm.afficher(" Vous avez réalisé trois double vous allé en prison ! BATARD VA ");
                     allerPrison(joueur);
-            }
-                
-            
-            
-            
+                }
+            } 
         }
         
     /**

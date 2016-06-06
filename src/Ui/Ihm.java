@@ -9,7 +9,7 @@ import Data.Compagnie;
 import Data.Gare;
 import Data.Joueur;
 import Data.ProprieteAConstruire;
-import Data.ResultatPropriete;
+import Data.Resultat;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Scanner;
@@ -57,7 +57,7 @@ public class Ihm {
         return listeJoueurs;
     }
     
-    public boolean demandeAchat(ResultatPropriete res){
+    public boolean demandeAchat(Resultat res){
         String rep;
         boolean loop = true;
         System.out.println("Votre cash : " + res.getJoueur().getCash());

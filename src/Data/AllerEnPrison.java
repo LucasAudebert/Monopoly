@@ -16,8 +16,9 @@ public class AllerEnPrison extends AutreCarreau{
     }
     
     @Override
-    public ResultatPropriete action(Joueur joueur) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Resultat action(Joueur joueur) {
+        
+        return new Resultat(this, joueur,EnumerationsMonopoly.TYPE_RESULTAT.allerEnPrison);
     }
     
 }

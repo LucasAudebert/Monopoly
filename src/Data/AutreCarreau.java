@@ -21,9 +21,7 @@ public class AutreCarreau extends Carreau{
      * @return
      */
     @Override
-    public ResultatPropriete action(Joueur joueur) {
-        ResultatPropriete res = new ResultatPropriete();
-        res.update(null, joueur, EnumerationsMonopoly.TYPE_RESULTAT.autreCarreau);
-        return res;
+    public Resultat action(Joueur joueur) {
+        return new Resultat(this, joueur, EnumerationsMonopoly.TYPE_RESULTAT.neRienFaire);
     }
 }

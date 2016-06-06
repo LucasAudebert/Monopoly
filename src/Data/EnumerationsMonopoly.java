@@ -29,6 +29,8 @@ public class EnumerationsMonopoly {
         neRienFaire,
         achat,
         loyer,
-        autreCarreau
+        taxe,
+        allerEnPrison,
+        piocherUneCarte
     }
 }

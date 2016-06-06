@@ -2,6 +2,7 @@ package Data;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 /**
  *
@@ -12,6 +13,7 @@ public class Monopoly {
 	private ArrayList<Joueur> joueurs;
         private ArrayList<Joueur> joueursElimines;
         private ArrayList<Carreau> carreaux; // HashMap ??!!!
+        private HashSet<Joueur> prisonniers;
         private HashMap<EnumerationsMonopoly.COULEUR_PROPRIETE, Groupe> groupes;
 
     
@@ -20,6 +22,7 @@ public class Monopoly {
             this.joueursElimines = new ArrayList<Joueur>();
             this.carreaux = new ArrayList<Carreau>();
             this.groupes = new HashMap<EnumerationsMonopoly.COULEUR_PROPRIETE, Groupe>();
+            this.prisonniers = new HashSet();
         }
         
    
@@ -102,7 +105,19 @@ public class Monopoly {
         return (cpt == joueurs.size()-1);
     }
     
-    public Carreau getPrison(){
-      return  carreaux.get(10);
+    public Carreau getCarreauPrison(){
+        return carreaux.get(10);
+    }
+    
+    public void addPrisonnier(Joueur joueur){
+        prisonniers.add(joueur);
+    }
+    
+    public void removePrisonnier(Joueur joueur){
+        prisonniers.remove(joueur);
+    }
+    
+    public boolean estEnPrison(Joueur joueur){
+        return prisonniers.contains(joueur);
     }
 }

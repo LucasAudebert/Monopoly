@@ -1,6 +1,6 @@
 package Ui;
 
-import Data.ResultatPropriete;
+import Data.Resultat;
 import javax.swing.*;
 
 /*

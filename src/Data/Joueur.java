@@ -15,6 +15,7 @@ public class Joueur {
 	private Carreau positionCourante;
         private int[] derniereValeurDes;
         private int compteurDouble = 0 ;
+        private int compteurEssaiPrison = 0;
 
     /**
      *
@@ -81,7 +82,7 @@ public class Joueur {
      * @param l 
      * Soustrait l au  cash du joueur
      */
-    public void payerLoyer(int l) {
+    public void payer(int l) {
                 cash -= l;
 	}
 
@@ -159,11 +160,24 @@ public class Joueur {
         return compteurDouble;
     }
 
-    public void setCompteurDouble(int compteurDouble) {
-        this.compteurDouble = compteurDouble;
+    public void reinitCompteurDouble() {
+        this.compteurDouble = 0;
     }
     
     public void incrementCompteurDee(){
         compteurDouble ++;
-    }    
+    }  
+    
+    public void incrementCompteurEssaiPrison(){
+        compteurEssaiPrison ++;
+    } 
+    
+    public void reinitCompteurEssaiPrison() {
+        this.compteurEssaiPrison = 0;
+    }
+    
+    public int getCompteurEssaiPrison() {
+        return compteurEssaiPrison;
+    }
+    
 }

@@ -11,26 +11,65 @@ package Data;
  */
 public class Resultat {
 
-
     private Joueur joueur;
     private EnumerationsMonopoly.TYPE_RESULTAT typeResultat;
-
-    public Resultat() {
-        
-    }
-   
-    public Joueur getJoueur() {
-        return joueur;
+    private int loyer;
+    private Propriete propriete;    
+    private AutreCarreau autreCarreau;
+    private int taxe;
+    
+    public Resultat(Joueur joueur, EnumerationsMonopoly.TYPE_RESULTAT type){
+        update(joueur, type);
     }
     
-    public EnumerationsMonopoly.TYPE_RESULTAT getTypeResultat() {
-        return typeResultat;
+    public Resultat(Propriete propriete, Joueur joueur, EnumerationsMonopoly.TYPE_RESULTAT type){
+        update(joueur, type);
+        this.propriete = propriete;
     }
+
+    public Resultat(Propriete propriete, Joueur joueur, EnumerationsMonopoly.TYPE_RESULTAT type, int loyer){
+        update(joueur, type);
+        this.propriete = propriete;
+        this.loyer = loyer;
+    }
+    
+    public Resultat(AutreCarreau autreCarreau, Joueur joueur, EnumerationsMonopoly.TYPE_RESULTAT type){
+        update(joueur, type);
+        this.autreCarreau = autreCarreau;
+    }    
+
+    public Resultat(AutreCarreau autreCarreau, Joueur joueur, EnumerationsMonopoly.TYPE_RESULTAT type, int taxe){
+        update(joueur, type);
+        this.autreCarreau = autreCarreau;
+        this.taxe = taxe;
+    }   
     
     public void update(Joueur joueur, EnumerationsMonopoly.TYPE_RESULTAT type){
         this.joueur = joueur;
         typeResultat = type;
     }
     
+    public Joueur getJoueur() {
+        return joueur;
+    }
     
+    public EnumerationsMonopoly.TYPE_RESULTAT getTypeResultat() {
+        return typeResultat;
+    }    
+
+    public int getLoyer() {
+        return loyer;
+    }    
+    
+    public Propriete getPropriete() {
+        return propriete;
+    }  
+    
+    public AutreCarreau getCarreau() {
+        return autreCarreau;
+    }
+    
+    public int getTaxe() {
+        return taxe;
+    }
 }

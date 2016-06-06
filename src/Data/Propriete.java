@@ -31,7 +31,7 @@ public abstract class Propriete extends Carreau {
     
     public void achat(Joueur joueur){
         this.setProprietaire(joueur);
-        joueur.payerLoyer(this.getPrix());
+        joueur.payer(this.getPrix());
 
     }
     
@@ -40,14 +40,12 @@ public abstract class Propriete extends Carreau {
      * @param joueur
      * @return ResultatPropriete 
      */
-    public ResultatPropriete achatPossible(Joueur joueur){
-        ResultatPropriete res = new ResultatPropriete();
+    public Resultat achatPossible(Joueur joueur){
         if (joueur.peutPayer(prix)){
-            res.update(this, joueur, TYPE_RESULTAT.achat);
+            return new Resultat(this, joueur, TYPE_RESULTAT.achat);
         }else{
-            res.update(this, joueur, TYPE_RESULTAT.neRienFaire);
+            return new Resultat(this, joueur, TYPE_RESULTAT.neRienFaire);
         }
-        return res;
     }
     
     public Joueur getProprietaire(){
@@ -68,15 +66,13 @@ public abstract class Propriete extends Carreau {
      * @return
      */
     @Override
-    public ResultatPropriete action(Joueur joueur) {
-        ResultatPropriete res = new ResultatPropriete();//Creation du resultat renvoyé au controleur
+    public Resultat action(Joueur joueur) {
         if(this.getProprietaire() == null){
-            res = achatPossible(joueur);
+            return achatPossible(joueur);
         }else if (this.getProprietaire() != joueur){
-            res.update(this, joueur, TYPE_RESULTAT.loyer, calculLoyer(joueur));
+            return new Resultat(this, joueur, TYPE_RESULTAT.loyer, calculLoyer(joueur));
         }else{// Si le joueur est proprietaire de la propriete ou que la case ne peut pas être achetée
-            res.update(this, joueur, TYPE_RESULTAT.neRienFaire);
+            return new Resultat(this, joueur, TYPE_RESULTAT.neRienFaire);
         }
-        return res;
     }
 }
