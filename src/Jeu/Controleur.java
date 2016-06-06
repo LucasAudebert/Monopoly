@@ -2,6 +2,7 @@ package Jeu;
 
 import Data.*;
 import Ui.Ihm;
+import Ui.Observateur;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -12,6 +13,7 @@ public class Controleur {
         
         private Monopoly monopoly;
         private Ihm ihm;
+        private Observateur observateur;        
         
         public Controleur(){
             monopoly = new Monopoly();

@@ -5,10 +5,12 @@
  */
 package Ui;
 
+import Data.Resultat;
+
 /**
  *
  * @author blachert
  */
 public interface Observateur {
-    public Message notifier();
+    public Message notifier(Message message);
 }
