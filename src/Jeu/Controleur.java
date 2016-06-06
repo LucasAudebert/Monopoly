@@ -87,8 +87,12 @@ public class Controleur {
             des[1] = ihm.lancerDes();//(int) (Math.random() * 6) + 1;
             if(des[0] == des[1]){
                 ihm.afficher("Vous obtenez un double " + des[1]);
+               joueur.incrementCompteurDee();
+                
+                
             }else{
                 ihm.afficher("Vous obtenez un " + des[0] + " et un " + des[1]);
+                joueur.setCompteurDouble(0);
             }
             joueur.setDerniereValeurDes(des);
             joueur.setPositionCourante(monopoly.getNouvellePosition(des[0]+des[1], joueur.getPositionCourante()));

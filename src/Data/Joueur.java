@@ -14,6 +14,7 @@ public class Joueur {
         private HashSet<ProprieteAConstruire> proprietesAConstruire;
 	private Carreau positionCourante;
         private int[] derniereValeurDes;
+        private int compteurDouble = 0 ;
 
     /**
      *
@@ -149,4 +150,16 @@ public class Joueur {
     public boolean estElimine(){
             return cash <= 0;
         }
+
+    public int getCompteurDouble() {
+        return compteurDouble;
+    }
+
+    public void setCompteurDouble(int compteurDouble) {
+        this.compteurDouble = compteurDouble;
+    }
+    
+    public void incrementCompteurDee(){
+        compteurDouble ++;
+    }    
 }
