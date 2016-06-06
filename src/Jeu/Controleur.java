@@ -149,12 +149,14 @@ public class Controleur {
                     }
                     ihm.afficherInfosJoueur(jTemp); //affiche l'etat du joueur qui vient de jouer
                
+                
+                  }
+                }
+                
                 if(!finPartieJoueur){ 
                     ihm.attendreBouton("Appuyer sur Entrer pour voir le récapitulatif du tour");
                     ihm.afficherFinDeTour(monopoly.getJoueurs()); // affiche l'etat de chaque joueur à la fin du tour
                 }
-                }
-            }
                 nbTours++; // increment de 1  le nbr tour à chauqe fin de tour 
             }
             ihm.afficher("\033[31m----------- Fin de partie -----------\033[31m");
