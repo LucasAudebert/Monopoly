@@ -11,11 +11,9 @@ package Data;
  */
 public class Pioche extends AutreCarreau {
     
-    private String type;
     
-    public Pioche(int numero, String nomCarreau, String type) {
+    public Pioche(int numero, String nomCarreau) {
         super(numero, nomCarreau);
-        this.type = type;
     }
     
     @Override

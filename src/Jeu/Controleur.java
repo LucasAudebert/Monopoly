@@ -20,6 +20,11 @@ public class Controleur {
             ihm = new Ihm();
         }
         
+        public Controleur(Observateur obs){
+            monopoly = new Monopoly();
+            this.observateur = obs;
+        }
+        
 	public void creerPlateau(String dataFilename){
 		try{
 			ArrayList<String[]> data = readDataFile(dataFilename, ",");
@@ -45,7 +50,13 @@ public class Controleur {
 				}
 				else if(caseType.compareTo("AU") == 0){
                                         monopoly.addCarreau(new AutreCarreau(Integer.parseInt(data.get(i)[1]), data.get(i)[2]));
-				}
+				}else if(caseType.compareTo("CP") == 0){
+                                        monopoly.addCarreau(new Pioche(Integer.parseInt(data.get(i)[1]), data.get(i)[2]));
+                                }else if(caseType.compareTo("PR") == 0){
+                                        monopoly.addCarreau(new AllerEnPrison(Integer.parseInt(data.get(i)[1]), data.get(i)[2]));
+                                }else if(caseType.compareTo("T") == 0){
+                                        monopoly.addCarreau(new Taxe(Integer.parseInt(data.get(i)[1]), data.get(i)[2], Integer.parseInt(data.get(i)[3])));
+                                }
 				else
 					System.err.println("[buildGamePleateau()] : Invalid Data type");
 			}
