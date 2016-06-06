@@ -96,6 +96,10 @@ public class Controleur {
             }
             joueur.setDerniereValeurDes(des);
             joueur.setPositionCourante(monopoly.getNouvellePosition(des[0]+des[1], joueur.getPositionCourante()));
+            if(joueur.getDerniereValeurDes() >= joueur.getPositionCourante().getNumero()){
+                joueur.gagnerCash(200);
+                ihm.afficher("Vous êtes passé par la case départ (+200)");
+            }
         }
         
         private void jouerCoup(Joueur joueur){           

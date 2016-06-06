@@ -135,6 +135,10 @@ public class Joueur {
 		return cash > prixC;
 	}
         
+    public void gagnerCash(int cash){
+        this.cash += cash;
+    }
+    
     /**
      *
      * @return vrai si le joueur a réalisé un double
