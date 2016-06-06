@@ -114,7 +114,7 @@ public class Controleur {
                 joueur.reinitCompteurDouble();
             }
             joueur.setDerniereValeurDes(des);
-            if(!monopoly.estEnPrison(joueur) && !joueur.desDouble())
+            if(!monopoly.estEnPrison(joueur) || joueur.desDouble())
                 joueur.setPositionCourante(monopoly.getNouvellePosition(des[0]+des[1], joueur.getPositionCourante()));
             if(joueur.getDerniereValeurDes() >= joueur.getPositionCourante().getNumero()){
                 joueur.gagnerCash(200);
