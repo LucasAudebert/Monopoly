@@ -50,11 +50,14 @@ public class Controleur {
 				}
 				else if(caseType.compareTo("AU") == 0){
                                         monopoly.addCarreau(new AutreCarreau(Integer.parseInt(data.get(i)[1]), data.get(i)[2]));
-				}else if(caseType.compareTo("CP") == 0){
+				}
+                                else if(caseType.compareTo("CP") == 0){
                                         monopoly.addCarreau(new Pioche(Integer.parseInt(data.get(i)[1]), data.get(i)[2]));
-                                }else if(caseType.compareTo("PR") == 0){
+                                }
+                                else if(caseType.compareTo("PR") == 0){
                                         monopoly.addCarreau(new AllerEnPrison(Integer.parseInt(data.get(i)[1]), data.get(i)[2]));
-                                }else if(caseType.compareTo("T") == 0){
+                                }
+                                else if(caseType.compareTo("T") == 0){
                                         monopoly.addCarreau(new Taxe(Integer.parseInt(data.get(i)[1]), data.get(i)[2], Integer.parseInt(data.get(i)[3])));
                                 }
 				else
@@ -127,7 +130,7 @@ public class Controleur {
         
         private void jouerCoup(Joueur joueur){           
             lancerDesAvancer(joueur); 
-            Resultat resultat = joueur.getPositionCourante().action(joueur);
+            ResultatPropriete resultat = joueur.getPositionCourante().action(joueur);
             if(joueur.getCompteurDouble() !=3){
                 switch(resultat.getTypeResultat()){
                 case achat ://si le joueur peut acheter 

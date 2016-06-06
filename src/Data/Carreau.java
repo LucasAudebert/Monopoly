@@ -23,7 +23,7 @@ public abstract class Carreau {
      * @param joueur
      * @return
      */
-    public abstract Resultat action(Joueur joueur);
+    public abstract ResultatPropriete action(Joueur joueur);
         
     public int getNumero(){
             return numero;

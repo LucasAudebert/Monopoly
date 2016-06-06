@@ -38,10 +38,10 @@ public abstract class Propriete extends Carreau {
     /**
      *
      * @param joueur
-     * @return Resultat 
+     * @return ResultatPropriete 
      */
-    public Resultat achatPossible(Joueur joueur){
-        Resultat res = new Resultat();
+    public ResultatPropriete achatPossible(Joueur joueur){
+        ResultatPropriete res = new ResultatPropriete();
         if (joueur.peutPayer(prix)){
             res.update(this, joueur, TYPE_RESULTAT.achat);
         }else{
@@ -68,8 +68,8 @@ public abstract class Propriete extends Carreau {
      * @return
      */
     @Override
-    public Resultat action(Joueur joueur) {
-        Resultat res = new Resultat();//Creation du resultat renvoyé au controleur
+    public ResultatPropriete action(Joueur joueur) {
+        ResultatPropriete res = new ResultatPropriete();//Creation du resultat renvoyé au controleur
         if(this.getProprietaire() == null){
             res = achatPossible(joueur);
         }else if (this.getProprietaire() != joueur){

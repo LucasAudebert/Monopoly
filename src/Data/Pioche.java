@@ -17,7 +17,7 @@ public class Pioche extends AutreCarreau {
     }
     
     @Override
-    public Resultat action(Joueur joueur){
+    public ResultatPropriete action(Joueur joueur){
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     } 
 }

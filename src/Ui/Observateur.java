@@ -5,7 +5,7 @@
  */
 package Ui;
 
-import Data.Resultat;
+import Data.ResultatPropriete;
 
 /**
  *
