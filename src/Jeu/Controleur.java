@@ -102,10 +102,16 @@ public class Controleur {
             }
         }
         
+        private void allerPrison(Joueur joueur){
+            joueur.setPositionCourante(monopoly.getPrison());
+            //peut être set le joueur dans la prison OU boolean dans joueur
+        }
+        
         private void jouerCoup(Joueur joueur){           
             lancerDesAvancer(joueur); 
             Resultat resultat = joueur.getPositionCourante().action(joueur);
-            switch(resultat.getTypeResultat()){
+            if(joueur.getCompteurDouble() !=3){
+                switch(resultat.getTypeResultat()){
                 case achat ://si le joueur peut acheter 
                     ihm.afficher("Vous étes tombé(e) sur la propriété libre " + resultat.getPropriete().getNom());
                     if(ihm.demandeAchat(resultat)){ //si le joueur veut acheter  
@@ -134,6 +140,14 @@ public class Controleur {
                 ihm.attendreBouton("\033[32m" + joueur.getNomJoueur() + " appuyez sur Entrer pour rejouer.\033[32m");
                 jouerCoup(joueur); // on fait rejouer le joueur 
             }
+            }else{
+                    ihm.afficher(" Vous avez réalisé trois double vous allé en prison ! BATARD VA ");
+                    allerPrison(joueur);
+            }
+                
+            
+            
+            
         }
         
     /**

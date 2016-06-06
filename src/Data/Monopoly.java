@@ -102,14 +102,7 @@ public class Monopoly {
         return (cpt == joueurs.size()-1);
     }
     
-    
-    //JEU DE TEST
-    public void donneesProprietes(Joueur joueur){
-        for(Groupe gp : groupes.values()){
-            for(ProprieteAConstruire pc : gp.getProprietes()){
-                pc.setProprietaire(joueur);
-                joueur.addProprieteAConstruire(pc);
-            }
-        }
+    public Carreau getPrison(){
+      return  carreaux.get(10);
     }
 }
