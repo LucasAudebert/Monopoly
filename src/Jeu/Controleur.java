@@ -81,10 +81,15 @@ public class Controleur {
                 }
             }
         
-        private void lancerDesAvancer(Joueur joueur){
+        private int[] lancerDes(){
             int[] des = new int[2];
             des[0] = ihm.lancerDes();//(int) (Math.random() * 6) + 1;
             des[1] = ihm.lancerDes();//(int) (Math.random() * 6) + 1;
+            return des;
+        }
+        
+        private void lancerDesAvancer(Joueur joueur){
+            int[] des = lancerDes();
             if(des[0] == des[1]){
                 ihm.afficher("Vous obtenez un double " + des[1]);
                joueur.incrementCompteurDee();
