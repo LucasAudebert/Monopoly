@@ -59,6 +59,7 @@ public class Controleur {
                                 }
                                 else if(caseType.compareTo("T") == 0){
                                         monopoly.addCarreau(new Taxe(Integer.parseInt(data.get(i)[1]), data.get(i)[2], Integer.parseInt(data.get(i)[3])));
+                                        System.out.println(Integer.parseInt(data.get(i)[3]));
                                 }
 				else
 					System.err.println("[buildGamePleateau()] : Invalid Data type");
