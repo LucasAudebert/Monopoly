@@ -162,7 +162,6 @@ public class Monopoly {
         if(groupe.peutConstruire(pac) && joueur.peutPayer(pac.getPrixMaison()) && pac.getNbMaisons() <= 5){
             joueur.payer(pac.getPrixMaison());
             pac.addMaison();
-            System.out.println("Construction de la " + pac.getNbMaisons() + " maison sur "+ pac.getNom());
         }
     }
 }

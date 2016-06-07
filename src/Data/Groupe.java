@@ -58,6 +58,7 @@ public class Groupe {
         
         while(resultat && i < proprietes.size()){
             resultat = proprietes.get(i).getNbMaisons() >= pac.getNbMaisons();
+            i++;
         }
         return resultat && memeProprietaire();
     }

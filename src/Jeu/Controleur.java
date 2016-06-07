@@ -198,6 +198,12 @@ public class Controleur {
                 monopoly.removePrisonnier(joueur);
                 joueur.reinitCompteurEssaiPrison();
             }
+            if(joueur.getDerniereValeurDes() == 20){
+                for(ProprieteAConstruire pac : joueur.getProprieteAConstruires()){
+                    monopoly.construireMaison(pac, joueur);
+                    
+                }
+            }
                 //Si joueur en prison et des non double et compteur < 3 => compteur++ et ne joue pas 
             if(monopoly.estEnPrison(joueur) && joueur.getCompteurEssaiPrison() < 3 ){
                 joueur.incrementCompteurEssaiPrison();
