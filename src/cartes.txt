@@ -6,17 +6,17 @@ R,Chance,Faites des réparations dans toutes vos maison : versez pour chaque mai
 A,Chance,Amende pour ivresse : 20€,20
 DD,Chance,Avancez jusqu'à la case Départ,1
 AP,Chance,Allez en prison. Avancez tout droit en prison. Ne passez pas par la case Départ. Ne recevez pas 200€
-DD,Chance,Rendez-vous à l'Avenue Henri-Martin. Si vous passez par la case Départ\n Recevez 200€,25
-DD,Chance,Allez à la gare de Lyon. Si vous passez par la case Départ, recevez 200€,16
+DD,Chance,Rendez-vous à l'Avenue Henri-Martin. Si vous passez par la case Départ Recevez 200€,25
+DD,Chance,Allez à la gare de Lyon. Si vous passez par la case Départ\n Recevez 200€,16
 A,Chance,Payer pour frais de scolarité : 150€,150
 GG,Chance,Vous avez gagné le prix de mots croisés. Recevez 100€,100
 GG,Chance,La Banque vous verse un dividende de 50€,50
 D,Chance,Rendez-vous à la Rue de la Paix,40
 GG,Chance,Votre immeuble et votre prêt rapportent. Vous devez toucher 150€,150
-DD,Chance,Accédez au Boulevard de la Villette. Si vous passez par la case Départ\n Recevez 200€,12
+DD,Chance,Accédez au Boulevard de la Villette. Si vous passez par la case Départ Recevez 200€,12
 SP,Caisse,Vous êtes libéré de prison. Cette carte peut être conservée jusqu'à ce qu'elle soit utilisée
 A,Caisse,Payez une amende de 10€,10
-HB,Caisse,C'est votre anniversaire. Chaque joueur doit vous donner 10€
+HB,Caisse,C'est votre anniversaire. Chaque joueur doit vous donner 10€,10
 GG,Caisse,Erreur de la banque en votre faveur. Recevez 200€,200
 D,Caisse,Retournez à Belleville,2
 A,Caisse,Payez la note du médecin : 50€,50
