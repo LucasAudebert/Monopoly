@@ -156,4 +156,12 @@ public class Monopoly {
     public boolean estEnPrison(Joueur joueur){
         return prisonniers.contains(joueur);
     }
+    
+    public void construireMaison(ProprieteAConstruire pac, Joueur joueur){
+        Groupe groupe = getGroupe(pac);
+        if(groupe.peutConstruire(pac) && joueur.peutPayer(pac.getPrixMaison()) && pac.getNbMaisons() < 5){
+            joueur.payer(pac.getPrixMaison());
+            pac.addMaison();
+        }
+    }
 }

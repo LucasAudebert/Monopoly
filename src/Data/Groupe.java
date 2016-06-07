@@ -51,4 +51,14 @@ public class Groupe {
         }
         return resultat;
     }
+    
+    public boolean peutConstruire(ProprieteAConstruire pac){
+        boolean resultat = true;
+        int i = 0;
+        
+        while(resultat && i < proprietes.size()){
+            resultat = proprietes.get(i).getNbMaisons() >= pac.getNbMaisons();
+        }
+        return resultat && memeProprietaire();
+    }
 }

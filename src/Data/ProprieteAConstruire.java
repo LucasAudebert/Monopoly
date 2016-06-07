@@ -65,4 +65,12 @@ public class ProprieteAConstruire extends Propriete{
         joueur.addProprieteAConstruire(this);
     }
     
+    public int getPrixMaison(){
+        return prixMaison;
+    }
+    
+    public void addMaison(){
+        nbMaisons++;
+    }
+    
 }
