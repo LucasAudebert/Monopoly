@@ -22,7 +22,7 @@ public class CarteGain extends Carte {
     }
 
     @Override
-    public ResultatCarte Action(Joueur j) {
+    public ResultatCarte action(Joueur j) {
         j.gagnerCash(gain);
         return new ResultatCarte(super.getLibelle(), EnumerationsMonopoly.TYPE_RESULTAT_CARTE.gain, gain);
     }

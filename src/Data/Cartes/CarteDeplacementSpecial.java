@@ -23,7 +23,7 @@ public class CarteDeplacementSpecial extends Carte {
     }
 
     @Override
-    public ResultatCarte Action(Joueur j) {
+    public ResultatCarte action(Joueur j) {
         if (numeroCarreau < 0) {
             numeroCarreau = j.getPositionCourante().getNumero() + numeroCarreau - 1;
         }

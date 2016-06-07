@@ -25,7 +25,7 @@ public class CarteReparation extends Carte {
     }
     
     @Override
-    public ResultatCarte Action(Joueur j) {
+    public ResultatCarte action(Joueur j) {
         int taxe = 0;
         for(ProprieteAConstruire p : j.getProprieteAConstruires()) {
             if (p.getNbMaisons()==5) {

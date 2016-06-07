@@ -200,7 +200,7 @@ public class Controleur {
         }
         
         private void tirerEtJouerCarte(Carte carte, Joueur joueur, Pile pile){
-            ResultatCarte res = carte.Action(joueur);
+            ResultatCarte res = carte.action(joueur);
             switch(res.getTypeResultat()){
                 case allerEnPrison :
                     allerPrison(joueur);

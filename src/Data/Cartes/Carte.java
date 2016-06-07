@@ -18,7 +18,7 @@ public abstract class Carte {
         this.libelle = libelle;
     }
     
-    public abstract ResultatCarte Action(Joueur j);
+    public abstract ResultatCarte action(Joueur j);
 
     public String getLibelle() {
         return libelle;

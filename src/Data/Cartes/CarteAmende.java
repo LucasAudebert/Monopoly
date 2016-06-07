@@ -22,7 +22,7 @@ public class CarteAmende extends Carte {
     }
 
     @Override
-    public ResultatCarte Action(Joueur j) {
+    public ResultatCarte action(Joueur j) {
         j.payer(amende);
         return new ResultatCarte(super.getLibelle(), EnumerationsMonopoly.TYPE_RESULTAT_CARTE.perte, amende);
     }

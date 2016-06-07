@@ -19,7 +19,7 @@ public class CarteSortieDePrison extends Carte {
     }
     
     @Override
-    public ResultatCarte Action(Joueur j) {
+    public ResultatCarte action(Joueur j) {
         return new ResultatCarte(super.getLibelle(), EnumerationsMonopoly.TYPE_RESULTAT_CARTE.sortieDePrison);
     }
     
