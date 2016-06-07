@@ -105,7 +105,7 @@ public class Controleur {
                     }else if(caseType.compareTo("HB") == 0){
                         carte = new CarteAnniversaire(data.get(i)[2], Integer.parseInt(data.get(i)[3]));
                     }else if(caseType.compareTo("AP") == 0){
-                        carte = new CarteAllerEnPrison(data.get(i)[i]);
+                        carte = new CarteAllerEnPrison(data.get(i)[2]);
                     }else{
                         System.err.println("[creerCartes()] : Invalid Data type");
                     }
