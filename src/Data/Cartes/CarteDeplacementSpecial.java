@@ -19,13 +19,13 @@ public class CarteDeplacementSpecial extends Carte {
     
     public CarteDeplacementSpecial(String libelle, int numeroCarreau) {
         super(libelle);
-        this.numeroCarreau = numeroCarreau;
+        this.numeroCarreau = numeroCarreau ;
     }
 
     @Override
     public ResultatCarte Action(Joueur j) {
         if (numeroCarreau < 0) {
-            numeroCarreau = j.getPositionCourante().getNumero() + numeroCarreau;
+            numeroCarreau = j.getPositionCourante().getNumero() + numeroCarreau - 1;
         }
         return new ResultatCarte(super.getLibelle(), EnumerationsMonopoly.TYPE_RESULTAT_CARTE.deplacementSpecial, numeroCarreau);
     }

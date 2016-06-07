@@ -31,7 +31,7 @@ public class Controleur {
         private void initPartie(){
             creerPlateau("src/data.txt");
             creerCartes("src/cartes.txt");
-            monopoly.melangerPiles();
+            //monopoly.melangerPiles();
         }
         
 	private void creerPlateau(String dataFilename){
@@ -161,6 +161,10 @@ public class Controleur {
                 }
             }
         
+        public ArrayList getJoueurs(){
+            return monopoly.getJoueurs();
+        }
+        
         private int[] lancerDes(){
             int[] des = new int[2];
             des[0] = ihm.lancerDes();//(int) (Math.random() * 6) + 1;
@@ -205,13 +209,10 @@ public class Controleur {
                     joueur.setCarteSortieDePrison(carte);
                     break;
                 case deplacement :
-                    joueur.setPositionCourante(monopoly.getNouvellePosition(res.getValeur(), joueur.getPositionCourante()));
-                    break;
                 case deplacementSpecial :
                     joueur.setPositionCourante(monopoly.getCarreau(res.getValeur()));
                     break;
                 case perte :
-                    joueur.payer(res.getValeur());
                     break;
                 case gain :
                     joueur.gagnerCash(res.getValeur());
@@ -221,10 +222,13 @@ public class Controleur {
                         if(jTemp != joueur && !monopoly.getJoueursElimines().contains(jTemp)){
                             jTemp.payer(res.getValeur());
                             joueur.gagnerCash(res.getValeur());
+                            System.out.println("payerAnniv");
                         }
                     }
                     break;
             }
+            System.out.println(res.getValeur());
+            System.out.println(res.getLibelle());
             if(res.getTypeResultat() != EnumerationsMonopoly.TYPE_RESULTAT_CARTE.sortieDePrison){
                 pile.reposerUneCarte(carte);
             }
@@ -294,7 +298,7 @@ public class Controleur {
                     
                 }else{
                     ihm.afficher(" Vous avez réalisé trois double vous allé en prison ! BATARD VA ");
-                    allerPrison(joueur);
+                    //allerPrison(joueur);
                 }
             } 
         }
