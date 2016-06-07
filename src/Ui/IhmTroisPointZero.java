@@ -108,8 +108,6 @@ public class IhmTroisPointZero extends JFrame implements Observateur {
                             "Les joueurs sont :  "+listeNom ,
                             "Etapes 3 - Verification des noms" ,
                             JOptionPane.INFORMATION_MESSAGE);
-                    System.out.println("test"+nomJs.size());
-                    
                     controleur.inscrireJoueurs(nomJs);
                 }
             }
@@ -148,14 +146,14 @@ public class IhmTroisPointZero extends JFrame implements Observateur {
        // GridBagConstraints gbc = new GridBagConstraints();
         
         JPanel logo = new JPanel();
-        JLabel image = new JLabel( new ImageIcon( "F:\\Documents\\NetBeansProjects\\Monopoly\\src\\baniere.png"));
+        JLabel image = new JLabel( new ImageIcon( "src\\baniere.png"));
         logo.add(image);
         
         
         
        GridBagConstraints bc = new GridBagConstraints( );
         
-        inscrireJoueur = new JButton("Inscire Joueur");   
+        inscrireJoueur = new JButton("Inscrire Joueur");   
         inscrireJoueur.setMaximumSize(new Dimension(200,40));
         inscrireJoueur.setAlignmentX(center.CENTER_ALIGNMENT);
         
