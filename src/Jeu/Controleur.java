@@ -64,7 +64,7 @@ public class Controleur {
                                         monopoly.addCarreau(new AutreCarreau(Integer.parseInt(data.get(i)[1]), data.get(i)[2]));
 				}
                                 else if(caseType.compareTo("CP") == 0){
-                                        monopoly.addCarreau(new CarreauPiocherCarte(Integer.parseInt(data.get(i)[1]), data.get(i)[2]));
+                                        monopoly.addCarreau(new CarreauPiocherCarteChance(Integer.parseInt(data.get(i)[1]), data.get(i)[2]));
                                 }
                                 else if(caseType.compareTo("PR") == 0){
                                         monopoly.addCarreau(new AllerEnPrison(Integer.parseInt(data.get(i)[1]), data.get(i)[2]));
@@ -227,15 +227,18 @@ public class Controleur {
                             ihm.afficher(joueur.getNomJoueur() + " est ruiné(e)"); // on affiche que le joueur est éliminé
                         }
                     break;
-                    case piocherUneCarte ://si le joueur tombe sur un carreau quelconque
-                        
+                    case piocherUneCarteChance ://si le joueur tombe sur un carreau quelconque
+                        ihm.afficher("Chance");                        
                     break;
+                    case piocherUneCarteCDC ://si le joueur tombe sur un carreau quelconque
+                        ihm.afficher("Caisse de comunauté");                        
+                    break;                    
                     case allerEnPrison ://si le joueur tombe sur un carreau quelconque
                         allerPrison(joueur);
                         ihm.afficher("Prison");
                     break;
                     case taxe ://si le joueur tombe sur un carreau quelconque
-                        ihm.afficher("Vous étes tombé(e) sur un carreau taxe");
+                        ihm.afficher("Vous étes tombé(e) sur un carreau taxe.\nPayer "+resultat.getTaxe());
                     break;            
                     case neRienFaire : //si le joueur ne peut rien faire 
                         ihm.afficher("Rien faire");

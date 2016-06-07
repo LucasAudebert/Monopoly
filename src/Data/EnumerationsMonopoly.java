@@ -13,7 +13,7 @@ public class EnumerationsMonopoly {
     
     
     public enum COULEUR_PROPRIETE {
-
+        
         bleuFonce,
         orange,
         mauve,
@@ -31,7 +31,8 @@ public class EnumerationsMonopoly {
         loyer,
         taxe,
         allerEnPrison,
-        piocherUneCarte
+        piocherUneCarteChance,
+        piocherUneCarteCDC        
     }
 
     public enum TYPE_RESULTAT_CARTE {

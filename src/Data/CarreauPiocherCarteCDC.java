@@ -7,17 +7,16 @@ package Data;
 
 /**
  *
- * @author blachert
+ * @author audeberl
  */
-public class CarreauPiocherCarte extends AutreCarreau {
-    
-    
-    public CarreauPiocherCarte(int numero, String nomCarreau) {
+public class CarreauPiocherCarteCDC extends AutreCarreau {
+
+    public CarreauPiocherCarteCDC(int numero, String nomCarreau) {
         super(numero, nomCarreau);
     }
     
     @Override
     public Resultat action(Joueur joueur){
-        return new Resultat(this, joueur,EnumerationsMonopoly.TYPE_RESULTAT.piocherUneCarte);
+        return new Resultat(this, joueur,EnumerationsMonopoly.TYPE_RESULTAT.piocherUneCarteCDC);
     } 
 }
