@@ -187,6 +187,10 @@ public class Controleur {
             joueur.setPositionCourante(monopoly.getCarreauPrison());
             monopoly.addPrisonnier(joueur);
         }
+
+        public void setObservateur(Observateur observateur) {
+            this.observateur = observateur;
+        }
         
         private void jouerCoup(Joueur joueur){           
             lancerDesAvancer(joueur);
