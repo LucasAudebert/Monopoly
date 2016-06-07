@@ -19,14 +19,16 @@ public class Controleur {
         public Controleur(){
             monopoly = new Monopoly();
             ihm = new Ihm();
+            initPartie();
         }
         
         public Controleur(Observateur obs){
             monopoly = new Monopoly();
             this.observateur = obs;
+            initPartie();
         }
         
-        public void initPartie(){
+        private void initPartie(){
             creerPlateau("src/data.txt");
             creerCartes("src/cartes.txt");
         }

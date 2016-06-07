@@ -86,6 +86,14 @@ public class Monopoly {
             return groupes.get(couleur);
         }
 
+    public Groupe getGroupe(ProprieteAConstruire pac){
+        int i = 0;
+        while(!groupes.get(EnumerationsMonopoly.COULEUR_PROPRIETE.values()[i]).getProprietes().contains(pac)){
+            i++;
+        }
+        return groupes.get(EnumerationsMonopoly.COULEUR_PROPRIETE.values()[i]);
+    }
+    
     public void addGroupe(Groupe groupe){
             groupes.put(groupe.getCouleur(), groupe);
         }
