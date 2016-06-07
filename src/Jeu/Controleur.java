@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import Data.Cartes.*;
 
 public class Controleur {
         
@@ -88,24 +89,26 @@ public class Controleur {
                 ArrayList<String[]> data = readDataFile(filename, ",");
                 for(int i=0; i<data.size(); ++i){
                     String caseType = data.get(i)[0];
+                    Carte carte;
                     if(caseType.compareTo("D") == 0){
-                        
+                        carte = new CarteDeplacement(data.get(i)[2], Integer.parseInt(data.get(i)[3]));
                     }else if(caseType.compareTo("SP") == 0){
-                        
+                        carte = new CarteSortieDePrison(data.get(i)[2]);
                     }else if(caseType.compareTo("R") == 0){
-                        
+                        carte = new CarteReparation(data.get(i)[2], Integer.parseInt(data.get(i)[3]), Integer.parseInt(data.get(i)[4]));
                     }else if(caseType.compareTo("DD") == 0){
-                        
+                        carte = new CarteDeplacementSpecial(data.get(i)[2], Integer.parseInt(data.get(i)[3]));
                     }else if(caseType.compareTo("GG") == 0){
-                        
                     }else if(caseType.compareTo("A") == 0){
-                        
                     }else if(caseType.compareTo("HB") == 0){
-                        
                     }else if(caseType.compareTo("AP") == 0){
-                        
                     }else{
                         System.err.println("[creerCartes()] : Invalid Data type");
+                    }
+                    if(data.get(i)[1].compareTo("Chance") == 0){
+                        monopoly.addCarteChance(carte);
+                    }else{
+                        monopoly.addCarteCommunaute(carte);
                     }
                 }
                 
