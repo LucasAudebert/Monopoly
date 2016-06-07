@@ -141,6 +141,13 @@ public class Controleur {
 		return data;
 	}
         
+        
+        public void inscrireJoueurs(ArrayList<String> nomJoueurs){                              
+               
+                for(String nomTemp : nomJoueurs){
+                    monopoly.addJoueur(new Joueur(nomTemp, monopoly.getCarreau(0)));
+                }
+            }
         /**
          *
          */
