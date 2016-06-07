@@ -1,5 +1,7 @@
 package Data;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Maxence
@@ -7,7 +9,9 @@ package Data;
 public class ProprieteAConstruire extends Propriete{
 
     private Groupe groupe; 
-    private int loyer;
+    private ArrayList<Integer> loyers;
+    private int nbMaisons;
+    private int prixMaison;
     
     /**
      *
@@ -17,10 +21,12 @@ public class ProprieteAConstruire extends Propriete{
      * @param groupe
      * @param loyer
      */
-    public ProprieteAConstruire(int prix, int numero, String nomCarreau, Groupe groupe, int loyer) {
+    public ProprieteAConstruire(int prix, int numero, String nomCarreau, Groupe groupe, ArrayList<Integer> loyer, int prixMaison) {
         super(prix, numero, nomCarreau);
         this.groupe = groupe;
-        this.loyer = loyer;
+        this.loyers = loyer;
+        this.nbMaisons = 0;
+        this.prixMaison = prixMaison;
     }
 
     /**
@@ -28,7 +34,7 @@ public class ProprieteAConstruire extends Propriete{
      * @return
      */
     public int getLoyer() {
-        return loyer;
+        return loyers.get(nbMaisons);
     }
     
     /**
