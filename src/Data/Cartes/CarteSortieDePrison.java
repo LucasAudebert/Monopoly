@@ -9,6 +9,15 @@ package Data.Cartes;
  *
  * @author audeberl
  */
-public class CarteSortieDePrison {
+public class CarteSortieDePrison extends Carte {
+
+    public CarteSortieDePrison(String libelle) {
+        super(libelle);
+    }
+    
+    @Override
+    public ResultatCarte Action() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

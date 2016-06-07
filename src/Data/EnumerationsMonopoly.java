@@ -33,4 +33,17 @@ public class EnumerationsMonopoly {
         allerEnPrison,
         piocherUneCarte
     }
+
+    public enum TYPE_RESULTAT_CARTE {
+        
+        allerEnPrison,
+        sortieDePrison,
+        reparation,
+        deplacement,
+        deplacementSpecial,
+        amende,
+        gain,
+        anniversaire
+    }
+
 }
