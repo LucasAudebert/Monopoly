@@ -15,7 +15,7 @@ public class Taxe extends AutreCarreau{
     
     public Taxe(int numero, String nomCarreau, int valTaxe) {
         super(numero, nomCarreau);
-        this.valTaxe = valTaxe;
+        this.valTaxe = -valTaxe;
     }
     
     @Override

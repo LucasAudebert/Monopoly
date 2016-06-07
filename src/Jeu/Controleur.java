@@ -142,8 +142,7 @@ public class Controleur {
 	}
         
         
-        public void inscrireJoueurs(ArrayList<String> nomJoueurs){                              
-               
+        public void inscrireJoueurs(ArrayList<String> nomJoueurs){                                             
                 for(String nomTemp : nomJoueurs){
                     monopoly.addJoueur(new Joueur(nomTemp, monopoly.getCarreau(0)));
                 }
@@ -229,7 +228,7 @@ public class Controleur {
                         }
                     break;
                     case piocherUneCarte ://si le joueur tombe sur un carreau quelconque
-                        ihm.afficher("Vous étes tombé(e) sur un carreau quelconque");
+                        
                     break;
                     case allerEnPrison ://si le joueur tombe sur un carreau quelconque
                         allerPrison(joueur);
