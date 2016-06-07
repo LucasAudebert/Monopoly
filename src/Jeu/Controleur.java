@@ -134,10 +134,12 @@ public class Controleur {
         
         private void jouerCoup(Joueur joueur){           
             lancerDesAvancer(joueur);
+                //Liberation de prison si double
             if (monopoly.estEnPrison(joueur) && joueur.desDouble()){
                 monopoly.removePrisonnier(joueur);
                 joueur.reinitCompteurEssaiPrison();
             }
+                //Si joueur en prison et des non double et compteur < 3 => compteur++ et ne joue pas 
             if(monopoly.estEnPrison(joueur) && joueur.getCompteurEssaiPrison() < 3 ){
                 joueur.incrementCompteurEssaiPrison();
             }else{
