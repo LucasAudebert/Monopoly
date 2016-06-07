@@ -5,6 +5,9 @@
  */
 package Data.Cartes;
 
+import Data.EnumerationsMonopoly;
+import Data.Joueur;
+
 /**
  *
  * @author audeberl
@@ -16,7 +19,7 @@ public class CarteAllerEnPrison extends Carte{
     }
 
     @Override
-    public ResultatCarte Action() {
-        return new ResultatCarte();
+    public ResultatCarte Action(Joueur j) {
+        return new ResultatCarte(super.getLibelle(), EnumerationsMonopoly.TYPE_RESULTAT_CARTE.allerEnPrison);
     }    
 }

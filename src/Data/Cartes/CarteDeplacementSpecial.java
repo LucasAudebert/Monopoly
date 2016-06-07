@@ -5,18 +5,23 @@
  */
 package Data.Cartes;
 
+import Data.Joueur;
+
 /**
  *
  * @author audeberl
  */
 public class CarteDeplacementSpecial extends Carte {
 
-    public CarteDeplacementSpecial(String libelle) {
+    private int numeroCarreau;
+    
+    public CarteDeplacementSpecial(String libelle, int numeroCarreau) {
         super(libelle);
+        this.numeroCarreau = numeroCarreau;
     }
 
     @Override
-    public ResultatCarte Action() {
+    public ResultatCarte Action(Joueur j) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

@@ -5,6 +5,8 @@
  */
 package Data.Cartes;
 
+import Data.Joueur;
+
 /**
  *
  * @author audeberl
@@ -16,5 +18,10 @@ public abstract class Carte {
         this.libelle = libelle;
     }
     
-    public abstract ResultatCarte Action();
+    public abstract ResultatCarte Action(Joueur j);
+
+    public String getLibelle() {
+        return libelle;
+    }
+    
 }

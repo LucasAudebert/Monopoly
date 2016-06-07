@@ -5,6 +5,8 @@
  */
 package Data.Cartes;
 
+import Data.Joueur;
+
 /**
  *
  * @author audeberl
@@ -16,7 +18,7 @@ public class CarteSortieDePrison extends Carte {
     }
     
     @Override
-    public ResultatCarte Action() {
+    public ResultatCarte Action(Joueur j) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
