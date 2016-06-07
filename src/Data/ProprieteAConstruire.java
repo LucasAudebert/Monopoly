@@ -20,6 +20,7 @@ public class ProprieteAConstruire extends Propriete{
      * @param nomCarreau
      * @param groupe
      * @param loyer
+     * @param prixMaison
      */
     public ProprieteAConstruire(int prix, int numero, String nomCarreau, Groupe groupe, ArrayList<Integer> loyer, int prixMaison) {
         super(prix, numero, nomCarreau);
