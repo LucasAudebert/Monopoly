@@ -110,7 +110,7 @@ public class IhmTroisPointZero extends JFrame implements Observateur {
                             JOptionPane.INFORMATION_MESSAGE);
                     System.out.println("test"+nomJs.size());
                     
-                   // controleur.inscrireJoueurs(nomJs);
+                    controleur.inscrireJoueurs(nomJs);
                 }
             }
             @Override
