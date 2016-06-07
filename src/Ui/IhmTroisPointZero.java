@@ -10,26 +10,19 @@ import Jeu.Controleur;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.File;
 import java.util.ArrayList;
-import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
-
 import javax.swing.JButton;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
-import javax.swing.border.EmptyBorder;
+
 
 
 /**
@@ -42,16 +35,14 @@ public class IhmTroisPointZero extends JFrame implements Observateur {
     private JButton inscrireJoueur;
     private JButton demarrerPartie;
     private JButton quitter;
-    private ArrayList<Joueur> joueurs;
     private ArrayList<String> nomJs;
    
     
      public IhmTroisPointZero(Controleur controleur){
         this.controleur = controleur;
-      //  controleur.setObservarteur(this);
-        joueurs = new ArrayList<>();
-        nomJs = new ArrayList<>();
+        controleur.setObservateur(this);
         
+        nomJs = new ArrayList<>();        
         afficherMenu();
         
         inscrireJoueur.addMouseListener( new MouseListener() {
@@ -107,8 +98,7 @@ public class IhmTroisPointZero extends JFrame implements Observateur {
                     jopVerification.showMessageDialog(null,
                             "Les joueurs sont :  "+listeNom ,
                             "Etapes 3 - Verification des noms" ,
-                            JOptionPane.INFORMATION_MESSAGE);
-                    controleur.inscrireJoueurs(nomJs);
+                            JOptionPane.INFORMATION_MESSAGE);                    
                 }
             }
             @Override
@@ -119,6 +109,30 @@ public class IhmTroisPointZero extends JFrame implements Observateur {
             public void mouseEntered(MouseEvent e) {}            
             @Override
             public void mouseExited(MouseEvent e) {}           
+        });
+        demarrerPartie.addMouseListener(new MouseListener(
+        ) {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if(nomJs != null){
+                    controleur.inscrireJoueurs(nomJs);
+                    IhmPlateau plateau = new IhmPlateau(controleur);
+                    
+                }
+                
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {}
+
+            @Override
+            public void mouseReleased(MouseEvent e) {}
+
+            @Override
+            public void mouseEntered(MouseEvent e) {}
+
+            @Override
+            public void mouseExited(MouseEvent e) {}
         });
         
         quitter.addMouseListener(new MouseListener(){
@@ -143,7 +157,7 @@ public class IhmTroisPointZero extends JFrame implements Observateur {
         this.setLayout(new BorderLayout());
         JPanel center = new JPanel();        
         center.setLayout(new BoxLayout(center,BoxLayout.Y_AXIS));
-       // GridBagConstraints gbc = new GridBagConstraints();
+       
         
         JPanel logo = new JPanel();
         JLabel image = new JLabel( new ImageIcon( "src\\baniere.png"));
@@ -151,7 +165,7 @@ public class IhmTroisPointZero extends JFrame implements Observateur {
         
         
         
-       GridBagConstraints bc = new GridBagConstraints( );
+  
         
         inscrireJoueur = new JButton("Inscrire Joueur");   
         inscrireJoueur.setMaximumSize(new Dimension(200,40));
@@ -175,9 +189,7 @@ public class IhmTroisPointZero extends JFrame implements Observateur {
         center.add(quitter);   
         center.add(Box.createRigidArea(new Dimension(0,10)));
         
-        //inscrireJoueur.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-      //  demarrerPartie.setBorder(BorderFactory.createEmptyBorder(50, 0, 0, 0));
-        //quitter.setBorder(BorderFactory.createEmptyBorder(50, 0, 0, 0));
+      
         
         this.add(logo,BorderLayout.NORTH);
         this.add(center,BorderLayout.CENTER);
@@ -190,6 +202,10 @@ public class IhmTroisPointZero extends JFrame implements Observateur {
         setSize(850, 400);
         setVisible(true);                        
     }
+    @Override
+    public Message notifier(Message message) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     public static void main(String[] args){
         Controleur controleur = new Controleur();
@@ -197,9 +213,5 @@ public class IhmTroisPointZero extends JFrame implements Observateur {
         ihm.afficher();
     }
 
-    @Override
-    public Message notifier(Message message) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
 }

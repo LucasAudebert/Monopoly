@@ -1,0 +1,92 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Ui;
+
+import Data.AutreCarreau;
+import Data.Carreau;
+import Data.Compagnie;
+import Data.Gare;
+import Data.Joueur;
+import Data.ProprieteAConstruire;
+import java.awt.Color;
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+
+/**
+ *
+ * @author Maxence
+ */
+public class IhmInfoJoueur extends JPanel {
+    private Joueur joueur;
+    
+    public IhmInfoJoueur(Joueur joueur){
+       this.joueur =  joueur;
+       initFenetre();       
+        
+    }
+    public void initFenetre(){
+         this.setBorder(BorderFactory.createLineBorder(Color.black));
+        
+        JLabel nom = new JLabel("Joueur : "+joueur.getNomJoueur());
+        this.add(nom);
+        
+        JLabel argent = new JLabel("Cash : "+joueur.getCash());
+        this.add(argent);
+        
+        
+        JLabel position  = new JLabel("Position actuelles : "+joueur.getPositionCourante().getNom());
+        this.add(position);
+        
+        JLabel compagnie = new JLabel("Compagnie : ");
+        this.add(compagnie);
+        
+        if(joueur.getCompagnies().isEmpty()){
+           JLabel pasCompagnie = new JLabel("Pas de compagnies");
+           this.add(pasCompagnie);
+            
+        }else{
+            for(Compagnie cTemp : joueur.getCompagnies()){
+          
+            }
+        }
+        
+        
+       JLabel gare = new JLabel("Gares : ");
+       this.add(gare);
+        if(joueur.getGares().isEmpty()){
+            JLabel pasGare = new JLabel("Pas de gares");
+            this.add(pasGare);
+        }else{
+             for(Gare gTemp : joueur.getGares()){
+            
+            }
+        }
+       
+        JLabel propAConstruire = new JLabel("Proprieté à construire : ");
+        this.add(propAConstruire);
+        if(joueur.getGares().isEmpty()){
+            JLabel pasPropaConstruire = new JLabel("Pas de proprieté à construire");
+            this.add(pasPropaConstruire);
+        }else{
+            for(ProprieteAConstruire pTemp : joueur.getProprieteAConstruires() ){
+                    
+            }
+        }
+       
+       afficher();
+        
+    }
+    
+    public void afficher(){
+        
+        this.setSize(500,500);
+        this.setVisible(true);
+    }
+    
+        
+}
