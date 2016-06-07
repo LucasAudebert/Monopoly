@@ -159,7 +159,7 @@ public class Monopoly {
     
     public void construireMaison(ProprieteAConstruire pac, Joueur joueur){
         Groupe groupe = getGroupe(pac);
-        if(groupe.peutConstruire(pac) && joueur.peutPayer(pac.getPrixMaison()) && pac.getNbMaisons() < 5){
+        if(groupe.peutConstruire(pac) && joueur.peutPayer(pac.getPrixMaison()) && pac.getNbMaisons() <= 5){
             joueur.payer(pac.getPrixMaison());
             pac.addMaison();
         }
