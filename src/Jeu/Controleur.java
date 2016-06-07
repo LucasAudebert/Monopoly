@@ -26,8 +26,8 @@ public class Controleur {
         }
         
         public void initPartie(){
-            creerPlateau("data.txt");
-            creerCartes("carte.txt");
+            creerPlateau("src/data.txt");
+            creerCartes("src/cartes.txt");
         }
         
 	private void creerPlateau(String dataFilename){
@@ -68,7 +68,6 @@ public class Controleur {
                                 }
                                 else if(caseType.compareTo("T") == 0){
                                         monopoly.addCarreau(new Taxe(Integer.parseInt(data.get(i)[1]), data.get(i)[2], Integer.parseInt(data.get(i)[3])));
-                                        System.out.println(Integer.parseInt(data.get(i)[3]));
                                 }
 				else
 					System.err.println("[creerPlateau()] : Invalid Data type");
@@ -227,7 +226,6 @@ public class Controleur {
                     if(joueur.desDouble() && !monopoly.isFinDePartie()){ //si le joueur fait un double est que ce n'est pas une fin de partie 
                         ihm.afficherInfosJoueur(joueur); // on affiche les infos du joueur
                         ihm.attendreBouton("\033[32m" + joueur.getNomJoueur() + " appuyez sur Entrer pour rejouer.\033[32m");
-                        System.out.println(joueur.getCompteurDouble());
                         jouerCoup(joueur); // on fait rejouer le joueur 
                     }
                     
