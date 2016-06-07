@@ -25,7 +25,12 @@ public class Controleur {
             this.observateur = obs;
         }
         
-	public void creerPlateau(String dataFilename){
+        public void initPartie(){
+            creerPlateau("data.txt");
+            creerCartes("carte.txt");
+        }
+        
+	private void creerPlateau(String dataFilename){
 		try{
 			ArrayList<String[]> data = readDataFile(dataFilename, ",");
 			
@@ -66,18 +71,54 @@ public class Controleur {
                                         System.out.println(Integer.parseInt(data.get(i)[3]));
                                 }
 				else
-					System.err.println("[buildGamePleateau()] : Invalid Data type");
+					System.err.println("[creerPlateau()] : Invalid Data type");
 			}
 			
 		} 
 		catch(FileNotFoundException e){
-			System.err.println("[buildGamePlateau()] : File is not found!");
+			System.err.println("[creerPlateau()] : File is not found!");
 		}
 		catch(IOException e){
-			System.err.println("[buildGamePlateau()] : Error while reading file!");
+			System.err.println("[creerPlateau()] : Error while reading file!");
 		}		
 	}
-	
+        
+        private void creerCartes(String filename){
+                
+            try{
+                ArrayList<String[]> data = readDataFile(filename, ",");
+                for(int i=0; i<data.size(); ++i){
+                    String caseType = data.get(i)[0];
+                    if(caseType.compareTo("D") == 0){
+                        
+                    }else if(caseType.compareTo("SP") == 0){
+                        
+                    }else if(caseType.compareTo("R") == 0){
+                        
+                    }else if(caseType.compareTo("DD") == 0){
+                        
+                    }else if(caseType.compareTo("GG") == 0){
+                        
+                    }else if(caseType.compareTo("A") == 0){
+                        
+                    }else if(caseType.compareTo("HB") == 0){
+                        
+                    }else if(caseType.compareTo("AP") == 0){
+                        
+                    }else{
+                        System.err.println("[creerCartes()] : Invalid Data type");
+                    }
+                }
+                
+            }catch(FileNotFoundException e){
+                System.err.println("[creerCartes()] : File is not found!");
+            }catch(IOException e){
+                System.err.println("[creerCartes()] : Error while reading file!");
+            }
+            
+            
+        }
+        
 	private ArrayList<String[]> readDataFile(String filename, String token) throws FileNotFoundException, IOException
 	{
 		ArrayList<String[]> data = new ArrayList<String[]>();
