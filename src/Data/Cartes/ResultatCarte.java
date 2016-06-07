@@ -14,10 +14,17 @@ import Data.EnumerationsMonopoly;
 public class ResultatCarte {
     private EnumerationsMonopoly.TYPE_RESULTAT_CARTE typeResultat;
     private String libelle;
+    private int valeur;
 
     public ResultatCarte(String libelle, EnumerationsMonopoly.TYPE_RESULTAT_CARTE typeResultat) {
         this.typeResultat = typeResultat;
         this.libelle = libelle;
+    }
+
+    public ResultatCarte(String libelle, EnumerationsMonopoly.TYPE_RESULTAT_CARTE typeResultat, int taxe) {
+        this.typeResultat = typeResultat;
+        this.libelle = libelle;
+        this.valeur = taxe;
     }
 
     public EnumerationsMonopoly.TYPE_RESULTAT_CARTE getTypeResultat() {
@@ -26,6 +33,10 @@ public class ResultatCarte {
 
     public String getLibelle() {
         return libelle;
+    }
+
+    public int getValeur() {
+        return valeur;
     }
     
 }

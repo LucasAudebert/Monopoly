@@ -38,10 +38,9 @@ public class EnumerationsMonopoly {
         
         allerEnPrison,
         sortieDePrison,
-        reparation,
         deplacement,
         deplacementSpecial,
-        amende,
+        perte,
         gain,
         anniversaire
     }

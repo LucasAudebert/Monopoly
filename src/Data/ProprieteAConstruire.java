@@ -37,6 +37,10 @@ public class ProprieteAConstruire extends Propriete{
     public int getLoyer() {
         return loyers.get(nbMaisons);
     }
+
+    public int getNbMaisons() {
+        return nbMaisons;
+    }
     
     /**
      *

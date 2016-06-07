@@ -5,7 +5,9 @@
  */
 package Data.Cartes;
 
+import Data.EnumerationsMonopoly;
 import Data.Joueur;
+import Data.ProprieteAConstruire;
 
 /**
  *
@@ -13,18 +15,27 @@ import Data.Joueur;
  */
 public class CarteReparation extends Carte {
     
-    private int valReprationMaison;
-    private int valReprationHotel;    
+    private int valReparationMaison;
+    private int valReparationHotel;    
 
-    public CarteReparation( String libelle, int valReprationMaison, int valReprationHotel) {
+    public CarteReparation( String libelle, int valReparationMaison, int valReparationHotel) {
         super(libelle);
-        this.valReprationMaison = valReprationMaison;
-        this.valReprationHotel = valReprationHotel;
+        this.valReparationMaison = valReparationMaison;
+        this.valReparationHotel = valReparationHotel;
     }
     
     @Override
     public ResultatCarte Action(Joueur j) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int taxe = 0;
+        for(ProprieteAConstruire p : j.getProprieteAConstruires()) {
+            if (p.getNbMaisons()==5) {
+                taxe =+ valReparationHotel;
+            } else {
+                taxe =+ p.getNbMaisons()*valReparationMaison;
+            }
+        }
+        j.payer(taxe);
+        return new ResultatCarte(super.getLibelle(),EnumerationsMonopoly.TYPE_RESULTAT_CARTE.perte,taxe);
     }
     
 }
