@@ -89,7 +89,7 @@ public class Controleur {
                 ArrayList<String[]> data = readDataFile(filename, ",");
                 for(int i=0; i<data.size(); ++i){
                     String caseType = data.get(i)[0];
-                    Carte carte;
+                    Carte carte = null;
                     if(caseType.compareTo("D") == 0){
                         carte = new CarteDeplacement(data.get(i)[2], Integer.parseInt(data.get(i)[3]));
                     }else if(caseType.compareTo("SP") == 0){
@@ -99,9 +99,13 @@ public class Controleur {
                     }else if(caseType.compareTo("DD") == 0){
                         carte = new CarteDeplacementSpecial(data.get(i)[2], Integer.parseInt(data.get(i)[3]));
                     }else if(caseType.compareTo("GG") == 0){
+                        carte = new CarteGain(data.get(i)[2], Integer.parseInt(data.get(i)[3]));
                     }else if(caseType.compareTo("A") == 0){
+                        carte = new CarteAmende(data.get(i)[2], Integer.parseInt(data.get(i)[3]));
                     }else if(caseType.compareTo("HB") == 0){
+                        carte = new CarteAnniversaire(data.get(i)[2], Integer.parseInt(data.get(i)[3]));
                     }else if(caseType.compareTo("AP") == 0){
+                        carte = new CarteAllerEnPrison(data.get(i)[i]);
                     }else{
                         System.err.println("[creerCartes()] : Invalid Data type");
                     }
