@@ -5,6 +5,7 @@
  */
 package Data.Cartes;
 
+import Data.EnumerationsMonopoly;
 import Data.Joueur;
 
 /**
@@ -22,7 +23,7 @@ public class CarteDeplacement extends Carte {
 
     @Override
     public ResultatCarte Action(Joueur j) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new ResultatCarte(super.getLibelle(), EnumerationsMonopoly.TYPE_RESULTAT_CARTE.deplacement, numeroCarreau);
     }
     
 }

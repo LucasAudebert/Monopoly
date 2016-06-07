@@ -44,5 +44,5 @@ public class EnumerationsMonopoly {
         gain,
         anniversaire
     }
-
+    
 }
