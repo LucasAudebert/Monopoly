@@ -1,5 +1,6 @@
 package Data;
 
+import Data.Cartes.Carte;
 import java.util.HashSet;
 
 /**
@@ -16,6 +17,7 @@ public class Joueur {
         private int[] derniereValeurDes;
         private int compteurDouble = 0 ;
         private int compteurEssaiPrison = 0;
+        private Carte carteSortieDePrison;
 
     /**
      *
@@ -28,6 +30,7 @@ public class Joueur {
             compagnies = new HashSet();
             gares = new HashSet();
             proprietesAConstruire = new HashSet();
+            carteSortieDePrison = null;
         }
         
     public String getNomJoueur() {
@@ -178,6 +181,14 @@ public class Joueur {
     
     public int getCompteurEssaiPrison() {
         return compteurEssaiPrison;
+    }
+
+    public void setCarteSortieDePrison(Carte carteSortieDePrison) {
+        this.carteSortieDePrison = carteSortieDePrison;
+    }
+    
+    public void reiniCarteSortieDePrison(){
+        carteSortieDePrison = null;
     }
     
 }

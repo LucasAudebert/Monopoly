@@ -31,6 +31,7 @@ public class Controleur {
         private void initPartie(){
             creerPlateau("src/data.txt");
             creerCartes("src/cartes.txt");
+            monopoly.melangerPiles();
         }
         
 	private void creerPlateau(String dataFilename){
@@ -63,8 +64,11 @@ public class Controleur {
 				else if(caseType.compareTo("AU") == 0){
                                         monopoly.addCarreau(new AutreCarreau(Integer.parseInt(data.get(i)[1]), data.get(i)[2]));
 				}
-                                else if(caseType.compareTo("CP") == 0){
+                                else if(caseType.compareTo("CH") == 0){
                                         monopoly.addCarreau(new CarreauPiocherCarteChance(Integer.parseInt(data.get(i)[1]), data.get(i)[2]));
+                                }
+                                else if(caseType.compareTo("CC") == 0){
+                                        monopoly.addCarreau(new CarreauPiocherCarteCDC(Integer.parseInt(data.get(i)[1]), data.get(i)[2]));    
                                 }
                                 else if(caseType.compareTo("PR") == 0){
                                         monopoly.addCarreau(new AllerEnPrison(Integer.parseInt(data.get(i)[1]), data.get(i)[2]));
@@ -112,9 +116,9 @@ public class Controleur {
                         System.err.println("[creerCartes()] : Invalid Data type");
                     }
                     if(data.get(i)[1].compareTo("Chance") == 0){
-                        monopoly.addCarteChance(carte);
+                        monopoly.getPileChance().addCarte(carte);
                     }else{
-                        monopoly.addCarteCommunaute(carte);
+                        monopoly.getPileCommunaute().addCarte(carte);
                     }
                 }
                 
@@ -191,6 +195,41 @@ public class Controleur {
             this.observateur = observateur;
         }
         
+        private void tirerEtJouerCarte(Carte carte, Joueur joueur, Pile pile){
+            ResultatCarte res = carte.Action(joueur);
+            switch(res.getTypeResultat()){
+                case allerEnPrison :
+                    allerPrison(joueur);
+                    break;
+                case sortieDePrison :
+                    joueur.setCarteSortieDePrison(carte);
+                    break;
+                case deplacement :
+                    joueur.setPositionCourante(monopoly.getNouvellePosition(res.getValeur(), joueur.getPositionCourante()));
+                    break;
+                case deplacementSpecial :
+                    joueur.setPositionCourante(monopoly.getCarreau(res.getValeur()));
+                    break;
+                case perte :
+                    joueur.payer(res.getValeur());
+                    break;
+                case gain :
+                    joueur.gagnerCash(res.getValeur());
+                    break;
+                case anniversaire :
+                    for(Joueur jTemp : monopoly.getJoueurs()){
+                        if(jTemp != joueur && !monopoly.getJoueursElimines().contains(jTemp)){
+                            jTemp.payer(res.getValeur());
+                            joueur.gagnerCash(res.getValeur());
+                        }
+                    }
+                    break;
+            }
+            if(res.getTypeResultat() != EnumerationsMonopoly.TYPE_RESULTAT_CARTE.sortieDePrison){
+                pile.reposerUneCarte(carte);
+            }
+        }
+        
         private void jouerCoup(Joueur joueur){           
             lancerDesAvancer(joueur);
                 //Liberation de prison si double
@@ -228,9 +267,11 @@ public class Controleur {
                         }
                     break;
                     case piocherUneCarteChance ://si le joueur tombe sur un carreau quelconque
-                        ihm.afficher("Chance");                        
+                        tirerEtJouerCarte(monopoly.getPileChance().tirerUneCarte(), joueur, monopoly.getPileChance());
+                        ihm.afficher("Chance");   
                     break;
                     case piocherUneCarteCDC ://si le joueur tombe sur un carreau quelconque
+                        tirerEtJouerCarte(monopoly.getPileCommunaute().tirerUneCarte(), joueur, monopoly.getPileCommunaute());
                         ihm.afficher("Caisse de comunauté");                        
                     break;                    
                     case allerEnPrison ://si le joueur tombe sur un carreau quelconque

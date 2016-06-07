@@ -1,6 +1,7 @@
 package Data;
 
 import Data.Cartes.Carte;
+import Data.Cartes.Pile;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -15,7 +16,7 @@ public class Monopoly {
         private ArrayList<Joueur> joueursElimines;
         private ArrayList<Carreau> carreaux; // HashMap ??!!!
         private HashSet<Joueur> prisonniers;
-        private ArrayList<Carte> cartesChance, cartesCommunaute;
+        private Pile pileChance, pileCommunaute;
         private HashMap<EnumerationsMonopoly.COULEUR_PROPRIETE, Groupe> groupes;
 
     
@@ -25,8 +26,8 @@ public class Monopoly {
             this.carreaux = new ArrayList<Carreau>();
             this.groupes = new HashMap<EnumerationsMonopoly.COULEUR_PROPRIETE, Groupe>();
             this.prisonniers = new HashSet();
-            this.cartesChance = new ArrayList<Carte>();
-            this.cartesCommunaute = new ArrayList<Carte>();
+            this.pileChance = new Pile();
+            this.pileCommunaute = new Pile();
         }
         
    
@@ -42,28 +43,12 @@ public class Monopoly {
             carreaux.add(carreau);
         }
     
-    public ArrayList getCartesChance() {
-        return cartesChance;
-        }
-        
-    public Carte getCarteChance(int index){
-        return cartesChance.get(index);
-        }
-        
-    public void addCarteChance(Carte carte){
-            cartesChance.add(carte);
+    public Pile getPileChance() {
+        return pileChance;
         }
     
-    public ArrayList getCartesCommunaute() {
-        return cartesCommunaute;
-        }
-        
-    public Carte getCarteCommunaute(int index){
-        return cartesCommunaute.get(index);
-        }
-        
-    public void addCarteCommunaute(Carte carte){
-            cartesChance.add(carte);
+    public Pile getPileCommunaute() {
+        return pileCommunaute;
         }
 
     public ArrayList<Joueur> getJoueurs() {
@@ -163,5 +148,10 @@ public class Monopoly {
             joueur.payer(pac.getPrixMaison());
             pac.addMaison();
         }
+    }
+    
+    public void melangerPiles(){
+        pileChance.melanger();
+        pileCommunaute.melanger();
     }
 }
