@@ -51,4 +51,8 @@ public class Pile {
         reposerUneCarte(c);
         return c;
     }
+    
+    public Carte getCarte(int i) {
+        return (Carte) cartes.get(i);
+    }
 }

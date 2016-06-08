@@ -18,6 +18,7 @@ public class Joueur {
         private int compteurDouble = 0 ;
         private int compteurEssaiPrison = 0;
         private Carte carteSortieDePrison;
+        private boolean piocheCarteDeplacement;
 
     /**
      *
@@ -131,7 +132,6 @@ public class Joueur {
 	}
         
     /**
-     *
      * @param prixC
      * @return vrai si le joueur peut payer le prixC (prix du carreau) sinon faux
      */
@@ -144,20 +144,18 @@ public class Joueur {
     }
     
     /**
-     *
      * @return vrai si le joueur a réalisé un double
      */
     public boolean desDouble(){
             return derniereValeurDes[0] == derniereValeurDes[1];
-        }
+    }
         
     /**
-     *
      * @return vrai si le joueur est éliminé (n'a plus d'argent)
      */
     public boolean estElimine(){
             return cash <= 0;
-        }
+    }
 
     public int getCompteurDouble() {
         return compteurDouble;
@@ -187,8 +185,29 @@ public class Joueur {
         this.carteSortieDePrison = carteSortieDePrison;
     }
     
-    public void reiniCarteSortieDePrison(){
-        carteSortieDePrison = null;
+    public boolean possedeCarteSortieDePriso() {
+        return carteSortieDePrison != null;
     }
     
+    public Carte utiliserCarteSortieDePrison(){
+        Carte c=carteSortieDePrison;
+        carteSortieDePrison = null;
+        return c;
+    }
+    
+    public void setPiocheCarteDeplacement(Boolean b) {
+        piocheCarteDeplacement = b; 
+    }
+    
+    public boolean aPiocherUneCarteDeplacement() {
+        return piocheCarteDeplacement;
+    }
+    
+    public boolean rejouer() {
+        if (piocheCarteDeplacement || desDouble()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

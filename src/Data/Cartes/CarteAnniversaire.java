@@ -23,7 +23,7 @@ public class CarteAnniversaire extends Carte {
 
     @Override
     public ResultatCarte action(Joueur j) {
-        return new ResultatCarte(super.getLibelle(), EnumerationsMonopoly.TYPE_RESULTAT_CARTE.perte, gain);
+        return new ResultatCarte(super.getLibelle(), EnumerationsMonopoly.TYPE_RESULTAT_CARTE.anniversaire, gain);
     }
     
 }
