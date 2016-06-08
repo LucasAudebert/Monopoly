@@ -12,7 +12,7 @@ import Data.Cartes.*;
 import Ui.IhmBoiteMessage;
 
 public class Controleur {
-        
+        private GuardedBlocks gardien;
         private Monopoly monopoly;
         private Ihm ihm;
         private Observateur observateur;
@@ -23,9 +23,10 @@ public class Controleur {
             initPartie();
         }
         
-        public Controleur(Observateur obs){
+        public Controleur(Observateur obs,GuardedBlocks gardien){
             monopoly = new Monopoly();
             this.observateur = obs;
+            this.gardien = gardien;
             initPartie();
         }
         
