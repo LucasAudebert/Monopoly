@@ -9,6 +9,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import Data.Cartes.*;
+import Ui.IhmBoiteMessage;
 
 public class Controleur {
         
@@ -288,7 +289,7 @@ public class Controleur {
         
         private void jouerCoup(Joueur joueur){
                 // Si le joueur a une carte prison et souhaite l'utiliser pour sortir de prison          
-            if (monopoly.estEnPrison(joueur) && joueur.possedeCarteSortieDePrison() && ihm.demandeUtiliserCarte()){
+            if (monopoly.estEnPrison(joueur) && joueur.possedeCarteSortieDePrison() && IhmBoiteMessage.afficherBoiteDialogue("Vous possèdez une carte 'Sortie de prison'\nSouhaitez-vous l'utilisez pour sortir de prison ?", 1)) {
                 sortirPrison(joueur);
             }     
             
