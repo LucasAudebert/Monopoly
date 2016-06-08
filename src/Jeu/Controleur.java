@@ -245,34 +245,8 @@ public class Controleur {
             }
         }
         
-        private void jouerCoup(Joueur joueur){
-            boolean desDouble;         
-            if (!joueur.aPiocherUneCarteDeplacement()) {
-                desDouble = lancerDesAvancer(joueur);
-            } else {
-                desDouble = false; // Pour empecher le joueur de rejouer s'il a fait un double avant
-                joueur.setPiocheCarteDeplacement(false);
-                joueur.setDerniereValeurDes(lancerDes()); // On lance quand même les dès au cas où le joueur tombe sur une case compagnie
-                joueur.reinitCompteurDouble(); // Le compteur de double est remis à zéro
-            }    
-                //Liberation de prison si double
-            if (monopoly.estEnPrison(joueur) && desDouble){
-                monopoly.removePrisonnier(joueur);
-                joueur.reinitCompteurEssaiPrison();
-            }
-                //Si joueur en prison et des non double et compteur < 3 => compteur++ et ne joue pas 
-            if(monopoly.estEnPrison(joueur) && joueur.getCompteurEssaiPrison() < 2 ){
-                joueur.incrementCompteurEssaiPrison();
-            }else{
-                if(joueur.getCompteurEssaiPrison() >= 2){
-                    ihm.afficher("Payer caution 50");
-                    joueur.payer(50);
-                    monopoly.removePrisonnier(joueur);
-                    joueur.reinitCompteurEssaiPrison();
-                }
-                Resultat resultat = joueur.getPositionCourante().action(joueur);
-                if(joueur.getCompteurDouble() != 3){
-                    switch(resultat.getTypeResultat()){
+        private void traiterResultatCarreau(Resultat resultat, Joueur joueur){
+            switch(resultat.getTypeResultat()){
                     case achat ://si le joueur peut acheter 
                         ihm.afficher("Vous étes tombé(e) sur la propriété libre " + resultat.getPropriete().getNom());
                         if(ihm.demandeAchat(resultat)){ //si le joueur veut acheter  
@@ -303,7 +277,37 @@ public class Controleur {
                     case neRienFaire : //si le joueur ne peut rien faire 
                         ihm.afficher("Rien faire");
                     break;   
-                    }
+                }
+        }
+        
+        private void jouerCoup(Joueur joueur){
+            boolean desDouble;         
+            if (!joueur.aPiocherUneCarteDeplacement()) {
+                desDouble = lancerDesAvancer(joueur);
+            } else {
+                desDouble = false; // Pour empecher le joueur de rejouer s'il a fait un double avant
+                joueur.setPiocheCarteDeplacement(false);
+                joueur.setDerniereValeurDes(lancerDes()); // On lance quand même les dès au cas où le joueur tombe sur une case compagnie
+                joueur.reinitCompteurDouble(); // Le compteur de double est remis à zéro
+            }    
+                //Liberation de prison si double
+            if (monopoly.estEnPrison(joueur) && desDouble){
+                monopoly.removePrisonnier(joueur);
+                joueur.reinitCompteurEssaiPrison();
+            }
+                //Si joueur en prison et des non double et compteur < 3 => compteur++ et ne joue pas 
+            if(monopoly.estEnPrison(joueur) && joueur.getCompteurEssaiPrison() < 2 ){
+                joueur.incrementCompteurEssaiPrison();
+            }else{
+                if(joueur.getCompteurEssaiPrison() >= 2){
+                    ihm.afficher("Payer caution 50");
+                    joueur.payer(50);
+                    monopoly.removePrisonnier(joueur);
+                    joueur.reinitCompteurEssaiPrison();
+                }
+                Resultat resultat = joueur.getPositionCourante().action(joueur);
+                if(joueur.getCompteurDouble() != 3){
+                    traiterResultatCarreau(resultat, joueur);
                     
                     if(joueur.rejouer() && !monopoly.isFinDePartie()){ //si le joueur fait un double/piocher une carte de deplacement et que ce n'est pas une fin de partie 
                         ihm.afficherInfosJoueur(joueur); // on affiche les infos du joueur
@@ -317,7 +321,7 @@ public class Controleur {
                     }
                     
                 }else{
-                    ihm.afficher(" Vous avez réalisé trois double vous allé en prison ! BATARD VA ");
+                    ihm.afficher(" Vous avez réalisé trois double vous allez en prison ! BATARD VA ");
                     allerPrison(joueur);
                 }
             } 
