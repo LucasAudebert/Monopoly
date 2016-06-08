@@ -168,4 +168,20 @@ public class Ihm {
         System.out.print("Entrer valeur dé : ");
         return Integer.parseInt(sc.nextLine());
     }
+
+    public boolean demandeUtiliserCarte() {
+        String rep;
+        boolean loop = true;
+        System.out.println("Vous possèdez une carte Sortir de Prison.");
+        do{
+            System.out.print("\033 Souhaitez Vous l'utiliser ? (y/n) : \033[32m");
+            rep = sc.nextLine();
+            if(rep.equalsIgnoreCase("n") || rep.equalsIgnoreCase("y")){
+                loop = false;
+            }else{
+                System.out.println("\033[31mMauvaise saisie. \033[31m"); 
+            }
+        }while(loop);
+        return rep.equalsIgnoreCase("y");
+    }
 }

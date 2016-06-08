@@ -185,7 +185,7 @@ public class Joueur {
         this.carteSortieDePrison = carteSortieDePrison;
     }
     
-    public boolean possedeCarteSortieDePriso() {
+    public boolean possedeCarteSortieDePrison() {
         return carteSortieDePrison != null;
     }
     
@@ -195,19 +195,16 @@ public class Joueur {
         return c;
     }
     
-    public void setPiocheCarteDeplacement(Boolean b) {
-        piocheCarteDeplacement = b; 
-    }
-    
-    public boolean aPiocherUneCarteDeplacement() {
-        return piocheCarteDeplacement;
+    public void aPiocherUneCarteDeplacement() {
+        piocheCarteDeplacement = true;
     }
     
     public boolean rejouer() {
-        if (piocheCarteDeplacement || desDouble()) {
-            return true;
-        } else {
+        if (piocheCarteDeplacement || !desDouble()) {
+            piocheCarteDeplacement = false;      
             return false;
+        } else {
+            return true;
         }
     }
 }

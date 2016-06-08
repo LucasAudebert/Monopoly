@@ -22,7 +22,7 @@ public class CarteDeplacementSpecial extends CarteDeplacement {
     @Override
     public ResultatCarte action(Joueur j) {
         if (super.getNumeroCarreau() < 0) {
-            super.setNumeroCarreau(j.getPositionCourante().getNumero()-1 + super.getNumeroCarreau());
+            super.setNumeroCarreau(j.getPositionCourante().getNumero() + super.getNumeroCarreau());
         }
         return new ResultatCarte(super.getLibelle(), EnumerationsMonopoly.TYPE_RESULTAT_CARTE.deplacementSpecial, super.getNumeroCarreau());
     }
