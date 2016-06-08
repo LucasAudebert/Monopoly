@@ -98,7 +98,12 @@ public class IhmTroisPointZero extends JFrame implements Observateur {
                     jopVerification.showMessageDialog(null,
                             "Les joueurs sont :  "+listeNom ,
                             "Etapes 3 - Verification des noms" ,
-                            JOptionPane.INFORMATION_MESSAGE);                    
+                            JOptionPane.INFORMATION_MESSAGE);     
+                   if(nomJs.size() != 0){
+                       demarrerPartie.setEnabled(true);
+                    
+                }
+                    
                 }
             }
             @Override
@@ -110,13 +115,10 @@ public class IhmTroisPointZero extends JFrame implements Observateur {
             @Override
             public void mouseExited(MouseEvent e) {}           
         });
-        demarrerPartie.addMouseListener(new MouseListener(
-        ) {
+        demarrerPartie.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if(nomJs != null){
-                    controleur.inscrireJoueurs(nomJs);
-                    IhmPlateau plateau = new IhmPlateau(controleur);
+                if(nomJs.size() != 0){
                     
                 }
                 
@@ -162,9 +164,6 @@ public class IhmTroisPointZero extends JFrame implements Observateur {
         JPanel logo = new JPanel();
         JLabel image = new JLabel( new ImageIcon( "src\\baniere.png"));
         logo.add(image);
-        
-        
-        
   
         
         inscrireJoueur = new JButton("Inscrire Joueur");   
@@ -173,8 +172,9 @@ public class IhmTroisPointZero extends JFrame implements Observateur {
         
         
         
-        demarrerPartie = new JButton("Demarrer Partie");  
+        demarrerPartie = new JButton("Demarrer Partie"); 
         demarrerPartie.setMaximumSize(new Dimension(200,40));
+        demarrerPartie.setEnabled(false);
         demarrerPartie.setAlignmentX(center.CENTER_ALIGNMENT);
         
         quitter = new JButton("Quitter");         

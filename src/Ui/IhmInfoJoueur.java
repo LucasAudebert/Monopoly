@@ -13,6 +13,7 @@ import Data.Joueur;
 import Data.ProprieteAConstruire;
 import java.awt.Color;
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -31,6 +32,7 @@ public class IhmInfoJoueur extends JPanel {
     }
     public void initFenetre(){
          this.setBorder(BorderFactory.createLineBorder(Color.black));
+         this.setLayout(new BoxLayout(this,BoxLayout.PAGE_AXIS));
         
         JLabel nom = new JLabel("Joueur : "+joueur.getNomJoueur());
         this.add(nom);
@@ -46,7 +48,7 @@ public class IhmInfoJoueur extends JPanel {
         this.add(compagnie);
         
         if(joueur.getCompagnies().isEmpty()){
-           JLabel pasCompagnie = new JLabel("Pas de compagnies");
+           JLabel pasCompagnie = new JLabel("    Pas de compagnies");
            this.add(pasCompagnie);
             
         }else{
@@ -59,7 +61,7 @@ public class IhmInfoJoueur extends JPanel {
        JLabel gare = new JLabel("Gares : ");
        this.add(gare);
         if(joueur.getGares().isEmpty()){
-            JLabel pasGare = new JLabel("Pas de gares");
+            JLabel pasGare = new JLabel("    Pas de gares");
             this.add(pasGare);
         }else{
              for(Gare gTemp : joueur.getGares()){
@@ -70,7 +72,7 @@ public class IhmInfoJoueur extends JPanel {
         JLabel propAConstruire = new JLabel("Proprieté à construire : ");
         this.add(propAConstruire);
         if(joueur.getGares().isEmpty()){
-            JLabel pasPropaConstruire = new JLabel("Pas de proprieté à construire");
+            JLabel pasPropaConstruire = new JLabel("    Pas de proprieté à construire");
             this.add(pasPropaConstruire);
         }else{
             for(ProprieteAConstruire pTemp : joueur.getProprieteAConstruires() ){
