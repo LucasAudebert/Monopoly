@@ -21,6 +21,14 @@ public class CarteDeplacement extends Carte {
         this.numeroCarreau = numeroCarreau;
     }
 
+    public int getNumeroCarreau() {
+        return numeroCarreau;
+    }
+
+    public void setNumeroCarreau(int numeroCarreau) {
+        this.numeroCarreau = numeroCarreau;
+    }
+
     @Override
     public ResultatCarte action(Joueur j) {
         return new ResultatCarte(super.getLibelle(), EnumerationsMonopoly.TYPE_RESULTAT_CARTE.deplacement, numeroCarreau);

@@ -13,21 +13,18 @@ import Data.Resultat;
  *
  * @author audeberl
  */
-public class CarteDeplacementSpecial extends Carte {
+public class CarteDeplacementSpecial extends CarteDeplacement {
 
-    private int numeroCarreau;
-    
     public CarteDeplacementSpecial(String libelle, int numeroCarreau) {
-        super(libelle);
-        this.numeroCarreau = numeroCarreau ;
+        super(libelle, numeroCarreau);
     }
 
     @Override
     public ResultatCarte action(Joueur j) {
-        if (numeroCarreau < 0) {
-            numeroCarreau = j.getPositionCourante().getNumero() + numeroCarreau - 1;
+        if (super.getNumeroCarreau() < 0) {
+            super.setNumeroCarreau(j.getPositionCourante().getNumero()-1 + super.getNumeroCarreau());
         }
-        return new ResultatCarte(super.getLibelle(), EnumerationsMonopoly.TYPE_RESULTAT_CARTE.deplacementSpecial, numeroCarreau);
+        return new ResultatCarte(super.getLibelle(), EnumerationsMonopoly.TYPE_RESULTAT_CARTE.deplacementSpecial, super.getNumeroCarreau());
     }
     
 }
