@@ -31,8 +31,9 @@ public class IhmInfoJoueur extends JPanel {
         
     }
     public void initFenetre(){
-         this.setBorder(BorderFactory.createLineBorder(Color.black));
-         this.setLayout(new BoxLayout(this,BoxLayout.PAGE_AXIS));
+        
+        this.setBorder(BorderFactory.createLineBorder(Color.black));
+        this.setLayout(new BoxLayout(this,BoxLayout.PAGE_AXIS));
         
         JLabel nom = new JLabel("Joueur : "+joueur.getNomJoueur());
         this.add(nom);
@@ -53,7 +54,7 @@ public class IhmInfoJoueur extends JPanel {
             
         }else{
             for(Compagnie cTemp : joueur.getCompagnies()){
-          
+                this.add(new JLabel("   "+cTemp.getNom()));          
             }
         }
         
@@ -65,7 +66,7 @@ public class IhmInfoJoueur extends JPanel {
             this.add(pasGare);
         }else{
              for(Gare gTemp : joueur.getGares()){
-            
+                 this.add(new JLabel("  "+gTemp.getNom()));
             }
         }
        
@@ -76,7 +77,7 @@ public class IhmInfoJoueur extends JPanel {
             this.add(pasPropaConstruire);
         }else{
             for(ProprieteAConstruire pTemp : joueur.getProprieteAConstruires() ){
-                    
+                    this.add(new JLabel("  "+pTemp.getNom()));
             }
         }
        

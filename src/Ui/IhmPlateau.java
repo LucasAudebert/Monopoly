@@ -8,18 +8,24 @@ package Ui;
 import Data.Joueur;
 import Jeu.Controleur;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.HashMap;
 import java.util.Iterator;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
 
 import javax.swing.BoxLayout;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 
 /**
  *
@@ -28,6 +34,9 @@ import javax.swing.JPanel;
 public class IhmPlateau extends JFrame implements Observateur{
     private Controleur controleur;
     private HashMap<Joueur,JPanel> joueurPanels;
+    private HashMap<String,JButton> boutonsPanels;
+    
+    
     
     public IhmPlateau(Controleur controleur){
         this.controleur = controleur;
@@ -39,52 +48,84 @@ public class IhmPlateau extends JFrame implements Observateur{
      private void ititIhmPlateau() {
         
         this.setLayout(new BorderLayout());
-        JPanel panJoueurs = new JPanel();
-        panJoueurs.setLayout(new BoxLayout(panJoueurs,BoxLayout.PAGE_AXIS));
-        System.out.println("test1");
+        
+        
+        JPanel panJoueurs = new JPanel();     
+        
+        
+        
+        if(controleur.getJoueurs().size() == 2){
+             panJoueurs.setLayout(new GridLayout(1,2));
+        }else if(controleur.getJoueurs().size()<=4){
+            panJoueurs.setLayout(new GridLayout(2,2));
+        }else if(controleur.getJoueurs().size()>4){
+            panJoueurs.setLayout(new GridLayout(3,2));
+        }
+            
        
-         System.out.println(controleur.getJoueurs().size());
+           
+        
+        JPanel panTour = new JPanel();
+        IhmJoueurActuelle joueurActuelle = new IhmJoueurActuelle((Joueur)controleur.getJoueurs().get(1));
+        
+        
+        panTour.setLayout(new BoxLayout(panTour,BoxLayout.Y_AXIS));
+        panTour.add(joueurActuelle);
+        JButton jouer = new JButton(" Jouer ");
+        jouer.setMaximumSize(new Dimension(200,40));
+        JButton construire = new JButton(" Construire ");
+        construire.setMaximumSize(new Dimension(200,40));
+        JButton abandonner = new JButton(" Abandonner ");
+        abandonner.setMaximumSize(new Dimension(200,40));
+        JButton quitterJeu = new JButton(" Arrêter la partie ");
+        quitterJeu.setMaximumSize(new Dimension(200,40));
+        
+        panTour.add(jouer);        
+        panTour.add(construire);        
+        panTour.add(abandonner);        
+        panTour.add(quitterJeu);
+        
+        panTour.add(new JLabel("Action Possible : "));
+        
+       /*JButton jouer = new JButton(" Jouer ");
+        jouer.setMaximumSize(new Dimension(200,40));
+        JButton construire = new JButton(" Construire ");
+        construire.setMaximumSize(new Dimension(200,40));
+        JButton abandonner = new JButton(" Abandonner ");
+        abandonner.setMaximumSize(new Dimension(200,40));
+        JButton quitterJeu = new JButton(" Arrêter la partie ");
+        quitterJeu.setMaximumSize(new Dimension(200,40));
+        
+        panTour.add(jouer);        
+        panTour.add(construire);        
+        panTour.add(abandonner);        
+        panTour.add(quitterJeu);*/
+       
+       
+       
+       
         for(Object jTemp : controleur.getJoueurs()){
             Joueur j = (Joueur)jTemp;
-            IhmInfoJoueur ihmJoueur = new IhmInfoJoueur(j);            
-            panJoueurs.add(ihmJoueur);       
+            IhmInfoJoueur ihmJoueur = new IhmInfoJoueur(j);                  
+            panJoueurs.add(ihmJoueur);  
             joueurPanels.put(j,ihmJoueur);
-
         }
        
-                
-        JLabel panelJeu = new JLabel( new ImageIcon("src\\Image_Plateau.jpg"));
+        Plateau plateau = new Plateau();
+        
         this.add(panJoueurs,BorderLayout.WEST);
-        this.add(panelJeu,BorderLayout.CENTER);
+        this.add(plateau,BorderLayout.CENTER);
+        this.add(panTour,BorderLayout.EAST);
         afficher();
         
-        panelJeu.addMouseListener(new MouseListener(
-        ) {
-            @Override
-            public void mouseClicked(MouseEvent e) {}
-
-            @Override
-            public void mousePressed(MouseEvent e) {}
-
-            @Override
-            public void mouseReleased(MouseEvent e) {}
-
-            @Override
-            public void mouseEntered(MouseEvent e) {}
-
-            @Override
-            public void mouseExited(MouseEvent e) {}
-        });
+        
        
     }
     public void afficher(){
-        this.setSize(1200,1200);
+        this.setSize(1920,1080);
          this.setVisible(true); 
          setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);       
      }
-     
-   
-     
     @Override
     public Message notifier(Message message) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
