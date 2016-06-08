@@ -221,7 +221,9 @@ public class Controleur {
                     System.out.println("deplacement Special debut");                      
                     joueur.setPositionCourante(monopoly.getCarreau(res.getValeur()+1));
                     joueur.setPiocheCarteDeplacement(true);
-                    System.out.println("deplacement Special fin");                     
+                    System.out.println("deplacement Special fin");
+                    Resultat resDeplacement = joueur.getPositionCourante().action(joueur);
+                    traiterResultatCarreau(resDeplacement, joueur);
                     break;
                 case perte :
                     break;
@@ -276,8 +278,13 @@ public class Controleur {
                     break;            
                     case neRienFaire : //si le joueur ne peut rien faire 
                         ihm.afficher("Rien faire");
-                    break;   
+                    break;
+                                      
                 }
+                if(joueur.estElimine()){//si le  joueur est eliminer 
+                    monopoly.eliminerJoueur(joueur); // on elimine le joueur
+                    ihm.afficher(joueur.getNomJoueur() + " est ruiné(e)"); // on affiche que le joueur est éliminé
+                }             
         }
         
         private void jouerCoup(Joueur joueur){
@@ -313,11 +320,6 @@ public class Controleur {
                         ihm.afficherInfosJoueur(joueur); // on affiche les infos du joueur
                         ihm.attendreBouton("\033[32m" + joueur.getNomJoueur() + " appuyez sur Entrer pour rejouer.\033[32m");
                         jouerCoup(joueur); // on fait rejouer le joueur 
-                    }
-                    
-                    if(joueur.estElimine()){//si le  joueur est eliminer 
-                            monopoly.eliminerJoueur(joueur); // on elimine le joueur
-                            ihm.afficher(joueur.getNomJoueur() + " est ruiné(e)"); // on affiche que le joueur est éliminé
                     }
                     
                 }else{

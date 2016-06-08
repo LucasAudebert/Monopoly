@@ -21,10 +21,10 @@ public class ResultatCarte {
         this.libelle = libelle;
     }
 
-    public ResultatCarte(String libelle, EnumerationsMonopoly.TYPE_RESULTAT_CARTE typeResultat, int taxe) {
+    public ResultatCarte(String libelle, EnumerationsMonopoly.TYPE_RESULTAT_CARTE typeResultat, int valeur) {
         this.typeResultat = typeResultat;
         this.libelle = libelle;
-        this.valeur = taxe;
+        this.valeur = valeur;
     }
 
     public EnumerationsMonopoly.TYPE_RESULTAT_CARTE getTypeResultat() {
