@@ -11,7 +11,9 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.HashMap;
 import java.util.Iterator;
+
 import javax.swing.BoxLayout;
 
 import javax.swing.ImageIcon;
@@ -25,8 +27,11 @@ import javax.swing.JPanel;
  */
 public class IhmPlateau extends JFrame implements Observateur{
     private Controleur controleur;
+    private HashMap<Joueur,JPanel> joueurPanels;
+    
     public IhmPlateau(Controleur controleur){
         this.controleur = controleur;
+        joueurPanels = new HashMap<>();
         ititIhmPlateau();
         
         
@@ -36,24 +41,27 @@ public class IhmPlateau extends JFrame implements Observateur{
         this.setLayout(new BorderLayout());
         JPanel panJoueurs = new JPanel();
         panJoueurs.setLayout(new BoxLayout(panJoueurs,BoxLayout.PAGE_AXIS));
+        System.out.println("test1");
        
-        for(Object jtemp : controleur.getJoueurs()){
-            IhmInfoJoueur ihmJoueur = new IhmInfoJoueur((Joueur) jtemp);
-            panJoueurs.add(ihmJoueur);
+         System.out.println(controleur.getJoueurs().size());
+        for(Object jTemp : controleur.getJoueurs()){
+            Joueur j = (Joueur)jTemp;
+            IhmInfoJoueur ihmJoueur = new IhmInfoJoueur(j);            
+            panJoueurs.add(ihmJoueur);       
+            joueurPanels.put(j,ihmJoueur);
+
         }
+       
                 
         JLabel panelJeu = new JLabel( new ImageIcon("src\\Image_Plateau.jpg"));
         this.add(panJoueurs,BorderLayout.WEST);
         this.add(panelJeu,BorderLayout.CENTER);
         afficher();
+        
         panelJeu.addMouseListener(new MouseListener(
         ) {
             @Override
-            public void mouseClicked(MouseEvent e) {
-                int x = e.getX();
-                int y = e.getY();
-               Dimension dim =  panelJeu.getSize();
-            }
+            public void mouseClicked(MouseEvent e) {}
 
             @Override
             public void mousePressed(MouseEvent e) {}
@@ -72,8 +80,7 @@ public class IhmPlateau extends JFrame implements Observateur{
     public void afficher(){
         this.setSize(1200,1200);
          this.setVisible(true); 
-         setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
-       
+         setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);       
      }
      
    

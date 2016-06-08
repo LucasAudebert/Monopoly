@@ -74,7 +74,7 @@ public class IhmTroisPointZero extends JFrame implements Observateur {
                                 JOptionPane.WARNING_MESSAGE);                       
                                 i--;
                         }else{
-                            if(!(nomJs.contains(nom) || nom.equals(""))){//|| nom.equals("")s
+                            if(!(nomJs.contains(nom) || nom.equals(""))){
                               nomJs.add(nom);
                             }else{
                                 jopErreurSaisie.showMessageDialog(null,
@@ -100,7 +100,8 @@ public class IhmTroisPointZero extends JFrame implements Observateur {
                             "Etapes 3 - Verification des noms" ,
                             JOptionPane.INFORMATION_MESSAGE);     
                    if(nomJs.size() != 0){
-                       demarrerPartie.setEnabled(true);
+                    controleur.inscrireJoueurs(nomJs);
+                    demarrerPartie.setEnabled(true);
                     
                 }
                     
@@ -119,6 +120,7 @@ public class IhmTroisPointZero extends JFrame implements Observateur {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if(nomJs.size() != 0){
+                    IhmPlateau ihmPlateau = new IhmPlateau(controleur);
                     
                 }
                 
@@ -162,7 +164,7 @@ public class IhmTroisPointZero extends JFrame implements Observateur {
        
         
         JPanel logo = new JPanel();
-        JLabel image = new JLabel( new ImageIcon( "src\\baniere.png"));
+        JLabel image = new JLabel( new ImageIcon( "src/baniere.png"));
         logo.add(image);
   
         
