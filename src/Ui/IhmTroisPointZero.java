@@ -83,12 +83,8 @@ public class IhmTroisPointZero extends JFrame {
                                 JOptionPane.WARNING_MESSAGE);                       
                                 i--;
                             }     
-                        }
-                        
-                                                   
+                        }                              
                     }
-                        
-                    
                     
                     JOptionPane jopVerification = new JOptionPane();
                     String listeNom = " ";
@@ -102,9 +98,7 @@ public class IhmTroisPointZero extends JFrame {
                    if(nomJs.size() != 0){
                     controleur.inscrireJoueurs(nomJs);
                     demarrerPartie.setEnabled(true);
-                    
-                }
-                    
+                    }
                 }
             }
             @Override

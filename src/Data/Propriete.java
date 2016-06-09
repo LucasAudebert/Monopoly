@@ -71,7 +71,8 @@ public abstract class Propriete extends Carreau {
             return achatPossible(joueur);
         }else if (this.getProprietaire() != joueur){
             return new Resultat(this, joueur, TYPE_RESULTAT.loyer, calculLoyer(joueur));
-        }else{// Si le joueur est proprietaire de la propriete ou que la case ne peut pas être achetée
+        }else {// Si le joueur est proprietaire
+            System.out.print("Propriètaire");
             return new Resultat(this, joueur, TYPE_RESULTAT.neRienFaire);
         }
     }

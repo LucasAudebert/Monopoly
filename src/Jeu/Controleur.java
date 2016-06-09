@@ -13,7 +13,6 @@ import Ui.IhmBoiteMessage;
 import Ui.Message;
 
 public class Controleur {
-        private GuardedBlocks gardien;
         private Monopoly monopoly;
         private Ihm ihm;
         private Observateur observateur;
@@ -27,7 +26,6 @@ public class Controleur {
         public Controleur(Observateur obs){
             monopoly = new Monopoly();
             this.observateur = obs;
-            this.gardien = new GuardedBlocks();
             initPartie();
         }
         
@@ -38,7 +36,7 @@ public class Controleur {
         private void initPartie(){
             creerPlateau("src/data.txt");
             creerCartes("src/cartes.txt");
-            //monopoly.melangerPiles();
+            monopoly.melangerPiles();
         }
         
 	private void creerPlateau(String dataFilename){
@@ -133,9 +131,7 @@ public class Controleur {
                 System.err.println("[creerCartes()] : File is not found!");
             }catch(IOException e){
                 System.err.println("[creerCartes()] : Error while reading file!");
-            }
-            
-            
+            }     
         }
         
 	private ArrayList<String[]> readDataFile(String filename, String token) throws FileNotFoundException, IOException
@@ -151,16 +147,13 @@ public class Controleur {
 		
 		return data;
 	}
-        
-        
+           
         public void inscrireJoueurs(ArrayList<String> nomJoueurs){                                             
                 for(String nomTemp : nomJoueurs){
                     monopoly.addJoueur(new Joueur(nomTemp, monopoly.getCarreau(0)));
                 }
             }
-        /**
-         *
-         */
+
         public void inscrireJoueurs(){                              
                 ArrayList<String> nomJoueurs = ihm.saisirNouveauJoueur();
                 for(String nomTemp : nomJoueurs){
@@ -200,139 +193,103 @@ public class Controleur {
                 joueur.reinitCompteurDouble();
             }
             joueur.setDerniereValeurDes(des);
-            if(!monopoly.estEnPrison(joueur) || des[0]==des[1])
+            if(!monopoly.estEnPrison(joueur) || des[0]==des[1] || joueur.getCompteurEssaiPrison() >= 2 )
                 joueur.setPositionCourante(monopoly.getNouvellePosition(des[0]+des[1], joueur.getPositionCourante()));
             if(joueur.getDerniereValeurDes() >= joueur.getPositionCourante().getNumero()){
                 joueur.gagnerCash(200);
                 ihm.afficher("Vous êtes passé par la case départ (+200)");
             }
             
-            observateur.notifier(new Message(EnumerationsMonopoly.TYPE_MESSAGE.deplacement,joueur.getDerniereValeurDes() >= joueur.getPositionCourante().getNumero(),des[0]==des[1]));
+            observateur.notifier(new Message(EnumerationsMonopoly.TYPE_MESSAGE.deplacement,joueur.getDerniereValeurDes() > joueur.getPositionCourante().getNumero(),des[0]==des[1]));
         }
         
         public void tirerEtJouerCarte(Carte carte, Joueur joueur, Pile pile){
             observateur.notifier( new Message(EnumerationsMonopoly.TYPE_MESSAGE.actionCarte, carte.action(joueur), carte, pile));
-//            System.out.println(res.getValeur());
-//            System.out.println(res.getLibelle());            
-//            switch(res.getTypeResultat()){
-//                case allerEnPrison :
-//                    allerPrison(joueur);
-//                    break;
-//                case sortieDePrison :
-//                    joueur.setCarteSortieDePrison(carte);
-//                    break;
-//                case deplacement :                      
-//                    if (joueur.getPositionCourante().getNumero() > res.getValeur()) {
-//                        joueur.gagnerCash(200);
-//                        ihm.afficher("Vous êtes passé par la case départ (+200)");      
-//                    }
-//                case deplacementSpecial :                 
-//                    joueur.setPositionCourante(monopoly.getCarreau(res.getValeur()-1));
-//                    joueur.aPiocherUneCarteDeplacement();
-//                    traiterActionCarreau( joueur);
-//                    break;
-//                case perte :
-//                    break;
-//                case gain :
-//                    break;
-//                case anniversaire :                 
-//                    for(Joueur jTemp : monopoly.getJoueurs()){                   
-//                        if(jTemp != joueur && !monopoly.getJoueursElimines().contains(jTemp)){
-//                            jTemp.payer(res.getValeur());
-//                            joueur.gagnerCash(res.getValeur());
-//                        }
-//                    }
-//                    break;
-//            }
-//            if(res.getTypeResultat() != EnumerationsMonopoly.TYPE_RESULTAT_CARTE.sortieDePrison){
-//                pile.reposerUneCarte(carte);
-//                System.out.println(pile.getCarte(14).getLibelle());                 
-//            }
         }
         
         public void traiterActionCarreau( Joueur joueur){           
             observateur.notifier(new Message(EnumerationsMonopoly.TYPE_MESSAGE.actionCarreau, joueur.getPositionCourante().action(joueur)));        
         }
         
-        public void jouerCoup(Joueur joueur){
-                // Si le joueur a une carte prison et souhaite l'utiliser pour sortir de prison          
-            if (monopoly.estEnPrison(joueur) && joueur.possedeCarteSortieDePrison() && IhmBoiteMessage.afficherBoiteDialogue("Vous possèdez une carte 'Sortie de prison'\nSouhaitez-vous l'utilisez pour sortir de prison ?", 1)) {
-                sortirPrison(joueur);
-            }     
-            
-                // On lance les dès et on déplace le joueur
-            boolean desDouble = false;
-            
-                //Liberation de prison si double
-            if (monopoly.estEnPrison(joueur) && desDouble){
-                sortirPrison(joueur);
-            }
-            
-                //Si joueur en prison et des non double et compteur < 3 => compteur++ et ne joue pas 
-            if(monopoly.estEnPrison(joueur) && joueur.getCompteurEssaiPrison() < 2 ){
-                joueur.incrementCompteurEssaiPrison();
-            }else{
-                if(joueur.getCompteurEssaiPrison() >= 2){
-                    ihm.afficher("Payer caution 50");
-                    joueur.payer(50);
-                    sortirPrison(joueur);
-                }
-                Resultat resultat = joueur.getPositionCourante().action(joueur);
-                if(joueur.getCompteurDouble() != 3){
-                    traiterActionCarreau(joueur);
-                    
-                    if(joueur.rejouer() && !monopoly.isFinDePartie()){ //si le joueur fait un double/piocher une carte de deplacement et que ce n'est pas une fin de partie 
-                        ihm.afficherInfosJoueur(joueur); // on affiche les infos du joueur
-                        ihm.attendreBouton("\033[32m" + joueur.getNomJoueur() + " appuyez sur Entrer pour rejouer.\033[32m");
-                        jouerCoup(joueur); // on fait rejouer le joueur 
-                    }
-                    
-                }else{
-                    ihm.afficher(" Vous avez réalisé trois double vous allez en prison ! BATARD VA ");
-                    allerPrison(joueur);
-                }
-            } 
-        }
+//        public void jouerCoup(Joueur joueur){
+//                // Si le joueur a une carte prison et souhaite l'utiliser pour sortir de prison          
+//            if (monopoly.estEnPrison(joueur) && joueur.possedeCarteSortieDePrison() && IhmBoiteMessage.afficherBoiteDialogue("Vous possèdez une carte 'Sortie de prison'\nSouhaitez-vous l'utilisez pour sortir de prison ?", 1)) {
+//                sortirPrison(joueur);
+//            }     
+//            
+//                // On lance les dès et on déplace le joueur
+//            boolean desDouble = false;
+//            
+//                //Liberation de prison si double
+//            if (monopoly.estEnPrison(joueur) && desDouble){
+//                sortirPrison(joueur);
+//            }
+//            
+//                //Si joueur en prison et des non double et compteur < 3 => compteur++ et ne joue pas 
+//            if(monopoly.estEnPrison(joueur) && joueur.getCompteurEssaiPrison() < 2 ){
+//                joueur.incrementCompteurEssaiPrison();
+//            }else{
+//                if(joueur.getCompteurEssaiPrison() >= 2){
+//                    ihm.afficher("Payer caution 50");
+//                    joueur.payer(50);
+//                    sortirPrison(joueur);
+//                }
+//                Resultat resultat = joueur.getPositionCourante().action(joueur);
+//                if(joueur.getCompteurDouble() != 3){
+//                    traiterActionCarreau(joueur);
+//                    
+//                    if(joueur.rejouer() && !monopoly.isFinDePartie()){ //si le joueur fait un double/piocher une carte de deplacement et que ce n'est pas une fin de partie 
+//                        ihm.afficherInfosJoueur(joueur); // on affiche les infos du joueur
+//                        ihm.attendreBouton("\033[32m" + joueur.getNomJoueur() + " appuyez sur Entrer pour rejouer.\033[32m");
+//                        jouerCoup(joueur); // on fait rejouer le joueur 
+//                    }
+//                    
+//                }else{
+//                    ihm.afficher(" Vous avez réalisé trois double vous allez en prison ! BATARD VA ");
+//                    allerPrison(joueur);
+//                }
+//            } 
+//        }
         
     /**
      *
      */
-    public void boucleDeJeu(){
-            int nbTours = 1;
-            boolean finPartieJoueur = false; //boolean de fin de partie decider par les joueur
-            while(!finPartieJoueur && !monopoly.isFinDePartie()){ // tant que finPartieJoueur false ET pas de vainqeur faire 
-                ihm.afficher("\033[34m------------- Tour " + nbTours + " -------------\033[34m");
-                for(Joueur jTemp : monopoly.getJoueurs()){// boucle sur tout les joueurs du monopoly
-                     if(!monopoly.getJoueursElimines().contains(jTemp)){// verifie que jTemp n'est pas éliminé
-                   
-                    finPartieJoueur = ihm.menuTourJoueur(jTemp); 
-                    if(finPartieJoueur){//si fin de partie décider par les joueurs arrêter de jouer 
-                        break;
-                    }
-                    jouerCoup(jTemp);
-                    if(monopoly.isFinDePartie()){ // si fin de partie car vainqueur arrêter de joueur
-                        break;
-                    }
-                    ihm.afficherInfosJoueur(jTemp); //affiche l'etat du joueur qui vient de jouer
-               
-                
-                  }
-                }
-                
-                if(!finPartieJoueur){ 
-                    ihm.attendreBouton("Appuyer sur Entrer pour voir le récapitulatif du tour");
-                    ihm.afficherFinDeTour(monopoly.getJoueurs()); // affiche l'etat de chaque joueur à la fin du tour
-                }
-                nbTours++; // increment de 1  le nbr tour à chauqe fin de tour 
-            }
-            ihm.afficher("\033[31m----------- Fin de partie -----------\033[31m");
-            
-            if(monopoly.isFinDePartie()){  //Si fin de partie car il y a un gagnant               
-                ihm.afficherGagnant(monopoly.getJoueurs()); // affiche le gagnant 
-            }else if(finPartieJoueur){//si fin de partie décider par les joueur
-                ihm.afficherFinDePartie(monopoly.getJoueurs());// afficher l'etat des joueur à ce moment 
-            }
-        }
+//    public void boucleDeJeu(){
+//            int nbTours = 1;
+//            boolean finPartieJoueur = false; //boolean de fin de partie decider par les joueur
+//            while(!finPartieJoueur && !monopoly.isFinDePartie()){ // tant que finPartieJoueur false ET pas de vainqeur faire 
+//                ihm.afficher("\033[34m------------- Tour " + nbTours + " -------------\033[34m");
+//                for(Joueur jTemp : monopoly.getJoueurs()){// boucle sur tout les joueurs du monopoly
+//                     if(!monopoly.getJoueursElimines().contains(jTemp)){// verifie que jTemp n'est pas éliminé
+//                   
+//                    finPartieJoueur = ihm.menuTourJoueur(jTemp); 
+//                    if(finPartieJoueur){//si fin de partie décider par les joueurs arrêter de jouer 
+//                        break;
+//                    }
+//                    jouerCoup(jTemp);
+//                    if(monopoly.isFinDePartie()){ // si fin de partie car vainqueur arrêter de joueur
+//                        break;
+//                    }
+//                    ihm.afficherInfosJoueur(jTemp); //affiche l'etat du joueur qui vient de jouer
+//               
+//                
+//                  }
+//                }
+//                
+//                if(!finPartieJoueur){ 
+//                    ihm.attendreBouton("Appuyer sur Entrer pour voir le récapitulatif du tour");
+//                    ihm.afficherFinDeTour(monopoly.getJoueurs()); // affiche l'etat de chaque joueur à la fin du tour
+//                }
+//                nbTours++; // increment de 1  le nbr tour à chauqe fin de tour 
+//            }
+//            ihm.afficher("\033[31m----------- Fin de partie -----------\033[31m");
+//            
+//            if(monopoly.isFinDePartie()){  //Si fin de partie car il y a un gagnant               
+//                ihm.afficherGagnant(monopoly.getJoueurs()); // affiche le gagnant 
+//            }else if(finPartieJoueur){//si fin de partie décider par les joueur
+//                ihm.afficherFinDePartie(monopoly.getJoueurs());// afficher l'etat des joueur à ce moment 
+//            }
+//        }
 
     public boolean estEnPrison(Joueur joueurCourant) {        
         return monopoly.estEnPrison(joueurCourant);
@@ -347,12 +304,8 @@ public class Controleur {
                 return monopoly.getJoueurs().get(0);
             }else{
                 return monopoly.getJoueurs().get(i+1);
-
-            }
-            
+            }            
         }
-        
-    
 
     public Carte piocherCarteChance() {
         return monopoly.getPileChance().tirerUneCarte();       
@@ -384,6 +337,10 @@ public class Controleur {
 
     public boolean estElimine(Joueur j) {
         return monopoly.getJoueursElimines().contains(j);
+    }
+
+    public Joueur getDernierJoueur() {
+        return monopoly.getJoueurs().get(0);
     }
 }
 

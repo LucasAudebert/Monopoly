@@ -30,6 +30,9 @@ public class Gare extends Propriete {
      */
     @Override
     public int calculLoyer(Joueur joueur) {
+        System.out.println(super.getProprietaire().getNbGares());
+        System.out.println(getLoyer());
+        System.out.println(super.getProprietaire().getNbGares()*getLoyer());        
         return super.getProprietaire().getNbGares() * getLoyer();
     }	
 

@@ -27,6 +27,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 
@@ -45,14 +46,14 @@ public class IhmPlateau extends JFrame implements Observateur{
     private JButton quitter;
     private IhmJoueurActuelle joueurActuelle;
     private Joueur joueurCourant;
+    private boolean rejouer;
     
     
     public IhmPlateau(Controleur controleur){
         this.controleur = controleur;
         controleur.setObservateur(this);
         panelJoueurs = new ArrayList<>();
-        joueurCourant = controleur.getJoueurs().get(0);
-        
+        joueurCourant = controleur.getJoueurs().get(0); 
         
         ititIhmPlateau();
         
@@ -61,11 +62,8 @@ public class IhmPlateau extends JFrame implements Observateur{
      private void ititIhmPlateau() {
         
         this.setLayout(new BorderLayout());
-        
-        
+            
         JPanel panelJoueurs = new JPanel();     
-        
-        
         
         if(controleur.getJoueurs().size() == 2){
              panelJoueurs.setLayout(new GridLayout(1,2));
@@ -74,25 +72,23 @@ public class IhmPlateau extends JFrame implements Observateur{
         }else if(controleur.getJoueurs().size()>4){
             panelJoueurs.setLayout(new GridLayout(3,2));
         }
-            
-       
-           
         
         panTour = new JPanel();
         joueurActuelle = new IhmJoueurActuelle(joueurCourant);
         
-        
         panTour.setLayout(new BoxLayout(panTour,BoxLayout.Y_AXIS));
         panTour.add(joueurActuelle);
         
-        lancerDes = new JButton(" Lancer Dès ");
+        lancerDes = new JButton("Lancer Dès");
         lancerDes.setMaximumSize(new Dimension(200,40));
         lancerDes.addMouseListener(new MouseListener(){
             @Override
             public void mouseClicked(MouseEvent e) {
+                construire.setEnabled(false);               
                 lancerDes.setEnabled(false);
+                tourSuivant.setEnabled(true);                 
                 if (controleur.estEnPrison(joueurCourant) && joueurCourant.possedeCarteSortieDePrison() ) {
-                    if ( IhmBoiteMessage.afficherBoiteDialogue("Vous possèdez une carte 'Sortie de prison'\nSouhaitez-vous l'utilisez pour sortir de prison ?", 1)) {
+                    if ( IhmBoiteMessage.afficherBoiteDialogue("Vous possèdez une carte Sortie de prison.\nSouhaitez-vous l'utilisez pour sortir de prison ?", 1)) {
                         controleur.sortirPrison(joueurCourant);
                     }
                 }                 
@@ -127,6 +123,7 @@ public class IhmPlateau extends JFrame implements Observateur{
         
         tourSuivant = new JButton(" Tour Suivant ");
         tourSuivant.setMaximumSize(new Dimension(200,40));
+        tourSuivant.setEnabled(false);
         tourSuivant.addMouseListener(new MouseListener(){
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -134,6 +131,7 @@ public class IhmPlateau extends JFrame implements Observateur{
                 joueurCourant = controleur.joueurSuivant(joueurCourant);
                 lancerDes.setEnabled(true);
                 construire.setEnabled(true);
+                tourSuivant.setEnabled(false);
                 joueurActuelle.updateIhmJoueurActuelle(joueurCourant);  
                 
             }
@@ -152,7 +150,10 @@ public class IhmPlateau extends JFrame implements Observateur{
         quitter.addMouseListener(new MouseListener(){
             @Override
             public void mouseClicked(MouseEvent e) {
-              System.exit(0);
+                if (IhmBoiteMessage.afficherBoiteDialogue("Êtes-vous vraiment sûr(e) de vouloir quitter la partie ?", 2)) {
+                    System.exit(0);                  
+                }  
+
             }
             @Override
             public void mousePressed(MouseEvent e) {}
@@ -162,27 +163,16 @@ public class IhmPlateau extends JFrame implements Observateur{
             public void mouseEntered(MouseEvent e) {}
             @Override
             public void mouseExited(MouseEvent e) {}
-        });        
+        }); 
         
         panTour.add(lancerDes);        
         panTour.add(construire);        
         panTour.add(tourSuivant);        
-        panTour.add(quitter);      
-
-            
-         
-        JButton quitterJeu = new JButton(" Arrêter la partie ");
-        quitterJeu.setMaximumSize(new Dimension(200,40));
-        panTour.add(quitterJeu);
+        panTour.add(quitter);
        
-       
-       
-       
-        for(Object jTemp : controleur.getJoueurs()){
-            
+        for(Joueur jTemp : controleur.getJoueurs()){
             IhmInfoJoueur ihmJoueur = new IhmInfoJoueur((Joueur)jTemp);                  
-            panelJoueurs.add(ihmJoueur);  
-            
+            panelJoueurs.add(ihmJoueur);   
         }
        
         Plateau plateau = new Plateau();
@@ -201,87 +191,69 @@ public class IhmPlateau extends JFrame implements Observateur{
          setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);       
      }
     
-    public void updateInfoJoueurs(ArrayList<Joueur> joueurs){
-        for(IhmInfoJoueur panTemp : panelJoueurs){
-            for(Joueur jTemp : joueurs){
-                if(panTemp.getJoueur().getNomJoueur() ==jTemp.getNomJoueur() ){
-                    panTemp.updateJoueur(jTemp);
-                    
-                }
-            }
-        }
-    }
-    
-    
     @Override
     public void notifier(Message message) {
        switch(message.getTypeMessage()) {
             case deplacement :
                resetDes();
-                
-                    // gèrer sortie de prison
+
+                rejouer = message.aFaitUnDouble();
                 if (controleur.estEnPrison(joueurCourant) && message.aFaitUnDouble()){
                     controleur.sortirPrison(joueurCourant);
-                    updateInfoJoueurs(controleur.getJoueurs());
                     
                 } else if(controleur.estEnPrison(joueurCourant) && joueurCourant.getCompteurEssaiPrison() < 2 ){
-                    IhmBoiteMessage.afficherBoiteDialogue("Vous n'avez pas fait de double\nVous restez en prison", 0);                    
+                    IhmBoiteMessage.afficherBoiteDialogue("Vous n'avez pas fait de double.\nVous restez en prison.", 0);                    
                     joueurCourant.incrementCompteurEssaiPrison();
-                    updateInfoJoueurs(controleur.getJoueurs());
 
                 } else if (joueurCourant.getCompteurEssaiPrison() >= 2){                        
-                        IhmBoiteMessage.afficherBoiteDialogue("Vous avez vos trois essais\nPayez une caution de 50", 0);
+                        IhmBoiteMessage.afficherBoiteDialogue("Vous avez vos trois essais.\nPayez une caution de 50€.", 0);
                         joueurCourant.payer(50);
                         controleur.sortirPrison(joueurCourant);
-                        updateInfoJoueurs(controleur.getJoueurs());
                 }    
 
-                if(joueurCourant.getCompteurDouble() != 3){
+                if(joueurCourant.getCompteurDouble() != 3 && !controleur.estEnPrison(joueurCourant)){
                     controleur.traiterActionCarreau(joueurCourant);
                     if (message.passageCaseDepart()) {
-                        IhmBoiteMessage.afficherBoiteDialogue("Vous êtes passez par la case départ\nRecevez 200", 0);
-                        updateInfoJoueurs(controleur.getJoueurs());
+                        IhmBoiteMessage.afficherBoiteDialogue("Vous êtes passez par la case départ.\nRecevez 200€.", 0);
                     }
-                }else{
-                     IhmBoiteMessage.afficherBoiteDialogue(" Vous avez réalisé trois doubles consécutifs\nVous allez en prison !",0);
+                } else if (joueurCourant.getCompteurDouble() == 3){
+                     IhmBoiteMessage.afficherBoiteDialogue("Vous avez réalisé trois doubles consécutifs.\nVous allez en prison !",0);
                      controleur.allerPrison(joueurCourant);
-                     updateInfoJoueurs(controleur.getJoueurs());
-                }                
-               break;
+                }
+                updateAffichage();                
+                break;
                
             case actionCarreau :
                 
                 Resultat resultat = message.getResultat();
                 switch(resultat.getTypeResultat()){
                     case achat ://si le joueur peut acheter                        
-                        if (IhmBoiteMessage.afficherBoiteDialogue("Voulez-vous acheter cette proprièté ?", 1)) {
+                        if (IhmBoiteMessage.afficherBoiteDialogue("Vous êtes tombé(e) sur la propriété " + resultat.getPropriete().getNom()+".\nVoulez-vous acheter cette proprièté pour "+resultat.getPropriete().getPrix()+"€ ?", 1)) {
                             resultat.getPropriete().setProprietaire(joueurCourant);
-                            int i =0;
-                             while(controleur.getJoueurs().get(i) != joueurCourant ){
-                                   i++;
-                            }          
-                            setJoueurCourant(controleur.getJoueurs().get(i));
-                            joueurActuelle.updateIhmJoueurActuelle(joueurCourant);
-                            updateInfoJoueurs(controleur.getJoueurs());
+//                            int i =0;
+//                            while(controleur.getJoueurs().get(i) != joueurCourant ){    //????
+//                                   i++;
+//                            }          
+//                            setJoueurCourant(controleur.getJoueurs().get(i));
+//                            joueurActuelle.updateIhmJoueurActuelle(joueurCourant);
+//                            updateInfoJoueurs(controleur.getJoueurs());
                         }
                     break;
                     
                     case loyer :// si le joueur doit payer le loyer 
-                        IhmBoiteMessage.afficherBoiteDialogue("Vous êtes tombé(e) sur la propriété " + resultat.getPropriete().getNom() + " appartenant à " + resultat.getPropriete().getProprietaire().getNomJoueur()+"\n Vous payez" + resultat.getLoyer(), 0);                 
+                        IhmBoiteMessage.afficherBoiteDialogue("Vous êtes tombé(e) sur la propriété " + resultat.getPropriete().getNom() + " appartenant à " + resultat.getPropriete().getProprietaire().getNomJoueur()+".\n Vous payez " + resultat.getLoyer()+"€.", 0);                 
                         joueurCourant.payer(resultat.getLoyer());//on fait payer le loyer au joueur 
                         resultat.getPropriete().getProprietaire().recevoirLoyer( resultat.getLoyer() );  //on donne le loyer au proprietaire de la proprietés
-                        joueurActuelle.updateIhmJoueurActuelle(joueurCourant);
-                        updateInfoJoueurs(controleur.getJoueurs());
                     break;
                     
                     case piocherUneCarteChance ://si le joueur tombe sur un carreau quelconque
-                        IhmBoiteMessage.afficherBoiteDialogue("Vous êtes tombé(e) sur une case 'Chance'", 0);
+                        IhmBoiteMessage.afficherBoiteDialogue("Vous êtes tombé(e) sur une case Chance.\nVous piochez une carte.", 0);
                         controleur.tirerEtJouerCarte(controleur.piocherCarteChance(), joueurCourant, controleur.getPileChance());
                         
                     break;
                     
                     case piocherUneCarteCDC ://si le joueur tombe sur un carreau quelconque
-                        IhmBoiteMessage.afficherBoiteDialogue("Vous êtes tombé(e) sur une case 'Caisse de Comunauté'", 0);
+                        IhmBoiteMessage.afficherBoiteDialogue("Vous êtes tombé(e) sur une case Caisse de Comunauté.\nVous piochez une carte.", 0);
                         controleur.tirerEtJouerCarte(controleur.piocherCarteCDC(), joueurCourant, controleur.getPileComunaute());
                     break;     
                     
@@ -293,21 +265,29 @@ public class IhmPlateau extends JFrame implements Observateur{
                     break;
                     
                     case taxe ://si le joueur tombe sur un carreau quelconque
-                        IhmBoiteMessage.afficherBoiteDialogue("Vous étes tombé(e) sur "+resultat.getCarreau().getNom()+"\nPayez "+resultat.getTaxe(),0);
+                        IhmBoiteMessage.afficherBoiteDialogue("Vous étes tombé(e) sur "+resultat.getCarreau().getNom()+".\nPayez "+resultat.getTaxe()+"€.",0);
                         joueurActuelle.updateIhmJoueurActuelle(joueurCourant);
                         updateInfoJoueurs(controleur.getJoueurs());
                     break;   
                     
                     case neRienFaire : //si le joueur ne peut rien faire 
-                        IhmBoiteMessage.afficherBoiteDialogue("Vous étes tombé(e) sur "+resultat.getCarreau().getNom()+"\nIl n'y a pas d'action pour cette case",0);
-                    break;
-                                      
-                }
+                        IhmBoiteMessage.afficherBoiteDialogue("Vous étes tombé(e) sur "+resultat.getCarreau().getNom()+".\nIl n'y a pas d'action pour cette case.",0);
+                    break;                
+                } 
+                updateAffichage();
                 
                 if(joueurCourant.estElimine()){//si le  joueur est eliminer 
                     controleur.eliminerJoueur(joueurCourant); // on elimine le joueur
-                    IhmBoiteMessage.afficherBoiteDialogue(joueurCourant.getNomJoueur() + " est ruiné(e)\nIl est élimininé de la partie",0); // on affiche que le joueur est éliminé
-                }
+                    IhmBoiteMessage.afficherBoiteDialogue(joueurCourant.getNomJoueur() + " est ruiné(e).\nIl est élimininé de la partie !",0); // on affiche que le joueur est éliminé
+                    if (controleur.finDePartie()) {
+                        IhmBoiteMessage.afficherBoiteDialogue("La partie est finis !\n"+controleur.getDernierJoueur().getNomJoueur()+ " a gagné la partie !",0);
+                        System.exit(0);
+                    }                   
+                        if (rejouer && ( resultat.getTypeResultat() != EnumerationsMonopoly.TYPE_RESULTAT.piocherUneCarteCDC || resultat.getTypeResultat() != EnumerationsMonopoly.TYPE_RESULTAT.piocherUneCarteChance )) {
+                            IhmBoiteMessage.afficherBoiteDialogue("Vous avez fait un double.\nVous rejouez.",0);
+                            controleur.lancerDesAvancer(joueurCourant);
+                        }
+                    }                     
                 break;
 
             case actionCarte :
@@ -315,18 +295,16 @@ public class IhmPlateau extends JFrame implements Observateur{
                 popupCarte(message.getResultatCarte().getLibelle());
                 switch(resultatCarte.getTypeResultat()){
                     case allerEnPrison :
-                        IhmBoiteMessage.afficherBoiteDialogue("Vous allez en prison", 0);                         
+                        IhmBoiteMessage.afficherBoiteDialogue("Vous allez en prison !", 0);                         
                         controleur.allerPrison(joueurCourant);
                         joueurActuelle.updateIhmJoueurActuelle(joueurCourant);
-                        updateInfoJoueurs(controleur.getJoueurs());
                         break;
                         
                     case sortieDePrison :
                         if (!joueurCourant.possedeCarteSortieDePrison()) {
-                            IhmBoiteMessage.afficherBoiteDialogue("Vous obtenez une carte 'Sortie de prison'", 0);                         
+                            IhmBoiteMessage.afficherBoiteDialogue("Vous obtenez une carte Sortie de prison.", 0);                         
                             joueurCourant.setCarteSortieDePrison(message.getCarte());
                             joueurActuelle.updateIhmJoueurActuelle(joueurCourant);
-                            updateInfoJoueurs(controleur.getJoueurs());
                         } else {
                             
                         }
@@ -335,28 +313,24 @@ public class IhmPlateau extends JFrame implements Observateur{
                     case deplacement :                      
                         if (joueurCourant.getPositionCourante().getNumero() > resultatCarte.getValeur()) {
                             joueurCourant.gagnerCash(200);
-                            IhmBoiteMessage.afficherBoiteDialogue("Vous êtes passez par la case départ\nRecevez 200", 0); 
+                            IhmBoiteMessage.afficherBoiteDialogue("Vous êtes passez par la case départ.\nRecevez 200€.", 0); 
                             joueurActuelle.updateIhmJoueurActuelle(joueurCourant);
-                            updateInfoJoueurs(controleur.getJoueurs());
                         }
                     case deplacementSpecial :                           
                         joueurCourant.setPositionCourante(controleur.getCarreau(resultatCarte.getValeur()-1));
                         joueurCourant.aPiocherUneCarteDeplacement();                       
                         controleur.traiterActionCarreau( joueurCourant);
                         joueurActuelle.updateIhmJoueurActuelle(joueurCourant);
-                        updateInfoJoueurs(controleur.getJoueurs());
                         break;
                         
                     case perte :
-                        IhmBoiteMessage.afficherBoiteDialogue("Vous perdez "+resultatCarte.getValeur(), 0);  
+                        IhmBoiteMessage.afficherBoiteDialogue("Vous perdez "+resultatCarte.getValeur()+"€.", 0);  
                         joueurActuelle.updateIhmJoueurActuelle(joueurCourant);
-                        updateInfoJoueurs(controleur.getJoueurs());
                         break;
                         
                     case gain :
-                        IhmBoiteMessage.afficherBoiteDialogue("Vous gagnez "+resultatCarte.getValeur(), 0);
-                        joueurActuelle.updateIhmJoueurActuelle(joueurCourant);
-                        updateInfoJoueurs(controleur.getJoueurs());                        
+                        IhmBoiteMessage.afficherBoiteDialogue("Vous gagnez "+resultatCarte.getValeur()+"€.", 0);
+                        joueurActuelle.updateIhmJoueurActuelle(joueurCourant);                        
                         break;
                         
                     case anniversaire :
@@ -376,14 +350,26 @@ public class IhmPlateau extends JFrame implements Observateur{
                                 i++;
                             }                           
                         }
-                        IhmBoiteMessage.afficherBoiteDialogue("Vous gagnez "+somme+"\n"+joueurs+" ont/a perdu "+resultatCarte.getValeur(), 0);  
-                        joueurActuelle.updateIhmJoueurActuelle(joueurCourant);
-                        updateInfoJoueurs(controleur.getJoueurs());                        
+                        IhmBoiteMessage.afficherBoiteDialogue("Vous gagnez "+somme+"€.\n"+joueurs+" ont/a perdu "+resultatCarte.getValeur()+"€.", 0);  
                         break;
                 }
+                updateAffichage();  
+                
                 if(resultatCarte.getTypeResultat() != EnumerationsMonopoly.TYPE_RESULTAT_CARTE.sortieDePrison){
                     message.getPile().reposerUneCarte(message.getCarte());                
-                }                
+                }
+                if(joueurCourant.estElimine()){//si le  joueur est eliminé 
+                    controleur.eliminerJoueur(joueurCourant); // on elimine le joueur
+                    IhmBoiteMessage.afficherBoiteDialogue(joueurCourant.getNomJoueur() + " est ruiné(e).\nIl est élimininé de la partie !",0); // on affiche que le joueur est éliminé
+                    if (controleur.finDePartie()) {
+                        IhmBoiteMessage.afficherBoiteDialogue("La partie est finis !\n"+controleur.getDernierJoueur().getNomJoueur()+ " a gagné la partie !",0);
+                        System.exit(0);                        
+                    }
+                }
+                if (rejouer) {
+                    IhmBoiteMessage.afficherBoiteDialogue("Vous avez fait un double.\nVous rejouez.",0);
+                    controleur.lancerDesAvancer(joueurCourant);
+                }                  
                 break;
             }   
     }    
@@ -393,10 +379,29 @@ public class IhmPlateau extends JFrame implements Observateur{
     }
 
     private void popupCarte(String libelle) {
-        System.out.println("a faire ");
+                JOptionPane.showMessageDialog(
+                        null,
+                        libelle, 
+                        "Carte", 
+                        JOptionPane.PLAIN_MESSAGE);
     }
 
     private void setJoueurCourant(Joueur joueur) {
         this.joueurCourant = joueur;
+    }
+    
+    public void updateInfoJoueurs(ArrayList<Joueur> joueurs){
+        for(IhmInfoJoueur panTemp : panelJoueurs){
+            for(Joueur jTemp : joueurs){
+                if(panTemp.getJoueur().getNomJoueur() ==jTemp.getNomJoueur() ){
+                    panTemp.updateJoueur(jTemp);                    
+                }
+            }
+        }
+    }
+    
+    private void updateAffichage() {
+        joueurActuelle.updateIhmJoueurActuelle(joueurCourant);
+        updateInfoJoueurs(controleur.getJoueurs()); 
     }
 }

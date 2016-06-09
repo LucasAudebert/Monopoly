@@ -20,7 +20,7 @@ public class IhmBoiteMessage {
                 JOptionPane.showConfirmDialog(   null, 
                                                 message, 
                                                 "Confirmation",
-                                                JOptionPane.OK_OPTION, 
+                                                JOptionPane.DEFAULT_OPTION, 
                                                 JOptionPane.INFORMATION_MESSAGE);
                 return true ;
            case 1 :
@@ -30,6 +30,13 @@ public class IhmBoiteMessage {
                                                             JOptionPane.YES_NO_OPTION, 
                                                             JOptionPane.QUESTION_MESSAGE);
                 return response == JOptionPane.YES_OPTION ;
+           case 2 :
+                response = JOptionPane.showConfirmDialog(   null, 
+                                                            message, 
+                                                            "Veuillez confirmer l'opération",
+                                                            JOptionPane.WARNING_MESSAGE, 
+                                                            JOptionPane.WARNING_MESSAGE);
+                return response == JOptionPane.YES_OPTION ;                
         }
         return false;
     }
