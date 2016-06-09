@@ -19,7 +19,7 @@ import javax.swing.JPanel;
  *
  * @author Maxence
  */
-public class IhmJoueurActuelle extends JPanel{
+public final class IhmJoueurActuelle extends JPanel{
    
     private JLabel nom;
     private  JLabel cash;
@@ -34,8 +34,10 @@ public class IhmJoueurActuelle extends JPanel{
         nom.setText(joueur.getNomJoueur());
         
         cash = new JLabel();
-        cash.setText(Integer.toString(joueur.getCash()));        
+        cash.setText(Integer.toString(joueur.getCash())); 
+         
         initComponent();
+       
     }
     public void initComponent(){
         JPanel panCash = new JPanel();
@@ -45,19 +47,20 @@ public class IhmJoueurActuelle extends JPanel{
         panNom.setLayout(new BoxLayout(panNom,BoxLayout.X_AXIS));
         
         
-        this.setLayout(new BoxLayout(this,BoxLayout.PAGE_AXIS));
         
+       
         panNom.add(new JLabel("C'est au tour de "));
-      //  panNom.add(nom);
-        panNom.add(new JLabel(" de jouer ! "));
+        panNom.add(nom);
+       
       
         
-        
         panCash.add(new JLabel("Cash : "));
-       // panCash.add(cash);
-        
-        this.add(tourJoueur);
-        this.add(argent);
+        panCash.add(cash);
+       
+       
+        this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
+        this.add(panNom);
+        this.add(panCash);
         afficher();
         
     }

@@ -387,6 +387,6 @@ public class IhmPlateau extends JFrame implements Observateur{
     }
 
     private void popupCarte(String libelle) {
-            System.out.println("a faire ");
+        System.out.println("a faire ");
     }
 }
