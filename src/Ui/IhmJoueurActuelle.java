@@ -38,6 +38,10 @@ public class IhmJoueurActuelle extends JPanel{
         afficher();
         
     }
+    public void updateIhmJoueurActuelle(Joueur joueur){
+        this.joueur = joueur;
+        repaint();
+    }
 
     private void afficher() {
         setVisible(true);

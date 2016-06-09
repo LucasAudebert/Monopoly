@@ -84,6 +84,15 @@ public class IhmInfoJoueur extends JPanel {
        afficher();
         
     }
+
+    public Joueur getJoueur() {
+        return joueur;
+    }
+    
+    public void updateJoueur(Joueur joueur){
+        this.joueur = joueur;
+        repaint();
+    }
     
     public void afficher(){
         
