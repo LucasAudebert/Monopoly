@@ -21,8 +21,8 @@ import javax.swing.JPanel;
  */
 public class IhmJoueurActuelle extends JPanel{
    
-    private final JLabel nom;
-    private final JLabel cash;
+    private JLabel nom;
+    private  JLabel cash;
     private JLabel tourJoueur;
     
     private JLabel argent;
