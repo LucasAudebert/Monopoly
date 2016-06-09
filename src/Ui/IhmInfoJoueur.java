@@ -91,7 +91,8 @@ public class IhmInfoJoueur extends JPanel {
     
     public void updateJoueur(Joueur joueur){
         this.joueur = joueur;
-        repaint();
+        removeAll();
+        initFenetre();
     }
     
     public void afficher(){

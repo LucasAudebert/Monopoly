@@ -12,5 +12,5 @@ import Data.Resultat;
  * @author blachert
  */
 public interface Observateur {
-    public Message notifier(Message message);
+    public void notifier(Message message);
 }

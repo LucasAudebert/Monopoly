@@ -46,4 +46,11 @@ public class EnumerationsMonopoly {
         anniversaire
     }
     
+    public enum TYPE_MESSAGE {
+        
+        deplacement,
+        actionCarreau,
+        actionCarte
+    }
+    
 }

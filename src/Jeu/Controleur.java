@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import Data.Cartes.*;
 import Ui.IhmBoiteMessage;
+import Ui.Message;
 
 public class Controleur {
         private GuardedBlocks gardien;
@@ -23,10 +24,10 @@ public class Controleur {
             initPartie();
         }
         
-        public Controleur(Observateur obs,GuardedBlocks gardien){
+        public Controleur(Observateur obs){
             monopoly = new Monopoly();
             this.observateur = obs;
-            this.gardien = gardien;
+            this.gardien = new GuardedBlocks();
             initPartie();
         }
         
@@ -167,28 +168,29 @@ public class Controleur {
                 }
             }
         
-        public ArrayList getJoueurs(){
+        public ArrayList<Joueur> getJoueurs(){
             return monopoly.getJoueurs();
         }
         
-        private void allerPrison(Joueur joueur){
+        public void allerPrison(Joueur joueur){
             joueur.setPositionCourante(monopoly.getCarreauPrison());
             monopoly.addPrisonnier(joueur);
         }     
 
-        private void sortirPrison(Joueur joueur){
+        public void sortirPrison(Joueur joueur){
             monopoly.removePrisonnier(joueur);
             joueur.reinitCompteurEssaiPrison();
         }  
         
         private int[] lancerDes(){
             int[] des = new int[2];
-            des[0] = ihm.lancerDes();//(int) (Math.random() * 6) + 1;
-            des[1] = ihm.lancerDes();//(int) (Math.random() * 6) + 1;
+            des[0] = (int) (Math.random() * 6) + 1;
+            des[1] = (int) (Math.random() * 6) + 1;
+            System.out.println("Score de des : "+ des[0]+" "+des[1]);
             return des;
         }
         
-        private boolean lancerDesAvancer(Joueur joueur){
+        public void lancerDesAvancer(Joueur joueur){
             int[] des = lancerDes();
             if(des[0] == des[1]){
                 ihm.afficher("Vous obtenez un double " + des[1]);
@@ -204,98 +206,62 @@ public class Controleur {
                 joueur.gagnerCash(200);
                 ihm.afficher("Vous êtes passé par la case départ (+200)");
             }
-            return des[0] == des[1];
+            
+            observateur.notifier(new Message(EnumerationsMonopoly.TYPE_MESSAGE.deplacement,joueur.getDerniereValeurDes() >= joueur.getPositionCourante().getNumero(),des[0]==des[1]));
         }
         
-        private void tirerEtJouerCarte(Carte carte, Joueur joueur, Pile pile){
-            ResultatCarte res = carte.action(joueur);
-            System.out.println(res.getValeur());
-            System.out.println(res.getLibelle());            
-            switch(res.getTypeResultat()){
-                case allerEnPrison :
-                    allerPrison(joueur);
-                    break;
-                case sortieDePrison :
-                    joueur.setCarteSortieDePrison(carte);
-                    break;
-                case deplacement :                      
-                    if (joueur.getPositionCourante().getNumero() > res.getValeur()) {
-                        joueur.gagnerCash(200);
-                        ihm.afficher("Vous êtes passé par la case départ (+200)");      
-                    }
-                case deplacementSpecial :                 
-                    joueur.setPositionCourante(monopoly.getCarreau(res.getValeur()-1));
-                    joueur.aPiocherUneCarteDeplacement();
-                    Resultat resDeplacement = joueur.getPositionCourante().action(joueur);
-                    traiterResultatCarreau(resDeplacement, joueur);
-                    break;
-                case perte :
-                    break;
-                case gain :
-                    break;
-                case anniversaire :                 
-                    for(Joueur jTemp : monopoly.getJoueurs()){                   
-                        if(jTemp != joueur && !monopoly.getJoueursElimines().contains(jTemp)){
-                            jTemp.payer(res.getValeur());
-                            joueur.gagnerCash(res.getValeur());
-                        }
-                    }
-                    break;
-            }
-            if(res.getTypeResultat() != EnumerationsMonopoly.TYPE_RESULTAT_CARTE.sortieDePrison){
-                pile.reposerUneCarte(carte);
-                System.out.println(pile.getCarte(14).getLibelle());                 
-            }
+        public void tirerEtJouerCarte(Carte carte, Joueur joueur, Pile pile){
+            observateur.notifier( new Message(EnumerationsMonopoly.TYPE_MESSAGE.actionCarte, carte.action(joueur), carte, pile));
+//            System.out.println(res.getValeur());
+//            System.out.println(res.getLibelle());            
+//            switch(res.getTypeResultat()){
+//                case allerEnPrison :
+//                    allerPrison(joueur);
+//                    break;
+//                case sortieDePrison :
+//                    joueur.setCarteSortieDePrison(carte);
+//                    break;
+//                case deplacement :                      
+//                    if (joueur.getPositionCourante().getNumero() > res.getValeur()) {
+//                        joueur.gagnerCash(200);
+//                        ihm.afficher("Vous êtes passé par la case départ (+200)");      
+//                    }
+//                case deplacementSpecial :                 
+//                    joueur.setPositionCourante(monopoly.getCarreau(res.getValeur()-1));
+//                    joueur.aPiocherUneCarteDeplacement();
+//                    traiterActionCarreau( joueur);
+//                    break;
+//                case perte :
+//                    break;
+//                case gain :
+//                    break;
+//                case anniversaire :                 
+//                    for(Joueur jTemp : monopoly.getJoueurs()){                   
+//                        if(jTemp != joueur && !monopoly.getJoueursElimines().contains(jTemp)){
+//                            jTemp.payer(res.getValeur());
+//                            joueur.gagnerCash(res.getValeur());
+//                        }
+//                    }
+//                    break;
+//            }
+//            if(res.getTypeResultat() != EnumerationsMonopoly.TYPE_RESULTAT_CARTE.sortieDePrison){
+//                pile.reposerUneCarte(carte);
+//                System.out.println(pile.getCarte(14).getLibelle());                 
+//            }
         }
         
-        private void traiterResultatCarreau(Resultat resultat, Joueur joueur){
-            switch(resultat.getTypeResultat()){
-                    case achat ://si le joueur peut acheter 
-                        ihm.afficher("Vous étes tombé(e) sur la propriété libre " + resultat.getPropriete().getNom());
-                        if(ihm.demandeAchat(resultat)){ //si le joueur veut acheter  
-                            resultat.getPropriete().achat(joueur); // on set le joueur comme proprietaire de la proprieté 
-                        }
-                    break;
-                    case loyer :// si le joueur doit payer le loyer 
-                        ihm.afficher("Vous êtes tombé(e) sur la propriété " + resultat.getPropriete().getNom() + " appartenant à " + resultat.getPropriete().getProprietaire().getNomJoueur());
-                        ihm.afficher("Vous payez " + resultat.getLoyer()); // on affiche le loyer 
-                        joueur.payer(resultat.getLoyer());//on fait payer le loyer au joueur 
-                        resultat.getPropriete().getProprietaire().recevoirLoyer( resultat.getLoyer() );  //on donne le loyer au proprietaire de la proprietés
-                    break;
-                    case piocherUneCarteChance ://si le joueur tombe sur un carreau quelconque
-                        ihm.afficher("Chance :");                         
-                        tirerEtJouerCarte(monopoly.getPileChance().tirerUneCarte(), joueur, monopoly.getPileChance());
-                    break;
-                    case piocherUneCarteCDC ://si le joueur tombe sur un carreau quelconque
-                        ihm.afficher("Caisse de comunauté :");                        
-                        tirerEtJouerCarte(monopoly.getPileCommunaute().tirerUneCarte(), joueur, monopoly.getPileCommunaute());                       
-                    break;                    
-                    case allerEnPrison ://si le joueur tombe sur un carreau quelconque
-                        allerPrison(joueur);
-                        ihm.afficher("Vous allez en Prison");
-                    break;
-                    case taxe ://si le joueur tombe sur un carreau quelconque
-                        ihm.afficher("Vous étes tombé(e) sur un carreau taxe.\nPayer "+resultat.getTaxe());
-                    break;            
-                    case neRienFaire : //si le joueur ne peut rien faire 
-                        ihm.afficher("Rien faire");
-                    break;
-                                      
-                }
-                if(joueur.estElimine()){//si le  joueur est eliminer 
-                    monopoly.eliminerJoueur(joueur); // on elimine le joueur
-                    ihm.afficher(joueur.getNomJoueur() + " est ruiné(e)"); // on affiche que le joueur est éliminé
-                }             
+        public void traiterActionCarreau( Joueur joueur){           
+            observateur.notifier(new Message(EnumerationsMonopoly.TYPE_MESSAGE.actionCarreau, joueur.getPositionCourante().action(joueur)));        
         }
         
-        private void jouerCoup(Joueur joueur){
+        public void jouerCoup(Joueur joueur){
                 // Si le joueur a une carte prison et souhaite l'utiliser pour sortir de prison          
             if (monopoly.estEnPrison(joueur) && joueur.possedeCarteSortieDePrison() && IhmBoiteMessage.afficherBoiteDialogue("Vous possèdez une carte 'Sortie de prison'\nSouhaitez-vous l'utilisez pour sortir de prison ?", 1)) {
                 sortirPrison(joueur);
             }     
             
                 // On lance les dès et on déplace le joueur
-            boolean desDouble = lancerDesAvancer(joueur);   
+            boolean desDouble = false;
             
                 //Liberation de prison si double
             if (monopoly.estEnPrison(joueur) && desDouble){
@@ -313,7 +279,7 @@ public class Controleur {
                 }
                 Resultat resultat = joueur.getPositionCourante().action(joueur);
                 if(joueur.getCompteurDouble() != 3){
-                    traiterResultatCarreau(resultat, joueur);
+                    traiterActionCarreau(joueur);
                     
                     if(joueur.rejouer() && !monopoly.isFinDePartie()){ //si le joueur fait un double/piocher une carte de deplacement et que ce n'est pas une fin de partie 
                         ihm.afficherInfosJoueur(joueur); // on affiche les infos du joueur
@@ -367,7 +333,53 @@ public class Controleur {
                 ihm.afficherFinDePartie(monopoly.getJoueurs());// afficher l'etat des joueur à ce moment 
             }
         }
+
+    public boolean estEnPrison(Joueur joueurCourant) {        
+        return monopoly.estEnPrison(joueurCourant);
+    }
+
+    public Joueur joueurSuivant(Joueur joueur) {
+        int i =0;       
+            while(joueur.getNomJoueur() != monopoly.getJoueurs().get(i).getNomJoueur() ){
+                i++;
+            }
+            return monopoly.getJoueurs().get(i);
+            
+        }
         
+    
+
+    public Carte piocherCarteChance() {
+        return monopoly.getPileChance().tirerUneCarte();       
+    }
+
+    public Carte piocherCarteCDC() {
+        return monopoly.getPileCommunaute().tirerUneCarte();
+    }
+
+    public Pile getPileChance() {
+        return monopoly.getPileChance();
+    }
+    
+    public Pile getPileComunaute() {
+        return monopoly.getPileCommunaute();
+    } 
+   
+    public void eliminerJoueur(Joueur joueurCourant) {        
+      monopoly.eliminerJoueur(joueurCourant);        
+    }
+
+    public boolean finDePartie() {
+        return (monopoly.getJoueurs().size()-monopoly.getJoueursElimines().size()) == 1;
+    }
+
+    public Carreau getCarreau(int i) {
+        return monopoly.getCarreau(i);
+    }
+
+    public boolean estElimine(Joueur j) {
+        return monopoly.getJoueursElimines().contains(j);
+    }
 }
 
 

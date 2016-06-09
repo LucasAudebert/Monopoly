@@ -20,27 +20,51 @@ import javax.swing.JPanel;
  * @author Maxence
  */
 public class IhmJoueurActuelle extends JPanel{
-    private Joueur joueur;
+   
+    private final JLabel nom;
+    private final JLabel cash;
+    private JLabel tourJoueur;
+    
+    private JLabel argent;
+    
     public IhmJoueurActuelle(Joueur joueur){
         super();
-        this.joueur = joueur;
+        
+        nom = new JLabel();
+        nom.setText(joueur.getNomJoueur());
+        
+        cash = new JLabel();
+        cash.setText(Integer.toString(joueur.getCash()));        
         initComponent();
     }
     public void initComponent(){
+        JPanel panCash = new JPanel();
+        panCash.setLayout(new BoxLayout(panCash,BoxLayout.X_AXIS));
+        
+        JPanel panNom = new JPanel();
+        panNom.setLayout(new BoxLayout(panNom,BoxLayout.X_AXIS));
+        
+        
         this.setLayout(new BoxLayout(this,BoxLayout.PAGE_AXIS));
         
-        this.add(new JLabel("C'est au tour de "+joueur.getNomJoueur() + " de jouer ! "));
+        panNom.add(new JLabel("C'est au tour de "));
+      //  panNom.add(nom);
+        panNom.add(new JLabel(" de jouer ! "));
+      
         
-        JLabel argent = new JLabel("Cash : "+joueur.getCash());
+        
+        panCash.add(new JLabel("Cash : "));
+       // panCash.add(cash);
+        
+        this.add(tourJoueur);
         this.add(argent);
-        
-        
         afficher();
         
     }
     public void updateIhmJoueurActuelle(Joueur joueur){
-        this.joueur = joueur;
-        repaint();
+        nom.setText(joueur.getNomJoueur());
+        cash.setText(Integer.toString(joueur.getCash()));
+        initComponent();
     }
 
     private void afficher() {

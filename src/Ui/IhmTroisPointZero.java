@@ -29,7 +29,7 @@ import javax.swing.WindowConstants;
  *
  * @author Maxence
  */
-public class IhmTroisPointZero extends JFrame implements Observateur {
+public class IhmTroisPointZero extends JFrame {
     
     private Controleur controleur;
     private JButton inscrireJoueur;
@@ -40,7 +40,7 @@ public class IhmTroisPointZero extends JFrame implements Observateur {
     
      public IhmTroisPointZero(Controleur controleur){
         this.controleur = controleur;
-        controleur.setObservateur(this);
+        //controleur.setObservateur(this);
         
         nomJs = new ArrayList<>();        
         afficherMenu();
@@ -204,10 +204,10 @@ public class IhmTroisPointZero extends JFrame implements Observateur {
         setSize(850, 400);
         setVisible(true);                        
     }
-    @Override
-    public Message notifier(Message message) {
+  /*  @Override
+    public void notifier(Message message) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    }*/
     
     public static void main(String[] args){
         Controleur controleur = new Controleur();
