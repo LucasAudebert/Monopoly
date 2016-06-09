@@ -53,25 +53,25 @@ public class IhmInfoJoueur extends JPanel {
     public void initFenetre(){
         
         this.setBorder(BorderFactory.createLineBorder(Color.black));
-     //   this.setLayout(new BoxLayout(this,BoxLayout.PAGE_AXIS));
+      this.setLayout(new BoxLayout(this,BoxLayout.PAGE_AXIS));
     
        
         
         JPanel panNom = new JPanel();
-      //  panNom.setLayout(new BoxLayout(panNom,BoxLayout.LINE_AXIS));
+        panNom.setLayout(new BoxLayout(panNom,BoxLayout.LINE_AXIS));
         panNom.add(new JLabel("Joueur : "));
         panNom.add(nom);
         this.add(panNom);
         
         JPanel panCash = new JPanel();
-       // panCash.setLayout(new BoxLayout(panCash,BoxLayout.X_AXIS));
+        panCash.setLayout(new BoxLayout(panCash,BoxLayout.X_AXIS));
         panCash.add(new JLabel("Votre argent : "));
         panCash.add(cash);
         this.add(panCash);
         
       
         JPanel panPosition = new JPanel();
-      //  panPosition.setLayout(new BoxLayout(panPosition,BoxLayout.LINE_AXIS));
+        panPosition.setLayout(new BoxLayout(panPosition,BoxLayout.LINE_AXIS));
         panPosition.add(new JLabel("Position actuelle  : "));
         panPosition.add(positionCourante);
         this.add(panPosition);
