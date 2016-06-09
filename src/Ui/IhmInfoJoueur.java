@@ -12,6 +12,7 @@ import Data.Gare;
 import Data.Joueur;
 import Data.ProprieteAConstruire;
 import java.awt.Color;
+import java.util.HashMap;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
@@ -23,61 +24,94 @@ import javax.swing.JPanel;
  * @author Maxence
  */
 public class IhmInfoJoueur extends JPanel {
+    private JLabel nom;
+    private JLabel cash;
+    private JLabel positionCourante;
     private Joueur joueur;
+    private HashMap<String,JLabel> gares;
+    private HashMap<String,JLabel> proprietes;
+    private HashMap<String,JLabel> compagnies;
     
     public IhmInfoJoueur(Joueur joueur){
-       this.joueur =  joueur;
+        System.out.println("testmachine ");
+       this.joueur = joueur;
+       nom = new JLabel();
+       nom.setText(joueur.getNomJoueur());
+       
+       cash = new JLabel();
+       cash.setText(Integer.toString(joueur.getCash()));
+       
+       positionCourante = new JLabel();
+       positionCourante.setText(joueur.getPositionCourante().getNom());
+       compagnies = new HashMap();
+       proprietes = new HashMap();
+       gares = new HashMap();
        initFenetre();       
+      
         
     }
     public void initFenetre(){
         
         this.setBorder(BorderFactory.createLineBorder(Color.black));
-        this.setLayout(new BoxLayout(this,BoxLayout.PAGE_AXIS));
+     //   this.setLayout(new BoxLayout(this,BoxLayout.PAGE_AXIS));
+    
+       
         
-        JLabel nom = new JLabel("Joueur : "+joueur.getNomJoueur());
-        this.add(nom);
+        JPanel panNom = new JPanel();
+      //  panNom.setLayout(new BoxLayout(panNom,BoxLayout.LINE_AXIS));
+        panNom.add(new JLabel("Joueur : "));
+        panNom.add(nom);
+        this.add(panNom);
         
-        JLabel argent = new JLabel("Cash : "+joueur.getCash());
-        this.add(argent);
+        JPanel panCash = new JPanel();
+       // panCash.setLayout(new BoxLayout(panCash,BoxLayout.X_AXIS));
+        panCash.add(new JLabel("Votre argent : "));
+        panCash.add(cash);
+        this.add(panCash);
+        
+      
+        JPanel panPosition = new JPanel();
+      //  panPosition.setLayout(new BoxLayout(panPosition,BoxLayout.LINE_AXIS));
+        panPosition.add(new JLabel("Position actuelle  : "));
+        panPosition.add(positionCourante);
+        this.add(panPosition);
+      
+        this.add(new JLabel("Compagnie : "));
         
         
-        JLabel position  = new JLabel("Position actuelles : "+joueur.getPositionCourante().getNom());
-        this.add(position);
-        
-        JLabel compagnie = new JLabel("Compagnie : ");
-        this.add(compagnie);
-        
-        if(joueur.getCompagnies().isEmpty()){
-           JLabel pasCompagnie = new JLabel("    Pas de compagnies");
-           this.add(pasCompagnie);
-            
+        if(joueur.getCompagnies().isEmpty()){          
+           this.add(new JLabel("    Pas de compagnies"));            
         }else{
             for(Compagnie cTemp : joueur.getCompagnies()){
-                this.add(new JLabel("   "+cTemp.getNom()));          
+                 JLabel compagnie = new JLabel("     "+cTemp.getNom());                 
+                 compagnies.put(cTemp.getNom(),compagnie);
+                 this.add(compagnie);          
             }
         }
         
         
-       JLabel gare = new JLabel("Gares : ");
-       this.add(gare);
+       
+       this.add(new JLabel("Gares : "));
         if(joueur.getGares().isEmpty()){
-            JLabel pasGare = new JLabel("    Pas de gares");
-            this.add(pasGare);
+            this.add(new JLabel("    Pas de gares"));
         }else{
              for(Gare gTemp : joueur.getGares()){
-                 this.add(new JLabel("  "+gTemp.getNom()));
+                 JLabel gare = new JLabel("     "+gTemp.getNom());                 
+                 gares.put(gTemp.getNom(),gare);
+                 this.add(gare);
             }
         }
        
-        JLabel propAConstruire = new JLabel("Proprieté à construire : ");
-        this.add(propAConstruire);
+       
+        this.add(new JLabel("Proprieté à construire : "));
         if(joueur.getGares().isEmpty()){
-            JLabel pasPropaConstruire = new JLabel("    Pas de proprieté à construire");
-            this.add(pasPropaConstruire);
+            this.add(new JLabel("    Pas de proprieté à construire"));
         }else{
             for(ProprieteAConstruire pTemp : joueur.getProprieteAConstruires() ){
-                    this.add(new JLabel("  "+pTemp.getNom()));
+                 JLabel prop = new JLabel("     "+pTemp.getNom());                 
+                 proprietes.put(pTemp.getNom(),prop);
+                 this.add(prop);
+                    
             }
         }
        
@@ -91,7 +125,9 @@ public class IhmInfoJoueur extends JPanel {
     
     public void updateJoueur(Joueur joueur){
         this.joueur = joueur;
-        removeAll();
+        nom.setText(joueur.getNomJoueur());
+        positionCourante.setText(joueur.getPositionCourante().getNom());
+        cash.setText(Integer.toString(joueur.getCash()));
         initFenetre();
     }
     

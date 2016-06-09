@@ -66,8 +66,10 @@ public final class IhmJoueurActuelle extends JPanel{
     }
     public void updateIhmJoueurActuelle(Joueur joueur){
         nom.setText(joueur.getNomJoueur());
+      
         cash.setText(Integer.toString(joueur.getCash()));
-        initComponent();
+        //initComponent();
+        repaint();
     }
 
     private void afficher() {

@@ -339,11 +339,16 @@ public class Controleur {
     }
 
     public Joueur joueurSuivant(Joueur joueur) {
-        int i =0;       
-            while(joueur.getNomJoueur() != monopoly.getJoueurs().get(i).getNomJoueur() ){
+        int i = 0;       
+            while(monopoly.getJoueurs().get(i) != joueur ){
                 i++;
             }
-            return monopoly.getJoueurs().get(i);
+            if(i == monopoly.getJoueurs().size()-1 ){
+                return monopoly.getJoueurs().get(0);
+            }else{
+                return monopoly.getJoueurs().get(i+1);
+
+            }
             
         }
         

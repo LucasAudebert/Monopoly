@@ -134,7 +134,8 @@ public class IhmPlateau extends JFrame implements Observateur{
                 joueurCourant = controleur.joueurSuivant(joueurCourant);
                 lancerDes.setEnabled(true);
                 construire.setEnabled(true);
-                joueurActuelle.updateIhmJoueurActuelle(joueurCourant);                              
+                joueurActuelle.updateIhmJoueurActuelle(joueurCourant);  
+                
             }
             @Override
             public void mousePressed(MouseEvent e) {}
@@ -255,6 +256,11 @@ public class IhmPlateau extends JFrame implements Observateur{
                     case achat ://si le joueur peut acheter                        
                         if (IhmBoiteMessage.afficherBoiteDialogue("Voulez-vous acheter cette proprièté ?", 1)) {
                             resultat.getPropriete().setProprietaire(joueurCourant);
+                            int i =0;
+                             while(controleur.getJoueurs().get(i) != joueurCourant ){
+                                   i++;
+                            }          
+                            setJoueurCourant(controleur.getJoueurs().get(i));
                             joueurActuelle.updateIhmJoueurActuelle(joueurCourant);
                             updateInfoJoueurs(controleur.getJoueurs());
                         }
@@ -388,5 +394,9 @@ public class IhmPlateau extends JFrame implements Observateur{
 
     private void popupCarte(String libelle) {
         System.out.println("a faire ");
+    }
+
+    private void setJoueurCourant(Joueur joueur) {
+        this.joueurCourant = joueur;
     }
 }
