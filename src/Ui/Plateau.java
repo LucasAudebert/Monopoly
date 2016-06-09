@@ -69,11 +69,11 @@ public class Plateau extends Canvas {
 
     @Override
     public void paint(Graphics g) {
-        Dimension dim = this.getSize();
+       Dimension dim = this.getSize();
        Image plateau = null;
      //  Image desACoudre = null;
         try {
-            plateau = ImageIO.read(new File("src\\Image_Plateau.jpg"));
+            plateau = ImageIO.read(new File("src/Image_Plateau.jpg"));
            // desACoudre = ImageIO.read(new File("src\\desACoudre.png"));
         } catch (IOException ex) {
             Logger.getLogger(Plateau.class.getName()).log(Level.SEVERE, null, ex);
