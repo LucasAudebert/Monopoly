@@ -119,7 +119,7 @@ public class IhmPlateau extends JFrame implements Observateur{
         construire.addMouseListener(new MouseListener(){
             @Override
             public void mouseClicked(MouseEvent e) {
-                // construction
+                IhmConstruire i = new IhmConstruire(joueurCourant);
             }
             @Override
             public void mousePressed(MouseEvent e) {}
