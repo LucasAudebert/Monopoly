@@ -2,6 +2,7 @@ package Data;
 
 import Data.Cartes.Carte;
 import java.util.HashSet;
+import javax.swing.ImageIcon;
 
 public class Joueur {
 	private String nomJoueur;
@@ -15,8 +16,10 @@ public class Joueur {
         private int compteurEssaiPrison = 0;
         private Carte carteSortieDePrison;
         private boolean piocheCarteDeplacement;
+        private ImageIcon imagePion;
 
-    public Joueur(String nomJoueur, Carreau carreauDepart){
+    public Joueur(String nomJoueur, Carreau carreauDepart, ImageIcon imagePion){
+            this.imagePion = imagePion;
             this.nomJoueur = nomJoueur;
             this.positionCourante = carreauDepart;
             compagnies = new HashSet();
