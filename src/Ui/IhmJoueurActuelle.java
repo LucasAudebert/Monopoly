@@ -68,7 +68,7 @@ public final class IhmJoueurActuelle extends JPanel{
         nom.setText(joueur.getNomJoueur());
       
         cash.setText(Integer.toString(joueur.getCash()));
-        //initComponent();
+        
         repaint();
     }
 

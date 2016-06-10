@@ -11,22 +11,14 @@ import Data.Joueur;
 import Data.Resultat;
 import Jeu.Controleur;
 import java.awt.BorderLayout;
-
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
 import java.util.ArrayList;
-import java.util.HashMap;
-
-
 import javax.swing.BoxLayout;
-
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -81,12 +73,22 @@ public class IhmPlateau extends JFrame implements Observateur{
         
         lancerDes = new JButton("Lancer Dès");
         lancerDes.setMaximumSize(new Dimension(200,40));
+        
         lancerDes.addMouseListener(new MouseListener(){
             @Override
             public void mouseClicked(MouseEvent e) {
                 construire.setEnabled(false);               
                 lancerDes.setEnabled(false);
-                tourSuivant.setEnabled(true);                 
+                tourSuivant.setEnabled(true);  
+                if(!joueurCourant.getProprieteAConstruires().isEmpty()){
+                     construire.setEnabled(true);
+                     
+                }else{
+                    construire.setEnabled(false);
+                   
+                }
+               
+                 
                 if (controleur.estEnPrison(joueurCourant) && joueurCourant.possedeCarteSortieDePrison() ) {
                     if ( IhmBoiteMessage.afficherBoiteDialogue("Vous possèdez une carte Sortie de prison.\nSouhaitez-vous l'utilisez pour sortir de prison ?", 1)) {
                         controleur.sortirPrison(joueurCourant);
@@ -106,6 +108,7 @@ public class IhmPlateau extends JFrame implements Observateur{
         
         construire = new JButton(" Construire ");
         construire.setMaximumSize(new Dimension(200,40));
+        construire.setEnabled(false);
         construire.addMouseListener(new MouseListener(){
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -130,10 +133,16 @@ public class IhmPlateau extends JFrame implements Observateur{
                 // gèrer fin de partie
                 joueurCourant = controleur.joueurSuivant(joueurCourant);
                 lancerDes.setEnabled(true);
-                construire.setEnabled(true);
+                if(!joueurCourant.getProprieteAConstruires().isEmpty()){
+                     construire.setEnabled(true);
+                     
+                }else{
+                    construire.setEnabled(false);
+                   
+                }
+                
                 tourSuivant.setEnabled(false);
                 joueurActuelle.updateIhmJoueurActuelle(joueurCourant);  
-                
             }
             @Override
             public void mousePressed(MouseEvent e) {}
@@ -152,8 +161,7 @@ public class IhmPlateau extends JFrame implements Observateur{
             public void mouseClicked(MouseEvent e) {
                 if (IhmBoiteMessage.afficherBoiteDialogue("Êtes-vous vraiment sûr(e) de vouloir quitter la partie ?", 2)) {
                     System.exit(0);                  
-                }  
-
+                }
             }
             @Override
             public void mousePressed(MouseEvent e) {}
@@ -229,15 +237,9 @@ public class IhmPlateau extends JFrame implements Observateur{
                 switch(resultat.getTypeResultat()){
                     case achat ://si le joueur peut acheter                        
                         if (IhmBoiteMessage.afficherBoiteDialogue("Vous êtes tombé(e) sur la propriété " + resultat.getPropriete().getNom()+".\nVoulez-vous acheter cette proprièté pour "+resultat.getPropriete().getPrix()+"€ ?", 1)) {
-                            resultat.getPropriete().setProprietaire(joueurCourant);
-//                            int i =0;
-//                            while(controleur.getJoueurs().get(i) != joueurCourant ){    //????
-//                                   i++;
-//                            }          
-//                            setJoueurCourant(controleur.getJoueurs().get(i));
-//                            joueurActuelle.updateIhmJoueurActuelle(joueurCourant);
-//                            updateInfoJoueurs(controleur.getJoueurs());
+                            resultat.getPropriete().achat(joueurCourant);//                          
                         }
+                    updateAffichage();
                     break;
                     
                     case loyer :// si le joueur doit payer le loyer 
@@ -287,7 +289,8 @@ public class IhmPlateau extends JFrame implements Observateur{
                             IhmBoiteMessage.afficherBoiteDialogue("Vous avez fait un double.\nVous rejouez.",0);
                             controleur.lancerDesAvancer(joueurCourant);
                         }
-                    }                     
+                    }  
+                updateAffichage();
                 break;
 
             case actionCarte :
@@ -314,23 +317,25 @@ public class IhmPlateau extends JFrame implements Observateur{
                         if (joueurCourant.getPositionCourante().getNumero() > resultatCarte.getValeur()) {
                             joueurCourant.gagnerCash(200);
                             IhmBoiteMessage.afficherBoiteDialogue("Vous êtes passez par la case départ.\nRecevez 200€.", 0); 
-                            joueurActuelle.updateIhmJoueurActuelle(joueurCourant);
+                            
                         }
+                        updateAffichage();
+                        break;
                     case deplacementSpecial :                           
                         joueurCourant.setPositionCourante(controleur.getCarreau(resultatCarte.getValeur()-1));
                         joueurCourant.aPiocherUneCarteDeplacement();                       
                         controleur.traiterActionCarreau( joueurCourant);
-                        joueurActuelle.updateIhmJoueurActuelle(joueurCourant);
+                        updateAffichage();
                         break;
                         
                     case perte :
                         IhmBoiteMessage.afficherBoiteDialogue("Vous perdez "+resultatCarte.getValeur()+"€.", 0);  
-                        joueurActuelle.updateIhmJoueurActuelle(joueurCourant);
+                        updateAffichage();
                         break;
                         
                     case gain :
                         IhmBoiteMessage.afficherBoiteDialogue("Vous gagnez "+resultatCarte.getValeur()+"€.", 0);
-                        joueurActuelle.updateIhmJoueurActuelle(joueurCourant);                        
+                        updateAffichage();                        
                         break;
                         
                     case anniversaire :
@@ -351,6 +356,7 @@ public class IhmPlateau extends JFrame implements Observateur{
                             }                           
                         }
                         IhmBoiteMessage.afficherBoiteDialogue("Vous gagnez "+somme+"€.\n"+joueurs+" ont/a perdu "+resultatCarte.getValeur()+"€.", 0);  
+                        updateAffichage();
                         break;
                 }
                 updateAffichage();  
@@ -369,7 +375,8 @@ public class IhmPlateau extends JFrame implements Observateur{
                 if (rejouer) {
                     IhmBoiteMessage.afficherBoiteDialogue("Vous avez fait un double.\nVous rejouez.",0);
                     controleur.lancerDesAvancer(joueurCourant);
-                }                  
+                }
+                updateAffichage();
                 break;
             }   
     }    
@@ -391,17 +398,27 @@ public class IhmPlateau extends JFrame implements Observateur{
     }
     
     public void updateInfoJoueurs(ArrayList<Joueur> joueurs){
-        for(IhmInfoJoueur panTemp : panelJoueurs){
-            for(Joueur jTemp : joueurs){
-                if(panTemp.getJoueur().getNomJoueur() ==jTemp.getNomJoueur() ){
-                    panTemp.updateJoueur(jTemp);                    
+        
+       
+        for(int i=0;i<panelJoueurs.size();i++){
+          
+            for(Joueur jTemp : joueurs){  
+               
+                if(panelJoueurs.get(i).getJoueur() ==jTemp ){           
+                   
+                    panelJoueurs.get(i).updateJoueur(jTemp);                    
                 }
-            }
+            } 
         }
+        
+            
     }
+    
     
     private void updateAffichage() {
         joueurActuelle.updateIhmJoueurActuelle(joueurCourant);
         updateInfoJoueurs(controleur.getJoueurs()); 
     }
+    
+     
 }

@@ -128,6 +128,7 @@ public class IhmInfoJoueur extends JPanel {
         nom.setText(joueur.getNomJoueur());
         positionCourante.setText(joueur.getPositionCourante().getNom());
         cash.setText(Integer.toString(joueur.getCash()));
+        
         initFenetre();
     }
     
