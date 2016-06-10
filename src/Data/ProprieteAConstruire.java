@@ -55,4 +55,8 @@ public class ProprieteAConstruire extends Propriete{
     public boolean peutConstruire() { //retourne vrai si le joueur peut construire, faux sinon
         return groupe.peutConstruire(this);
     }
+
+    public void construire() {
+        nbMaisons = nbMaisons + 1;
+    }
 }

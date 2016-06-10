@@ -7,21 +7,56 @@ package Ui;
 
 import Data.Joueur;
 import Data.ProprieteAConstruire;
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.HashSet;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  *
  * @author audeberl
  */
-public class IhmConstruire extends JFrame {
+public class IhmConstruire extends JFrame {;
     private Joueur joueur;
+    private HashSet<PanelPropriete> panels;
+    private JButton boutonValider;
+    private JButton boutonAnnuler;    
     
     public IhmConstruire(Joueur joueur) {
         super();
-        this.setSize(800, 800);
-        for (ProprieteAConstruire p : joueur.getProprieteAConstruires()) {
-            this.add(new IhmProprieteConstruire(p));
-        }
-        this.setVisible(true);
+        
+        this.joueur = joueur;
+        this.panels = new HashSet<PanelPropriete>();
+        
+        initComponent();       
     }
+
+    private void initComponent() {
+        this.setLayout(new BorderLayout());
+        
+       JPanel panel = new JPanel();   
+        for (ProprieteAConstruire p : joueur.getProprieteAConstruires()) {
+            PanelPropriete pan = new PanelPropriete(p,this);
+            panel.add(pan);
+            panels.add(pan);
+        }               
+        this.add(panel,BorderLayout.NORTH);
+        
+        afficher();
+    }
+    
+    public void afficher(){
+          this.setSize(1000, 800);
+          this.setVisible(true);
+    }
+    
+    public void update(){
+          for (PanelPropriete pan : panels) {
+              pan.update();
+          }
+    }      
 }
