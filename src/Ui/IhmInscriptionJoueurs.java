@@ -100,6 +100,7 @@ public class IhmInscriptionJoueurs extends JFrame {
                     panelJoueurs.remove(listePanelsJ.get(listePanelsJ.size() - 1));
                     listePanelsJ.remove(listePanelsJ.size() - 1);
                     panelPrincipal.revalidate();
+                    panelJoueurs.repaint();
                     nbJfield.setText(((Integer)nbJ).toString());
                 }
                     
