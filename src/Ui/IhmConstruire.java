@@ -17,8 +17,11 @@ public class IhmConstruire extends JFrame {
     private Joueur joueur;
     
     public IhmConstruire(Joueur joueur) {
+        super();
+        this.setSize(800, 800);
         for (ProprieteAConstruire p : joueur.getProprieteAConstruires()) {
             this.add(new IhmProprieteConstruire(p));
         }
+        this.setVisible(true);
     }
 }

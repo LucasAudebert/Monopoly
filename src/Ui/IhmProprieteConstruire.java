@@ -27,8 +27,7 @@ public class IhmProprieteConstruire extends JPanel {
     
     public IhmProprieteConstruire(ProprieteAConstruire p){
         super();               
-        initComponent(p);
-        
+        initComponent(p);        
     }
     
     public void initComponent(ProprieteAConstruire p){
@@ -36,7 +35,7 @@ public class IhmProprieteConstruire extends JPanel {
         
         nom = new JLabel("Nom : "+p.getNom());
         this.add(nom);
-        
+        System.out.println("test1");
         String chaine ="Construction(s) : ";
         if (p.getNbMaisons()==0) {
             chaine +="aucune";
