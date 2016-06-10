@@ -1,20 +1,9 @@
 package Data;
 
-/**
- *
- * @author Maxence
- */
 public class Gare extends Propriete {
 
     private int loyer ;
     
-    /**
-     *
-     * @param prix
-     * @param numero
-     * @param nomCarreau
-     * @param loyer
-     */
     public Gare(int prix, int numero, String nomCarreau, int loyer) {
         super(prix, numero, nomCarreau);
         this.loyer = loyer;
@@ -24,28 +13,14 @@ public class Gare extends Propriete {
         return loyer;
     }
     
-    /**
-     *
-     * @return le prix du loyer en fonction du nombre de gares que possède le proprietaire
-     */
     @Override
-    public int calculLoyer(Joueur joueur) {
-        System.out.println(super.getProprietaire().getNbGares());
-        System.out.println(getLoyer());
-        System.out.println(super.getProprietaire().getNbGares()*getLoyer());        
-        return super.getProprietaire().getNbGares() * getLoyer();
+    public int calculLoyer(Joueur joueur) { //calcul du loyer pour une gare        
+        return super.getProprietaire().getNbGares() * getLoyer(); //retourne le loyer calculé à partir du nombre de gares possédées par le proprietaire de la gare actuelle et du loyer d'une gare de base
     }	
 
-    /**
-     *
-     * @param joueur
-     * set le Joueur joueur comme proprietaire de la Gare
-     * ajouter la proprieté aux Gares du joueur
-     * fait payer le joueur le prix de la Gare 
-     */
     @Override
-    public void achat(Joueur joueur) {
-        super.achat(joueur);        
-        joueur.addGare(this); 
+    public void achat(Joueur joueur) { //achat pour une gare
+        super.achat(joueur); //achat de la proriété      
+        joueur.addGare(this); //ajout de la gare dans la collection de gares du joueur
     }
 }

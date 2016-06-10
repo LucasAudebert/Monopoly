@@ -20,7 +20,7 @@ public class Taxe extends AutreCarreau{
     
     @Override
     public Resultat action(Joueur joueur){
-        joueur.payer(valTaxe);
-        return new Resultat(this, joueur,EnumerationsMonopoly.TYPE_RESULTAT.taxe, valTaxe);
+        joueur.payer(valTaxe); //fait payer au joueur une taxe
+        return new Resultat(this, joueur,EnumerationsMonopoly.TYPE_RESULTAT.taxe, valTaxe); //retourne un résultat de type "taxe" contenant en plus la valeur de la taxe
     } 
 }

@@ -2,10 +2,6 @@ package Data;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author Maxence
- */
 public class ProprieteAConstruire extends Propriete{
 
     private Groupe groupe; 
@@ -13,15 +9,6 @@ public class ProprieteAConstruire extends Propriete{
     private int nbMaisons;
     private int prixMaison;
     
-    /**
-     *
-     * @param prix
-     * @param numero
-     * @param nomCarreau
-     * @param groupe
-     * @param loyer
-     * @param prixMaison
-     */
     public ProprieteAConstruire(int prix, int numero, String nomCarreau, Groupe groupe, ArrayList<Integer> loyer, int prixMaison) {
         super(prix, numero, nomCarreau);
         this.groupe = groupe;
@@ -30,10 +17,6 @@ public class ProprieteAConstruire extends Propriete{
         this.prixMaison = prixMaison;
     }
 
-    /**
-     *
-     * @return
-     */
     public int getLoyer() {
         return loyers.get(nbMaisons);
     }
@@ -42,16 +25,12 @@ public class ProprieteAConstruire extends Propriete{
         return nbMaisons;
     }
     
-    /**
-     *
-     * @return
-     */
     @Override
-    public int calculLoyer(Joueur joueur) {
-         if(groupe.memeProprietaire()){
-           return getLoyer()*2;
-         }else{
-           return  getLoyer();
+    public int calculLoyer(Joueur joueur) { //calcul du loyer pour une propriété à construire
+         if(groupe.memeProprietaire()){ //si le groupe de cette propriété contient des propriétés ayant toutes le même propriétaire
+           return getLoyer()*2; //retourne le loyer de la propriété doublé
+         }else{ //sinon
+           return  getLoyer(); //retourne le loyer simple
          }
     }
 
@@ -60,9 +39,9 @@ public class ProprieteAConstruire extends Propriete{
      * @param joueur
      */
     @Override
-    public void achat(Joueur joueur) {
-        super.achat(joueur);
-        joueur.addProprieteAConstruire(this);
+    public void achat(Joueur joueur) { //achat pour une propriété à construire
+        super.achat(joueur); //achat de la proriété
+        joueur.addProprieteAConstruire(this); //ajout de la propriété à construire dans la collection de propriétés à construire du joueur
     }
     
     public int getPrixMaison(){
@@ -73,4 +52,7 @@ public class ProprieteAConstruire extends Propriete{
         nbMaisons++;
     }
     
+    public boolean peutConstruire() { //retourne vrai si le joueur peut construire, faux sinon
+        return groupe.peutConstruire(this);
+    }
 }

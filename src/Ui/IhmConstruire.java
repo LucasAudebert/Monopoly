@@ -6,6 +6,7 @@
 package Ui;
 
 import Data.Joueur;
+import Data.ProprieteAConstruire;
 import javax.swing.JFrame;
 
 /**
@@ -16,6 +17,8 @@ public class IhmConstruire extends JFrame {
     private Joueur joueur;
     
     public IhmConstruire(Joueur joueur) {
-        
+        for (ProprieteAConstruire p : joueur.getProprieteAConstruires()) {
+            this.add(new IhmProprieteConstruire(p));
+        }
     }
 }

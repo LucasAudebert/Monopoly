@@ -1,29 +1,17 @@
 package Data;
 
-/**
- *
- * @author Maxence
- */
+
 public abstract class Carreau {
 	private int numero;
 	private String nomCarreau;
         
-    /**
-     *
-     * @param numero
-     * @param nomCarreau
-     */
+        
     public Carreau(int numero, String nomCarreau){
             this.numero = numero;
             this.nomCarreau = nomCarreau;
         }
         
-    /**
-     *
-     * @param joueur
-     * @return
-     */
-    public abstract Resultat action(Joueur joueur);
+    public abstract Resultat action(Joueur joueur); //renvoie un résultat dont le type sera défini par redéfinition puis sera analysé par le controleur
         
     public int getNumero(){
             return numero;
