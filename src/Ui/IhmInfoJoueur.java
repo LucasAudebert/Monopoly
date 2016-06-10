@@ -12,6 +12,7 @@ import Data.Gare;
 import Data.Joueur;
 import Data.ProprieteAConstruire;
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.util.HashMap;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -60,20 +61,22 @@ public class IhmInfoJoueur extends JPanel {
         
     }
     public void initFenetre(){
-        
+        this.setBackground(Color.gray);
         this.setBorder(BorderFactory.createLineBorder(Color.black));
-      this.setLayout(new BoxLayout(this,BoxLayout.PAGE_AXIS));
-    
+        this.setLayout(new BoxLayout(this,BoxLayout.PAGE_AXIS));
+         
        
         
         JPanel panNom = new JPanel();
         panNom.setLayout(new BoxLayout(panNom,BoxLayout.LINE_AXIS));
+        panNom.setAlignmentX( this.LEFT_ALIGNMENT );
         panNom.add(new JLabel("Joueur : "));
         panNom.add(nom);
         this.add(panNom);
         
         JPanel panCash = new JPanel();
         panCash.setLayout(new BoxLayout(panCash,BoxLayout.X_AXIS));
+        panCash.setAlignmentX( this.LEFT_ALIGNMENT );
         panCash.add(new JLabel("Votre argent : "));
         panCash.add(cash);
         this.add(panCash);
@@ -81,12 +84,14 @@ public class IhmInfoJoueur extends JPanel {
       
         JPanel panPosition = new JPanel();
         panPosition.setLayout(new BoxLayout(panPosition,BoxLayout.LINE_AXIS));
+        panPosition.setAlignmentX( this.LEFT_ALIGNMENT );
         panPosition.add(new JLabel("Position actuelle  : "));
         panPosition.add(positionCourante);
         this.add(panPosition);
       
         JPanel panCompagnie = new JPanel();
         panCompagnie.setLayout(new BoxLayout(panCompagnie,BoxLayout.LINE_AXIS));
+        panCompagnie.setAlignmentX( this.LEFT_ALIGNMENT );
         panCompagnie.add(new JLabel("Nombre de compagnie : "));
         panCompagnie.add(nbCompagnie);
         this.add(panCompagnie);
@@ -94,17 +99,21 @@ public class IhmInfoJoueur extends JPanel {
         
         JPanel panGare = new JPanel();
         panGare.setLayout(new BoxLayout(panGare,BoxLayout.LINE_AXIS));
+        panGare.setAlignmentX( this.LEFT_ALIGNMENT );
         panGare.add(new JLabel("Nombre de gare : "));
         panGare.add(nbGare);
         this.add(panGare);
         
         JPanel panProp = new JPanel();
         panProp.setLayout(new BoxLayout(panProp,BoxLayout.LINE_AXIS));
+        panProp.setAlignmentX( this.LEFT_ALIGNMENT );
         panProp.add(new JLabel("Nombre de Proprieté constructible : "));
         panProp.add(nbPropriete);
         this.add(panProp);
         
-       
+        
+        this.setOpaque(false);
+
        
        afficher();
         

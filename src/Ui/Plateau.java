@@ -78,9 +78,10 @@ public class Plateau extends Canvas {
         } catch (IOException ex) {
             Logger.getLogger(Plateau.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
-        g.drawImage(plateau, 0,0, null);
-        //g.drawImage(desACoudre, dim.height -50,50, null);
+        int x = (int)((getWidth()/2) -(plateau.getHeight(null)/2));
+        int y = (int)((getHeight()/2) - (plateau.getHeight(null)/2));
+        g.drawImage(plateau,x,y, null);
+      
         
         
         

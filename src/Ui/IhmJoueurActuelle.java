@@ -44,16 +44,9 @@ public final class IhmJoueurActuelle extends JPanel{
         panCash.setLayout(new BoxLayout(panCash,BoxLayout.X_AXIS));
         
         JPanel panNom = new JPanel();
-        panNom.setLayout(new BoxLayout(panNom,BoxLayout.X_AXIS));
-        
-        
-        
-       
+        panNom.setLayout(new BoxLayout(panNom,BoxLayout.X_AXIS)); 
         panNom.add(new JLabel("C'est au tour de "));
         panNom.add(nom);
-       
-      
-        
         panCash.add(new JLabel("Cash : "));
         panCash.add(cash);
        
@@ -61,6 +54,8 @@ public final class IhmJoueurActuelle extends JPanel{
         this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         this.add(panNom);
         this.add(panCash);
+        this.setOpaque(false);
+
         afficher();
         
     }

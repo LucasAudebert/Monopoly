@@ -11,11 +11,14 @@ import Data.Joueur;
 import Data.Resultat;
 import Jeu.Controleur;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -55,24 +58,27 @@ public class IhmPlateau extends JFrame implements Observateur{
         
         this.setLayout(new BorderLayout());
             
-        JPanel panelJoueurs = new JPanel();     
+        JPanel panelJoueurs = new JPanel(); 
+        GridLayout layout = new GridLayout(6, 1);
+        layout.setVgap(30);
+        panelJoueurs.setLayout(layout);
+        panelJoueurs.setBorder(BorderFactory.createEmptyBorder(20, 20, 0, 0));
         
-        if(controleur.getJoueurs().size() == 2){
-             panelJoueurs.setLayout(new GridLayout(1,2));
-        }else if(controleur.getJoueurs().size()<=4){
-            panelJoueurs.setLayout(new GridLayout(2,2));
-        }else if(controleur.getJoueurs().size()>4){
-            panelJoueurs.setLayout(new GridLayout(3,2));
-        }
+        
+       
         
         panTour = new JPanel();
-        joueurActuelle = new IhmJoueurActuelle(joueurCourant);
-        
         panTour.setLayout(new BoxLayout(panTour,BoxLayout.Y_AXIS));
-        panTour.add(joueurActuelle);
+        panTour.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 20));
+        
+        
+        
+       
+       
         
         lancerDes = new JButton("Lancer Dès");
         lancerDes.setMaximumSize(new Dimension(200,40));
+        
         
         lancerDes.addMouseListener(new MouseListener(){
             @Override
@@ -109,6 +115,7 @@ public class IhmPlateau extends JFrame implements Observateur{
         construire = new JButton(" Construire ");
         construire.setMaximumSize(new Dimension(200,40));
         construire.setEnabled(false);
+        
         construire.addMouseListener(new MouseListener(){
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -134,13 +141,10 @@ public class IhmPlateau extends JFrame implements Observateur{
                 joueurCourant = controleur.joueurSuivant(joueurCourant);
                 lancerDes.setEnabled(true);
                 if(!joueurCourant.getProprieteAConstruires().isEmpty()){
-                     construire.setEnabled(true);
-                     
+                     construire.setEnabled(true);                     
                 }else{
-                    construire.setEnabled(false);
-                   
-                }
-                
+                    construire.setEnabled(false);                   
+                }                
                 tourSuivant.setEnabled(false);
                 joueurActuelle.updateIhmJoueurActuelle(joueurCourant);  
             }
@@ -173,22 +177,38 @@ public class IhmPlateau extends JFrame implements Observateur{
             public void mouseExited(MouseEvent e) {}
         }); 
         
-        panTour.add(lancerDes);        
-        panTour.add(construire);        
-        panTour.add(tourSuivant);        
+        
+        joueurActuelle = new IhmJoueurActuelle(joueurCourant);        
+        panTour.add(joueurActuelle);
+        panTour.setAlignmentX( joueurActuelle.CENTER_ALIGNMENT );
+        
+        panTour.add(lancerDes); 
+        panTour.setAlignmentX( lancerDes.CENTER_ALIGNMENT );
+        
+        panTour.add(construire);
+        panTour.setAlignmentX( construire.CENTER_ALIGNMENT );
+        
+        panTour.add(tourSuivant);
+        panTour.setAlignmentX( tourSuivant.CENTER_ALIGNMENT );
+        
         panTour.add(quitter);
-       
+        panTour.setAlignmentX( quitter.CENTER_ALIGNMENT );
+        
         for(Joueur jTemp : controleur.getJoueurs()){
             IhmInfoJoueur ihmJoueur = new IhmInfoJoueur((Joueur)jTemp);      
             InfoJoueurs.add(ihmJoueur);
             panelJoueurs.add(ihmJoueur);   
         }
-       
+        
+        
         Plateau plateau = new Plateau();
         
+        Color fond = new Color(213,231,207);
+        this.setBackground(Color.BLACK);
         this.add(panelJoueurs,BorderLayout.WEST);
         this.add(plateau,BorderLayout.CENTER);
         this.add(panTour,BorderLayout.EAST);
+        this.pack();
         afficher();
         
         
