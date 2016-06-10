@@ -10,6 +10,8 @@ import Jeu.Controleur;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -35,7 +37,9 @@ public class IhmTroisPointZero extends JFrame {
     private JButton inscrireJoueur;
     private JButton demarrerPartie;
     private JButton quitter;
+    private JButton validerInscription;
     private ArrayList<String> nomJs;
+    private IhmInscriptionJoueurs ihmIJ;
    
     
      public IhmTroisPointZero(Controleur controleur){
@@ -45,60 +49,24 @@ public class IhmTroisPointZero extends JFrame {
         nomJs = new ArrayList<>();        
         afficherMenu();
         
+        ihmIJ = new IhmInscriptionJoueurs();
+        validerInscription = new JButton("Valider Inscription");        
+        ihmIJ.add(validerInscription, BorderLayout.SOUTH);
+        validerInscription.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(ihmIJ.verification()){
+                    nomJs = ihmIJ.getJoueurs();
+                    ihmIJ.setVisible(false);
+                }
+            }
+        });
+        
         inscrireJoueur.addMouseListener( new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 nomJs.clear();
-                String[] nbJoueur =  {"2","3","4","5","6"};
-                JOptionPane jopNombreJoueur = new JOptionPane();
-                
-                String nbJ = (String)jopNombreJoueur.showInputDialog(null,
-                  " Etape 1 - Veuillez selectionner le nombre de joueur !",
-                  " Etape 1 - Selection du nombre de joueur ",
-                  JOptionPane.QUESTION_MESSAGE,
-                  null,
-                  nbJoueur,
-                  nbJoueur[0]);
-                if(nbJ != null){
-                    for(int i = 1; i <= Integer.parseInt(nbJ); i++){
-                        JOptionPane jopNomJoueurs = new JOptionPane();
-                        String nom = jopNomJoueurs.showInputDialog(null,
-                                "Etape 2 - Veuillez Saisir le nom du joueur n° "+i,
-                                "Etape 2 - Saisir le nom du joueur",
-                                JOptionPane.QUESTION_MESSAGE);
-                        JOptionPane jopErreurSaisie = new JOptionPane();
-                        if(nom == null){                            
-                                jopErreurSaisie.showMessageDialog(null,
-                                "Erreur  saisie vide, recommencez",
-                                "Erreur de saisie, recommencez" ,
-                                JOptionPane.WARNING_MESSAGE);                       
-                                i--;
-                        }else{
-                            if(!(nomJs.contains(nom) || nom.equals(""))){
-                              nomJs.add(nom);
-                            }else{
-                                jopErreurSaisie.showMessageDialog(null,
-                                "Erreur nom déjà saisie ou vide, recommencez",
-                                "Erreur de saisie, recommencez" ,
-                                JOptionPane.WARNING_MESSAGE);                       
-                                i--;
-                            }     
-                        }                              
-                    }
-                    
-                    JOptionPane jopVerification = new JOptionPane();
-                    String listeNom = " ";
-                    for(String nom : nomJs ){
-                        listeNom += "\n" + " - "+nom;
-                    }
-                    jopVerification.showMessageDialog(null,
-                            "Les joueurs sont :  "+listeNom ,
-                            "Etapes 3 - Verification des noms" ,
-                            JOptionPane.INFORMATION_MESSAGE);     
-                    if(nomJs.size() != 0){
-                        demarrerPartie.setEnabled(true);
-                    }
-                }
+                ihmIJ.setVisible(true);               
             }
             @Override
             public void mousePressed(MouseEvent e) {}
@@ -208,5 +176,8 @@ public class IhmTroisPointZero extends JFrame {
         ihm.afficher();
     }
 
+    public void loadJoueurs(ArrayList joueurs){
+        this.nomJs = joueurs;
+    }
     
 }

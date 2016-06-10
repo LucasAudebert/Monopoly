@@ -87,7 +87,15 @@ public class PanelJoueurPourInscription extends JPanel {
     public String getNom() {
         return nom.getText();
     }
-
+    
+    public JTextField getNomField(){
+        return nom;
+    }
+    
+    public JLabel getImage(){
+        return image;
+    }
+    
     public void setIcon(ImageIcon icon) {
         image.setIcon(icon);
     }

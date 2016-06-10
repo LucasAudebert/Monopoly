@@ -41,10 +41,9 @@ import javax.swing.SpringLayout;
  *
  * @author blachert
  */
-public class IhmInscriptionJoueurs {
+public class IhmInscriptionJoueurs extends JFrame {
     
     private JPanel panelPrincipal, panelNbJoueurs, panelNorth, panelJoueurs;
-    private JFrame frame;
     private BoutonImage boutonPlus, boutonMoins;
     private JLabel nbJfield;
     private ArrayList<PanelJoueurPourInscription> listePanelsJ;
@@ -57,12 +56,12 @@ public class IhmInscriptionJoueurs {
         listeImagesPions = new ArrayList<ImageIcon>();
         loadImages();
         
-        frame = new JFrame();
-        frame.setLayout(new BorderLayout());
-        frame.setDefaultCloseOperation(javax.swing.JFrame.HIDE_ON_CLOSE);
-        frame.setSize(300, 550);
-        frame.setResizable(false);
-        frame.setTitle("Inscription des joueurs");
+        
+        this.setLayout(new BorderLayout());
+        this.setDefaultCloseOperation(javax.swing.JFrame.HIDE_ON_CLOSE);
+        this.setSize(300, 550);
+        this.setResizable(false);
+        this.setTitle("Inscription des joueurs");
         
         panelPrincipal = new JPanel(new BorderLayout());
         panelNorth = new JPanel();
@@ -80,8 +79,8 @@ public class IhmInscriptionJoueurs {
         panelJoueurs = new JPanel(new GridLayout(6, 1));
         panelPrincipal.add(panelJoueurs, BorderLayout.CENTER);
         panelPrincipal.add(panelNorth, BorderLayout.NORTH);
-        frame.add(Box.createRigidArea(new Dimension(100,10)), BorderLayout.NORTH);
-        frame.add(panelPrincipal, BorderLayout.CENTER);
+        this.add(Box.createRigidArea(new Dimension(100,10)), BorderLayout.NORTH);
+        this.add(panelPrincipal, BorderLayout.CENTER);
         //boutonPlus.repaint();
         //boutonMoins.repaint();
         for(int i = 0; i < nbJ; i++){
@@ -89,19 +88,9 @@ public class IhmInscriptionJoueurs {
         }
         
         btnValider = new JButton("Valider");
-        frame.add(btnValider, BorderLayout.SOUTH);
-        frame.setVisible(true);
+        this.add(btnValider, BorderLayout.SOUTH);
+        this.setVisible(false);
         
-        
-        btnValider.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(verification()){
-                    
-                }
-            }
-            
-        });
         
         boutonMoins.addMouseListener(new MouseListener(){
             @Override
@@ -111,7 +100,6 @@ public class IhmInscriptionJoueurs {
                     panelJoueurs.remove(listePanelsJ.get(listePanelsJ.size() - 1));
                     listePanelsJ.remove(listePanelsJ.size() - 1);
                     panelPrincipal.revalidate();
-                    frame.repaint();
                     nbJfield.setText(((Integer)nbJ).toString());
                 }
                     
@@ -262,11 +250,13 @@ public class IhmInscriptionJoueurs {
         return joueurs;
     }
     
-    private boolean verification(){
+    public boolean verification(){
         boolean verified = true;
         for(PanelJoueurPourInscription pJ : listePanelsJ){
             pJ.setTextBorderColor(Color.GREEN);
             pJ.setPionBorderColor(Color.GREEN);
+            pJ.getNomField().setToolTipText("Saisie valide");
+            pJ.getImage().setToolTipText("Pion valide");
         }
         for(PanelJoueurPourInscription pJ1 : listePanelsJ){
             for(PanelJoueurPourInscription pJ2 : listePanelsJ){
@@ -274,18 +264,23 @@ public class IhmInscriptionJoueurs {
                     if( pJ1.getNom().compareTo(pJ2.getNom()) == 0){
                         verified = false;
                         pJ1.setTextBorderColor(Color.RED);
+                        pJ1.getNomField().setToolTipText("Vous ne pouvez pas posséder le même nom qu'une autre personne");
                         pJ2.setTextBorderColor(Color.RED);
+                        pJ2.getNomField().setToolTipText("Vous ne pouvez pas posséder le même nom qu'une autre personne");
                     }
                     if(pJ1.getIcon() == pJ2.getIcon()){
                         verified = false;
                         pJ1.setPionBorderColor(Color.RED);
                         pJ2.setPionBorderColor(Color.RED);
+                        pJ1.getImage().setToolTipText("Vous ne pouvez pas posséder le même pion qu'une autre personne");
+                        pJ1.getImage().setToolTipText("Vous ne pouvez pas posséder le même pion qu'une autre personne");
                     }
                 }
             }
             if(pJ1.getNom().compareTo("") == 0){
                 verified = false;
                 pJ1.setTextBorderColor(Color.RED);
+                pJ1.getNomField().setToolTipText("Veuillez saisir un nom");
             }
         }
         return verified;
