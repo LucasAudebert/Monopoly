@@ -18,7 +18,7 @@ public class AllerEnPrison extends AutreCarreau{
     @Override
     public Resultat action(Joueur joueur) {
         
-        return new Resultat(this, joueur,EnumerationsMonopoly.TYPE_RESULTAT.allerEnPrison);
+        return new Resultat(this, joueur,EnumerationsMonopoly.TYPE_RESULTAT.allerEnPrison); //renvoie un résultat de type "allerEnPrison" qui sera analysé par le controleur
     }
     
 }
