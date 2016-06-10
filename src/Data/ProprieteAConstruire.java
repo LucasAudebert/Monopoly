@@ -73,4 +73,7 @@ public class ProprieteAConstruire extends Propriete{
         nbMaisons++;
     }
     
+    public boolean peutConstruire() {
+        return groupe.peutConstruire(this);
+    }
 }
