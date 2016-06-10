@@ -28,8 +28,7 @@ public final class IhmJoueurActuelle extends JPanel{
     private JLabel argent;
     
     public IhmJoueurActuelle(Joueur joueur){
-        super();
-        
+        super();        
         nom = new JLabel();
         nom.setText(joueur.getNomJoueur());
         
@@ -40,6 +39,7 @@ public final class IhmJoueurActuelle extends JPanel{
        
     }
     public void initComponent(){
+        System.out.println("test1");
         JPanel panCash = new JPanel();
         panCash.setLayout(new BoxLayout(panCash,BoxLayout.X_AXIS));
         
@@ -64,12 +64,10 @@ public final class IhmJoueurActuelle extends JPanel{
         afficher();
         
     }
-    public void updateIhmJoueurActuelle(Joueur joueur){
-        nom.setText(joueur.getNomJoueur());
-      
+    public void updateIhmJoueurActuelle(Joueur joueur){           
         cash.setText(Integer.toString(joueur.getCash()));
         
-        repaint();
+        
     }
 
     private void afficher() {

@@ -32,8 +32,7 @@ public class IhmInfoJoueur extends JPanel {
     private HashMap<String,JLabel> proprietes;
     private HashMap<String,JLabel> compagnies;
     
-    public IhmInfoJoueur(Joueur joueur){
-        System.out.println("testmachine ");
+    public IhmInfoJoueur(Joueur joueur){      
        this.joueur = joueur;
        nom = new JLabel();
        nom.setText(joueur.getNomJoueur());
