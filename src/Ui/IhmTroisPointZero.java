@@ -95,9 +95,8 @@ public class IhmTroisPointZero extends JFrame {
                             "Les joueurs sont :  "+listeNom ,
                             "Etapes 3 - Verification des noms" ,
                             JOptionPane.INFORMATION_MESSAGE);     
-                   if(nomJs.size() != 0){
-                    controleur.inscrireJoueurs(nomJs);
-                    demarrerPartie.setEnabled(true);
+                    if(nomJs.size() != 0){
+                        demarrerPartie.setEnabled(true);
                     }
                 }
             }
@@ -114,8 +113,8 @@ public class IhmTroisPointZero extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if(nomJs.size() != 0){
-                    IhmPlateau ihmPlateau = new IhmPlateau(controleur);
-                    
+                    controleur.inscrireJoueurs(nomJs);
+                    IhmPlateau ihmPlateau = new IhmPlateau(controleur);                    
                 }
                 
             }
