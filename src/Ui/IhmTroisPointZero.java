@@ -10,6 +10,7 @@ import Jeu.Controleur;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -40,7 +41,7 @@ public class IhmTroisPointZero extends JFrame {
     private JButton quitter;
     private JButton validerInscription;
     private ArrayList<String> nomJs;
-    private HashMap<String, ImageIcon> pionJs;
+    private HashMap<String, Image> pionJs;
     private IhmInscriptionJoueurs ihmIJ;
    
     

@@ -1,8 +1,8 @@
 package Data;
 
 import Data.Cartes.Carte;
+import java.awt.Image;
 import java.util.HashSet;
-import javax.swing.ImageIcon;
 
 public class Joueur {
 	private String nomJoueur;
@@ -16,9 +16,9 @@ public class Joueur {
         private int compteurEssaiPrison = 0;
         private Carte carteSortieDePrison;
         private boolean piocheCarteDeplacement;
-        private ImageIcon imagePion;
+        private Image imagePion;
 
-    public Joueur(String nomJoueur, Carreau carreauDepart, ImageIcon imagePion){
+    public Joueur(String nomJoueur, Carreau carreauDepart, Image imagePion){
             this.imagePion = imagePion;
             this.nomJoueur = nomJoueur;
             this.positionCourante = carreauDepart;

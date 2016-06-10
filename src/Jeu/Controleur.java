@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import Data.Cartes.*;
 import Ui.IhmBoiteMessage;
 import Ui.Message;
+import java.awt.Image;
 import java.util.HashMap;
 import javax.swing.ImageIcon;
 
@@ -150,7 +151,7 @@ public class Controleur {
 		return data;
 	}
            
-        public void inscrireJoueurs(ArrayList<String> nomJoueurs, HashMap<String, ImageIcon> pions){                                             
+        public void inscrireJoueurs(ArrayList<String> nomJoueurs, HashMap<String, Image> pions){                                             
                 for(String nomTemp : nomJoueurs){
                     monopoly.addJoueur(new Joueur(nomTemp, monopoly.getCarreau(0), pions.get(nomTemp)));
                 }
