@@ -27,7 +27,7 @@ public class Resultat {
         this.propriete = propriete;
     }
 
-    public Resultat(Propriete propriete, Joueur joueur, EnumerationsMonopoly.TYPE_RESULTAT type, int loyer){
+    public Resultat(Propriete propriete, Joueur joueur, EnumerationsMonopoly.TYPE_RESULTAT type, int loyer){ //résultat basique pour une Propriété contenant en plus le loyer
         update(joueur, type);
         this.propriete = propriete;
         this.loyer = loyer;
@@ -38,13 +38,13 @@ public class Resultat {
         this.autreCarreau = autreCarreau;
     }    
 
-    public Resultat(AutreCarreau autreCarreau, Joueur joueur, EnumerationsMonopoly.TYPE_RESULTAT type, int taxe){
+    public Resultat(AutreCarreau autreCarreau, Joueur joueur, EnumerationsMonopoly.TYPE_RESULTAT type, int taxe){ //résultat basique pour un AutreCarreau contenant en plus une taxe
         update(joueur, type);
         this.autreCarreau = autreCarreau;
         this.taxe = taxe;
     }   
     
-    public void update(Joueur joueur, EnumerationsMonopoly.TYPE_RESULTAT type){
+    public void update(Joueur joueur, EnumerationsMonopoly.TYPE_RESULTAT type){ //modifie le résultat
         this.joueur = joueur;
         typeResultat = type;
     }

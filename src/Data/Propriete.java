@@ -7,21 +7,11 @@ package Data;
 
 import Data.EnumerationsMonopoly.TYPE_RESULTAT;
 
-/**
- *
- * @author blachert
- */
 public abstract class Propriete extends Carreau {
     
     private int prix;
     private Joueur proprietaire;
     
-    /**
-     *
-     * @param prix
-     * @param numero
-     * @param nomCarreau
-     */
     public Propriete(int prix, int numero, String nomCarreau){
         super(numero, nomCarreau);
         this.prix = prix;
@@ -35,16 +25,11 @@ public abstract class Propriete extends Carreau {
 
     }
     
-    /**
-     *
-     * @param joueur
-     * @return ResultatPropriete 
-     */
     public Resultat achatPossible(Joueur joueur){
-        if (joueur.peutPayer(prix)){
-            return new Resultat(this, joueur, TYPE_RESULTAT.achat);
-        }else{
-            return new Resultat(this, joueur, TYPE_RESULTAT.neRienFaire);
+        if (joueur.peutPayer(prix)){ //si le joueur peut payer la propriété actuelle
+            return new Resultat(this, joueur, TYPE_RESULTAT.achat); //retourne un résultat de type "achat"
+        }else{ //sinon
+            return new Resultat(this, joueur, TYPE_RESULTAT.neRienFaire); //retourne un résultat de type "neRienFaire"
         }
     }
     
@@ -60,20 +45,14 @@ public abstract class Propriete extends Carreau {
         return prix;
     }
    
-    /**
-     *
-     * @param joueur
-     * @return
-     */
     @Override
     public Resultat action(Joueur joueur) {
-        if(this.getProprietaire() == null){
-            return achatPossible(joueur);
-        }else if (this.getProprietaire() != joueur){
-            return new Resultat(this, joueur, TYPE_RESULTAT.loyer, calculLoyer(joueur));
-        }else {// Si le joueur est proprietaire
-            
-            return new Resultat(this, joueur, TYPE_RESULTAT.neRienFaire);
+        if(this.getProprietaire() == null){ //si la propriété n'a pas de propriétaire
+            return achatPossible(joueur); //vérifie si le joueur peut éventuellement l'acheter
+        }else if (this.getProprietaire() != joueur){ //si le propriétaire de la propriété est différent du joueur actuel
+            return new Resultat(this, joueur, TYPE_RESULTAT.loyer, calculLoyer(joueur)); //retourne un résultat de type "loyer" contenant le calcul du loyer pour cette propriété
+        }else { //si le joueur est proprietaire            
+            return new Resultat(this, joueur, TYPE_RESULTAT.neRienFaire); //retourne un résultat de type "neRienFaire"
         }
     }
 }
