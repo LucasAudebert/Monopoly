@@ -207,4 +207,8 @@ public class Joueur {
             return true;
         }
     }
+    
+    public int getNombreProprieteAConstruire() {
+        return proprietesAConstruire.size();
+    }
 }
