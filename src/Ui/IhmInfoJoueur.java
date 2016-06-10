@@ -26,11 +26,13 @@ import javax.swing.JPanel;
 public class IhmInfoJoueur extends JPanel {
     private JLabel nom;
     private JLabel cash;
-    private JLabel positionCourante;
+    private JLabel positionCourante;    
+    private JLabel nbGare;
+    private JLabel nbCompagnie;
+    private JLabel nbPropriete;
+    
     private Joueur joueur;
-    private HashMap<String,JLabel> gares;
-    private HashMap<String,JLabel> proprietes;
-    private HashMap<String,JLabel> compagnies;
+    
     
     public IhmInfoJoueur(Joueur joueur){      
        this.joueur = joueur;
@@ -42,9 +44,17 @@ public class IhmInfoJoueur extends JPanel {
        
        positionCourante = new JLabel();
        positionCourante.setText(joueur.getPositionCourante().getNom());
-       compagnies = new HashMap();
-       proprietes = new HashMap();
-       gares = new HashMap();
+       
+       nbGare = new JLabel();
+       nbGare.setText(Integer.toString(joueur.getNbGares()));
+       
+       nbCompagnie = new JLabel();
+       nbCompagnie.setText(Integer.toString(joueur.getNbCompagnies()));
+       
+       nbPropriete = new JLabel();
+       nbPropriete.setText(Integer.toString(joueur.getNombreProprieteAConstruire()));
+       
+       
        initFenetre();       
       
         
@@ -75,44 +85,26 @@ public class IhmInfoJoueur extends JPanel {
         panPosition.add(positionCourante);
         this.add(panPosition);
       
-        this.add(new JLabel("Compagnie : "));
+        JPanel panCompagnie = new JPanel();
+        panCompagnie.setLayout(new BoxLayout(panCompagnie,BoxLayout.LINE_AXIS));
+        panCompagnie.add(new JLabel("Nombre de compagnie : "));
+        panCompagnie.add(nbCompagnie);
+        this.add(panCompagnie);
         
         
-        if(joueur.getCompagnies().isEmpty()){          
-           this.add(new JLabel("    Pas de compagnies"));            
-        }else{
-            for(Compagnie cTemp : joueur.getCompagnies()){
-                 JLabel compagnie = new JLabel("     "+cTemp.getNom());                 
-                 compagnies.put(cTemp.getNom(),compagnie);
-                 this.add(compagnie);          
-            }
-        }
+        JPanel panGare = new JPanel();
+        panGare.setLayout(new BoxLayout(panGare,BoxLayout.LINE_AXIS));
+        panGare.add(new JLabel("Nombre de gare : "));
+        panGare.add(nbGare);
+        this.add(panGare);
         
+        JPanel panProp = new JPanel();
+        panProp.setLayout(new BoxLayout(panProp,BoxLayout.LINE_AXIS));
+        panProp.add(new JLabel("Nombre de Proprieté constructible : "));
+        panProp.add(nbPropriete);
+        this.add(panProp);
         
        
-       this.add(new JLabel("Gares : "));
-        if(joueur.getGares().isEmpty()){
-            this.add(new JLabel("    Pas de gares"));
-        }else{
-             for(Gare gTemp : joueur.getGares()){
-                 JLabel gare = new JLabel("     "+gTemp.getNom());                 
-                 gares.put(gTemp.getNom(),gare);
-                 this.add(gare);
-            }
-        }
-       
-       
-        this.add(new JLabel("Proprieté à construire : "));
-        if(joueur.getGares().isEmpty()){
-            this.add(new JLabel("    Pas de proprieté à construire"));
-        }else{
-            for(ProprieteAConstruire pTemp : joueur.getProprieteAConstruires() ){
-                 JLabel prop = new JLabel("     "+pTemp.getNom());                 
-                 proprietes.put(pTemp.getNom(),prop);
-                 this.add(prop);
-                    
-            }
-        }
        
        afficher();
         
@@ -126,9 +118,12 @@ public class IhmInfoJoueur extends JPanel {
         this.joueur = joueur;
         nom.setText(joueur.getNomJoueur());
         positionCourante.setText(joueur.getPositionCourante().getNom());
-        cash.setText(Integer.toString(joueur.getCash()));
+        cash.setText(Integer.toString(joueur.getCash()));        
+        nbCompagnie.setText(Integer.toString(joueur.getNbCompagnies()));
+        nbGare.setText(Integer.toString(joueur.getNbGares()));
+        nbPropriete.setText(Integer.toString(joueur.getNombreProprieteAConstruire()));
         
-        initFenetre();
+       
     }
     
     public void afficher(){

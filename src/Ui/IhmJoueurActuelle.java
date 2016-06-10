@@ -64,7 +64,8 @@ public final class IhmJoueurActuelle extends JPanel{
         afficher();
         
     }
-    public void updateIhmJoueurActuelle(Joueur joueur){           
+    public void updateIhmJoueurActuelle(Joueur joueur){  
+        nom.setText(joueur.getNomJoueur());
         cash.setText(Integer.toString(joueur.getCash()));
         
         
