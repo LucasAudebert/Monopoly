@@ -30,7 +30,7 @@ import javax.swing.JPanel;
 public class IhmPlateau extends JFrame implements Observateur{
     private Controleur controleur;
 
-    private ArrayList<IhmInfoJoueur> panelJoueurs;
+    private ArrayList<IhmInfoJoueur> InfoJoueurs;
     private JPanel panTour;
     private JButton lancerDes;
     private JButton construire;
@@ -44,7 +44,7 @@ public class IhmPlateau extends JFrame implements Observateur{
     public IhmPlateau(Controleur controleur){
         this.controleur = controleur;
         controleur.setObservateur(this);
-        panelJoueurs = new ArrayList<>();
+        InfoJoueurs = new ArrayList<>();
         joueurCourant = controleur.getJoueurs().get(0); 
         
         ititIhmPlateau();
@@ -179,7 +179,8 @@ public class IhmPlateau extends JFrame implements Observateur{
         panTour.add(quitter);
        
         for(Joueur jTemp : controleur.getJoueurs()){
-            IhmInfoJoueur ihmJoueur = new IhmInfoJoueur((Joueur)jTemp);                  
+            IhmInfoJoueur ihmJoueur = new IhmInfoJoueur((Joueur)jTemp);      
+            InfoJoueurs.add(ihmJoueur);
             panelJoueurs.add(ihmJoueur);   
         }
        
@@ -398,15 +399,12 @@ public class IhmPlateau extends JFrame implements Observateur{
     }
     
     public void updateInfoJoueurs(ArrayList<Joueur> joueurs){
-        
+        System.out.println(InfoJoueurs.size());
        
-        for(int i=0;i<panelJoueurs.size();i++){
-          
-            for(Joueur jTemp : joueurs){  
-               
-                if(panelJoueurs.get(i).getJoueur() ==jTemp ){           
-                   
-                    panelJoueurs.get(i).updateJoueur(jTemp);                    
+        for(int i=0;i<InfoJoueurs.size();i++){          
+            for(Joueur jTemp : joueurs){                
+                if(InfoJoueurs.get(i).getJoueur() ==jTemp ){
+                    InfoJoueurs.get(i).updateJoueur(jTemp);                    
                 }
             } 
         }
