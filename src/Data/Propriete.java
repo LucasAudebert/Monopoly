@@ -72,7 +72,7 @@ public abstract class Propriete extends Carreau {
         }else if (this.getProprietaire() != joueur){
             return new Resultat(this, joueur, TYPE_RESULTAT.loyer, calculLoyer(joueur));
         }else {// Si le joueur est proprietaire
-            System.out.print("Propriètaire");
+            
             return new Resultat(this, joueur, TYPE_RESULTAT.neRienFaire);
         }
     }

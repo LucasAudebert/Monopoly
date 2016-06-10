@@ -207,6 +207,7 @@ public class IhmPlateau extends JFrame implements Observateur{
                resetDes();
 
                 rejouer = message.aFaitUnDouble();
+                System.out.print(rejouer);
                 if (controleur.estEnPrison(joueurCourant) && message.aFaitUnDouble()){
                     controleur.sortirPrison(joueurCourant);
                     
@@ -215,11 +216,12 @@ public class IhmPlateau extends JFrame implements Observateur{
                     joueurCourant.incrementCompteurEssaiPrison();
 
                 } else if (joueurCourant.getCompteurEssaiPrison() >= 2){                        
-                        IhmBoiteMessage.afficherBoiteDialogue("Vous avez vos trois essais.\nPayez une caution de 50€.", 0);
+                        IhmBoiteMessage.afficherBoiteDialogue("Vous avez fais vos trois essais.\nPayez une caution de 50€.", 0);
                         joueurCourant.payer(50);
                         controleur.sortirPrison(joueurCourant);
                 }    
-
+                updateAffichage(); 
+                
                 if(joueurCourant.getCompteurDouble() != 3 && !controleur.estEnPrison(joueurCourant)){
                     controleur.traiterActionCarreau(joueurCourant);
                     if (message.passageCaseDepart()) {
@@ -240,7 +242,6 @@ public class IhmPlateau extends JFrame implements Observateur{
                         if (IhmBoiteMessage.afficherBoiteDialogue("Vous êtes tombé(e) sur la propriété " + resultat.getPropriete().getNom()+".\nVoulez-vous acheter cette proprièté pour "+resultat.getPropriete().getPrix()+"€ ?", 1)) {
                             resultat.getPropriete().achat(joueurCourant);//                          
                         }
-                    updateAffichage();
                     break;
                     
                     case loyer :// si le joueur doit payer le loyer 
@@ -274,7 +275,13 @@ public class IhmPlateau extends JFrame implements Observateur{
                     break;   
                     
                     case neRienFaire : //si le joueur ne peut rien faire 
-                        IhmBoiteMessage.afficherBoiteDialogue("Vous étes tombé(e) sur "+resultat.getCarreau().getNom()+".\nIl n'y a pas d'action pour cette case.",0);
+                        if(resultat.getCarreau() ==  null){
+                            IhmBoiteMessage.afficherBoiteDialogue("Vous étes tombé(e) sur votre proprieté "+resultat.getPropriete().getNom()+".\nIl n'y a pas d'action pour cette case.",0);
+
+                        }else{
+                            IhmBoiteMessage.afficherBoiteDialogue("Vous étes tombé(e) sur "+resultat.getCarreau().getNom()+".\nIl n'y a pas d'action pour cette case.",0);
+
+                        }
                     break;                
                 } 
                 updateAffichage();
@@ -320,23 +327,19 @@ public class IhmPlateau extends JFrame implements Observateur{
                             IhmBoiteMessage.afficherBoiteDialogue("Vous êtes passez par la case départ.\nRecevez 200€.", 0); 
                             
                         }
-                        updateAffichage();
                         break;
                     case deplacementSpecial :                           
                         joueurCourant.setPositionCourante(controleur.getCarreau(resultatCarte.getValeur()-1));
                         joueurCourant.aPiocherUneCarteDeplacement();                       
                         controleur.traiterActionCarreau( joueurCourant);
-                        updateAffichage();
                         break;
                         
                     case perte :
                         IhmBoiteMessage.afficherBoiteDialogue("Vous perdez "+resultatCarte.getValeur()+"€.", 0);  
-                        updateAffichage();
                         break;
                         
                     case gain :
-                        IhmBoiteMessage.afficherBoiteDialogue("Vous gagnez "+resultatCarte.getValeur()+"€.", 0);
-                        updateAffichage();                        
+                        IhmBoiteMessage.afficherBoiteDialogue("Vous gagnez "+resultatCarte.getValeur()+"€.", 0);                       
                         break;
                         
                     case anniversaire :
@@ -357,7 +360,6 @@ public class IhmPlateau extends JFrame implements Observateur{
                             }                           
                         }
                         IhmBoiteMessage.afficherBoiteDialogue("Vous gagnez "+somme+"€.\n"+joueurs+" ont/a perdu "+resultatCarte.getValeur()+"€.", 0);  
-                        updateAffichage();
                         break;
                 }
                 updateAffichage();  
@@ -373,11 +375,11 @@ public class IhmPlateau extends JFrame implements Observateur{
                         System.exit(0);                        
                     }
                 }
+                updateAffichage();                
                 if (rejouer) {
                     IhmBoiteMessage.afficherBoiteDialogue("Vous avez fait un double.\nVous rejouez.",0);
                     controleur.lancerDesAvancer(joueurCourant);
                 }
-                updateAffichage();
                 break;
             }   
     }    
