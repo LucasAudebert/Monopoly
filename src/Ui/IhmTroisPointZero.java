@@ -15,6 +15,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -39,6 +40,7 @@ public class IhmTroisPointZero extends JFrame {
     private JButton quitter;
     private JButton validerInscription;
     private ArrayList<String> nomJs;
+    private HashMap<String, ImageIcon> pionJs;
     private IhmInscriptionJoueurs ihmIJ;
    
     
@@ -46,7 +48,6 @@ public class IhmTroisPointZero extends JFrame {
         this.controleur = controleur;
         //controleur.setObservateur(this);
         
-        nomJs = new ArrayList<>();        
         afficherMenu();
         
         ihmIJ = new IhmInscriptionJoueurs();
@@ -57,7 +58,9 @@ public class IhmTroisPointZero extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if(ihmIJ.verification()){
                     nomJs = ihmIJ.getJoueurs();
+                    pionJs = ihmIJ.getPions();
                     ihmIJ.setVisible(false);
+                    demarrerPartie.setEnabled(true);
                 }
             }
         });
@@ -65,7 +68,6 @@ public class IhmTroisPointZero extends JFrame {
         inscrireJoueur.addMouseListener( new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                nomJs.clear();
                 ihmIJ.setVisible(true);               
             }
             @Override

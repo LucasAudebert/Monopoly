@@ -250,6 +250,14 @@ public class IhmInscriptionJoueurs extends JFrame {
         return joueurs;
     }
     
+    public HashMap getPions(){
+        HashMap<String, ImageIcon> pions = new HashMap();
+        for(PanelJoueurPourInscription pJ : listePanelsJ){
+            pions.put(pJ.getNom(), pJ.getIcon());
+        }
+        return pions;
+    }
+    
     public boolean verification(){
         boolean verified = true;
         for(PanelJoueurPourInscription pJ : listePanelsJ){
