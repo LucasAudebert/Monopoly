@@ -24,7 +24,7 @@ public class EnumerationsMonopoly {
         rouge
     }
 
-    public enum TYPE_RESULTAT {
+    public enum TYPE_RESULTAT { //différents types que prendra le résultat
 
         neRienFaire,
         achat,
@@ -35,7 +35,7 @@ public class EnumerationsMonopoly {
         piocherUneCarteCDC        
     }
 
-    public enum TYPE_RESULTAT_CARTE {
+    public enum TYPE_RESULTAT_CARTE { //différents types que prendra le résultat carte
         
         allerEnPrison,
         sortieDePrison,
@@ -46,7 +46,7 @@ public class EnumerationsMonopoly {
         anniversaire
     }
     
-    public enum TYPE_MESSAGE {
+    public enum TYPE_MESSAGE { //différents types que prendra le message
         
         deplacement,
         actionCarreau,

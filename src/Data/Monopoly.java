@@ -43,11 +43,11 @@ public class Monopoly {
             carreaux.add(carreau);
         }
     
-    public Pile getPileChance() {
+    public Pile getPileChance() { //retourne la pile de cartes Chance
         return pileChance;
         }
     
-    public Pile getPileCommunaute() {
+    public Pile getPileCommunaute() { //retourne la pile de cartes Caisse de Communauté
         return pileCommunaute;
         }
 
@@ -71,7 +71,7 @@ public class Monopoly {
             return groupes.get(couleur);
         }
 
-    public Groupe getGroupe(ProprieteAConstruire pac){
+    public Groupe getGroupe(ProprieteAConstruire pac){ //retourne le groupe d'une propriété pac donnée en paramètre
         int i = 0;
         while(!groupes.get(EnumerationsMonopoly.COULEUR_PROPRIETE.values()[i]).getProprietes().contains(pac)){
             i++;
@@ -83,38 +83,21 @@ public class Monopoly {
             groupes.put(groupe.getCouleur(), groupe);
         }
         
-    /**
-     *
-     * @param des
-     * @param anciennePosition
-     * 
-     * @return le nouveau carreau selon la valeur des dés et un carreau
-     */
-    public Carreau getNouvellePosition(int des, Carreau anciennePosition) {
-	    if(anciennePosition.getNumero() + des > carreaux.size()){// Si la valeur des dés + l'ancienne position est superieure à la valeur des dés
-                return getCarreau(anciennePosition.getNumero() + des - (carreaux.size() + 1));// calcul la nouvelle position si la valeur des dés + l'ancienne position est supérieure au nbr de carreaux 
+    public Carreau getNouvellePosition(int des, Carreau anciennePosition) { //retourne le nouveau carreau selon la valeur des dés et un carreau
+	    if(anciennePosition.getNumero() + des > carreaux.size()){//si la valeur des dés + l'ancienne position est supérieure au nombre de carreaux
+                return getCarreau(anciennePosition.getNumero() + des - (carreaux.size() + 1));// calcul la nouvelle position 
             }else{
-                return getCarreau(anciennePosition.getNumero() + des - 1);// calcul la nouvelle position si la valeur des dés + l'ancienne position est inferieure au nbr de carreaux 
+                return getCarreau(anciennePosition.getNumero() + des - 1);//calcul la nouvelle position si la valeur des dés + l'ancienne position est inférieure au nombre de carreaux 
             }
 	}
         
-    /**
-     *
-     * @param joueur 
-     * ajoute le joueur à la liste de joueur éliminé 
-     * boucle sur les proprietés qu'il possède pour mettre le proprietaire à null
-     */
     public void eliminerJoueur(Joueur joueur){    
-        joueursElimines.add(joueur);
-        for(Propriete pTemp : joueur.getProprietes()){
+        joueursElimines.add(joueur); //ajoute le joueur à la liste des joueurs éliminés
+        for(Propriete pTemp : joueur.getProprietes()){ //boucle sur les proprietés qu'il possède pour mettre le proprietaire à null
             pTemp.setProprietaire(null);
         }      
     }
         
-    /**
-     *
-     * @return vrai si le nbr de joueurs eliminés est egual au nombre de joueurs -1 (si il reste juste un joueur pas eliminé) faux sinon
-     */
     public boolean isFinDePartie(){
         int cpt = 0;
         for(Joueur jTemp :joueurs){
@@ -123,7 +106,7 @@ public class Monopoly {
             }
         }
         
-        return (cpt == joueurs.size()-1);
+        return (cpt == joueurs.size()-1); //vrai si le nombre de joueurs eliminés est égal au nombre de joueurs -1 (si il reste juste un joueur non eliminé) faux sinon
     }
     
     public Carreau getCarreauPrison(){
@@ -138,7 +121,7 @@ public class Monopoly {
         prisonniers.remove(joueur);
     }
     
-    public boolean estEnPrison(Joueur joueur){
+    public boolean estEnPrison(Joueur joueur){ //renvoie vrai si le joueur donné en paramètre est dans la liste des prisonniers
         return prisonniers.contains(joueur);
     }
     
@@ -150,7 +133,7 @@ public class Monopoly {
         }
     }
     
-    public void melangerPiles(){
+    public void melangerPiles(){ //mélange les deux piles
         pileChance.melanger();
         pileCommunaute.melanger();
     }
