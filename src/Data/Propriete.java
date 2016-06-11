@@ -44,6 +44,19 @@ public abstract class Propriete extends Carreau {
     public int getPrix(){
         return prix;
     }
+    
+    @Override
+    public String getInformations() {
+        String info = super.getInformations()+"\n";
+        info += "Propriètaire : ";
+        if (proprietaire != null) {
+            info += proprietaire.getNomJoueur();
+        } else {
+            info += "aucun";
+        }
+        info += "\nPrix : "+prix;        
+        return info;
+    }
    
     @Override
     public Resultat action(Joueur joueur) {

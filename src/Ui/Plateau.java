@@ -5,14 +5,17 @@
  */
 package Ui;
 
+import Data.Carreau;
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.ImageObserver;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -23,8 +26,13 @@ import javax.imageio.ImageIO;
  */
 public class Plateau extends Canvas {
     
-    public Plateau(){
+    Image ImagePlateau;
+    ArrayList<Carreau> plateau;
+    
+    public Plateau(ArrayList<Carreau> carreaux){
         super();
+        plateau = carreaux;
+        
         this.addMouseListener(new MouseListener() {
             @Override
             public void mouseReleased(MouseEvent e) {}
@@ -35,32 +43,47 @@ public class Plateau extends Canvas {
             @Override
             public void mouseClicked(MouseEvent e) {
                 int num =0;
-                int height = getSize().height;
-                int width = getSize().width;
-                int part = height/13;
                 
-                if (e.getY()>=11*part) {
-                    if (getX()>=11*part) {
-                        num =1;
-                    } else if (e.getX()<=2*part) {
-                        num=11;
-                    } else {
-                        num=12-e.getX()/part;                        
+                int x = e.getX();
+                int y = e.getY();
+                
+                int h = getSize().height;
+                int w = getSize().width;
+                int ih = ImagePlateau.getHeight(null);
+                int iw = ImagePlateau.getHeight(null);
+                int part = ih/13;
+                
+                int a1 = (w-iw)/2;
+                int b1 = w-a1;
+                int c1 = (h-ih)/2;
+                int d1 = h-c1;
+                
+                int a2 = a1 + 2*part;
+                int b2 = b1 - 2*part;
+                int c2 = c1 + 2*part;
+                int d2 = d1 - 2*part;
+                
+                if (y<=d1 && y>=d2 && x<=b1 && x>=a1) {
+                    num = 11-((x-a1)/part);
+                    if (num==-1) {
+                        num=0;
+                    }else if(num==11) {
+                        num=10;     
                     }
-                } else if (e.getY()<=2*part) {
-                    if (getX()>=11*part) {
-                        num=31;
-                    } else if (e.getX()<=2*part) {
-                        num=21;
-                    } else {
-                        num=e.getX()/part+20;
-                    }                   
-                } else if (e.getX()>=11*part) {
-                        num=22-e.getY()/part;                     
-                } else if (e.getX()<=2*part) {
-                        num=e.getX()/part+30;                       
+                } else if (y<=c2 && y>=c1 && x<=b1 && x>=a1) {
+                    num=((x-a1)/part)+19;
+                    if (num==19) {
+                        num=20;
+                    } else if (num==31) {
+                        num=30;
+                    }
+                } else if (y<=d1 && y>=c1 && x<=a2 && x>=a1) {
+                    num=21-((y-c1)/part);
+                } else if (y<=d1 && y>=c1 && x<=b1 && x>=b2) {
+                    num=((y-c1)/part)+29;
                 }
-            System.out.println(num);                
+                
+                IhmBoiteMessage.afficherBoiteDialogue(plateau.get(num).getInformations(), 0);
             }
             @Override
             public void mousePressed(MouseEvent e) {}                        
@@ -70,17 +93,17 @@ public class Plateau extends Canvas {
     @Override
     public void paint(Graphics g) {
        Dimension dim = this.getSize();
-       Image plateau = null;
+       ImagePlateau = null;
      //  Image desACoudre = null;
         try {
-            plateau = ImageIO.read(new File("src/Image_Plateau.jpg"));
+            ImagePlateau = ImageIO.read(new File("src/Image_Plateau.jpg"));
            // desACoudre = ImageIO.read(new File("src\\desACoudre.png"));
         } catch (IOException ex) {
             Logger.getLogger(Plateau.class.getName()).log(Level.SEVERE, null, ex);
         }
-        int x = (int)((getWidth()/2) -(plateau.getHeight(null)/2));
-        int y = (int)((getHeight()/2) - (plateau.getHeight(null)/2));
-        g.drawImage(plateau,x,y, null);
+        int x = (int)((getWidth()/2) -(ImagePlateau.getHeight(null)/2));
+        int y = (int)((getHeight()/2) - (ImagePlateau.getHeight(null)/2));
+        g.drawImage(ImagePlateau,x,y, null);
       
         
         

@@ -19,14 +19,14 @@ public class IhmBoiteMessage {
             case 0 :
                 JOptionPane.showConfirmDialog(   null, 
                                                 message, 
-                                                "Confirmation",
+                                                "Informations",
                                                 JOptionPane.DEFAULT_OPTION, 
                                                 JOptionPane.INFORMATION_MESSAGE);
                 return true ;
            case 1 :
                 response = JOptionPane.showConfirmDialog(   null, 
                                                             message, 
-                                                            "Veuillez confirmer l'opération",
+                                                            "Choix du joueur",
                                                             JOptionPane.YES_NO_OPTION, 
                                                             JOptionPane.QUESTION_MESSAGE);
                 return response == JOptionPane.YES_OPTION ;

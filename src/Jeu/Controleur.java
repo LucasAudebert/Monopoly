@@ -346,6 +346,10 @@ public class Controleur {
     public Joueur getDernierJoueur() {
         return monopoly.getJoueurs().get(0);
     }
+
+    public ArrayList<Carreau> getCarreaux() {
+        return monopoly.getCarreaux();
+    }
 }
 
 

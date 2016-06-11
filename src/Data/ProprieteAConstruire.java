@@ -27,7 +27,7 @@ public class ProprieteAConstruire extends Propriete{
     
     @Override
     public int calculLoyer(Joueur joueur) { //calcul du loyer pour une propriété à construire
-         if(groupe.memeProprietaire()){ //si le groupe de cette propriété contient des propriétés ayant toutes le même propriétaire
+         if(groupe.memeProprietaire()&&nbMaisons==0){ //si le groupe de cette propriété contient des propriétés ayant toutes le même propriétaire
            return getLoyer()*2; //retourne le loyer de la propriété doublé
          }else{ //sinon
            return  getLoyer(); //retourne le loyer simple
@@ -59,4 +59,12 @@ public class ProprieteAConstruire extends Propriete{
     public void construire() {
         nbMaisons = nbMaisons + 1;
     }
+    @Override
+    public String getInformations() {
+        if (this.getProprietaire()==null) {
+            return super.getInformations();
+        } else {
+            return super.getInformations() +"\nLoyer actuel : " +calculLoyer(null);
+        }
+    }      
 }

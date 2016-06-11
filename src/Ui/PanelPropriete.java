@@ -69,13 +69,13 @@ public class PanelPropriete extends JPanel {
        
         boutonConstruire.addMouseListener(new MouseListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void mouseClicked(MouseEvent e) {}
+
+            @Override
+            public void mousePressed(MouseEvent e) {
                 propriete.construire();
                 updateAll();
             }
-
-            @Override
-            public void mousePressed(MouseEvent e) {}
 
             @Override
             public void mouseReleased(MouseEvent e) {}

@@ -20,5 +20,9 @@ public abstract class Carreau {
     public String getNom(){
             return nomCarreau;
         }
+
+    public String getInformations() {
+        return "Carreau n°"+numero+" : "+nomCarreau;
+    }
         
 }

@@ -82,7 +82,9 @@ public class IhmPlateau extends JFrame implements Observateur{
         
         lancerDes.addMouseListener(new MouseListener(){
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void mouseClicked(MouseEvent e) {}
+            @Override
+            public void mousePressed(MouseEvent e) {
                 construire.setEnabled(false);               
                 lancerDes.setEnabled(false);
                 tourSuivant.setEnabled(true);  
@@ -103,8 +105,6 @@ public class IhmPlateau extends JFrame implements Observateur{
                 controleur.lancerDesAvancer(joueurCourant);
             }
             @Override
-            public void mousePressed(MouseEvent e) {}
-            @Override
             public void mouseReleased(MouseEvent e) {}
             @Override
             public void mouseEntered(MouseEvent e) {}
@@ -118,11 +118,11 @@ public class IhmPlateau extends JFrame implements Observateur{
         
         construire.addMouseListener(new MouseListener(){
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void mouseClicked(MouseEvent e) {}
+            @Override
+            public void mousePressed(MouseEvent e) {
                 IhmConstruire i = new IhmConstruire(joueurCourant);
             }
-            @Override
-            public void mousePressed(MouseEvent e) {}
             @Override
             public void mouseReleased(MouseEvent e) {}
             @Override
@@ -136,7 +136,9 @@ public class IhmPlateau extends JFrame implements Observateur{
         tourSuivant.setEnabled(false);
         tourSuivant.addMouseListener(new MouseListener(){
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void mouseClicked(MouseEvent e) {}
+            @Override
+            public void mousePressed(MouseEvent e) {
                 // gèrer fin de partie
                 joueurCourant = controleur.joueurSuivant(joueurCourant);
                 lancerDes.setEnabled(true);
@@ -149,8 +151,6 @@ public class IhmPlateau extends JFrame implements Observateur{
                 joueurActuelle.updateIhmJoueurActuelle(joueurCourant);  
             }
             @Override
-            public void mousePressed(MouseEvent e) {}
-            @Override
             public void mouseReleased(MouseEvent e) {}
             @Override
             public void mouseEntered(MouseEvent e) {}
@@ -162,13 +162,13 @@ public class IhmPlateau extends JFrame implements Observateur{
         quitter.setMaximumSize(new Dimension(200,40));
         quitter.addMouseListener(new MouseListener(){
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void mouseClicked(MouseEvent e) {}
+            @Override
+            public void mousePressed(MouseEvent e) {
                 if (IhmBoiteMessage.afficherBoiteDialogue("Êtes-vous vraiment sûr(e) de vouloir quitter la partie ?", 2)) {
                     System.exit(0);                  
                 }
             }
-            @Override
-            public void mousePressed(MouseEvent e) {}
             @Override
             public void mouseReleased(MouseEvent e) {}
             @Override
@@ -201,7 +201,7 @@ public class IhmPlateau extends JFrame implements Observateur{
         }
         
         
-        Plateau plateau = new Plateau();
+        Plateau plateau = new Plateau(controleur.getCarreaux());
         
         Color fond = new Color(213,231,207);
         this.setBackground(Color.BLACK);

@@ -23,4 +23,13 @@ public class Gare extends Propriete {
         super.achat(joueur); //achat de la proriété      
         joueur.addGare(this); //ajout de la gare dans la collection de gares du joueur
     }
+    
+    @Override
+    public String getInformations() {
+        if (this.getProprietaire()==null) {
+            return super.getInformations();
+        } else {
+            return super.getInformations() +"\nLoyer actuel : " +calculLoyer(null);
+        }
+    }           
 }
