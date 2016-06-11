@@ -190,10 +190,8 @@ public class Controleur {
         public void lancerDesAvancer(Joueur joueur){
             int[] des = lancerDes();
             if(des[0] == des[1]){
-                ihm.afficher("Vous obtenez un double " + des[1]);
                joueur.incrementCompteurDee();
             }else{
-                ihm.afficher("Vous obtenez un " + des[0] + " et un " + des[1]);
                 joueur.reinitCompteurDouble();
             }
             joueur.setDerniereValeurDes(des);
@@ -201,9 +199,7 @@ public class Controleur {
                 joueur.setPositionCourante(monopoly.getNouvellePosition(des[0]+des[1], joueur.getPositionCourante()));
             if(joueur.getDerniereValeurDes() >= joueur.getPositionCourante().getNumero()){
                 joueur.gagnerCash(200);
-                ihm.afficher("Vous êtes passé par la case départ (+200)");
-            }
-            
+            }       
             observateur.notifier(new Message(EnumerationsMonopoly.TYPE_MESSAGE.deplacement,joueur.getDerniereValeurDes() > joueur.getPositionCourante().getNumero(),des[0]==des[1]));
         }
         

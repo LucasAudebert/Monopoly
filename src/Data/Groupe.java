@@ -52,6 +52,6 @@ public class Groupe {
             resultat = proprietes.get(i).getNbMaisons() >= pac.getNbMaisons();
             i++;
         }
-        return resultat && memeProprietaire();
+        return resultat && memeProprietaire() && pac.getNbMaisons() < 5 && pac.getProprietaire().getCash() > pac.getPrixMaison();
     }
 }

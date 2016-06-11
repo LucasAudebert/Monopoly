@@ -39,11 +39,12 @@ public class PanelPropriete extends JPanel {
     
     public void initComponent(){
         JPanel panelPrincipal = new JPanel();
-        panelPrincipal.setBorder(BorderFactory.createLineBorder(Color.black));
+        panelPrincipal.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         panelPrincipal.setLayout(new GridLayout(4,2));
         
         panelPrincipal.add(new JLabel(" Nom : "));
         nom = new JLabel(propriete.getNom()+" ");
+        nom.setForeground(propriete.getColor());
         panelPrincipal.add(nom);
         
         panelPrincipal.add(new JLabel(" Construction(s) : "));    
@@ -92,7 +93,7 @@ public class PanelPropriete extends JPanel {
         panelPrincipal.add(panelBouton);
         
         this.add(panelPrincipal);
-        this.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        this.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         
         afficher();        
     }
@@ -116,8 +117,10 @@ public class PanelPropriete extends JPanel {
             construction.setText(Integer.toString(propriete.getNbMaisons()) +" maisons ");
         }
         
-        if (!propriete.peutConstruire()) {
-            boutonConstruire.setEnabled(false);
+        if (propriete.peutConstruire()) {
+            boutonConstruire.setEnabled(true);
+        } else {
+            boutonConstruire.setEnabled(false);            
         }
     }
 

@@ -15,11 +15,11 @@ import Jeu.*;
 public class Main {
     
     public static void main(String[] args){
-        //Initialisation
-        Controleur controleur = new Controleur();
-        controleur.inscrireJoueurs();
-        //Boucle de Jeu
-        controleur.boucleDeJeu();
+//        //Initialisation
+//        Controleur controleur = new Controleur();
+//        controleur.inscrireJoueurs();
+//        //Boucle de Jeu
+//        controleur.boucleDeJeu();
         
         //Fin
     }

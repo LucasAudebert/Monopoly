@@ -38,7 +38,8 @@ public class IhmConstruire extends JFrame {;
     private void initComponent() {
         this.setLayout(new BorderLayout());
         
-       JPanel panel = new JPanel();   
+       JPanel panel = new JPanel();
+       panel.setLayout(new GridLayout(4,4));
         for (ProprieteAConstruire p : joueur.getProprieteAConstruires()) {
             PanelPropriete pan = new PanelPropriete(p,this);
             panel.add(pan);
@@ -50,7 +51,7 @@ public class IhmConstruire extends JFrame {;
     }
     
     public void afficher(){
-          this.setSize(1000, 800);
+          this.setSize(1200, 700);
           this.setVisible(true);
     }
     

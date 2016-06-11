@@ -1,5 +1,6 @@
 package Data;
 
+import java.awt.Color;
 import java.util.ArrayList;
 
 public class ProprieteAConstruire extends Propriete{
@@ -58,13 +59,51 @@ public class ProprieteAConstruire extends Propriete{
 
     public void construire() {
         nbMaisons = nbMaisons + 1;
+        super.getProprietaire().payer(prixMaison);
     }
     @Override
     public String getInformations() {
         if (this.getProprietaire()==null) {
             return super.getInformations();
         } else {
-            return super.getInformations() +"\nLoyer actuel : " +calculLoyer(null);
+            String info = super.getInformations() +"\nLoyer actuel : " +calculLoyer(null)+"\nConstruction : ";
+            if (nbMaisons == 0) {
+                info += "aucune";
+            } else if (nbMaisons == 5) {
+                info += "1 hotel";
+            } else if (nbMaisons == 1) {
+                info += "1 maison";                 
+            } else {
+                info += nbMaisons+" maisons";                
+            }
+            return  info;
         }
     }      
+
+    public Color getColor() {
+        if (groupe.getCouleur()==EnumerationsMonopoly.COULEUR_PROPRIETE.bleuCiel){
+            return Color.cyan;
+            
+        } else if (groupe.getCouleur()==EnumerationsMonopoly.COULEUR_PROPRIETE.bleuFonce) {
+            return Color.blue; 
+            
+        } else if (groupe.getCouleur()==EnumerationsMonopoly.COULEUR_PROPRIETE.violet) {
+            return Color.magenta; 
+            
+        } else if (groupe.getCouleur()==EnumerationsMonopoly.COULEUR_PROPRIETE.vert) {
+            return Color.green; 
+            
+        } else if (groupe.getCouleur()==EnumerationsMonopoly.COULEUR_PROPRIETE.rouge) {
+            return Color.red;  
+            
+        } else if (groupe.getCouleur()==EnumerationsMonopoly.COULEUR_PROPRIETE.orange) {
+            return Color.orange; 
+            
+        } else if (groupe.getCouleur()==EnumerationsMonopoly.COULEUR_PROPRIETE.mauve) {
+            return Color.pink;   
+            
+        } else {
+            return Color.yellow;            
+        }
+    }
 }
