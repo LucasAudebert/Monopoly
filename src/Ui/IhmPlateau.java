@@ -22,6 +22,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -65,7 +66,8 @@ public class IhmPlateau extends JFrame implements Observateur{
         panelJoueurs.setBorder(BorderFactory.createEmptyBorder(20, 20, 0, 0));
         
         
-       
+        Des desUn = new Des();
+        Des desDeux = new Des();
         
         panTour = new JPanel();
         panTour.setLayout(new BoxLayout(panTour,BoxLayout.Y_AXIS));
@@ -77,7 +79,8 @@ public class IhmPlateau extends JFrame implements Observateur{
        
         
         lancerDes = new JButton("Lancer Dès");
-        lancerDes.setMaximumSize(new Dimension(200,40));
+        lancerDes.setPreferredSize(new Dimension(300,30));
+        lancerDes.setMaximumSize(new Dimension(300,30));
         
         
         lancerDes.addMouseListener(new MouseListener(){
@@ -103,6 +106,9 @@ public class IhmPlateau extends JFrame implements Observateur{
                     }
                 }                 
                 controleur.lancerDesAvancer(joueurCourant);
+                int[] des = joueurCourant.getDernierDes();
+                desUn.updateDes(des[0]);
+                desDeux.updateDes(des[1]);
             }
             @Override
             public void mouseReleased(MouseEvent e) {}
@@ -113,7 +119,8 @@ public class IhmPlateau extends JFrame implements Observateur{
         }); 
         
         construire = new JButton(" Construire ");
-        construire.setMaximumSize(new Dimension(200,40));
+        construire.setPreferredSize(new Dimension(300,30));
+        construire.setMaximumSize(new Dimension(300,30));
         construire.setEnabled(false);
         
         construire.addMouseListener(new MouseListener(){
@@ -132,7 +139,8 @@ public class IhmPlateau extends JFrame implements Observateur{
         }); 
         
         tourSuivant = new JButton(" Tour Suivant ");
-        tourSuivant.setMaximumSize(new Dimension(200,40));
+        tourSuivant.setPreferredSize(new Dimension(300,30));
+        tourSuivant.setMaximumSize(new Dimension(300,30));
         tourSuivant.setEnabled(false);
         tourSuivant.addMouseListener(new MouseListener(){
             @Override
@@ -159,7 +167,8 @@ public class IhmPlateau extends JFrame implements Observateur{
         }); 
         
         quitter = new JButton(" Quitter ");
-        quitter.setMaximumSize(new Dimension(200,40));
+        quitter.setPreferredSize(new Dimension(300,30));
+        quitter.setMaximumSize(new Dimension(300,30));
         quitter.addMouseListener(new MouseListener(){
             @Override
             public void mouseClicked(MouseEvent e) {}
@@ -180,20 +189,42 @@ public class IhmPlateau extends JFrame implements Observateur{
         
         joueurActuelle = new IhmJoueurActuelle(joueurCourant);        
         panTour.add(joueurActuelle);
-        panTour.setAlignmentX( joueurActuelle.CENTER_ALIGNMENT );
+        panTour.add(Box.createRigidArea(new Dimension(0,10)));
+        joueurActuelle.setAlignmentX( panTour.CENTER_ALIGNMENT );
         
         panTour.add(lancerDes); 
-        panTour.setAlignmentX( lancerDes.CENTER_ALIGNMENT );
+        panTour.add(Box.createRigidArea(new Dimension(0,10)));
+        lancerDes.setAlignmentX( panTour.CENTER_ALIGNMENT );
         
         panTour.add(construire);
-        panTour.setAlignmentX( construire.CENTER_ALIGNMENT );
+        panTour.add(Box.createRigidArea(new Dimension(0,10)));
+        construire.setAlignmentX( panTour.CENTER_ALIGNMENT );
         
         panTour.add(tourSuivant);
-        panTour.setAlignmentX( tourSuivant.CENTER_ALIGNMENT );
+        panTour.add(Box.createRigidArea(new Dimension(0,10)));
+        tourSuivant.setAlignmentX( panTour.CENTER_ALIGNMENT );
         
         panTour.add(quitter);
-        panTour.setAlignmentX( quitter.CENTER_ALIGNMENT );
+        panTour.add(Box.createRigidArea(new Dimension(0,10)));
+        quitter.setAlignmentX( panTour.CENTER_ALIGNMENT );
         
+        
+       
+        JLabel valDes = new JLabel("Valeur des dés : ");
+        panTour.add(valDes);
+        panTour.add(Box.createRigidArea(new Dimension(0,10)));
+        valDes.setAlignmentX( panTour.CENTER_ALIGNMENT );
+
+                
+        JPanel panelDes = new JPanel();
+        panelDes.setLayout( new BoxLayout(panelDes,BoxLayout.X_AXIS));
+        panelDes.add(desUn);
+      
+        panelDes.add(desDeux);
+        panTour.add(panelDes);
+        panelDes.setAlignmentX( panTour.CENTER_ALIGNMENT );
+
+       
         for(Joueur jTemp : controleur.getJoueurs()){
             IhmInfoJoueur ihmJoueur = new IhmInfoJoueur((Joueur)jTemp);      
             InfoJoueurs.add(ihmJoueur);

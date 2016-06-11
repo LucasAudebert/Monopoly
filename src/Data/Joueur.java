@@ -98,6 +98,10 @@ public class Joueur {
     public void setDerniereValeurDes(int[] des){
             this.derniereValeurDes = des;
         }
+    
+    public int[] getDernierDes(){
+         return derniereValeurDes;
+    }
         
     public int getDerniereValeurDes(){
             return derniereValeurDes[0]+derniereValeurDes[1];

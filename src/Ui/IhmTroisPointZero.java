@@ -85,7 +85,8 @@ public class IhmTroisPointZero extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 if(nomJs.size() != 0){
                     controleur.inscrireJoueurs(nomJs, pionJs);
-                    IhmPlateau ihmPlateau = new IhmPlateau(controleur);                    
+                    IhmPlateau ihmPlateau = new IhmPlateau(controleur);   
+                    setVisible(false);
                 }
                 
             }
