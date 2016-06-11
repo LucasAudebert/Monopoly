@@ -104,12 +104,46 @@ public class Plateau extends Canvas {
         int x = (int)((getWidth()/2) -(ImagePlateau.getHeight(null)/2));
         int y = (int)((getHeight()/2) - (ImagePlateau.getHeight(null)/2));
         g.drawImage(ImagePlateau,x,y, null);
-      
-        
-        
-        
+ 
     }
     
-    
+    public int[] getPosition(int numCarreau) {
+        int[] position = {0,0};
+        
+        int h = getSize().height;
+        int w = getSize().width;
+        int ih = ImagePlateau.getHeight(null);
+        int iw = ImagePlateau.getHeight(null);
+        int part = ih/13;        
+        
+        if (numCarreau <= 10) {
+            position[1] = h-(((h-ih)/2)+part/2);
+            if (numCarreau == 1) {
+                position[0]= ((w-iw)/2)+part/2;
+            } else if (numCarreau == 10) {
+                position[0]= w-(((w-iw)/2)+part/2);            
+            } else {
+                position[0]=((11-numCarreau)*part)+part/2+((w-iw)/2);
+            }
+        } else if (numCarreau >= 20 && numCarreau <= 30) {
+            position[1] = ((h-ih)/2)+part/2;
+            if (numCarreau == 20) {
+                position[0]= ((w-iw)/2)+part/2;                
+            } else if (numCarreau == 30) {
+                position[0]= w-(((w-iw)/2)+part/2);                
+            } else {
+                position[0]=((numCarreau-19)*part)+part/2+((w-iw)/2);
+            }            
+        } else if (numCarreau > 10 && numCarreau < 20) {
+            position[0]= ((w-iw)/2)+part/2;
+            position[1]=((11-(numCarreau-10))*part)+part/2+((h-ih)/2);
+            
+        } else if (numCarreau > 30) {
+            position[0]= w-(((w-iw)/2)+part/2);
+            position[1]=((numCarreau-29)*part)+part/2+((w-iw)/2);
+        }
+        
+        return position;
+    }
     
 }
