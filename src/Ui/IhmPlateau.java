@@ -238,10 +238,7 @@ public class IhmPlateau extends JFrame implements Observateur{
        switch(message.getTypeMessage()) {
             case deplacement :
                resetDes();
-
-                rejouer = message.aFaitUnDouble();
-                System.out.print(rejouer);
-                
+                rejouer = message.aFaitUnDouble();         
                 
                 if (controleur.estEnPrison(joueurCourant) && rejouer){
                     IhmBoiteMessage.afficherBoiteDialogue("Vous avez fait un double.\nVous sortez de prison !", 0);                       
@@ -332,7 +329,7 @@ public class IhmPlateau extends JFrame implements Observateur{
                         System.exit(0);
                     }                   
                 }
-                if (rejouer && ( resultat.getTypeResultat() != EnumerationsMonopoly.TYPE_RESULTAT.piocherUneCarteCDC || resultat.getTypeResultat() != EnumerationsMonopoly.TYPE_RESULTAT.piocherUneCarteChance )) {
+                if (rejouer && ( resultat.getTypeResultat() != EnumerationsMonopoly.TYPE_RESULTAT.piocherUneCarteCDC || resultat.getTypeResultat() != EnumerationsMonopoly.TYPE_RESULTAT.piocherUneCarteChance )&& !controleur.estEnPrison(joueurCourant)) {
                     IhmBoiteMessage.afficherBoiteDialogue("Vous avez fait un double.\nVous rejouez.",0);
                     controleur.lancerDesAvancer(joueurCourant);
                 }                

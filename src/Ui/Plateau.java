@@ -124,33 +124,33 @@ public class Plateau extends Canvas {
         int w = getSize().width;
         int ih = ImagePlateau.getHeight(null);
         int iw = ImagePlateau.getHeight(null);
-        int part = ih/13;        
+        int part = iw/13;        
         
         if (numCarreau <= 10) {
-            position[1] = h-(((h-ih)/2)+part/2);
+            position[1] = h-(((h-ih)/2)+part+part/2);
             if (numCarreau == 1) {
-                position[0]= ((w-iw)/2)+part/2;
+                position[0]= ((w-iw)/2)+part*2;
             } else if (numCarreau == 10) {
-                position[0]= w-(((w-iw)/2)+part/2);            
+                position[0]= (((w-iw)/2)+part/4);            
             } else {
-                position[0]=((11-numCarreau)*part)+part/2+((w-iw)/2);
+                position[0]=((11-numCarreau)*part)+part/4+((w-iw)/2);
             }
         } else if (numCarreau >= 20 && numCarreau <= 30) {
             position[1] = ((h-ih)/2)+part/2;
             if (numCarreau == 20) {
-                position[0]= ((w-iw)/2)+part/2;                
+                position[0]= ((w-iw)/2)+part/4;                
             } else if (numCarreau == 30) {
-                position[0]= w-(((w-iw)/2)+part/2);                
+                position[0]= w-(((w-iw)/2)+part/4);                
             } else {
-                position[0]=((numCarreau-19)*part)+part/2+((w-iw)/2);
+                position[0]=((numCarreau-19)*part)+part/4+((w-iw)/2);
             }            
         } else if (numCarreau > 10 && numCarreau < 20) {
             position[0]= ((w-iw)/2)+part/2;
-            position[1]=((11-(numCarreau-10))*part)+part/2+((h-ih)/2);
+            position[1]=((11-(numCarreau-10))*part)+part/4+((h-ih)/2);
             
         } else if (numCarreau > 30) {
-            position[0]= w-(((w-iw)/2)+part/2);
-            position[1]=((numCarreau-29)*part)+part/2+((w-iw)/2);
+            position[0]= w-(((w-iw)/2)+part);
+            position[1]=((numCarreau-30)*part)+part/2+((w-iw)/2);
         }
         
         return position;
