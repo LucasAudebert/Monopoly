@@ -45,6 +45,7 @@ public class IhmPlateau extends JFrame implements Observateur{
     private Des desUn;
     private Des desDeux;    
     private boolean rejouer;
+    private Plateau plateau;
     
     
     public IhmPlateau(Controleur controleur){
@@ -52,6 +53,7 @@ public class IhmPlateau extends JFrame implements Observateur{
         controleur.setObservateur(this);
         InfoJoueurs = new ArrayList<>();
         joueurCourant = controleur.getJoueurs().get(0); 
+        plateau = new Plateau(controleur.getCarreaux(), controleur.getJoueurs());
         
         ititIhmPlateau();
         
@@ -215,7 +217,6 @@ public class IhmPlateau extends JFrame implements Observateur{
             panelJoueurs.add(ihmJoueur);   
         }   
         
-        Plateau plateau = new Plateau(controleur.getCarreaux());
         
         Color fond = new Color(213,231,207);
         this.setBackground(Color.BLACK);
@@ -441,7 +442,8 @@ public class IhmPlateau extends JFrame implements Observateur{
     
     public void updateInfoJoueurs(ArrayList<Joueur> joueurs){
         System.out.println(InfoJoueurs.size());
-       
+        
+        plateau.repaint();
         for(int i=0;i<InfoJoueurs.size();i++){          
             for(Joueur jTemp : joueurs){                
                 if(InfoJoueurs.get(i).getJoueur() ==jTemp ){

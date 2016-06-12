@@ -6,6 +6,7 @@
 package Ui;
 
 import Data.Carreau;
+import Data.Joueur;
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -26,12 +27,21 @@ import javax.imageio.ImageIO;
  */
 public class Plateau extends Canvas {
     
-    Image ImagePlateau;
-    ArrayList<Carreau> plateau;
+    private Image ImagePlateau;
+    private ArrayList<Carreau> plateau;
+    private ArrayList<Joueur> joueurs;
     
-    public Plateau(ArrayList<Carreau> carreaux){
+    public Plateau(ArrayList<Carreau> carreaux, ArrayList<Joueur> joueurs){
         super();
         plateau = carreaux;
+        this.joueurs = joueurs;
+        
+        try {
+            ImagePlateau = ImageIO.read(new File("src/Image_Plateau.jpg"));
+           // desACoudre = ImageIO.read(new File("src\\desACoudre.png"));
+        } catch (IOException ex) {
+            Logger.getLogger(Plateau.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         this.addMouseListener(new MouseListener() {
             @Override
@@ -92,19 +102,19 @@ public class Plateau extends Canvas {
 
     @Override
     public void paint(Graphics g) {
-       Dimension dim = this.getSize();
-       ImagePlateau = null;
-     //  Image desACoudre = null;
-        try {
-            ImagePlateau = ImageIO.read(new File("src/Image_Plateau.jpg"));
-           // desACoudre = ImageIO.read(new File("src\\desACoudre.png"));
-        } catch (IOException ex) {
-            Logger.getLogger(Plateau.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        Dimension dim = this.getSize();
+
         int x = (int)((getWidth()/2) -(ImagePlateau.getHeight(null)/2));
         int y = (int)((getHeight()/2) - (ImagePlateau.getHeight(null)/2));
-        g.drawImage(ImagePlateau,x,y, null);
- 
+        g.drawImage(ImagePlateau, x, y, null);
+        
+        for(Joueur j : joueurs){
+            if(!j.estElimine()){
+                int[] coorPion = getPosition(j.getPositionCourante().getNumero() - 1);
+                System.out.println(coorPion[0] +" : "+ coorPion[1]);
+                g.drawImage(j.getImagePion(), coorPion[0], coorPion[1], null);
+            }
+        }
     }
     
     public int[] getPosition(int numCarreau) {

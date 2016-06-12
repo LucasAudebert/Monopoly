@@ -181,4 +181,9 @@ public class Joueur {
     public int getNombreProprieteAConstruire() { //retourne le nombre de Propriétés à Construire que possède le joueur
         return proprietesAConstruire.size();
     }
+
+    public Image getImagePion() {
+        return imagePion;
+    }
+    
 }
