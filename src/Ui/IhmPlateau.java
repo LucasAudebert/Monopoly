@@ -85,21 +85,25 @@ public class IhmPlateau extends JFrame implements Observateur{
             public void mouseClicked(MouseEvent e) {}
             @Override
             public void mousePressed(MouseEvent e) {
-                construire.setEnabled(false);               
-                lancerDes.setEnabled(false);
-                tourSuivant.setEnabled(true);  
-                if(!joueurCourant.getProprieteAConstruires().isEmpty()){
-                     construire.setEnabled(true);      
-                }else{
-                    construire.setEnabled(false);
-                }      
-                 
-                if (controleur.estEnPrison(joueurCourant) && joueurCourant.possedeCarteSortieDePrison() ) {
-                    if ( IhmBoiteMessage.afficherBoiteDialogue("Vous possèdez une carte Sortie de prison.\nSouhaitez-vous l'utilisez pour sortir de prison ?", 1)) {
-                        controleur.sortirPrison(joueurCourant);
-                    }
-                }                 
-                controleur.lancerDesAvancer(joueurCourant);
+                
+                if(lancerDes.isEnabled()){
+                    construire.setEnabled(false);               
+                    lancerDes.setEnabled(false);
+                    tourSuivant.setEnabled(true);  
+                    if(!joueurCourant.getProprieteAConstruires().isEmpty()){
+                         construire.setEnabled(true);      
+                    }else{
+                        construire.setEnabled(false);
+                    }      
+
+                    if (controleur.estEnPrison(joueurCourant) && joueurCourant.possedeCarteSortieDePrison() ) {
+                        if ( IhmBoiteMessage.afficherBoiteDialogue("Vous possèdez une carte Sortie de prison.\nSouhaitez-vous l'utilisez pour sortir de prison ?", 1)) {
+                            controleur.sortirPrison(joueurCourant);
+                        }
+                    }                 
+                    controleur.lancerDesAvancer(joueurCourant);
+                }
+                
             }
             @Override
             public void mouseReleased(MouseEvent e) {}
@@ -119,7 +123,10 @@ public class IhmPlateau extends JFrame implements Observateur{
             public void mouseClicked(MouseEvent e) {}
             @Override
             public void mousePressed(MouseEvent e) {
-                IhmConstruire i = new IhmConstruire(joueurCourant);
+                if(construire.isEnabled()){
+                    IhmConstruire i = new IhmConstruire(joueurCourant);
+                }
+                
             }
             @Override
             public void mouseReleased(MouseEvent e) {}
@@ -138,16 +145,18 @@ public class IhmPlateau extends JFrame implements Observateur{
             public void mouseClicked(MouseEvent e) {}
             @Override
             public void mousePressed(MouseEvent e) {
-                // gèrer fin de partie
-                joueurCourant = controleur.joueurSuivant(joueurCourant);
-                lancerDes.setEnabled(true);
-                if(!joueurCourant.getProprieteAConstruires().isEmpty()){
-                     construire.setEnabled(true);                     
-                }else{
-                    construire.setEnabled(false);                   
-                }                
-                tourSuivant.setEnabled(false);
-                joueurActuelle.updateIhmJoueurActuelle(joueurCourant);  
+                if(tourSuivant.isEnabled()){
+                    // gèrer fin de partie
+                    joueurCourant = controleur.joueurSuivant(joueurCourant);
+                    lancerDes.setEnabled(true);
+                    if(!joueurCourant.getProprieteAConstruires().isEmpty()){
+                         construire.setEnabled(true);                     
+                    }else{
+                        construire.setEnabled(false);                   
+                    }                
+                    tourSuivant.setEnabled(false);
+                    joueurActuelle.updateIhmJoueurActuelle(joueurCourant);  
+                }
             }
             @Override
             public void mouseReleased(MouseEvent e) {}

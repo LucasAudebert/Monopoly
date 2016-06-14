@@ -83,10 +83,14 @@ public class IhmTroisPointZero extends JFrame {
         demarrerPartie.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if(nomJs.size() != 0){
-                    controleur.inscrireJoueurs(nomJs, pionJs);
-                    IhmPlateau ihmPlateau = new IhmPlateau(controleur);   
-                    setVisible(false);
+                if(demarrerPartie.isEnabled()){
+                    
+
+                    if(nomJs.size() != 0){
+                        controleur.inscrireJoueurs(nomJs, pionJs);
+                        IhmPlateau ihmPlateau = new IhmPlateau(controleur);   
+                        setVisible(false);
+                    }
                 }
                 
             }
