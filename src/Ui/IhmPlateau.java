@@ -118,13 +118,15 @@ public class IhmPlateau extends JFrame implements Observateur{
         construire.setMaximumSize(new Dimension(300,30));
         construire.setEnabled(false);
         
+        IhmPlateau ihmPlateau = this;
+        
         construire.addMouseListener(new MouseListener(){
             @Override
             public void mouseClicked(MouseEvent e) {}
             @Override
             public void mousePressed(MouseEvent e) {
                 if(construire.isEnabled()){
-                    IhmConstruire i = new IhmConstruire(joueurCourant);
+                    IhmConstruire i = new IhmConstruire(joueurCourant,ihmPlateau,controleur);
                 }
                 
             }
@@ -434,7 +436,7 @@ public class IhmPlateau extends JFrame implements Observateur{
         desDeux.updateDes(des[1]);
     }
 
-    private void popupCarte(String libelle) {
+    public void popupCarte(String libelle) {
                 JOptionPane.showMessageDialog(
                         null,
                         libelle, 
@@ -459,10 +461,8 @@ public class IhmPlateau extends JFrame implements Observateur{
         }      
     }   
     
-    private void updateAffichage() {
+    public void updateAffichage() {
         joueurActuelle.updateIhmJoueurActuelle(joueurCourant);
         updateInfoJoueurs(controleur.getJoueurs()); 
     }
-    
-     
 }

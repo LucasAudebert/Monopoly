@@ -64,7 +64,7 @@ public class PanelPropriete extends JPanel {
         panelPrincipal.add(cout);
         
         boutonConstruire = new JButton(" Construire ");
-        if (!propriete.peutConstruire()) {
+        if (!propriete.peutConstruire() || ihmConstruire.getControleur().getNbHotel() > 12 || ihmConstruire.getControleur().getNbMaison() > 32 ) {
             boutonConstruire.setEnabled(false);
         }
        
@@ -74,8 +74,15 @@ public class PanelPropriete extends JPanel {
 
             @Override
             public void mousePressed(MouseEvent e) {
-                propriete.construire();
-                updateAll();
+                if (boutonConstruire.isEnabled()) {
+                    propriete.construire();
+                    if (propriete.getNbMaisons()<5) {
+                        ihmConstruire.getControleur().addMaison();
+                    } else {    
+                        ihmConstruire.getControleur().addHotel();
+                    }
+                    updateAll();
+                }
             }
 
             @Override
@@ -117,10 +124,10 @@ public class PanelPropriete extends JPanel {
             construction.setText(Integer.toString(propriete.getNbMaisons()) +" maisons ");
         }
         
-        if (propriete.peutConstruire()) {
-            boutonConstruire.setEnabled(true);
+        if (!propriete.peutConstruire() || ihmConstruire.getControleur().getNbHotel() > 12 || ihmConstruire.getControleur().getNbMaison() > 32 ) {
+            boutonConstruire.setEnabled(false);
         } else {
-            boutonConstruire.setEnabled(false);            
+            boutonConstruire.setEnabled(true);            
         }
     }
 

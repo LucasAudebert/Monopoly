@@ -14,10 +14,12 @@ public class Monopoly {
     
 	private ArrayList<Joueur> joueurs;
         private ArrayList<Joueur> joueursElimines;
-        private ArrayList<Carreau> carreaux; // HashMap ??!!!
+        private ArrayList<Carreau> carreaux;
         private HashSet<Joueur> prisonniers;
         private Pile pileChance, pileCommunaute;
         private HashMap<EnumerationsMonopoly.COULEUR_PROPRIETE, Groupe> groupes;
+        private int nbMaison;
+        private int nbHotel;
 
     
     public Monopoly(){
@@ -137,4 +139,21 @@ public class Monopoly {
         pileChance.melanger();
         pileCommunaute.melanger();
     }
+    
+    public void addMaison() {
+        nbMaison++;
+    }
+    
+    public void addHotel() {
+        nbHotel++;
+    }
+
+    public int getNbMaison() {
+        return nbMaison;
+    }
+
+    public int getNbHotel() {
+        return nbHotel;
+    }
+    
 }

@@ -129,7 +129,7 @@ public class Plateau extends Canvas {
         if (numCarreau <= 10) {
             position[1] = h-(((h-ih)/2)+part+part/2);
             if (numCarreau == 1) {
-                position[0]= ((w-iw)/2)+part*2;
+                position[0]= ((w-iw)/2)+part*3;
             } else if (numCarreau == 10) {
                 position[0]= (((w-iw)/2)+part/4);            
             } else {
@@ -150,7 +150,7 @@ public class Plateau extends Canvas {
             
         } else if (numCarreau > 30) {
             position[0]= w-(((w-iw)/2)+part);
-            position[1]=((numCarreau-30)*part)+part/2+((w-iw)/2);
+            position[1]=((numCarreau-30)*part)+((w-iw)/2);
         }
         
         return position;

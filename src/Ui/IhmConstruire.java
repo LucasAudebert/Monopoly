@@ -7,6 +7,7 @@ package Ui;
 
 import Data.Joueur;
 import Data.ProprieteAConstruire;
+import Jeu.Controleur;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
@@ -20,15 +21,19 @@ import javax.swing.JPanel;
  *
  * @author audeberl
  */
-public class IhmConstruire extends JFrame {;
+public class IhmConstruire extends JFrame {
+    private IhmPlateau ihmPrincipale;
+    private Controleur controleur;
     private Joueur joueur;
     private HashSet<PanelPropriete> panels;
     private JButton boutonValider;
-    private JButton boutonAnnuler;    
+    private JButton boutonAnnuler;   
     
-    public IhmConstruire(Joueur joueur) {
+    public IhmConstruire(Joueur joueur, IhmPlateau ihm, Controleur c) {
         super();
         
+        this.ihmPrincipale = ihm;
+        this.controleur = c;        
         this.joueur = joueur;
         this.panels = new HashSet<PanelPropriete>();
         
@@ -59,5 +64,10 @@ public class IhmConstruire extends JFrame {;
           for (PanelPropriete pan : panels) {
               pan.update();
           }
-    }      
+          ihmPrincipale.updateAffichage();
+    }
+    
+    public Controleur getControleur() {
+        return controleur;
+    }
 }

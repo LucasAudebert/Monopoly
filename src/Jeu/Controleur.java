@@ -346,6 +346,22 @@ public class Controleur {
     public ArrayList<Carreau> getCarreaux() {
         return monopoly.getCarreaux();
     }
+
+    public void addMaison() {
+        monopoly.addMaison();;
+    }
+
+    public void addHotel() {
+        monopoly.addHotel();
+    }
+    
+    public int getNbMaison() {
+        return monopoly.getNbMaison();
+    }
+
+    public int getNbHotel() {
+        return monopoly.getNbHotel();
+    }    
 }
 
 
