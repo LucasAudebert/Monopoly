@@ -373,7 +373,7 @@ public class IhmPlateau extends JFrame implements Observateur{
                             joueurCourant.gagnerCash(200);
                             IhmBoiteMessage.afficherBoiteDialogue("Vous êtes passez par la case départ.\nRecevez 200€.", 0);
                         }
-                        break;
+                        
                         
                     case deplacementSpecial :                           
                         joueurCourant.setPositionCourante(controleur.getCarreau(resultatCarte.getValeur()-1));
