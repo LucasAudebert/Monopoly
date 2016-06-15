@@ -16,6 +16,7 @@ import java.awt.FlowLayout;
 import java.util.HashMap;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -31,12 +32,16 @@ public class IhmInfoJoueur extends JPanel {
     private JLabel nbGare;
     private JLabel nbCompagnie;
     private JLabel nbPropriete;
+    private JLabel icon;
     
     private Joueur joueur;
     
     
     public IhmInfoJoueur(Joueur joueur){      
        this.joueur = joueur;
+       
+       icon = new JLabel(new ImageIcon(joueur.getImagePion()));
+       
        nom = new JLabel();
        nom.setText(joueur.getNomJoueur());
        
@@ -65,11 +70,12 @@ public class IhmInfoJoueur extends JPanel {
         this.setBorder(BorderFactory.createLineBorder(Color.black));
         this.setLayout(new BoxLayout(this,BoxLayout.PAGE_AXIS));
          
-       
+        this.add(icon);
         
         JPanel panNom = new JPanel();
         panNom.setLayout(new BoxLayout(panNom,BoxLayout.LINE_AXIS));
         panNom.setAlignmentX( this.LEFT_ALIGNMENT );
+        
         panNom.add(new JLabel("Joueur : "));
         panNom.add(nom);
         this.add(panNom);
