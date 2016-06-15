@@ -450,7 +450,6 @@ public class IhmPlateau extends JFrame implements Observateur{
     }
     
     public void updateInfoJoueurs(ArrayList<Joueur> joueurs){
-        System.out.println(InfoJoueurs.size());
         
         plateau.repaint();
         for(int i=0;i<InfoJoueurs.size();i++){          

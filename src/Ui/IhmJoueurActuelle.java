@@ -39,7 +39,6 @@ public final class IhmJoueurActuelle extends JPanel{
        
     }
     public void initComponent(){
-        System.out.println("test1");
         JPanel panCash = new JPanel();
         panCash.setLayout(new BoxLayout(panCash,BoxLayout.X_AXIS));
         
