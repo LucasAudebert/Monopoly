@@ -363,7 +363,8 @@ public class IhmPlateau extends JFrame implements Observateur{
                             joueurCourant.setCarteSortieDePrison(message.getCarte());
                             joueurActuelle.updateIhmJoueurActuelle(joueurCourant);
                         } else {
-                            
+                            IhmBoiteMessage.afficherBoiteDialogue("Vous avez piochez une carte Sortie de prison mais vous en possèder déja une.\nVous reposer la carte.", 0);                                  
+                            message.getPile().reposerUneCarte(message.getCarte());
                         }
                         break;
                         

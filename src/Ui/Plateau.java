@@ -111,7 +111,6 @@ public class Plateau extends Canvas {
         for(Joueur j : joueurs){
             if(!j.estElimine()){
                 int[] coorPion = getPosition(j.getPositionCourante().getNumero() - 1);
-                System.out.println(coorPion[0] +" : "+ coorPion[1]);
                 g.drawImage(j.getImagePion(), coorPion[0], coorPion[1], null);
             }
         }
