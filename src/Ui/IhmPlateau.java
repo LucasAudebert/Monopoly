@@ -249,7 +249,7 @@ public class IhmPlateau extends JFrame implements Observateur{
        switch(message.getTypeMessage()) {
             case deplacement :
                resetDes();
-                rejouer = message.aFaitUnDouble()&&joueurCourant.peutRejouer();         
+                rejouer = message.aFaitUnDouble();         
                 
                 if (controleur.estEnPrison(joueurCourant) && rejouer){
                     IhmBoiteMessage.afficherBoiteDialogue("Vous avez fait un double.\nVous sortez de prison !", 0);                       
