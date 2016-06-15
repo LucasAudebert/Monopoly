@@ -169,12 +169,12 @@ public class Joueur {
         piocheCarteDeplacement = true;
     }
     
-    public boolean rejouer() { //permet au joueur de rejouer
-        if (piocheCarteDeplacement || !desDouble()) { //si il a pioché une carte de déplacement ou s'il n'a pas réalisé de double
-            piocheCarteDeplacement = false; //piocheCarteDeplacement devient faux     
-            return false; 
+    public boolean peutRejouer() { //verifie que le joueur n'a pas piocher une carte deplacement 
+        if (piocheCarteDeplacement) {
+            piocheCarteDeplacement = false;
+            return false;
         } else {
-            return true;
+            return true;   
         }
     }
     

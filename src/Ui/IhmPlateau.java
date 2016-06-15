@@ -249,7 +249,7 @@ public class IhmPlateau extends JFrame implements Observateur{
        switch(message.getTypeMessage()) {
             case deplacement :
                resetDes();
-                rejouer = message.aFaitUnDouble();         
+                rejouer = message.aFaitUnDouble()&&joueurCourant.peutRejouer();         
                 
                 if (controleur.estEnPrison(joueurCourant) && rejouer){
                     IhmBoiteMessage.afficherBoiteDialogue("Vous avez fait un double.\nVous sortez de prison !", 0);                       
@@ -370,10 +370,10 @@ public class IhmPlateau extends JFrame implements Observateur{
                     case deplacement :                      
                         if (joueurCourant.getPositionCourante().getNumero() > resultatCarte.getValeur()) {
                             joueurCourant.gagnerCash(200);
-                            IhmBoiteMessage.afficherBoiteDialogue("Vous êtes passez par la case départ.\nRecevez 200€.", 0); 
-                            
+                            IhmBoiteMessage.afficherBoiteDialogue("Vous êtes passez par la case départ.\nRecevez 200€.", 0);
                         }
                         break;
+                        
                     case deplacementSpecial :                           
                         joueurCourant.setPositionCourante(controleur.getCarreau(resultatCarte.getValeur()-1));
                         joueurCourant.aPiocherUneCarteDeplacement();                       

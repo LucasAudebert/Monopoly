@@ -173,10 +173,6 @@ public class IhmTroisPointZero extends JFrame {
         setSize(850, 400);
         setVisible(true);                        
     }
-  /*  @Override
-    public void notifier(Message message) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }*/
     
     public static void main(String[] args){
         Controleur controleur = new Controleur();
